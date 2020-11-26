@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test</title>
+
+        <!-- Fichiers CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+
+    <style>
+        #carte{
+            height: 80vh;
+        }
+    </style>
+
+    <script>
+        window.onload = function(){
+            let macarte = L.map('carte').setView([49.24167849096564, 4.061995752829034], 13)
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                minZoom: 1,
+                maxZoom: 20
+            }).addTo(macarte)
+            L.Routing.control({
+                lineOptions: {
+                    styles: [{color: '#52af52', opacity: 1, weight: 7}]
+                },
+                router: new L.Routing.osrmv1({
+                    language: 'fr',
+                    profile: 'car', // car, bike, foot
+                }),
+                geocoder: L.Control.Geocoder.nominatim()
+            }).addTo(macarte)
+            
+        }
+    </script>
+
+    <body>
+        <div id="carte"></div>
+
+        <!-- Fichiers JS -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
