@@ -1,4 +1,4 @@
-import { MapContainer, MapView, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import React from 'react';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -18,7 +18,7 @@ function Test(){
     const destination = 'coords or address';
     const APIKEY = 'XXXXXXXXXXXX';
     const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${APIKEY}&mode=${mode}`;
-    
+
     fetch(url)
         .then(response => response.json())
         .then(responseJson => {
