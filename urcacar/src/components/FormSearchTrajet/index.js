@@ -25,7 +25,7 @@ export function FormSearchTrajet(props) {
 
 
     return (
-        <Form>
+        <Form className="container">
 
             <Form.Group as={Col} controlId="formGridDepart">
                 <Form.Control
