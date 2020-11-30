@@ -3,12 +3,14 @@ import 'leaflet/dist/leaflet.css'
 import React from "react";
 import {Header} from "./components/Header";
 import {Footer} from "./components/Footer";
+import {Accueil} from "./components/Accueil";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
 } from "react-router-dom";
-import {Accueil} from "./components/Accueil";
+import {ListeRecherche} from "./components/ListeRecherche";
+
 
 function App() {
   return (
@@ -17,7 +19,7 @@ function App() {
             <Header/>
             <Switch>
                 <Route exact path="/">
-                    <Accueil/>
+                    <ListeRecherche/>
                 </Route>
                 <Route path="/profil">
 

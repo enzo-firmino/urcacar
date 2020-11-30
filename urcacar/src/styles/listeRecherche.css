@@ -1,0 +1,51 @@
+.trajet {
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    width: 50%;
+    background-color: rgba(230, 230, 230, 0.5);
+    margin: 10px auto;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.recapRecherche {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+    width: 50%;
+    background-color: rgba(230, 230, 230, 0.5);
+    margin: 10px auto;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.trajet:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25), 0 8px 8px rgba(0,0,0,0.22);
+}
+
+.img-fluid {
+    width: auto !important;
+    height: 100% !important;
+}
+
+table {
+    border-collapse: separate !important;
+    border-spacing: 25px 0 !important;
+}
+
+.rightBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    right: 0;
+    text-align: right;
+}
