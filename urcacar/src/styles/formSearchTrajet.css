@@ -1,6 +1,9 @@
+.formSearchTrajet {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 
 h2 {
-    padding-top: 50px;
     padding-bottom: 25px;
 }
 
@@ -41,4 +44,8 @@ h2 {
     text-align: center;
     color: red !important;
     opacity: 1 !important;
+}
+
+.rechercheButton {
+    font-size: 20px !important;
 }

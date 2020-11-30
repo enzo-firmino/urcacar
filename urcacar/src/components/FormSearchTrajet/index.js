@@ -110,7 +110,7 @@ export function FormSearchTrajet(props) {
                 </Form.Row>
 
                 <Button
-                    className='fullBgField'
+                    className='fullBgField rechercheButton'
                     variant="primary"
                     type="submit">
                     Rechercher
