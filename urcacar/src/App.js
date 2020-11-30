@@ -1,6 +1,5 @@
 import './App.css';
 import 'leaflet/dist/leaflet.css'
-import {FormSearchTrajet} from "./components/FormSearchTrajet";
 import React from "react";
 import {Header} from "./components/Header";
 import {Footer} from "./components/Footer";
@@ -9,6 +8,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import {Accueil} from "./components/Accueil";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
             <Header/>
             <Switch>
                 <Route exact path="/">
-                    <FormSearchTrajet/>
+                    <Accueil/>
                 </Route>
                 <Route path="/profil">
                     <About/>
