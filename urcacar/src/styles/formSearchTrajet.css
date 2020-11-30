@@ -1,0 +1,44 @@
+
+h2 {
+    padding-top: 50px;
+    padding-bottom: 25px;
+}
+
+
+.form-group {
+    margin-top: 1rem;
+}
+
+.fullBgField {
+    border-radius: 25px !important ;
+    position: relative !important;
+    border-style: hidden !important;
+    background-color: rgba(88,185,75,1) !important;
+    box-shadow: 2px 2px 5px #292929 !important;
+    text-align: center !important;
+    color: white !important;
+}
+
+
+.fullBgField::placeholder {
+    text-align: center;
+    color: white !important;
+    opacity: 1 !important;
+}
+
+
+.emptyBgField {
+    border-radius: 25px !important ;
+    position: relative !important;
+    border: solid 3px rgba(88,185,75,1) !important;
+    background-color: white !important;
+    box-shadow: 2px 2px 5px #292929 !important;
+    text-align: center !important;
+    color: black !important;
+}
+
+.emptyBgField::placeholder {
+    text-align: center;
+    color: red !important;
+    opacity: 1 !important;
+}
