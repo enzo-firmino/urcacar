@@ -20,24 +20,21 @@ export default function MapView(){
         iconAnchor:   [15, 47], // point of the icon which will correspond to marker's location
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-const[refMap, wayPoints, saveMap, setWaypoint] = useMap();
 
+    const[refMap, wayPoints, saveMap, setWaypoint] = useMap();
 
     return(
-
-
         <div className="mapHolder">
 
             <input id="rue1" placeholder="Adresse1"type = "text"/>
             <input id="rue2" placeholder="Adresse2"type = "text"/>
 
             <button onClick ={()=>{
-                setWaypoint(dataPoints[0], dataPoints[1])
+                setWaypoint(document.getElementById("rue1").value, document.getElementById("rue2").value)
             }}>
                 Change
             </button>
 
-        }
             <Map center={[49.24167849096564, 4.061995752829034]} zoom={11} ref={saveMap}>
                 <TileLayer
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -52,6 +49,8 @@ const[refMap, wayPoints, saveMap, setWaypoint] = useMap();
                         </Marker>
                     )
                 })}
+
+                {console.log(wayPoints)}
 
                 <Routing
                     map={refMap}

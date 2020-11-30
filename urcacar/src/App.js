@@ -20,7 +20,7 @@ function App() {
                     <Accueil/>
                 </Route>
                 <Route path="/profil">
-                    <About/>
+
                 </Route>
                 <Route path="/notifications">
                     <Dashboard/>

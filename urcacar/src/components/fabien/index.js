@@ -1,11 +1,19 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import React from 'react';
+import React , {useState, useEffect} from 'react';
+import Routing from "../Routing";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import L from 'leaflet';
-import 'leaflet-routing-machine';
-import iconGreen from '../../assets/GreenMarker.png'
+import getAll from "../../services/fetch/fetch";
+import useMap from "../../services/hook/Map"
+import iconGreen from '../../assets/GreenMarker.png';
+export default function MapView(){
 
-function Test(){
-    const position = [49.24167849096564, 4.061995752829034] //Position du centre de la map
+
+    const dataPoints = [
+        [ 49.467134581917357,4.546518086577947],
+        [ 49.295014379864874,4.898610599532319],
+
+    ]
+
     var greenIcon = L.icon({
         iconUrl: iconGreen,
         iconSize:     [31, 47], // size of the icon
@@ -13,45 +21,48 @@ function Test(){
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
-    const mode = 'driving'; // 'walking';
-    const origin = 'coords or address';
-    const destination = 'coords or address';
-    const APIKEY = 'XXXXXXXXXXXX';
-    const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${APIKEY}&mode=${mode}`;
+    const[refMap, wayPoints, saveMap, setWaypoint] = useMap();
 
-    fetch(url)
-        .then(response => response.json())
-        .then(responseJson => {
-            if (responseJson.routes.length) {
-                this.setState({
-                    coords: this.decode(responseJson.routes[0].overview_polyline.points) // definition below
-                });
-            }
-        }).catch(e => {console.warn(e)});
+    return(
+        <div className="mapHolder">
 
-    return (
-      <MapContainer style={{height:500, width:1000}} center={position} zoom={13} scrollWheelZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position} icon={greenIcon}>
-          <Popup>
-            Départ
-          </Popup>
-        </Marker>
+            <input id="rue1" placeholder="Adresse1"type = "text"/>
+            <input id="rue2" placeholder="Adresse2"type = "text"/>
 
-        <MapView.Polyline
-          coordinates={[
-              {latitude: initial.latitude, longitude: initial.longitude}, // optional
-              ...this.state.coords,
-              {latitude: final.latitude, longitude: final.longitude}, // optional
-          ]}
-          strokeWidth={4}
-      />
+            <button onClick ={()=>{
+                setWaypoint(document.getElementById("rue1").value, document.getElementById("rue2").value)
+            }}>
+                Change
+            </button>
 
-      </MapContainer>
+            <Map center={[49.24167849096564, 4.061995752829034]} zoom={11} ref={saveMap}>
+                <TileLayer
+                    url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                { dataPoints.map((data , index)=>{
+                    return(
+                        <Marker icon={greenIcon} key={index} position={data}>
+                            <Popup>
+                                Sample Popup
+                            </Popup>
+                        </Marker>
+                    )
+                })}
+
+                {console.log(wayPoints)}
+
+                <Routing
+                    map={refMap}
+                    show={true}
+                    waypoints={wayPoints}
+                    lineStyles={{
+                        color: 'red',
+                        opacity: 1,
+                        weight: 5
+                    }}
+                />
+            </Map>
+        </div>
     )
 }
-
-export default Test;

@@ -16,15 +16,17 @@ function useMap(rue1, rue2) {
         setRefMap(map)
 
     }
+    let coord = [];
 
-    function setWaypoint(i1, i2) {
+    function setWaypoint(recherche1, recherche2) {
         //setWayPoints([i1, i2]);
-        setWayPoints(
-            getAll("IUT Reims").then(function (data) {
-                return [data[0].lat, data[0].lon];
 
-            }))
-
+        getAll(recherche1).then(function (data) {
+            coord = [parseFloat(data[0].lat), parseFloat(data[0].lon)]
+        });
+        getAll(recherche2).then(function (data) {
+            setWayPoints([coord, [parseFloat(data[0].lat), parseFloat(data[0].lon)]])
+        });
     }
 
     return [refMap, wayPoints, saveMap, setWaypoint]
