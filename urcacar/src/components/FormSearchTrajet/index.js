@@ -8,11 +8,12 @@ import '../../styles/formSearchTrajet.css';
 
 export function FormSearchTrajet(props) {
 
-
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Name ${depart}`)
     }
+
+
 
 
 
