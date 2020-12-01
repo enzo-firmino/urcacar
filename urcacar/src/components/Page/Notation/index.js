@@ -14,35 +14,33 @@ export function Notation(props) {
 
 function Top() {
     return (
-        <div className="row p-5">
-            <div className="w-100">
-                <h1 className="text-left" style={{marginBottom: 1, color: "#58B94B"}}>Mardi 12 Avril</h1>
-            </div>
+        <div className="row p-5 text-left">
+            <h1 className="text-left" style={{marginBottom: 1, color: "#58B94B"}}>Mardi 12 Avril</h1>
 
-            <div className="d-flex flex-grow-1">
-                <div className="d-flex flex-row flex-grow-1">
-                    <Image style={{height: 150, width: 150}} src={profilePicture} roundedCircle/>
-                    <div>
-                        <div style={{borderBottom: "1px solid #58B94B"}} className="p-2">Romane</div>
+            <div className="d-flex flex-row w-100 justiry flex-wrap">
+                <Image style={{height: 150, width: 150}} src={profilePicture} roundedCircle/>
+                <div className="d-flex flex-column ml-4">
+                    <div className="d-flex flex-row mb-2">
+                        <div className="p-2 mr-5">Romane</div>
                         <div className="p-2">Neutre</div>
                     </div>
-
-                </div>
-                <div>
-                    <div className="d-flex flex-column">
-                        <p className="text-left">Préférences</p>
+                    <div className="p-2" style={{borderTop: '1px solid #58B94B', borderBottom: '1px solid #58B94B'}}>
+                        trajets...
                     </div>
-
-                    <div className="d-flex">
-                        <Image style={{height: 30, width: 30, margin: 10}}
-                               src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
-                        <Image style={{height: 30, width: 50, margin: 10}}
-                               src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
-                        <Image style={{height: 50, width: 50, margin: 10}}
-                               src="https://img.icons8.com/metro/452/music.png"/>
+                    <div className="w-100">
+                        <div>
+                            <p className="mb-0 text-left mt-2">Préférences</p>
+                            <div className="d-flex">
+                                <Image style={{height: 20, width: 20, marginRight: 10, marginTop: 10}}
+                                    src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
+                                <Image style={{height: 20, width: 20, marginRight: 10, marginTop: 10}}
+                                    src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
+                                <Image style={{height: 20, width: 20, marginRight: 10, marginTop: 10}}
+                                    src="https://img.icons8.com/metro/452/music.png"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -55,12 +53,8 @@ function Note() {
             <div className="d-flex flex-column">
                 <div className="formSearchTrajet">
                     <h2>Noter un utilisateur</h2>
-
-
                 </div>
             </div>
         </div>
     )
 }
-
-
