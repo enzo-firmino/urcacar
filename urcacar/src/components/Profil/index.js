@@ -1,11 +1,11 @@
 import React from "react";
 import profilePicture from '../../assets/profilepicture.jpg';
 import Image from "react-bootstrap/Image";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 
 export function Profil(props) {
     return (
-        <div className="container">
+        <div className="container bg-light">
             <Top/>
             <Vehicule/>
             <Preferences/>
@@ -31,7 +31,7 @@ function Top(){
 function Vehicule(){
     return(
     <div>
-        <Title/>
+        <Title titre="Véhicule"/>
         <Form>
             <Form.Group controlId="formBasicEmail">
                 <Row>
@@ -106,6 +106,12 @@ function Vehicule(){
 function Preferences(){
     return (
         <>
+            <Title titre="Préférences"/>
+            <div>
+                <Image style={{height:50, width:50, margin:10}} src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
+                <Image style={{height:50, width:50, margin:10}} src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
+                <Image style={{height:50, width:50, margin:10}} src="https://img.icons8.com/metro/452/music.png"/>
+            </div>
         </>
     )
 }
@@ -113,14 +119,35 @@ function Preferences(){
 function Notification(){
     return (
         <>
+            <Title titre="Notifications"/>
+            <Container>
+                <Row>
+                    <Col>
+                        <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check className="text-left" type="checkbox" label="Réservation acceptée" />
+                            <Form.Check className="text-left" type="checkbox" label="Réservation envoyée" />
+                            <Form.Check className="text-left" type="checkbox" label="Demande de réservation" />
+                            <Form.Check className="text-left" type="checkbox" label="Trajet imminent" />
+                        </Form.Group>
+                    </Col>
+                    <div style={{borderLeft: "1px solid #58B94B", fontWeight: 'bold', margin:10}}/>
+                    <Col className="row">
+                        <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check className="text-left" type="checkbox" label="Trajet Annulé" />
+                            <Form.Check className="text-left" type="checkbox" label="Demande de notation" />
+                            <Form.Check className="text-left" type="checkbox" label="Nouvel avis" />
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }
 
-function Title(){
+function Title(props){
     return (
         <div style={{borderBottom: "1px solid #58B94B", fontWeight: 'bold'}}>
-            <h1 className="text-left">Véhicule</h1>
+            <h1 className="text-left">{props.titre}</h1>
         </div>
     )
 }
