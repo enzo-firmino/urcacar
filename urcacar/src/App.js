@@ -5,6 +5,7 @@ import {Header} from "./components/Reusable/Header";
 import {Footer} from "./components/Reusable/Footer";
 import {Accueil} from "./components/Page/Accueil";
 import {Profil} from "./components/Page/Profil";
+import {Notation} from "./components/Page/Notation";
 import {
     BrowserRouter as Router,
     Switch,
@@ -36,6 +37,9 @@ function App() {
                     </Route>
                     <Route path="/AddTrajets">
                         <Dashboard/>
+                    </Route>
+                    <Route path="/notation">
+                        <Notation/>
                     </Route>
                 </Switch>
             <Footer/>
