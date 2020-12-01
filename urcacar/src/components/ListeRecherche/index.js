@@ -39,7 +39,7 @@ export function ListeRecherche(props) {
 
 function RecapRecherche(props) {
     return (
-        <div className='recapRecherche'>
+        <div className='recapRecherche' >
             <Search/>
             <table>
                 <tbody>
@@ -64,7 +64,7 @@ function RecapRecherche(props) {
 function Trajet(props) {
     return (
         <div className='trajet'>
-            <Image src={profilePicture} roundedCircle fluid/>
+            <Image src={profilePicture} roundedCircle/>
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <span style={{borderBottom: "1px solid #58B94B", fontWeight: 'bold'}}> {props.trajet.conducteur}</span>
                 <table>

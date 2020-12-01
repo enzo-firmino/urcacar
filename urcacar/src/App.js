@@ -19,6 +19,9 @@ function App() {
             <Header/>
             <Switch>
                 <Route exact path="/">
+                    <Accueil/>
+                </Route>
+                <Route path="/recherche">
                     <ListeRecherche/>
                 </Route>
                 <Route path="/profil">
