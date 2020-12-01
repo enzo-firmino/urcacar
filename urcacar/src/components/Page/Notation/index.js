@@ -15,31 +15,35 @@ export function Notation(props) {
 function Top() {
     return (
         <div className="row p-5">
-            <div className="w-100 ">
-                <h1 className="text-left" style={{marginBottom: 1}}>Mardi 12 Avril</h1>
+            <div className="w-100">
+                <h1 className="text-left" style={{marginBottom: 1, color: "#58B94B"}}>Mardi 12 Avril</h1>
             </div>
 
             <div className="d-flex flex-grow-1">
-                <Image style={{height: 150, width: 150}} src={profilePicture} roundedCircle/>
-                <div className="p-2">Romane</div>
-                <div className="p-2">Neutre</div>
-            </div>
+                <div className="d-flex flex-row flex-grow-1">
+                    <Image style={{height: 150, width: 150}} src={profilePicture} roundedCircle/>
+                    <div>
+                        <div style={{borderBottom: "1px solid #58B94B"}} className="p-2">Romane</div>
+                        <div className="p-2">Neutre</div>
+                    </div>
 
-            <div className="container">
-
-                <div className="d-flex flex-column">
-                <p className="text-left">Préférences</p>
                 </div>
-                <div className="d-flex ">
+                <div>
+                    <div className="d-flex flex-column">
+                        <p className="text-left">Préférences</p>
+                    </div>
 
-            <Image style={{height: 50, width: 50, margin: 10}}
-                       src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
-                <Image style={{height: 50, width: 50, margin: 10}}
-                       src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
-                <Image style={{height: 50, width: 50, margin: 10}} src="https://img.icons8.com/metro/452/music.png"/>
+                    <div className="d-flex">
+                        <Image style={{height: 30, width: 30, margin: 10}}
+                               src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
+                        <Image style={{height: 30, width: 50, margin: 10}}
+                               src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
+                        <Image style={{height: 50, width: 50, margin: 10}}
+                               src="https://img.icons8.com/metro/452/music.png"/>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
 
     )
