@@ -12,11 +12,11 @@ export function Header(props) {
     return (
             <Navbar expand="lg" bg="success" variant="dark">
                 <div className="container">
-                    <Link style={{color: 'white'}} to="/">UrcaCar</Link>
+                    <Link className="aW" to="/">UrcaCar</Link>
                     <Nav className="d-flex flex-fill justify-content-around">
-                        <Link style={{color: 'white'}} to="/messagerie">Messagerie</Link>
-                        <Link style={{color: 'white'}} to="/profil">Profil</Link>
-                        <Link style={{color: 'white'}} to="/notifications">Notifications</Link>
+                        <Link className="aW" to="/messagerie">Messagerie</Link>
+                        <Link className="aW" to="/profil">Profil</Link>
+                        <Link className="aW" to="/notifications">Notifications</Link>
                     </Nav>
                 </div>
             </Navbar>

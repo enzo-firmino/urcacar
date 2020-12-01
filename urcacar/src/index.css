@@ -22,3 +22,11 @@ code {
   height: 60px;
   line-height: 60px;
 }
+
+.pTitre {
+  font-size: 1.50rem;
+}
+
+.bg-gris{
+  background-color: #C4C4C4 !important;
+}

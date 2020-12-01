@@ -50,7 +50,12 @@ h2 {
     font-size: 20px !important;
 }
 
-a {
+.aW {
     text-decoration: none;
     color: white !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: black !important;
 }
