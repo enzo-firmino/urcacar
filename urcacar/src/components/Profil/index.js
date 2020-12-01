@@ -39,7 +39,7 @@ function Vehicule(){
                         <Form.Label>Marque</Form.Label>
                     </Col>
                     <Col>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="email" placeholder="Marque" />
                     </Col>
                 </Row>
             </Form.Group>

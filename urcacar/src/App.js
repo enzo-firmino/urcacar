@@ -18,33 +18,31 @@ function App() {
     <div className="App">
         <Router>
             <Header/>
-            <Switch>
-                <Route exact path="/">
-                    <Accueil/>
-                </Route>
-                <Route path="/recherche">
-                    <ListeRecherche/>
-                </Route>
-                <Route path="/profil">
-                    <Profil/>
-                </Route>
-                <Route path="/notifications">
-                    <Dashboard/>
-                </Route>
-            </Switch>
+                <Switch>
+                    <Route exact path="/">
+                        <Accueil/>
+                    </Route>
+                    <Route path="/recherche">
+                        <ListeRecherche/>
+                    </Route>
+                    <Route path="/profil">
+                        <Profil/>
+                    </Route>
+                    <Route path="/notifications">
+                        <Dashboard/>
+                    </Route>
+                    <Route path="/MesTrajets">
+                        <Dashboard/>
+                    </Route>
+                    <Route path="/AddTrajets">
+                        <Dashboard/>
+                    </Route>
+                </Switch>
             <Footer/>
         </Router>
 
     </div>
   );
-}
-
-function About() {
-    return (
-        <div>
-            <h2>About</h2>
-        </div>
-    );
 }
 
 function Dashboard() {
