@@ -15,7 +15,7 @@ export default function Avis(props) {
 function AvisComponent(props){
     return(
         <>
-            <p style={{fontSize: 1.50 + "rem"}} className="text-left text-success">{props.name}</p>
+            <p className="text-left text-success pTitre">{props.name}</p>
             <Image style={{height:100, width:100}} src="https://www.icone-png.com/png/45/44936.png"/>
             
             <Image style={{height:100, width:100}} src="https://www.superprof.fr/images/annonces/professeur-home-etudiant-histoire-profil-litteraire-donne-cours-particuliers-soutien-generalise-disciplines-litteraires-ou.jpg" roundedCircle/>

@@ -11,6 +11,8 @@ import {
     Route,
 } from "react-router-dom";
 import {ListeRecherche} from "./components/Page/ListeRecherche";
+import ListeMessage from './components/Page/ListeMessage';
+import Message from './components/Page/Message';
 
 
 function App() {
@@ -36,6 +38,12 @@ function App() {
                     </Route>
                     <Route path="/AddTrajets">
                         <Dashboard/>
+                    </Route>
+                    <Route exact path="/messagerie">
+                        <ListeMessage/>
+                    </Route>
+                    <Route  path="/messagerie/id">
+                        <Message/>
                     </Route>
                 </Switch>
             <Footer/>
