@@ -1,0 +1,58 @@
+.detailTrajet {
+    font-size: 22px;
+}
+
+.detailTrajet .row {
+    justify-content: center;
+    align-items: center;
+}
+
+.detailTrajet .recapTrajet {
+    padding-bottom: 50px;
+    border-left: solid 2px rgba(88,185,75,1);
+}
+
+.detailTrajet .profil img {
+    height: 120px !important;
+    width: 120px !important;
+}
+
+.detailTrajet .profil h3{
+    font-weight: bold;
+}
+
+.detailTrajet .preferences .false {
+    background: linear-gradient(to left top, transparent 45%, red, red, transparent 55%);
+}
+
+
+.detailTrajet .preferences img {
+    height: 30px !important;
+    width: 30px !important;
+}
+
+
+.detailTrajet .badge {
+    height: fit-content !important;
+    font-size: 20px;
+}
+
+.detailTrajet .btn-bg-green button {
+    background-color: rgba(88,185,75,1);
+    border-radius: 25px;
+    border: none;
+    font-size: 22px;
+    margin: 0 20px;
+    box-shadow: 2px 2px 5px #292929 !important;
+}
+
+.detailTrajet .leaflet-container {
+    height: 200px;
+}
+
+.detailTrajet .row-padding {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-bottom: solid 2px rgba(88,185,75,1);
+}
+

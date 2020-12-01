@@ -1,4 +1,4 @@
-.trajet {
+.listeRecherche .trajet {
     display: flex;
     flex-direction: row;
     height: fit-content;
@@ -11,11 +11,12 @@
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-div.trajet > * {
+.listeRecherche div.trajet > * {
     margin-right: 20px;
+    color: black;
 }
 
-.recapRecherche {
+.listeRecherche .recapRecherche {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -28,15 +29,15 @@ div.trajet > * {
     padding-left: 20px;
 }
 
-div.recapRecherche > * {
+.listeRecherche div.recapRecherche > * {
     margin-right: 15px;
 }
 
-.trajet:hover {
+.listeRecherche .trajet:hover {
     box-shadow: 0 8px 20px rgba(0,0,0,0.25), 0 8px 8px rgba(0,0,0,0.22);
 }
 
-table {
+.listeRecherche table {
     border-collapse: separate !important;
     border-spacing: 25px 0 !important;
 }
@@ -52,7 +53,7 @@ table {
     text-align: right;
 }
 
-.trajet img {
+.listeRecherche .trajet img {
     height: 100px;
     width: auto;
 }

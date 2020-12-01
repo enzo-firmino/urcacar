@@ -1,4 +1,4 @@
-.card {
+.recherchesRecentes .card {
     margin-bottom: 50px;
     margin-right: auto;
     margin-left: auto;
@@ -6,12 +6,12 @@
     background-color: rgba(88,185,75,1) !important;
 }
 
-.card-header {
+.recherchesRecentes .card-header {
     font-size: 25px;
     text-decoration: underline;
 }
 
-.list-group-item {
+.recherchesRecentes .list-group-item {
     margin: 10px;
     background-color: rgb(68, 147, 57) !important;
 }
