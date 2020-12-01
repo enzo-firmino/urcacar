@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
-import profilePicture from '../../assets/profilepicture.jpg';
+import profilePicture from '../../../assets/profilepicture.jpg';
 import {ListGroup} from "react-bootstrap";
 import { ArrowDown } from 'react-bootstrap-icons';
 import { ArrowRight } from 'react-bootstrap-icons';
 import { Search } from 'react-bootstrap-icons';
-import '../../styles/listeRecherche.css';
+import '../../../styles/listeRecherche.css';
 import Badge from "react-bootstrap/Badge";
 
 

@@ -1,16 +1,16 @@
 import './App.css';
 import 'leaflet/dist/leaflet.css'
 import React from "react";
-import {Header} from "./components/Header";
-import {Footer} from "./components/Footer";
-import {Accueil} from "./components/Accueil";
-import {Profil} from "./components/Profil";
+import {Header} from "./components/Reusable/Header";
+import {Footer} from "./components/Reusable/Footer";
+import {Accueil} from "./components/Page/Accueil";
+import {Profil} from "./components/Page/Profil";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
 } from "react-router-dom";
-import {ListeRecherche} from "./components/ListeRecherche";
+import {ListeRecherche} from "./components/Page/ListeRecherche";
 
 
 function App() {

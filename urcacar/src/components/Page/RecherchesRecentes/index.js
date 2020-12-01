@@ -1,5 +1,5 @@
 import React from "react";
-import '../../styles/recherchesRecentes.css';
+import '../../../styles/recherchesRecentes.css';
 import { ArrowRight } from 'react-bootstrap-icons';
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
