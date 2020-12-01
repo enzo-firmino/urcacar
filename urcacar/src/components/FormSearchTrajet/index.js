@@ -4,18 +4,14 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { ArrowDownUp } from 'react-bootstrap-icons';
 import '../../styles/formSearchTrajet.css';
-
+import { Redirect } from "react-router-dom"
 
 export function FormSearchTrajet(props) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Submitting Name ${depart}`)
+        setRedirect('/recherche');
     }
-
-
-
-
 
     const [depart, setDepart] = useState('');
     const [arrive, setArrive] = useState('');
@@ -23,13 +19,18 @@ export function FormSearchTrajet(props) {
     const [heureDepart, setHeureDepart] = useState();
     const [heureArrive, setHeureArrive] = useState();
     const [nbPassager, setNbPassager] = useState(1);
+    const [redirect, setRedirect] = useState(null);
 
 
+    if (redirect) {
+        return <Redirect to={redirect} />
+    }
     return (
+
         <div className="formSearchTrajet">
             <h2> Rechercher un trajet</h2>
 
-            <Form className="container">
+            <Form className="container" onSubmit={handleSubmit}>
 
                 <Form.Group as={Col} controlId="formGridDepart">
                     <Form.Control
@@ -122,4 +123,6 @@ export function FormSearchTrajet(props) {
 
        );
 }
+
+
 
