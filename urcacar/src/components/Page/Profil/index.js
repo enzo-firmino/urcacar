@@ -2,6 +2,7 @@ import React from "react";
 import profilePicture from '../../../assets/profilepicture.jpg';
 import Image from "react-bootstrap/Image";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import Avis from "../../Reusable/Avis"
 
 export function Profil(props) {
     return (
@@ -10,6 +11,7 @@ export function Profil(props) {
             <Vehicule/>
             <Preferences/>
             <Notification/>
+            <Avis/>
         </div>
     )
 }
@@ -147,7 +149,7 @@ function Notification(){
 function Title(props){
     return (
         <div style={{borderBottom: "1px solid #58B94B", fontWeight: 'bold'}}>
-            <h1 className="text-left">{props.titre}</h1>
+            <h1 className="text-left text-success">{props.titre}</h1>
         </div>
     )
 }
