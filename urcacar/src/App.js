@@ -4,6 +4,7 @@ import React from "react";
 import {Header} from "./components/Header";
 import {Footer} from "./components/Footer";
 import {Accueil} from "./components/Accueil";
+import {Profil} from "./components/Profil";
 import {
     BrowserRouter as Router,
     Switch,
@@ -25,7 +26,7 @@ function App() {
                     <ListeRecherche/>
                 </Route>
                 <Route path="/profil">
-
+                    <Profil/>
                 </Route>
                 <Route path="/notifications">
                     <Dashboard/>
