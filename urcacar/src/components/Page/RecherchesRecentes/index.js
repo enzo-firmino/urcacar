@@ -4,6 +4,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 
+
 export function RecherchesRecentes(props) {
 
     const recherchesRecentes = [
