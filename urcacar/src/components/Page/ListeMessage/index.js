@@ -15,13 +15,13 @@ export default function ListeMessage(props) {
 
 function Message(props){
     return(
-        <a className='trajet' href="/messagerie/id">
+        <a className='box' href="/messagerie/id">
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <p className="pTitre text-success">{props.name} - {props.trajet}</p>
                 <p>Bonjour, est-il possible de partir 15 minutes 
 avant ? </p>
             </div>
-            <Image src={profilePicture} roundedCircle/>
+            <Image className="pp" src={profilePicture} roundedCircle/>
         </a>
     )
 }

@@ -73,8 +73,8 @@ function Trajet(props) {
 
     return (
             <Link to='/trajet'>
-                <div className='trajet'>
-                    <Image src={profilePicture} roundedCircle/>
+                <div className='box'>
+                    <Image className="pp" src={profilePicture} roundedCircle/>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                     <span style={{
                         borderBottom: "1px solid #58B94B",

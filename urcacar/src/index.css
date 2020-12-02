@@ -14,7 +14,7 @@ code {
 }
 
 
-
+/*CSS pour le footer*/
 .footer{
   position: fixed !important;
   bottom: 0;
@@ -23,10 +23,32 @@ code {
   line-height: 60px;
 }
 
+/*CSS pour les titres*/
 .pTitre {
   font-size: 1.50rem;
 }
 
+/*CSS pour la couleur grise moins violente*/
 .bg-gris{
   background-color: #C4C4C4 !important;
+}
+
+/*CSS pour les cadres*/
+.box {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: 40%;
+  background-color: rgba(230, 230, 230, 0.5);
+  margin: 10px auto;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+/*CSS pour les images de profil*/
+.pp { 
+  height: 100px;
+  width: auto;
 }
