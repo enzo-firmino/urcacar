@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, Form, Button, Row, Col } from "react-bootstrap";
-import profilePicture from '../../../assets/profilepicture.jpg';
+import retour from '../../../assets/Retour.png';
 
 
 export default function Message(props) {
@@ -10,7 +10,7 @@ export default function Message(props) {
             <div className="bg-gris">
                 <div className="container">
                     <div className="row p-2">
-                        <Image style={{height:25, width:25, marginTop:"auto", marginBottom:"auto"}} src="https://assets.stickpng.com/images/585e47accb11b227491c338a.png"></Image>
+                        <Image style={{height:25, width:25, marginTop:"auto", marginBottom:"auto"}} src={retour}></Image>
                         <Image style={{height:100, width:100, marginTop:"auto", marginBottom:"auto", marginLeft:10}} src="https://www.concordia.ca/content/concordia/fr/admission/profil-des-etudiants/_jcr_content/content-main/tabs/parsys-tabs-0/vignette/image.img.jpg/1541189460376.jpg" roundedCircle></Image>
                         <h1 style={{marginTop:"auto", marginBottom:"auto", marginLeft:50}}>Romane</h1>
                     </div>

@@ -1,12 +1,14 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
 import profilePicture from '../../../assets/profilepicture.jpg';
-import {ListGroup} from "react-bootstrap";
+import {Button, ListGroup} from "react-bootstrap";
 import { ArrowDown } from 'react-bootstrap-icons';
 import { ArrowRight } from 'react-bootstrap-icons';
 import { Search } from 'react-bootstrap-icons';
 import '../../../styles/listeRecherche.css';
 import Badge from "react-bootstrap/Badge";
+import retour from '../../../assets/Retour.png';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -48,7 +50,9 @@ export function ListeRecherche(props) {
 function RecapRecherche(props) {
     return (
         <div className='recapRecherche'>
-            <Search/>
+            <Button style={{backgroundColor: "transparent",borderColor: "transparent"}} href="/"> 
+                <Image style={{height:25, width:25, marginTop:"auto", marginBottom:"auto"}} src={retour}/>
+            </Button>
             <table>
                 <tbody>
                 <tr>
@@ -72,8 +76,7 @@ function RecapRecherche(props) {
 function Trajet(props) {
 
     return (
-            <Link to='/trajet'>
-                <div className='box'>
+                <a href="/trajet" className='box'>
                     <Image className="pp" src={profilePicture} roundedCircle/>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                     <span style={{
@@ -103,7 +106,6 @@ function Trajet(props) {
                             <Badge variant="success">{props.trajet.prix}€</Badge>
                         </div>
                     </div>
-                </div>
-            </Link>
+                </a>
     );
 }
