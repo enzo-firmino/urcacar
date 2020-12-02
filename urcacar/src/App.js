@@ -16,6 +16,7 @@ import ListeMessage from './components/Page/ListeMessage';
 import Message from './components/Page/Message';
 import {DetailTrajet} from "./components/Page/DetailTrajet";
 import AddTrajet from './components/Page/AddTrajet'
+import {MesTrajets, MesTrajetsReservations} from "./components/Page/MesTrajets";
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
                         <Dashboard/>
                     </Route>
                     <Route path="/mesTrajets">
-                        <Dashboard/>
+                        <MesTrajetsReservations/>
                     </Route>
                     <Route path="/addTrajet">
                         <AddTrajet/>
