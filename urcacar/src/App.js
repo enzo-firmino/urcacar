@@ -50,6 +50,9 @@ function App() {
                     <Route path="/notation">
                         <Notation/>
                     </Route>
+                    <Route path="/trajet">
+                        <DetailTrajet/>
+                    </Route>
                 </Switch>
             <Footer/>
         </Router>

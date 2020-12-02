@@ -1,8 +1,18 @@
-.formSearchTrajet {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    width: 50%;
-    margin: auto;
+@media only screen and (min-width: 768px) {
+    .formSearchTrajet {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        width: 50%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .formSearchTrajet {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin: auto;
+    }
 }
 
 .formSearchTrajet h2 {

@@ -6,7 +6,7 @@ import profilePicture from '../../../assets/profilepicture.jpg';
 export default function ListeMessage(props) {
 
     return (
-        <div style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
+        <div className="container" style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
             <Message name="Emmanuel" trajet="Reims -> Paris"/>
             <Message name="Anne" trajet="Gare de Reims -> I.U.T"/>
         </div>

@@ -3,17 +3,34 @@
     color: black;
 }
 
-.listeRecherche .recapRecherche {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: fit-content;
-    width: 40%;
-    background-color: rgb(237, 237, 237);
-    margin: 10px auto;
-    border-radius: 16px;
-    padding-left: 20px;
+@media only screen and (min-width: 966px) {
+    .listeRecherche .recapRecherche {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        height: fit-content;
+        width: 40%;
+        background-color: rgb(237, 237, 237);
+        margin: 10px auto;
+        border-radius: 16px;
+        padding-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 966px) {
+    .listeRecherche .recapRecherche {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        height: fit-content;
+        width: 90%;
+        background-color: rgb(237, 237, 237);
+        margin: 10px auto;
+        border-radius: 16px;
+        padding-left: 20px;
+    }
 }
 
 .listeRecherche div.recapRecherche > * {

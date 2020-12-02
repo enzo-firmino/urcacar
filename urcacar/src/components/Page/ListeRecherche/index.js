@@ -76,36 +76,36 @@ function RecapRecherche(props) {
 function Trajet(props) {
 
     return (
-                <a href="/trajet" className='box'>
-                    <Image className="pp" src={profilePicture} roundedCircle/>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <span style={{
-                        borderBottom: "1px solid #58B94B",
-                        fontWeight: 'bold'
-                    }}> {props.trajet.conducteur}</span>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>{props.trajet.heureDepart}</td>
-                                <td>{props.trajet.depart}</td>
-                            </tr>
-                            <tr>
-                                <td><ArrowDown/></td>
-                                <td><ArrowDown/></td>
-                            </tr>
-                            <tr>
-                                <td>{props.trajet.heureArrive}</td>
-                                <td>{props.trajet.arrive}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className='rightBox'>
-                        Neutre
-                        <div className='badgeRight'>
-                            <Badge variant="success">{props.trajet.prix}€</Badge>
-                        </div>
-                    </div>
-                </a>
+        <a href="/trajet" className='box'>
+            <Image className="pp" src={profilePicture} roundedCircle/>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+            <span style={{
+                borderBottom: "1px solid #58B94B",
+                fontWeight: 'bold'
+            }}> {props.trajet.conducteur}</span>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>{props.trajet.heureDepart}</td>
+                        <td>{props.trajet.depart}</td>
+                    </tr>
+                    <tr>
+                        <td><ArrowDown/></td>
+                        <td><ArrowDown/></td>
+                    </tr>
+                    <tr>
+                        <td>{props.trajet.heureArrive}</td>
+                        <td>{props.trajet.arrive}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div className='rightBox'>
+                Neutre
+                <div className='badgeRight'>
+                    <Badge variant="success">{props.trajet.prix}€</Badge>
+                </div>
+            </div>
+        </a>
     );
 }
