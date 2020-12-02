@@ -9,30 +9,27 @@ import '../../../styles/listeRecherche.css';
 import Badge from "react-bootstrap/Badge";
 import retour from '../../../assets/Retour.png';
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams,
-    useRouteMatch
-} from "react-router-dom";
-
 export function ListeRecherche(props) {
 
-    let {path, url} = useRouteMatch();
-
-    const recherche = {depart: 'Reims', arrive: 'Paris', heureDepart: '12h10', heureArrive: '12h50', nbPassager: 2}
+    const recherche = {depart: 'Reims', date: '12/05',arrive: 'Paris', heureDepart: '12h10', heureArrive: '12h50', nbPassager: 2}
 
     const trajets = [
-        {idTrajet: 1, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', heureDepart: '12h10', heureArrive: '12h50', prix: 125},
-        {idTrajet: 2, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', heureDepart: '12h10', heureArrive: '12h50', prix: 125},
-        {idTrajet: 3, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', heureDepart: '12h10', heureArrive: '12h50', prix: 125},
-        {idTrajet: 4, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', heureDepart: '12h10', heureArrive: '12h50', prix: 125},
-        {idTrajet: 5, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', heureDepart: '12h10', heureArrive: '12h50', prix: 125},
+        {idTrajet: 1, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', date: '12/05', heureDepart: '12h10', heureArrive: '12h50', prix: 125, recurrence: null},
+        {idTrajet: 2, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', date: '12/05', heureDepart: '12h10', heureArrive: '12h50', prix: 125, recurrence: null},
+        {idTrajet: 3, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', date: '12/05', heureDepart: '12h10', heureArrive: '12h50', prix: 125, recurrence: null},
+        {idTrajet: 4, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', date: '12/05', heureDepart: '12h10', heureArrive: '12h50', prix: 125, recurrence: null},
+        {idTrajet: 5, conducteur: 'Romane', depart: 'Reims', arrive: 'Paris', date: '12/05', heureDepart: '12h10', heureArrive: '12h50', prix: 125, recurrence: {
+            lundi: true,
+            mardi: true,
+            mercredi: false,
+            jeudi: true,
+            vendredi: true,
+            samedi: false,
+            dimanche: false,
+            }},
     ];
     const listeTrajets = trajets.map((trajet, index) => {
-            return <Trajet key={index} trajet={trajet} path={path} url={url}/>;
+            return <Trajet key={index} trajet={trajet}/>;
         }
     );
 
@@ -50,9 +47,10 @@ export function ListeRecherche(props) {
 function RecapRecherche(props) {
     return (
         <div className='recapRecherche'>
-            <Button style={{backgroundColor: "transparent",borderColor: "transparent"}} href="/"> 
+            <Button style={{backgroundColor: "transparent",borderColor: "transparent"}} href="/">
                 <Image style={{height:25, width:25, marginTop:"auto", marginBottom:"auto"}} src={retour}/>
             </Button>
+            <span style={{fontSize:'20px'}}>{props.recherche.date}</span>
             <table>
                 <tbody>
                 <tr>
@@ -73,7 +71,17 @@ function RecapRecherche(props) {
     );
 }
 
-function Trajet(props) {
+function Trajet({trajet}) {
+
+    let recurrenceText = '';
+
+    if (trajet.recurrence != null) {
+        for (const [key, value] of Object.entries(trajet.recurrence)) {
+            if (value) {
+                recurrenceText += key + ' ';
+            }
+        }
+    }
 
     return (
         <a href="/trajet" className='box'>
@@ -82,28 +90,30 @@ function Trajet(props) {
             <span style={{
                 borderBottom: "1px solid #58B94B",
                 fontWeight: 'bold'
-            }}> {props.trajet.conducteur}</span>
+            }}> {trajet.conducteur}</span>
                 <table>
                     <tbody>
                     <tr>
-                        <td>{props.trajet.heureDepart}</td>
-                        <td>{props.trajet.depart}</td>
+                        <td>{trajet.heureDepart}</td>
+                        <td>{trajet.depart}</td>
                     </tr>
                     <tr>
                         <td><ArrowDown/></td>
                         <td><ArrowDown/></td>
                     </tr>
                     <tr>
-                        <td>{props.trajet.heureArrive}</td>
-                        <td>{props.trajet.arrive}</td>
+                        <td>{trajet.heureArrive}</td>
+                        <td>{trajet.arrive}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <span style={{fontSize:'20px', paddingLeft: '25px'}}>{trajet.date}</span>
             <div className='rightBox'>
                 Neutre
+                <span>{recurrenceText}</span>
                 <div className='badgeRight'>
-                    <Badge variant="success">{props.trajet.prix}€</Badge>
+                    <Badge variant="success">{trajet.prix}€</Badge>
                 </div>
             </div>
         </a>
