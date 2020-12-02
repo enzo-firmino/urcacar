@@ -15,11 +15,7 @@ import {ListeRecherche} from "./components/Page/ListeRecherche";
 import ListeMessage from './components/Page/ListeMessage';
 import Message from './components/Page/Message';
 import {DetailTrajet} from "./components/Page/DetailTrajet";
-<<<<<<< HEAD
 import AddTrajet from './components/Page/AddTrajet'
-=======
-import MapView from "./components/Map";
->>>>>>> bf8c061541091a77ae64e87616d807d65ad2c30f
 
 
 function App() {
@@ -43,25 +39,14 @@ function App() {
                     <Route path="/mesTrajets">
                         <Dashboard/>
                     </Route>
-<<<<<<< HEAD
                     <Route path="/addTrajet">
                         <AddTrajet/>
-=======
-                    <Route path="/trajet">
-                        <DetailTrajet/>
-                    </Route>
-                    <Route path="/AddTrajets">
-                        <Dashboard/>
->>>>>>> bf8c061541091a77ae64e87616d807d65ad2c30f
                     </Route>
                     <Route exact path="/messagerie">
                         <ListeMessage/>
                     </Route>
                     <Route  path="/messagerie/id">
                         <Message/>
-                    </Route>
-                    <Route path="/map">
-                        <MapView/>
                     </Route>
                     <Route path="/notation">
                         <Notation/>

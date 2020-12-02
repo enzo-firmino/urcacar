@@ -1,9 +1,5 @@
 import Container from "react-bootstrap/Container";
-<<<<<<< HEAD
-import React from "react";
-=======
 import React, {useRef, useState} from "react";
->>>>>>> bf8c061541091a77ae64e87616d807d65ad2c30f
 import profilePicture from '../../../assets/profilepicture.jpg';
 import voiture from '../../../assets/c4.png';
 import Image from "react-bootstrap/Image";
@@ -14,11 +10,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import MapView from "../../Map";
-<<<<<<< HEAD
-=======
 import Avis from "../../Reusable/Avis";
 import Overlay from "react-bootstrap/Overlay";
->>>>>>> bf8c061541091a77ae64e87616d807d65ad2c30f
 
 export function DetailTrajet(props) {
 
@@ -110,13 +103,11 @@ export function DetailTrajet(props) {
                 <Col>
                     <Vehicule voiture={conducteur.vehicle}/>
                 </Col>
-<<<<<<< HEAD
                 <Col>
                     <MapView />
-=======
+                    </Col>
                 <Col className='border-left'>
                     <Avis/>
->>>>>>> bf8c061541091a77ae64e87616d807d65ad2c30f
                 </Col>
             </Row>
         </Container>
