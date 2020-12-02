@@ -9,9 +9,7 @@ import {ArrowDown, GeoAlt, GeoFill, Map, Signpost} from "react-bootstrap-icons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import MapView from "../../Map";
 import Avis from "../../Reusable/Avis";
-import Overlay from "react-bootstrap/Overlay";
 
 export function DetailTrajet(props) {
 
@@ -103,9 +101,6 @@ export function DetailTrajet(props) {
                 <Col>
                     <Vehicule voiture={conducteur.vehicle}/>
                 </Col>
-                <Col>
-                    <MapView />
-                    </Col>
                 <Col className='border-left'>
                     <Avis/>
                 </Col>
