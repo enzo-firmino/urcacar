@@ -82,10 +82,12 @@ export function DetailTrajet(props) {
                 <Col className='border-left'>
                     <RecapTrajet trajet={trajet}/>
                     <Row>
-                        <span>Prix pour un passager : {trajet.prix}€</span>
+                        <span style={{color: 'rgba(0, 0, 0, 0.6)', paddingRight: '15px'}}>Prix pour un passager</span>
+                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.prix}€</span>
                     </Row>
                     <Row>
-                        <span> Places disponibles : {trajet.nbPlaceDispo}</span>
+                        <span style={{color: 'rgba(0, 0, 0, 0.6)', paddingRight: '15px'}}> Places disponibles</span>
+                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.nbPlaceDispo}</span>
                     </Row>
                 </Col>
             </Row>

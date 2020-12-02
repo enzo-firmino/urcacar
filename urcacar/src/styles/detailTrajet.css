@@ -82,12 +82,16 @@
 .detailTrajet .row-padding {
     padding-top: 25px;
     padding-bottom: 25px;
+    width: 95%;
+    margin: auto;
     border-bottom: solid 2px rgba(88,185,75,1);
 }
 
 .detailTrajet .row-btn {
     padding-top: 25px;
     padding-bottom: 25px;
+    width: 95%;
+    margin: auto;
     border-bottom: solid 2px rgba(88,185,75,1);
 }
 
