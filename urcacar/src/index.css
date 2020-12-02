@@ -75,7 +75,7 @@ a {
   color: black !important;
 }
 
-button {
+.transparent {
   background-color: transparent !important;
   border-color: transparent !important;
 }

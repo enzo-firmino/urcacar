@@ -25,7 +25,7 @@ export default function Message(props) {
                                 <Form.Control className="bg-gris" type="text" placeholder="Message" />
                             </Col>
                             <Col xs={1}>
-                                <Button><Image className="action" src="https://image.winudf.com/v2/image/Y29tLnRyaXNodWx0ZWNoaW5kaWEudGFwMnNlbmRfaWNvbl8xNTM1NDI4MTQxXzAzNg/icon.png?w=170&fakeurl=1"/></Button>
+                                <Button className="transparent"><Image className="action" src="https://image.winudf.com/v2/image/Y29tLnRyaXNodWx0ZWNoaW5kaWEudGFwMnNlbmRfaWNvbl8xNTM1NDI4MTQxXzAzNg/icon.png?w=170&fakeurl=1"/></Button>
                             </Col>
                         </Row>
                     </Form>

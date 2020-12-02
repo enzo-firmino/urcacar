@@ -1,15 +1,15 @@
 import Container from "react-bootstrap/Container";
 import React from "react";
-import profilePicture from '../../assets/profilepicture.jpg';
-import voiture from '../../assets/c4.png';
+import profilePicture from '../../../assets/profilepicture.jpg';
+import voiture from '../../../assets/c4.png';
 import Image from "react-bootstrap/Image";
-import '../../styles/detailTrajet.css';
+import '../../../styles/detailTrajet.css';
 
 import {ArrowDown, GeoAlt} from "react-bootstrap-icons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import MapView from "../Map";
+import MapView from "../../Map";
 
 export function DetailTrajet(props) {
 
@@ -138,7 +138,7 @@ export function DetailTrajet(props) {
                     <Vehicule voiture={conducteur.vehicle}/>
                 </Col>
                 <Col>
-                    <MapView/>
+                    <MapView />
                 </Col>
             </Row>
         </Container>
