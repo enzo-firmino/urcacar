@@ -14,7 +14,8 @@ import {
 import {ListeRecherche} from "./components/Page/ListeRecherche";
 import ListeMessage from './components/Page/ListeMessage';
 import Message from './components/Page/Message';
-import {DetailTrajet} from "./components/DetailTrajet";
+import {DetailTrajet} from "./components/Page/DetailTrajet";
+import MapView from "./components/Map";
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
                     <Route path="/MesTrajets">
                         <Dashboard/>
                     </Route>
+                    <Route path="/trajet">
+                        <DetailTrajet/>
+                    </Route>
                     <Route path="/AddTrajets">
                         <Dashboard/>
                     </Route>
@@ -46,6 +50,9 @@ function App() {
                     </Route>
                     <Route  path="/messagerie/id">
                         <Message/>
+                    </Route>
+                    <Route path="/map">
+                        <MapView/>
                     </Route>
                     <Route path="/notation">
                         <Notation/>
