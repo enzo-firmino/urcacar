@@ -22,7 +22,7 @@ export default function MapView(props){
     const[refMap, wayPoints, saveMap, setWaypoint] = useMap();
 
     return(
-        <div className="mapHolder">
+        <div className="mapHolder" style={{height:"100%"}}>
 
             <input id="rue1" placeholder="Adresse1"type = "text"/>
             <input id="rue2" placeholder="Adresse2"type = "text"/>
@@ -33,7 +33,7 @@ export default function MapView(props){
                 Change
             </button>
 
-            <Map style={{height: props.size}} center={[49.24167849096564, 4.061995752829034]} zoom={11} ref={saveMap}>
+            <Map center={[49.24167849096564, 4.061995752829034]} zoom={11} ref={saveMap}>
                 <TileLayer
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
