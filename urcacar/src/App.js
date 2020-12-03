@@ -1,8 +1,8 @@
 import './App.css';
 import 'leaflet/dist/leaflet.css'
 import React from "react";
-import {Header} from "./components/Reusable/Header";
-import {Footer} from "./components/Reusable/Footer";
+import Header from "./components/Reusable/Header";
+import Footer from "./components/Reusable/Footer";
 import {Accueil} from "./components/Page/Accueil";
 import {Profil} from "./components/Page/Profil";
 import {Notation} from "./components/Page/Notation";
@@ -14,7 +14,9 @@ import {
 import {ListeRecherche} from "./components/Page/ListeRecherche";
 import ListeMessage from './components/Page/ListeMessage';
 import Message from './components/Page/Message';
-//import {DetailTrajet} from "./components/DetailTrajet";
+import {DetailTrajet} from "./components/Page/DetailTrajet";
+import AddTrajet from './components/Page/AddTrajet'
+import {MesTrajets, MesTrajetsReservations} from "./components/Page/MesTrajets";
 
 
 function App() {
@@ -35,11 +37,11 @@ function App() {
                     <Route path="/notifications">
                         <Dashboard/>
                     </Route>
-                    <Route path="/MesTrajets">
-                        <Dashboard/>
+                    <Route path="/mesTrajets">
+                        <MesTrajetsReservations/>
                     </Route>
-                    <Route path="/AddTrajets">
-                        <Dashboard/>
+                    <Route path="/addTrajet">
+                        <AddTrajet/>
                     </Route>
                     <Route exact path="/messagerie">
                         <ListeMessage/>
@@ -49,6 +51,9 @@ function App() {
                     </Route>
                     <Route path="/notation">
                         <Notation/>
+                    </Route>
+                    <Route path="/trajet">
+                        <DetailTrajet/>
                     </Route>
 
                 </Switch>

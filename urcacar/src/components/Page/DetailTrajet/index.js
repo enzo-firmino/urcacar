@@ -1,15 +1,15 @@
 import Container from "react-bootstrap/Container";
-import React from "react";
-import profilePicture from '../../assets/profilepicture.jpg';
-import voiture from '../../assets/c4.png';
+import React, {useRef, useState} from "react";
+import profilePicture from '../../../assets/profilepicture.jpg';
+import voiture from '../../../assets/c4.png';
 import Image from "react-bootstrap/Image";
-import '../../styles/detailTrajet.css';
+import '../../../styles/detailTrajet.css';
 
-import {ArrowDown, GeoAlt} from "react-bootstrap-icons";
+import {ArrowDown, GeoAlt, GeoFill, Map, Signpost} from "react-bootstrap-icons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import MapView from "../Map";
+import Avis from "../../Reusable/Avis";
 
 export function DetailTrajet(props) {
 
@@ -67,69 +67,33 @@ export function DetailTrajet(props) {
         ]
     }
 
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
+
     return (
         <Container className='detailTrajet container bg-light'>
             <Row className='row-padding'>
                 <h2>{trajet.date}</h2>
             </Row>
             <Row className='row-padding'>
-                <Col className='profil'>
+                <Profil conducteur={conducteur}/>
+                <Col className='border-left'>
+                    <RecapTrajet trajet={trajet}/>
                     <Row>
-                        <Image src={conducteur.photo} roundedCircle/>
+                        <span style={{color: 'rgba(0, 0, 0, 0.6)', paddingRight: '15px'}}>Prix pour un passager</span>
+                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.prix}€</span>
                     </Row>
                     <Row>
-                        <h3>{conducteur.prenom}</h3>
-                    </Row>
-                    <Row>
-                        <span>{conducteur.notation}</span>
-                    </Row>
-                    <Row>
-                        <div className='preferences'>
-                            <Image className={conducteur.preferences.discussion.toString()}
-                                   style={{height: 50, width: 50, margin: 10}}
-                                   src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
-                            <Image className={conducteur.preferences.fumer.toString()}
-                                   style={{height: 50, width: 50, margin: 10}}
-                                   src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
-                            <Image className={conducteur.preferences.musique.toString()}
-                                   style={{height: 50, width: 50, margin: 10}}
-                                   src="https://img.icons8.com/metro/452/music.png"/>
-                        </div>
-                    </Row>
-                </Col>
-                <Col>
-                    <Row className='recapTrajet'>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>{trajet.heureDepart}</td>
-                                <td><GeoAlt/></td>
-                                <td>{trajet.depart}</td>
-                            </tr>
-                            <tr>
-                                <td/>
-                                <ArrowDown/>
-                                <td/>
-                            </tr>
-                            <tr>
-                                <td>{trajet.heureArrive}</td>
-                                <td><GeoAlt/></td>
-                                <td>{trajet.arrive}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </Row>
-                    <Row>
-                        <span>Prix pour un passager : {trajet.prix}€</span>
-                    </Row>
-                    <Row>
-                        <span> Places disponibles : {trajet.nbPlaceDispo}</span>
+                        <span style={{color: 'rgba(0, 0, 0, 0.6)', paddingRight: '15px'}}> Places disponibles</span>
+                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.nbPlaceDispo}</span>
                     </Row>
                 </Col>
             </Row>
-            <Row className='row-padding'>
+            <Row className='row-btn'>
                 <Col className='btn-bg-green'>
-                    <Button>Contacter</Button>
+                    <a href='/messagerie/id'>Contacter</a>
+                </Col>
+                <Col className='btn-bg-green'>
                     <Button>Réserver</Button>
                 </Col>
             </Row>
@@ -137,11 +101,68 @@ export function DetailTrajet(props) {
                 <Col>
                     <Vehicule voiture={conducteur.vehicle}/>
                 </Col>
-                <Col>
-                    <MapView/>
+                <Col className='border-left'>
+                    <Avis/>
                 </Col>
             </Row>
         </Container>
+    );
+}
+
+function Profil({conducteur}) {
+    return (<Col className='profil'>
+        <Row>
+            <Image src={conducteur.photo} roundedCircle/>
+        </Row>
+        <Row>
+            <h3>{conducteur.prenom}</h3>
+        </Row>
+        <Row>
+            <span>{conducteur.notation}</span>
+        </Row>
+        <Row>
+            <div className='preferences'>
+                <Image className={conducteur.preferences.discussion.toString()}
+                       style={{height: 50, width: 50, margin: 10}}
+                       src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
+                <Image className={conducteur.preferences.fumer.toString()}
+                       style={{height: 50, width: 50, margin: 10}}
+                       src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
+                <Image className={conducteur.preferences.musique.toString()}
+                       style={{height: 50, width: 50, margin: 10}}
+                       src="https://img.icons8.com/metro/452/music.png"/>
+            </div>
+        </Row>
+    </Col>);
+}
+
+function RecapTrajet({trajet}) {
+    return (
+        <Row className='recapTrajet'>
+            <table>
+                <tbody>
+                <tr>
+                    <td>{trajet.heureDepart}</td>
+                    <td><GeoAlt/></td>
+                    <td>{trajet.depart}</td>
+                </tr>
+                <tr>
+                    <td/>
+                    <ArrowDown/>
+                    <td/>
+                </tr>
+                <tr>
+                    <td>{trajet.heureArrive}</td>
+                    <td><GeoAlt/></td>
+                    <td>{trajet.arrive}</td>
+                </tr>
+                </tbody>
+            </table>
+            <a className='a-bg-green' style={{marginTop: '20px'}} href='/map'>
+                <Map className='align-middle' />
+                <span className='align-middle' >  Voir le trajet sur la carte </span>
+            </a>
+        </Row>
     );
 }
 
@@ -150,8 +171,8 @@ function Vehicule({voiture}) {
         <Col>
             <Row>
                 <Image
-                style={{height: 50, width: 50, margin: 10}}
-                src="https://www.flaticon.com/svg/static/icons/svg/846/846338.svg"/>
+                    style={{height: 50, width: 50, margin: 10}}
+                    src="https://www.flaticon.com/svg/static/icons/svg/846/846338.svg"/>
             </Row>
             <Row>
                 <span>{voiture.marque} {voiture.modele} {voiture.annee} </span>

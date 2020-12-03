@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import Form from 'react-bootstrap/Form';
+import {Form, Button} from 'react-bootstrap';
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import { ArrowDownUp } from 'react-bootstrap-icons';
 import '../../../styles/formSearchTrajet.css';
 import { Redirect } from "react-router-dom"

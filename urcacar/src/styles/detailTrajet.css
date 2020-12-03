@@ -7,9 +7,24 @@
     align-items: center;
 }
 
+.detailTrajet .border-left {
+    border-left: solid 2px rgba(88,185,75,1) !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .detailTrajet .border-left {
+        border-left: none !important;
+    }
+}
+
 .detailTrajet .recapTrajet {
     padding-bottom: 50px;
-    border-left: solid 2px rgba(88,185,75,1);
+}
+
+@media only screen and (max-width: 768px) {
+    .detailTrajet .recapTrajet {
+        border-top: solid 2px rgba(88,185,75,1) !important;
+    }
 }
 
 .detailTrajet .profil img {
@@ -37,13 +52,27 @@
     font-size: 20px;
 }
 
-.detailTrajet .btn-bg-green button {
-    background-color: rgba(88,185,75,1);
+.detailTrajet .btn-bg-green > * {
+    background-color: rgba(88,185,75,1) !important;
     border-radius: 25px;
     border: none;
+    color: white !important;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5;
+    padding: 6px 12px;
     font-size: 22px;
     margin: 0 20px;
     box-shadow: 2px 2px 5px #292929 !important;
+}
+
+.detailTrajet .btn-bg-green > *:hover {
+    background-color: rgb(68, 147, 57) !important;
+}
+
+.detailTrajet .btn-bg-green button:active {
+    background-color: rgb(68, 147, 57) !important;
 }
 
 .detailTrajet .leaflet-container {
@@ -53,6 +82,29 @@
 .detailTrajet .row-padding {
     padding-top: 25px;
     padding-bottom: 25px;
+    width: 95%;
+    margin: auto;
     border-bottom: solid 2px rgba(88,185,75,1);
 }
+
+.detailTrajet .row-btn {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 95%;
+    margin: auto;
+    border-bottom: solid 2px rgba(88,185,75,1);
+}
+
+
+@media only screen and (max-width: 768px)  {
+    .detailTrajet .row-padding {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+}
+
+.a-bg-green:hover {
+    color: rgba(88,185,75,1) !important;
+}
+
 

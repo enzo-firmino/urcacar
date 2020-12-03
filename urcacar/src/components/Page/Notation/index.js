@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import profilePicture from '../../../assets/profilepicture.jpg';
 import Image from "react-bootstrap/Image";
 import {Col, Container, Form, Row} from "react-bootstrap";
+import StarRating from '../../Reusable/Rating/index';
+import {StarFill} from "react-bootstrap-icons";
 
 export function Notation(props) {
     return (
@@ -22,19 +24,19 @@ function Top() {
                 <div className="d-flex flex-column ml-4">
                     <div className="d-flex flex-row mb-2">
                         <div className="p-2 mr-5" style={{borderBottom: '2px solid #58B94B', width: 200}}>Romane</div>
-                        <div  className="p-2">Neutre</div>
+                        <div className="p-2">Neutre</div>
                     </div>
 
                     <div className="d-flex flex-row mb-2">
-                        <div className="p-2 mr-5" style={{height:5}}>12h00</div>
+                        <div className="p-2 mr-5" style={{height: 5}}>12h00</div>
                         <div className="p-2">Gare de Reims</div>
                     </div>
                     <div className="d-flex flex-row mb-2">
-                        <div style={{fontSize:40}}className="p-2 mr-5">↓</div>
+                        <div style={{fontSize: 40}} className="p-2 mr-5">↓</div>
                         <div className="p-2">↓</div>
                     </div>
-                    <div className="d-flex flex-row mb-2" style={{width:20}}>
-                        <div className="p-2 mr-5" style={{height:5}}>12h15</div>
+                    <div className="d-flex flex-row mb-2" style={{width: 20}}>
+                        <div className="p-2 mr-5" style={{height: 5}}>12h15</div>
                         <div className="p-2">I.U.T</div>
                     </div>
 
@@ -62,11 +64,83 @@ function Top() {
 }
 
 function Note() {
+    const [note1, setNote1] = useState(null);
+    const [note2, setNote2] = useState(null);
+    const [note3, setNote3] = useState(null);
+
+
+    let oui = ["Conduite", "Ponctualité", "Comportement"];
     return (
-        <div className="justify-content-center">
-                    <p className="ml-5" style={{borderTop: '2px solid #58B94B', width: 1000}}>
-                    </p>
-                    <h2>Noter un utilisateur</h2>
+        <div>
+
+
+            {[...Array(5)].map((star, i) => {
+                const valeurNote = i + 1;
+                return (
+
+                    <label>
+                        <input
+                            style={{display: "none"}}
+                            type="radio"
+                            name="notation"
+                            value={valeurNote}
+                            onClick={() => setNote1(valeurNote)}
+                        />
+                        <StarFill style={{cursor: "pointer"}} className="star"
+                                color={valeurNote <= note1 ? "#58B94B" : "#e4e5e9"} size={40}/>
+                    </label>
+            );
+            })}
+
+            <div>
+
+
+                {[...Array(5)].map((star, i) => {
+                    const valeurNote = i + 1;
+                    return (
+
+                        <label>
+                            <input
+                                style={{display: "none"}}
+                                type="radio"
+                                name="notation"
+                                value={valeurNote}
+                                onClick={() => setNote2(valeurNote)}
+                            />
+                            <StarFill style={{cursor: "pointer"}} className="star"
+                                    color={valeurNote <= note2 ? "#58B94B" : "#e4e5e9"} size={40}/>
+                        </label>
+                    );
+                })}
+
+
+            </div>
+            <div>
+
+
+                {[...Array(5)].map((star, i) => {
+                    const valeurNote = i + 1;
+                    return (
+
+                        <label>
+                            <input
+                                style={{display: "none"}}
+                                type="radio"
+                                name="notation"
+                                value={valeurNote}
+                                onClick={() => setNote3(valeurNote)}
+                            />
+                            <StarFill style={{cursor: "pointer"}} className="star"
+                                    color={valeurNote <= note3 ? "#58B94B" : "#e4e5e9"} size={40}/>
+                        </label>
+                    );
+                })}
+
+
+            </div>
         </div>
-    )
+
+
+
+    );
 }

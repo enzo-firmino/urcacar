@@ -3,24 +3,41 @@
     color: black;
 }
 
-.listeRecherche .recapRecherche {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: fit-content;
-    width: 40%;
-    background-color: rgb(237, 237, 237);
-    margin: 10px auto;
-    border-radius: 16px;
-    padding-left: 20px;
+@media only screen and (min-width: 966px) {
+    .listeRecherche .recapRecherche {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        height: fit-content;
+        width: 40%;
+        background-color: rgb(237, 237, 237);
+        margin: 10px auto;
+        border-radius: 16px;
+        padding-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 966px) {
+    .listeRecherche .recapRecherche {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        height: fit-content;
+        width: 90%;
+        background-color: rgb(237, 237, 237);
+        margin: 10px auto;
+        border-radius: 16px;
+        padding-left: 20px;
+    }
 }
 
 .listeRecherche div.recapRecherche > * {
     margin-right: 15px;
 }
 
-.listeRecherche .trajet:hover {
+ .trajet:hover {
     box-shadow: 0 8px 20px rgba(0,0,0,0.25), 0 8px 8px rgba(0,0,0,0.22);
 }
 
@@ -40,7 +57,7 @@
     text-align: right;
 }
 
-.listeRecherche .trajet img {
+ .trajet img {
     height: 100px;
     width: auto;
 }

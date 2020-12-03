@@ -1,9 +1,20 @@
-.recherchesRecentes {
-    margin-bottom: 50px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 50%;
-    background-color: rgba(88,185,75,1) !important;
+@media only screen and (min-width: 768px) {
+    .recherchesRecentes {
+        margin-bottom: 50px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 50%;
+        background-color: rgba(88,185,75,1) !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .recherchesRecentes {
+        margin-bottom: 50px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgba(88,185,75,1) !important;
+    }
 }
 
 .recherchesRecentes .card-header {

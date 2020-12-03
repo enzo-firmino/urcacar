@@ -19,7 +19,7 @@ export function Profil(props) {
 function Top(){
     return (
     <div className="row p-5">
-        <Image style={{height:100, width:100}} src={profilePicture} roundedCircle/>
+        <Image className="pp" src={profilePicture} roundedCircle/>
         <div style={{paddingLeft:10}}>
             <p className="text-left" style={{marginBottom:1}}>Emmanuel</p>
             <p className="text-left" style={{marginBottom:1}}>Neutre</p>
