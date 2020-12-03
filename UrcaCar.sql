@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  01/12/2020 11:32:04                      */
+/* Date de création :  03/12/2020 14:32:52                      */
 /*==============================================================*/
 
 
@@ -33,7 +33,7 @@ drop table if exists Voiture;
 /*==============================================================*/
 create table Adresse
 (
-   idAd                 int not null,
+   idAd                 int not null auto_increment,
    villeAd              varchar(255),
    cpAd                 numeric(5,0),
    adAd                 varchar(255),
@@ -45,7 +45,7 @@ create table Adresse
 /*==============================================================*/
 create table Avis
 (
-   idAvis               int not null,
+   idAvis               int not null auto_increment,
    idUser               int not null,
    conduite             int,
    ponctualite          int,
@@ -68,7 +68,7 @@ create table Consulter
 /*==============================================================*/
 create table Etapes
 (
-   idEtape              int not null,
+   idEtape              int not null auto_increment,
    idTrajet             int,
    heure                time,
    primary key (idEtape)
@@ -79,7 +79,7 @@ create table Etapes
 /*==============================================================*/
 create table Message
 (
-   idMsg                int not null,
+   idMsg                int not null auto_increment,
    idUser               int not null,
    Uti_idUser           int not null,
    texteMsg             varchar(1024),
@@ -93,7 +93,7 @@ create table Message
 /*==============================================================*/
 create table Notifs
 (
-   idNotif              int not null,
+   idNotif              int not null auto_increment,
    idUser               int not null,
    titreNotif           varchar(255),
    texteNotif           varchar(255),
@@ -105,7 +105,7 @@ create table Notifs
 /*==============================================================*/
 create table Recurence
 (
-   idRec                int not null,
+   idRec                int not null auto_increment,
    idTrajet             int not null,
    dateFin              date,
    Lundi                bool,
@@ -144,7 +144,7 @@ create table Situer
 /*==============================================================*/
 create table Trajet
 (
-   idTrajet             int not null,
+   idTrajet             int not null auto_increment,
    idAd                 int not null,
    idUser               int not null,
    Adr_idAd             int not null,
@@ -162,7 +162,7 @@ create table Trajet
 /*==============================================================*/
 create table Utilisateur
 (
-   idUser               int not null,
+   idUser               int not null auto_increment,
    idCar                int,
    pnomUser             varchar(255),
    emailUser            varchar(255),
@@ -189,7 +189,7 @@ create table Utilisateur
 /*==============================================================*/
 create table Voiture
 (
-   idCar                int not null,
+   idCar                int not null auto_increment,
    idUser               int not null,
    modeleCar            varchar(255),
    anneeCar             date,

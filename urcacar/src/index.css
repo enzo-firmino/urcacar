@@ -52,7 +52,7 @@ code {
 @media only screen and (max-width: 768px) {
   .box {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: fit-content;
     background-color: rgba(230, 230, 230, 0.5);
     margin: 10px auto;
@@ -67,6 +67,13 @@ code {
 .pp {
   height: 100px;
   width: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .pp {
+    height: 50px;
+    width: 50px;
+  }
 }
 
 /*CSS pour les lien*/
@@ -85,4 +92,8 @@ a {
   width: 30px;
   margin-top: auto;
   margin-bottom: auto;
+}
+body{
+  height:100vh;
+  width:100vw;
 }

@@ -3,7 +3,7 @@ import { Form, Button, Dropdown, Row } from "react-bootstrap";
 import { ArrowDownUp, PlusCircle, TrashFill } from "react-bootstrap-icons";
 import Col from "react-bootstrap/Col";
 import MapView from '../../Map';
-import '../../../styles/formSearchTrajet.css';
+import '../../../styles/form.css';
 
 export default function AddTrajet(props) {
 
@@ -16,7 +16,7 @@ export default function AddTrajet(props) {
     const [prix, setPrix] = useState(0);
 
     return (
-        <div>
+        <div className='addTrajet'>
             <h1>Ajouter un trajet</h1>
             <Form className="container bg-light">
 
@@ -153,8 +153,8 @@ export default function AddTrajet(props) {
                         <Button className="transparent"><TrashFill color="black"/></Button>
                     </Row>
                 </div>
-                
-                
+
+
                 <MapView size={250} />
 
                 <Button

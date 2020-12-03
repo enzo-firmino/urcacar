@@ -138,31 +138,27 @@ function Profil({conducteur}) {
 
 function RecapTrajet({trajet}) {
     return (
-        <Row className='recapTrajet'>
-            <table>
-                <tbody>
-                <tr>
-                    <td>{trajet.heureDepart}</td>
-                    <td><GeoAlt/></td>
-                    <td>{trajet.depart}</td>
-                </tr>
-                <tr>
-                    <td/>
-                    <ArrowDown/>
-                    <td/>
-                </tr>
-                <tr>
-                    <td>{trajet.heureArrive}</td>
-                    <td><GeoAlt/></td>
-                    <td>{trajet.arrive}</td>
-                </tr>
-                </tbody>
-            </table>
+        <div>
+
+                <div className="d-flex flex-fill">
+                    <p style={{fontSize: 15, width:"50%"}}>Place de la Gare,<br/> 51100 Reims</p>
+                    <p/>
+                    <p style={{fontSize: 15, width:"50%"}}>Chemin des Rouliers,<br/> 51100 Reims</p>
+                </div>
+                <div className="d-flex flex-fill border-bottom border-dark">
+
+                    <GeoAlt className="justify-content-center" width="50%" height="35"/>
+                    <GeoAlt className="justify-content-center" width="50%" height="35"/>
+                </div>
+                <div className="d-flex flex-fill">
+                    <p style={{fontSize: 15, width:"50%"}}>12h00</p>
+                    <p style={{fontSize: 15, width:"50%"}}>12h15</p>
+                </div>
             <a className='a-bg-green' style={{marginTop: '20px'}} href='/map'>
                 <Map className='align-middle' />
                 <span className='align-middle' >  Voir le trajet sur la carte </span>
             </a>
-        </Row>
+            </div>
     );
 }
 

@@ -131,6 +131,7 @@ function MesReservations({reservations}) {
 function MonTrajet({trajet}) {
     return (
         <a href="/trajet" className='box' >
+            <span style={{fontSize:'20px'}}>{trajet.date}</span>
                 <table>
                     <tbody>
                     <tr>
@@ -147,7 +148,6 @@ function MonTrajet({trajet}) {
                     </tr>
                     </tbody>
                 </table>
-            <span style={{fontSize:'20px', paddingLeft: '25px'}}>{trajet.date}</span>
             <div className='rightBox'>
                 <span>{trajet.nbPassagers} / {trajet.nbPlaces} Passagers</span>
                 <div className='badgeRight'>
@@ -162,13 +162,14 @@ function MonTrajet({trajet}) {
 function MaReservation({trajet}) {
 
     return (
-        <a href="/trajet" className='box' >
-            <Image className="pp" src={profilePicture} roundedCircle/>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-            <span style={{
-                borderBottom: "1px solid #58B94B",
-                fontWeight: 'bold'
-            }}> {trajet.conducteur}</span>
+        <a href="/trajet" className='box'>
+            <div className='leftBox'>
+                <Image className="pp" src={profilePicture} roundedCircle/>
+                <span style={{
+                    borderBottom: "1px solid #58B94B",
+                    fontWeight: 'bold'
+                }}> {trajet.conducteur}</span>
+                <span style={{fontSize:'20px'}}>{trajet.date}</span>
                 <table>
                     <tbody>
                     <tr>
@@ -186,7 +187,6 @@ function MaReservation({trajet}) {
                     </tbody>
                 </table>
             </div>
-            <span style={{fontSize:'20px', paddingLeft: '25px'}}>{trajet.date}</span>
             <div className='rightBox'>
                 Neutre
                 <div className='badgeRight'>
@@ -207,6 +207,7 @@ function MaDemandeReservation({demande}) {
                 borderBottom: "1px solid #58B94B",
                 fontWeight: 'bold'
             }}> {demande.conducteur}</span>
+            <span style={{fontSize:'20px'}}>{demande.date}</span>
                 <table>
                     <tbody>
                     <tr>
@@ -224,7 +225,6 @@ function MaDemandeReservation({demande}) {
                     </tbody>
                 </table>
             </div>
-            <span style={{fontSize:'20px', paddingLeft: '25px'}}>{demande.date}</span>
             <div className='rightBox'>
                 Neutre
                 <div className='badgeRight'>

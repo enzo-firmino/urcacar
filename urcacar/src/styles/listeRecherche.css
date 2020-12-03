@@ -21,7 +21,7 @@
 @media only screen and (max-width: 966px) {
     .listeRecherche .recapRecherche {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         height: fit-content;
@@ -55,6 +55,53 @@
     position: relative;
     right: 0;
     text-align: right;
+}
+
+@media only screen and (max-width: 768px) {
+    .rightBox {
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        right: 0;
+        text-align: right;
+    }
+}
+
+.leftBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    right: 0;
+    text-align: right;
+}
+
+@media only screen and (max-width: 768px) {
+    .leftBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        position: relative;
+        right: 0;
+        text-align: right;
+    }
+}
+
+.leftBox > * {
+    padding: 0 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .leftBox > * {
+        padding: 0;
+    }
 }
 
  .trajet img {

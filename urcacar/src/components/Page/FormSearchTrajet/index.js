@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Form, Button} from 'react-bootstrap';
 import Col from "react-bootstrap/Col";
 import { ArrowDownUp } from 'react-bootstrap-icons';
-import '../../../styles/formSearchTrajet.css';
+import '../../../styles/form.css';
 import { Redirect } from "react-router-dom"
 
 export function FormSearchTrajet(props) {
