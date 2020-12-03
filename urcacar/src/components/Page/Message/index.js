@@ -20,13 +20,9 @@ export default function Message(props) {
                 <UMsg/>
                 <div>
                     <Form>
-                        <Row>
-                            <Col style={{marginTop:"auto", marginBottom:"auto"}}>
-                                <Form.Control className="bg-gris" type="text" placeholder="Message" />
-                            </Col>
-                            <Col xs={1}>
-                                <Button className="transparent"><Image className="action" src="https://image.winudf.com/v2/image/Y29tLnRyaXNodWx0ZWNoaW5kaWEudGFwMnNlbmRfaWNvbl8xNTM1NDI4MTQxXzAzNg/icon.png?w=170&fakeurl=1"/></Button>
-                            </Col>
+                        <Row className="d-flex flex-fill">
+                            <Form.Control style={{marginTop:"auto", marginBottom:"auto", width:"80%"}} className="bg-gris" type="text" placeholder="Message" />
+                            <Button className="transparent"><Image className="action" src="https://image.winudf.com/v2/image/Y29tLnRyaXNodWx0ZWNoaW5kaWEudGFwMnNlbmRfaWNvbl8xNTM1NDI4MTQxXzAzNg/icon.png?w=170&fakeurl=1"/></Button>
                         </Row>
                     </Form>
                 </div>
