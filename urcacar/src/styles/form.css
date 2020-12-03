@@ -7,8 +7,25 @@
     }
 }
 
+@media only screen and (min-width: 768px) {
+    .addTrajet {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        width: 50%;
+        margin: auto;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .formSearchTrajet {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .addTrajet {
         padding-top: 50px;
         padding-bottom: 50px;
         margin: auto;
@@ -19,12 +36,20 @@
     padding-bottom: 25px;
 }
 
+.addTrajet h2 {
+    padding-bottom: 25px;
+}
+
 
 .formSearchTrajet .form-group {
     margin-top: 1rem;
 }
 
-.formSearchTrajet .fullBgField {
+ .addTrajet .form-group {
+    margin-top: 1rem;
+}
+
+ .fullBgField {
     border-radius: 25px !important ;
     position: relative !important;
     border-style: hidden !important;
@@ -34,15 +59,13 @@
     color: white !important;
 }
 
-
-.formSearchTrajet .fullBgField::placeholder {
+ .fullBgField::placeholder {
     text-align: center;
     color: white !important;
     opacity: 1 !important;
 }
 
-
-.formSearchTrajet .emptyBgField {
+ .emptyBgField {
     border-radius: 25px !important ;
     position: relative !important;
     border: solid 3px rgba(88,185,75,1) !important;
@@ -52,17 +75,21 @@
     color: black !important;
 }
 
-.formSearchTrajet .emptyBgField::placeholder {
+ .emptyBgField::placeholder {
     text-align: center;
     color: red !important;
     opacity: 1 !important;
 }
-
-.formSearchTrajet .rechercheButton {
+ .rechercheButton {
     font-size: 20px !important;
 }
 
 .formSearchTrajet a {
+    text-decoration: none;
+    color: white !important;
+}
+
+.addTrajet a {
     text-decoration: none;
     color: white !important;
 }
