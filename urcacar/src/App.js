@@ -14,7 +14,7 @@ import {
 import {ListeRecherche} from "./components/Page/ListeRecherche";
 import ListeMessage from './components/Page/ListeMessage';
 import Message from './components/Page/Message';
-import {DetailTrajet} from "./components/DetailTrajet";
+//import {DetailTrajet} from "./components/DetailTrajet";
 
 
 function App() {
@@ -50,6 +50,7 @@ function App() {
                     <Route path="/notation">
                         <Notation/>
                     </Route>
+
                 </Switch>
             <Footer/>
         </Router>
