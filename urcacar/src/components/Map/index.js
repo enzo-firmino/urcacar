@@ -1,8 +1,7 @@
-import React , {useState, useEffect} from 'react';
+import React from 'react';
 import Routing from "../Routing";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import L from 'leaflet';
-import getAll from "../../services/fetch/fetch";
 import useMap from "../../services/hook/Map"
 import iconGreen from '../../assets/GreenMarker.png';
 
