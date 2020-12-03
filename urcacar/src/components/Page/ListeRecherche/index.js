@@ -167,7 +167,7 @@ function Trajet({trajet}) {
                 borderBottom: "1px solid #58B94B",
                 fontWeight: 'bold'
             }}> {trajet.conducteur}</span>
-                <span style={{fontSize:'20px', paddingLeft: '25px'}}>{trajet.date}</span>
+                <span style={{fontSize:'20px'}}>{trajet.date}</span>
                 <table>
                         <tbody>
                         <tr>
