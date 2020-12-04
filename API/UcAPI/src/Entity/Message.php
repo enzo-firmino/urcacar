@@ -2,112 +2,124 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=MessageRepository::class)
+ * Message
+ *
+ * @ORM\Table(name="message", indexes={@ORM\Index(name="FK_Recevoir", columns={"idUser"}), @ORM\Index(name="FK_Envoyer", columns={"Uti_idUser"})})
+ * @ORM\Entity
  */
 class Message
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="idMsg", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idmsg;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var int
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
      */
-    private $texteMsg;
+    private $iduser;
 
     /**
-     * @ORM\Column(type="date")
+     * @var int
+     *
+     * @ORM\Column(name="Uti_idUser", type="integer", nullable=false)
      */
-    private $dateMsg;
+    private $utiIduser;
 
     /**
-     * @ORM\Column(type="date")
+     * @var string|null
+     *
+     * @ORM\Column(name="texteMsg", type="string", length=1024, nullable=true)
      */
-    private $vuMsg;
+    private $textemsg;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messageEnvoye")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="dateMsg", type="date", nullable=true)
      */
-    private $utilisateurEnvoyer;
+    private $datemsg;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messageRecu")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="vuMsg", type="date", nullable=true)
      */
-    private $utilisateurRecevoir;
+    private $vumsg;
 
-    public function getId(): ?int
+    public function getIdmsg(): ?int
     {
-        return $this->id;
+        return $this->idmsg;
     }
 
-    public function getTexteMsg(): ?string
+    public function getIduser(): ?int
     {
-        return $this->texteMsg;
+        return $this->iduser;
     }
 
-    public function setTexteMsg(string $texteMsg): self
+    public function setIduser(int $iduser): self
     {
-        $this->texteMsg = $texteMsg;
+        $this->iduser = $iduser;
 
         return $this;
     }
 
-    public function getDateMsg(): ?\DateTimeInterface
+    public function getUtiIduser(): ?int
     {
-        return $this->dateMsg;
+        return $this->utiIduser;
     }
 
-    public function setDateMsg(\DateTimeInterface $dateMsg): self
+    public function setUtiIduser(int $utiIduser): self
     {
-        $this->dateMsg = $dateMsg;
+        $this->utiIduser = $utiIduser;
 
         return $this;
     }
 
-    public function getVuMsg(): ?\DateTimeInterface
+    public function getTextemsg(): ?string
     {
-        return $this->vuMsg;
+        return $this->textemsg;
     }
 
-    public function setVuMsg(bool $vuMsg): self
+    public function setTextemsg(?string $textemsg): self
     {
-        $this->vuMsg = $vuMsg;
+        $this->textemsg = $textemsg;
 
         return $this;
     }
 
-    public function getUtilisateurEnvoyer(): ?Utilisateur
+    public function getDatemsg(): ?\DateTimeInterface
     {
-        return $this->utilisateurEnvoyer;
+        return $this->datemsg;
     }
 
-    public function setUtilisateurEnvoyer(?Utilisateur $utilisateurEnvoyer): self
+    public function setDatemsg(?\DateTimeInterface $datemsg): self
     {
-        $this->utilisateurEnvoyer = $utilisateurEnvoyer;
+        $this->datemsg = $datemsg;
 
         return $this;
     }
 
-    public function getUtilisateurRecevoir(): ?Utilisateur
+    public function getVumsg(): ?\DateTimeInterface
     {
-        return $this->utilisateurRecevoir;
+        return $this->vumsg;
     }
 
-    public function setUtilisateurRecevoir(?Utilisateur $utilisateurRecevoir): self
+    public function setVumsg(?\DateTimeInterface $vumsg): self
     {
-        $this->utilisateurRecevoir = $utilisateurRecevoir;
+        $this->vumsg = $vumsg;
 
         return $this;
     }
+
+
 }

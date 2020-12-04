@@ -2,53 +2,87 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=AvisRepository::class)
+ * Avis
+ *
+ * @ORM\Table(name="avis", indexes={@ORM\Index(name="FK_donner", columns={"idUser"}), @ORM\Index(name="FK_Avoir", columns={"Uti_idUser"})})
+ * @ORM\Entity
  */
 class Avis
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="idAvis", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idavis;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
+     */
+    private $iduser;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="Uti_idUser", type="integer", nullable=false)
+     */
+    private $utiIduser;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="conduite", type="integer", nullable=true)
      */
     private $conduite;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int|null
+     *
+     * @ORM\Column(name="ponctualite", type="integer", nullable=true)
      */
     private $ponctualite;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int|null
+     *
+     * @ORM\Column(name="comportement", type="integer", nullable=true)
      */
     private $comportement;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisDonne")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $utilisateurDonner;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisRecu")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $utilisateurAvoir;
-
-    public function getId(): ?int
+    public function getIdavis(): ?int
     {
-        return $this->id;
+        return $this->idavis;
+    }
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
+
+        return $this;
+    }
+
+    public function getUtiIduser(): ?int
+    {
+        return $this->utiIduser;
+    }
+
+    public function setUtiIduser(int $utiIduser): self
+    {
+        $this->utiIduser = $utiIduser;
+
+        return $this;
     }
 
     public function getConduite(): ?int
@@ -56,7 +90,7 @@ class Avis
         return $this->conduite;
     }
 
-    public function setConduite(int $conduite): self
+    public function setConduite(?int $conduite): self
     {
         $this->conduite = $conduite;
 
@@ -68,7 +102,7 @@ class Avis
         return $this->ponctualite;
     }
 
-    public function setPonctualite(int $ponctualite): self
+    public function setPonctualite(?int $ponctualite): self
     {
         $this->ponctualite = $ponctualite;
 
@@ -80,34 +114,12 @@ class Avis
         return $this->comportement;
     }
 
-    public function setComportement(int $comportement): self
+    public function setComportement(?int $comportement): self
     {
         $this->comportement = $comportement;
 
         return $this;
     }
 
-    public function getUtilisateurDonner(): ?Utilisateur
-    {
-        return $this->utilisateurDonner;
-    }
 
-    public function setUtilisateurDonner(?Utilisateur $utilisateurDonner): self
-    {
-        $this->utilisateurDonner = $utilisateurDonner;
-
-        return $this;
-    }
-
-    public function getUtilisateurAvoir(): ?Utilisateur
-    {
-        return $this->utilisateurAvoir;
-    }
-
-    public function setUtilisateurAvoir(?Utilisateur $utilisateurAvoir): self
-    {
-        $this->utilisateurAvoir = $utilisateurAvoir;
-
-        return $this;
-    }
 }

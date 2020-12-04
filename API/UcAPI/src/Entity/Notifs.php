@@ -2,77 +2,86 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\NotifsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=NotifsRepository::class)
+ * Notifs
+ *
+ * @ORM\Table(name="notifs", indexes={@ORM\Index(name="FK_Regarder", columns={"idUser"})})
+ * @ORM\Entity
  */
 class Notifs
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="idNotif", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idnotif;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var int
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
      */
-    private $titreNotif;
+    private $iduser;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="titreNotif", type="string", length=255, nullable=true)
      */
-    private $texteNotif;
+    private $titrenotif;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="notif")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string|null
+     *
+     * @ORM\Column(name="texteNotif", type="string", length=255, nullable=true)
      */
-    private $utilisateurNotifs;
+    private $textenotif;
 
-    public function getId(): ?int
+    public function getIdnotif(): ?int
     {
-        return $this->id;
+        return $this->idnotif;
     }
 
-    public function getTitreNotif(): ?string
+    public function getIduser(): ?int
     {
-        return $this->titreNotif;
+        return $this->iduser;
     }
 
-    public function setTitreNotif(string $titreNotif): self
+    public function setIduser(int $iduser): self
     {
-        $this->titreNotif = $titreNotif;
+        $this->iduser = $iduser;
 
         return $this;
     }
 
-    public function getTexteNotif(): ?string
+    public function getTitrenotif(): ?string
     {
-        return $this->texteNotif;
+        return $this->titrenotif;
     }
 
-    public function setTexteNotif(string $texteNotif): self
+    public function setTitrenotif(?string $titrenotif): self
     {
-        $this->texteNotif = $texteNotif;
+        $this->titrenotif = $titrenotif;
 
         return $this;
     }
 
-    public function getUtilisateurNotifs(): ?Utilisateur
+    public function getTextenotif(): ?string
     {
-        return $this->utilisateurNotifs;
+        return $this->textenotif;
     }
 
-    public function setUtilisateurNotifs(?Utilisateur $utilisateurNotifs): self
+    public function setTextenotif(?string $textenotif): self
     {
-        $this->utilisateurNotifs = $utilisateurNotifs;
+        $this->textenotif = $textenotif;
 
         return $this;
     }
+
+
 }

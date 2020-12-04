@@ -2,327 +2,371 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
+ * Utilisateur
+ *
+ * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="FK_Posseder2", columns={"idCar"})})
+ * @ORM\Entity
  */
-class Utilisateur implements UserInterface
+class Utilisateur
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $pnom;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
-
-    /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="utilisateurEnvoyer")
-     */
-    private $messageEnvoye;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="utilisateurRecevoir")
-     */
-    private $messageRecu;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Notifs::class, mappedBy="utilisateurNotifs", orphanRemoval=true)
-     */
-    private $notif;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="utilisateurDonner")
-     */
-    private $avisDonne;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="utilisateurAvoir")
-     */
-    private $avisRecu;
-
-    public function __construct()
-    {
-        $this->messageEnvoye = new ArrayCollection();
-        $this->messageRecu = new ArrayCollection();
-        $this->notif = new ArrayCollection();
-        $this->avisDonne = new ArrayCollection();
-        $this->avisRecu = new ArrayCollection();
-     * @ORM\OneToOne(targetEntity=Voiture::class, mappedBy="idUser", cascade={"persist", "remove"})
-     */
-    private $voiture;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Reserver::class, mappedBy="idUser")
-     */
-    private $reservers;
-
-    public function __construct()
-    {
-        $this->reservers = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getPnom(): ?string
-    {
-        return $this->pnom;
-    }
-
-    public function setPnom(string $pnom): self
-    {
-        $this->pnom = $pnom;
-
-        return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
+     * @var int
      *
-     * @see UserInterface
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    public function getUsername(): string
-    {
-        return (string) $this->pnom;
-    }
+    private $iduser;
 
     /**
-     * @see UserInterface
+     * @var int|null
+     *
+     * @ORM\Column(name="idCar", type="integer", nullable=true)
      */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
+    private $idcar;
 
     /**
-     * @see UserInterface
+     * @var string|null
+     *
+     * @ORM\Column(name="pnomUser", type="string", length=255, nullable=true)
      */
-    public function getPassword()
-    {
-        // not needed for apps that do not check user passwords
-    }
+    private $pnomuser;
 
     /**
-     * @see UserInterface
+     * @var string|null
+     *
+     * @ORM\Column(name="emailUser", type="string", length=255, nullable=true)
      */
-    public function getSalt()
-    {
-        // not needed for apps that do not check user passwords
-    }
+    private $emailuser;
 
     /**
-     * @see UserInterface
+     * @var int|null
+     *
+     * @ORM\Column(name="telUser", type="integer", nullable=true)
      */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
+    private $teluser;
 
     /**
-     * @return Collection|Message[]
+     * @var int|null
+     *
+     * @ORM\Column(name="statutUser", type="integer", nullable=true)
      */
-    public function getMessageEnvoye(): Collection
-    {
-        return $this->messageEnvoye;
-    }
-
-    public function addMessageEnvoye(Message $messageEnvoye): self
-    {
-        if (!$this->messageEnvoye->contains($messageEnvoye)) {
-            $this->messageEnvoye[] = $messageEnvoye;
-            $messageEnvoye->setUtilisateurEnvoyer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessageEnvoye(Message $messageEnvoye): self
-    {
-        if ($this->messageEnvoye->removeElement($messageEnvoye)) {
-            // set the owning side to null (unless already changed)
-            if ($messageEnvoye->getUtilisateurEnvoyer() === $this) {
-                $messageEnvoye->setUtilisateurEnvoyer(null);
-            }
-        }
-
-        return $this;
-    }
+    private $statutuser;
 
     /**
-     * @return Collection|Message[]
+     * @var int|null
+     *
+     * @ORM\Column(name="rang", type="integer", nullable=true)
      */
-    public function getMessageRecu(): Collection
-    {
-        return $this->messageRecu;
-    }
-
-    public function addMessageRecu(Message $messageRecu): self
-    {
-        if (!$this->messageRecu->contains($messageRecu)) {
-            $this->messageRecu[] = $messageRecu;
-            $messageRecu->setUtilisateurRecevoir($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessageRecu(Message $messageRecu): self
-    {
-        if ($this->messageRecu->removeElement($messageRecu)) {
-            // set the owning side to null (unless already changed)
-            if ($messageRecu->getUtilisateurRecevoir() === $this) {
-                $messageRecu->setUtilisateurRecevoir(null);
-            }
-        }
-
-        return $this;
-    }
+    private $rang;
 
     /**
-     * @return Collection|Notifs[]
+     * @var string|null
+     *
+     * @ORM\Column(name="photoUser", type="blob", length=0, nullable=true)
      */
-    public function getNotif(): Collection
-    {
-        return $this->notif;
-    }
-
-    public function addNotif(Notifs $notif): self
-    {
-        if (!$this->notif->contains($notif)) {
-            $this->notif[] = $notif;
-            $notif->setUtilisateurNotifs($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNotif(Notifs $notif): self
-    {
-        if ($this->notif->removeElement($notif)) {
-            // set the owning side to null (unless already changed)
-            if ($notif->getUtilisateurNotifs() === $this) {
-                $notif->setUtilisateurNotifs(null);
-            }
-        }
-
-        return $this;
-    }
+    private $photouser;
 
     /**
-     * @return Collection|Avis[]
+     * @var int|null
+     *
+     * @ORM\Column(name="fiabilite", type="integer", nullable=true)
      */
-    public function getAvisDonne(): Collection
-    {
-        return $this->avisDonne;
-    }
-
-    public function addAvisDonne(Avis $avisDonne): self
-    {
-        if (!$this->avisDonne->contains($avisDonne)) {
-            $this->avisDonne[] = $avisDonne;
-            $avisDonne->setUtilisateurDonner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAvisDonne(Avis $avisDonne): self
-    {
-        if ($this->avisDonne->removeElement($avisDonne)) {
-            // set the owning side to null (unless already changed)
-            if ($avisDonne->getUtilisateurDonner() === $this) {
-                $avisDonne->setUtilisateurDonner(null);
-            }
-    public function getVoiture(): ?Voiture
-    {
-        return $this->voiture;
-    }
-
-    public function setVoiture(?Voiture $voiture): self
-    {
-        $this->voiture = $voiture;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newIdUser = null === $voiture ? null : $this;
-        if ($voiture->getIdUser() !== $newIdUser) {
-            $voiture->setIdUser($newIdUser);
-        }
-
-        return $this;
-    }
+    private $fiabilite;
 
     /**
-     * @return Collection|Avis[]
+     * @var bool|null
+     *
+     * @ORM\Column(name="resAccepter", type="boolean", nullable=true)
      */
-    public function getAvisRecu(): Collection
+    private $resaccepter;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="resEnvoyer", type="boolean", nullable=true)
+     */
+    private $resenvoyer;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="demandeRes", type="boolean", nullable=true)
+     */
+    private $demanderes;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="trajetImi", type="boolean", nullable=true)
+     */
+    private $trajetimi;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="trajetAnnuler", type="boolean", nullable=true)
+     */
+    private $trajetannuler;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="demandeNota", type="boolean", nullable=true)
+     */
+    private $demandenota;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="nouvelleAvis", type="boolean", nullable=true)
+     */
+    private $nouvelleavis;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="dialogue", type="boolean", nullable=true)
+     */
+    private $dialogue;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="fumer", type="boolean", nullable=true)
+     */
+    private $fumer;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="musique", type="boolean", nullable=true)
+     */
+    private $musique;
+
+    public function getIduser(): ?int
     {
-        return $this->avisRecu;
+        return $this->iduser;
     }
 
-    public function addAvisRecu(Avis $avisRecu): self
+    public function getIdcar(): ?int
     {
-        if (!$this->avisRecu->contains($avisRecu)) {
-            $this->avisRecu[] = $avisRecu;
-            $avisRecu->setUtilisateurAvoir($this);
-     * @return Collection|Reserver[]
-     */
-    public function getReservers(): Collection
-    {
-        return $this->reservers;
+        return $this->idcar;
     }
 
-    public function addReserver(Reserver $reserver): self
+    public function setIdcar(?int $idcar): self
     {
-        if (!$this->reservers->contains($reserver)) {
-            $this->reservers[] = $reserver;
-            $reserver->addIdUser($this);
-        }
+        $this->idcar = $idcar;
 
         return $this;
     }
 
-    public function removeAvisRecu(Avis $avisRecu): self
+    public function getPnomuser(): ?string
     {
-        if ($this->avisRecu->removeElement($avisRecu)) {
-            // set the owning side to null (unless already changed)
-            if ($avisRecu->getUtilisateurAvoir() === $this) {
-                $avisRecu->setUtilisateurAvoir(null);
-            }
-    public function removeReserver(Reserver $reserver): self
+        return $this->pnomuser;
+    }
+
+    public function setPnomuser(?string $pnomuser): self
     {
-        if ($this->reservers->removeElement($reserver)) {
-            $reserver->removeIdUser($this);
-        }
+        $this->pnomuser = $pnomuser;
 
         return $this;
     }
+
+    public function getEmailuser(): ?string
+    {
+        return $this->emailuser;
+    }
+
+    public function setEmailuser(?string $emailuser): self
+    {
+        $this->emailuser = $emailuser;
+
+        return $this;
+    }
+
+    public function getTeluser(): ?int
+    {
+        return $this->teluser;
+    }
+
+    public function setTeluser(?int $teluser): self
+    {
+        $this->teluser = $teluser;
+
+        return $this;
+    }
+
+    public function getStatutuser(): ?int
+    {
+        return $this->statutuser;
+    }
+
+    public function setStatutuser(?int $statutuser): self
+    {
+        $this->statutuser = $statutuser;
+
+        return $this;
+    }
+
+    public function getRang(): ?int
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?int $rang): self
+    {
+        $this->rang = $rang;
+
+        return $this;
+    }
+
+    public function getPhotouser()
+    {
+        return $this->photouser;
+    }
+
+    public function setPhotouser($photouser): self
+    {
+        $this->photouser = $photouser;
+
+        return $this;
+    }
+
+    public function getFiabilite(): ?int
+    {
+        return $this->fiabilite;
+    }
+
+    public function setFiabilite(?int $fiabilite): self
+    {
+        $this->fiabilite = $fiabilite;
+
+        return $this;
+    }
+
+    public function getResaccepter(): ?bool
+    {
+        return $this->resaccepter;
+    }
+
+    public function setResaccepter(?bool $resaccepter): self
+    {
+        $this->resaccepter = $resaccepter;
+
+        return $this;
+    }
+
+    public function getResenvoyer(): ?bool
+    {
+        return $this->resenvoyer;
+    }
+
+    public function setResenvoyer(?bool $resenvoyer): self
+    {
+        $this->resenvoyer = $resenvoyer;
+
+        return $this;
+    }
+
+    public function getDemanderes(): ?bool
+    {
+        return $this->demanderes;
+    }
+
+    public function setDemanderes(?bool $demanderes): self
+    {
+        $this->demanderes = $demanderes;
+
+        return $this;
+    }
+
+    public function getTrajetimi(): ?bool
+    {
+        return $this->trajetimi;
+    }
+
+    public function setTrajetimi(?bool $trajetimi): self
+    {
+        $this->trajetimi = $trajetimi;
+
+        return $this;
+    }
+
+    public function getTrajetannuler(): ?bool
+    {
+        return $this->trajetannuler;
+    }
+
+    public function setTrajetannuler(?bool $trajetannuler): self
+    {
+        $this->trajetannuler = $trajetannuler;
+
+        return $this;
+    }
+
+    public function getDemandenota(): ?bool
+    {
+        return $this->demandenota;
+    }
+
+    public function setDemandenota(?bool $demandenota): self
+    {
+        $this->demandenota = $demandenota;
+
+        return $this;
+    }
+
+    public function getNouvelleavis(): ?bool
+    {
+        return $this->nouvelleavis;
+    }
+
+    public function setNouvelleavis(?bool $nouvelleavis): self
+    {
+        $this->nouvelleavis = $nouvelleavis;
+
+        return $this;
+    }
+
+    public function getDialogue(): ?bool
+    {
+        return $this->dialogue;
+    }
+
+    public function setDialogue(?bool $dialogue): self
+    {
+        $this->dialogue = $dialogue;
+
+        return $this;
+    }
+
+    public function getFumer(): ?bool
+    {
+        return $this->fumer;
+    }
+
+    public function setFumer(?bool $fumer): self
+    {
+        $this->fumer = $fumer;
+
+        return $this;
+    }
+
+    public function getMusique(): ?bool
+    {
+        return $this->musique;
+    }
+
+    public function setMusique(?bool $musique): self
+    {
+        $this->musique = $musique;
+
+        return $this;
+    }
+
+
 }

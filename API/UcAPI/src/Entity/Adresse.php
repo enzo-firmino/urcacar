@@ -2,76 +2,86 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\AdresseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=AdresseRepository::class)
+ * Adresse
+ *
+ * @ORM\Table(name="adresse")
+ * @ORM\Entity
  */
 class Adresse
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="idAd", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idad;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="villeAd", type="string", length=255, nullable=true)
      */
-    private $villeAd;
+    private $villead;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="cpAd", type="decimal", precision=5, scale=0, nullable=true)
      */
-    private $cpAd;
+    private $cpad;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     *
+     * @ORM\Column(name="adAd", type="string", length=255, nullable=true)
      */
-    private $adresseAd;
+    private $adad;
 
-    public function getId(): ?int
+    public function getIdad(): ?int
     {
-        return $this->id;
+        return $this->idad;
     }
 
-    public function getVilleAd(): ?string
+    public function getVillead(): ?string
     {
-        return $this->villeAd;
+        return $this->villead;
     }
 
-    public function setVilleAd(string $villeAd): self
+    public function setVillead(?string $villead): self
     {
-        $this->villeAd = $villeAd;
+        $this->villead = $villead;
 
         return $this;
     }
 
-    public function getCpAd(): ?string
+    public function getCpad(): ?string
     {
-        return $this->cpAd;
+        return $this->cpad;
     }
 
-    public function setCpAd(string $cpAd): self
+    public function setCpad(?string $cpad): self
     {
-        $this->cpAd = $cpAd;
+        $this->cpad = $cpad;
 
         return $this;
     }
 
-    public function getAdresseAd(): ?string
+    public function getAdad(): ?string
     {
-        return $this->adresseAd;
+        return $this->adad;
     }
 
-    public function setAdresseAd(string $adresseAd): self
+    public function setAdad(?string $adad): self
     {
-        $this->adresseAd = $adresseAd;
+        $this->adad = $adad;
 
         return $this;
     }
+
+
 }

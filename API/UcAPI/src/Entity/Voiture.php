@@ -2,144 +2,162 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=VoitureRepository::class)
+ * Voiture
+ *
+ * @ORM\Table(name="voiture", indexes={@ORM\Index(name="FK_Posseder", columns={"idUser"})})
+ * @ORM\Entity
  */
 class Voiture
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="idCar", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idcar;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var int
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
      */
-    private $modeleCar;
+    private $iduser;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="modeleCar", type="string", length=255, nullable=true)
      */
-    private $anneCar;
+    private $modelecar;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="anneeCar", type="date", nullable=true)
      */
-    private $couleurCar;
+    private $anneecar;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="couleurCar", type="string", length=255, nullable=true)
      */
-    private $marqueCar;
+    private $couleurcar;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="marqueCar", type="string", length=255, nullable=true)
      */
-    private $plaqueCar;
+    private $marquecar;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="plaqueCar", type="string", length=7, nullable=true, options={"fixed"=true})
      */
-    private $photoCar;
+    private $plaquecar;
 
     /**
-     * @ORM\OneToOne(targetEntity=Utilisateur::class, inversedBy="voiture", cascade={"persist", "remove"})
+     * @var string|null
+     *
+     * @ORM\Column(name="photoCar", type="blob", length=0, nullable=true)
      */
-    private $idUser;
+    private $photocar;
 
-    public function getId(): ?int
+    public function getIdcar(): ?int
     {
-        return $this->id;
+        return $this->idcar;
     }
 
-    public function getModeleCar(): ?string
+    public function getIduser(): ?int
     {
-        return $this->modeleCar;
+        return $this->iduser;
     }
 
-    public function setModeleCar(?string $modeleCar): self
+    public function setIduser(int $iduser): self
     {
-        $this->modeleCar = $modeleCar;
+        $this->iduser = $iduser;
 
         return $this;
     }
 
-    public function getAnneCar(): ?\DateTimeInterface
+    public function getModelecar(): ?string
     {
-        return $this->anneCar;
+        return $this->modelecar;
     }
 
-    public function setAnneCar(?\DateTimeInterface $anneCar): self
+    public function setModelecar(?string $modelecar): self
     {
-        $this->anneCar = $anneCar;
+        $this->modelecar = $modelecar;
 
         return $this;
     }
 
-    public function getCouleurCar(): ?string
+    public function getAnneecar(): ?\DateTimeInterface
     {
-        return $this->couleurCar;
+        return $this->anneecar;
     }
 
-    public function setCouleurCar(?string $couleurCar): self
+    public function setAnneecar(?\DateTimeInterface $anneecar): self
     {
-        $this->couleurCar = $couleurCar;
+        $this->anneecar = $anneecar;
 
         return $this;
     }
 
-    public function getMarqueCar(): ?string
+    public function getCouleurcar(): ?string
     {
-        return $this->marqueCar;
+        return $this->couleurcar;
     }
 
-    public function setMarqueCar(?string $marqueCar): self
+    public function setCouleurcar(?string $couleurcar): self
     {
-        $this->marqueCar = $marqueCar;
+        $this->couleurcar = $couleurcar;
 
         return $this;
     }
 
-    public function getPlaqueCar(): ?string
+    public function getMarquecar(): ?string
     {
-        return $this->plaqueCar;
+        return $this->marquecar;
     }
 
-    public function setPlaqueCar(?string $plaqueCar): self
+    public function setMarquecar(?string $marquecar): self
     {
-        $this->plaqueCar = $plaqueCar;
+        $this->marquecar = $marquecar;
 
         return $this;
     }
 
-    public function getPhotoCar(): ?string
+    public function getPlaquecar(): ?string
     {
-        return $this->photoCar;
+        return $this->plaquecar;
     }
 
-    public function setPhotoCar(?string $photoCar): self
+    public function setPlaquecar(?string $plaquecar): self
     {
-        $this->photoCar = $photoCar;
+        $this->plaquecar = $plaquecar;
 
         return $this;
     }
 
-    public function getIdUser(): ?Utilisateur
+    public function getPhotocar()
     {
-        return $this->idUser;
+        return $this->photocar;
     }
 
-    public function setIdUser(?Utilisateur $idUser): self
+    public function setPhotocar($photocar): self
     {
-        $this->idUser = $idUser;
+        $this->photocar = $photocar;
 
         return $this;
     }
+
+
 }
