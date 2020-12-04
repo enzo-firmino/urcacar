@@ -34,6 +34,18 @@ class Avis
      */
     private $comportement;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisDonne")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurDonner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisRecu")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurAvoir;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +83,30 @@ class Avis
     public function setComportement(int $comportement): self
     {
         $this->comportement = $comportement;
+
+        return $this;
+    }
+
+    public function getUtilisateurDonner(): ?Utilisateur
+    {
+        return $this->utilisateurDonner;
+    }
+
+    public function setUtilisateurDonner(?Utilisateur $utilisateurDonner): self
+    {
+        $this->utilisateurDonner = $utilisateurDonner;
+
+        return $this;
+    }
+
+    public function getUtilisateurAvoir(): ?Utilisateur
+    {
+        return $this->utilisateurAvoir;
+    }
+
+    public function setUtilisateurAvoir(?Utilisateur $utilisateurAvoir): self
+    {
+        $this->utilisateurAvoir = $utilisateurAvoir;
 
         return $this;
     }

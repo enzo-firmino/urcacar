@@ -34,6 +34,18 @@ class Message
      */
     private $vuMsg;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messageEnvoye")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurEnvoyer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messageRecu")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurRecevoir;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +83,30 @@ class Message
     public function setVuMsg(bool $vuMsg): self
     {
         $this->vuMsg = $vuMsg;
+
+        return $this;
+    }
+
+    public function getUtilisateurEnvoyer(): ?Utilisateur
+    {
+        return $this->utilisateurEnvoyer;
+    }
+
+    public function setUtilisateurEnvoyer(?Utilisateur $utilisateurEnvoyer): self
+    {
+        $this->utilisateurEnvoyer = $utilisateurEnvoyer;
+
+        return $this;
+    }
+
+    public function getUtilisateurRecevoir(): ?Utilisateur
+    {
+        return $this->utilisateurRecevoir;
+    }
+
+    public function setUtilisateurRecevoir(?Utilisateur $utilisateurRecevoir): self
+    {
+        $this->utilisateurRecevoir = $utilisateurRecevoir;
 
         return $this;
     }

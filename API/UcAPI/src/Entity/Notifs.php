@@ -29,6 +29,12 @@ class Notifs
      */
     private $texteNotif;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="notif")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurNotifs;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +60,18 @@ class Notifs
     public function setTexteNotif(string $texteNotif): self
     {
         $this->texteNotif = $texteNotif;
+
+        return $this;
+    }
+
+    public function getUtilisateurNotifs(): ?Utilisateur
+    {
+        return $this->utilisateurNotifs;
+    }
+
+    public function setUtilisateurNotifs(?Utilisateur $utilisateurNotifs): self
+    {
+        $this->utilisateurNotifs = $utilisateurNotifs;
 
         return $this;
     }
