@@ -6,25 +6,27 @@ const StarRating = () => {
     var stars = [];
 
     for(let i = 0; i<5; i++){
-        stars.push(<StarFill size = "24 "color="green"/>);
+        stars.push(<StarFill className="flex-fill avis" size = "24 "color="green"/>);
 
 
     }
 
     return (
 
-        <div>
+        <div className="flex-fill" >
 
             {oui.map((label) => {
                 return (
-                    <div>
-                        <label>
+                    <div className="text-left">
+                        <p className="avis" style={{display: "contents"}}>
                             {label}
-                        </label>
-                        {stars.map((star, i )=> {
+                        </p>
+                        <div>
+                            {stars.map((star, i )=> {
 
-                            return star;
-                        })}
+                                return star;
+                            })}
+                        </div>
 
                     </div>
                 )

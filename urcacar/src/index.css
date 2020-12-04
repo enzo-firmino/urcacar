@@ -24,8 +24,15 @@ code {
 }
 
 /*CSS pour les titres*/
-.pTitre {
-  font-size: 1.50rem;
+@media only screen and (min-width: 768px) {
+  .pTitre {
+    font-size: 1.50rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .pTitre {
+    font-size: 14;
+  }
 }
 
 /*CSS pour la couleur grise moins violente*/
@@ -39,7 +46,7 @@ code {
     display: flex;
     flex-direction: row;
     height: fit-content;
-    width: 40%;
+
     background-color: rgba(230, 230, 230, 0.5);
     margin: 10px auto;
     border-radius: 16px;
@@ -96,4 +103,43 @@ a {
 body{
   height:100vh;
   width:100vw;
+}
+
+@media only screen and (max-width: 768px) {
+  p.avis{
+    font-size: 12px;
+  }
+  svg.avis{
+    width: 20px;
+    height: 20px;
+  }
+  img.avis{
+    height: 70%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .avis {
+    font-size: 15px;
+  }
+  img.avis{
+    height: 100%;
+    text-align: right;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .medail{
+    margin-right:10%;
+    height:100px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .medail{
+    margin-right:10%;
+    height:70px;
+  }
 }
