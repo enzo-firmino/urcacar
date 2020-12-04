@@ -59,11 +59,6 @@ class Trajet
      */
     private $idAd;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idTrajet;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -161,18 +156,6 @@ class Trajet
     public function setIdAd(string $idAd): self
     {
         $this->idAd = $idAd;
-
-        return $this;
-    }
-
-    public function getIdTrajet(): ?string
-    {
-        return $this->idTrajet;
-    }
-
-    public function setIdTrajet(string $idTrajet): self
-    {
-        $this->idTrajet = $idTrajet;
 
         return $this;
     }

@@ -64,11 +64,6 @@ class Recurrence
      */
     private $idTrajet;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idRec;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -178,18 +173,6 @@ class Recurrence
     public function setIdTrajet(string $idTrajet): self
     {
         $this->idTrajet = $idTrajet;
-
-        return $this;
-    }
-
-    public function getIdRec(): ?string
-    {
-        return $this->idRec;
-    }
-
-    public function setIdRec(string $idRec): self
-    {
-        $this->idRec = $idRec;
 
         return $this;
     }
