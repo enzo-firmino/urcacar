@@ -20,14 +20,14 @@ class Trajet
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="float")
      */
-    private $heureDepart;
+    private $prix;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $heureArriver;
+    private $nbPlace;
 
     /**
      * @ORM\Column(type="date")
@@ -35,55 +35,45 @@ class Trajet
     private $dateDeb;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="time")
      */
-    private $nbPlace;
+    private $heureArriver;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="time")
      */
-    private $idRec;
+    private $heureDepart;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity=Recurrence::class, mappedBy="idTrajet", cascade={"persist", "remove"})
      */
-    private $adr_idAd;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idUser;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idAd;
+    private $recurrence;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getHeureDepart(): ?\DateTimeInterface
+    public function getPrix(): ?float
     {
-        return $this->heureDepart;
+        return $this->prix;
     }
 
-    public function setHeureDepart(\DateTimeInterface $heureDepart): self
+    public function setPrix(float $prix): self
     {
-        $this->heureDepart = $heureDepart;
+        $this->prix = $prix;
 
         return $this;
     }
 
-    public function getHeureArriver(): ?string
+    public function getNbPlace(): ?int
     {
-        return $this->heureArriver;
+        return $this->nbPlace;
     }
 
-    public function setHeureArriver(string $heureArriver): self
+    public function setNbPlace(int $nbPlace): self
     {
-        $this->heureArriver = $heureArriver;
+        $this->nbPlace = $nbPlace;
 
         return $this;
     }
@@ -100,62 +90,44 @@ class Trajet
         return $this;
     }
 
-    public function getNbPlace(): ?string
+    public function getHeureArriver(): ?\DateTimeInterface
     {
-        return $this->nbPlace;
+        return $this->heureArriver;
     }
 
-    public function setNbPlace(string $nbPlace): self
+    public function setHeureArriver(\DateTimeInterface $heureArriver): self
     {
-        $this->nbPlace = $nbPlace;
+        $this->heureArriver = $heureArriver;
 
         return $this;
     }
 
-    public function getIdRec(): ?string
+    public function getHeureDepart(): ?\DateTimeInterface
     {
-        return $this->idRec;
+        return $this->heureDepart;
     }
 
-    public function setIdRec(string $idRec): self
+    public function setHeureDepart(\DateTimeInterface $heureDepart): self
     {
-        $this->idRec = $idRec;
+        $this->heureDepart = $heureDepart;
 
         return $this;
     }
 
-    public function getAdrIdAd(): ?string
+    public function getRecurrence(): ?Recurrence
     {
-        return $this->adr_idAd;
+        return $this->recurrence;
     }
 
-    public function setAdrIdAd(string $adr_idAd): self
+    public function setRecurrence(?Recurrence $recurrence): self
     {
-        $this->adr_idAd = $adr_idAd;
+        $this->recurrence = $recurrence;
 
-        return $this;
-    }
-
-    public function getIdUser(): ?string
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(string $idUser): self
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    public function getIdAd(): ?string
-    {
-        return $this->idAd;
-    }
-
-    public function setIdAd(string $idAd): self
-    {
-        $this->idAd = $idAd;
+        // set (or unset) the owning side of the relation if necessary
+        $newIdTrajet = null === $recurrence ? null : $this;
+        if ($recurrence->getIdTrajet() !== $newIdTrajet) {
+            $recurrence->setIdTrajet($newIdTrajet);
+        }
 
         return $this;
     }

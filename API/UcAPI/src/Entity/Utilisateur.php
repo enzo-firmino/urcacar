@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -27,6 +29,21 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
+    /**
+     * @ORM\OneToOne(targetEntity=Voiture::class, mappedBy="idUser", cascade={"persist", "remove"})
+     */
+    private $voiture;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Reserver::class, mappedBy="idUser")
+     */
+    private $reservers;
+
+    public function __construct()
+    {
+        $this->reservers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,5 +114,50 @@ class Utilisateur implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getVoiture(): ?Voiture
+    {
+        return $this->voiture;
+    }
+
+    public function setVoiture(?Voiture $voiture): self
+    {
+        $this->voiture = $voiture;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newIdUser = null === $voiture ? null : $this;
+        if ($voiture->getIdUser() !== $newIdUser) {
+            $voiture->setIdUser($newIdUser);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reserver[]
+     */
+    public function getReservers(): Collection
+    {
+        return $this->reservers;
+    }
+
+    public function addReserver(Reserver $reserver): self
+    {
+        if (!$this->reservers->contains($reserver)) {
+            $this->reservers[] = $reserver;
+            $reserver->addIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReserver(Reserver $reserver): self
+    {
+        if ($this->reservers->removeElement($reserver)) {
+            $reserver->removeIdUser($this);
+        }
+
+        return $this;
     }
 }

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ReserverRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,57 +22,57 @@ class Reserver
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
-    private $idTrajet;
+    private $valider;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToMany(targetEntity=Utilisateur::class, inversedBy="reservers")
      */
     private $idUser;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Valider;
+    public function __construct()
+    {
+        $this->idUser = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdTrajet(): ?string
+    public function getValider(): ?bool
     {
-        return $this->idTrajet;
+        return $this->valider;
     }
 
-    public function setIdTrajet(string $idTrajet): self
+    public function setValider(bool $valider): self
     {
-        $this->idTrajet = $idTrajet;
+        $this->valider = $valider;
 
         return $this;
     }
 
-    public function getIdUser(): ?string
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getIdUser(): Collection
     {
         return $this->idUser;
     }
 
-    public function setIdUser(string $idUser): self
+    public function addIdUser(Utilisateur $idUser): self
     {
-        $this->idUser = $idUser;
+        if (!$this->idUser->contains($idUser)) {
+            $this->idUser[] = $idUser;
+        }
 
         return $this;
     }
 
-    public function getValider(): ?string
+    public function removeIdUser(Utilisateur $idUser): self
     {
-        return $this->Valider;
-    }
-
-    public function setValider(string $Valider): self
-    {
-        $this->Valider = $Valider;
+        $this->idUser->removeElement($idUser);
 
         return $this;
     }

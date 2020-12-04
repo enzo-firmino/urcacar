@@ -27,7 +27,7 @@ class Voiture
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $anneeCar;
+    private $anneCar;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -50,7 +50,7 @@ class Voiture
     private $photoCar;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity=Utilisateur::class, inversedBy="voiture", cascade={"persist", "remove"})
      */
     private $idUser;
 
@@ -71,14 +71,14 @@ class Voiture
         return $this;
     }
 
-    public function getAnneeCar(): ?\DateTimeInterface
+    public function getAnneCar(): ?\DateTimeInterface
     {
-        return $this->anneeCar;
+        return $this->anneCar;
     }
 
-    public function setAnneeCar(?\DateTimeInterface $anneeCar): self
+    public function setAnneCar(?\DateTimeInterface $anneCar): self
     {
-        $this->anneeCar = $anneeCar;
+        $this->anneCar = $anneCar;
 
         return $this;
     }
@@ -131,12 +131,12 @@ class Voiture
         return $this;
     }
 
-    public function getIdUser(): ?string
+    public function getIdUser(): ?Utilisateur
     {
         return $this->idUser;
     }
 
-    public function setIdUser(?string $idUser): self
+    public function setIdUser(?Utilisateur $idUser): self
     {
         $this->idUser = $idUser;
 
