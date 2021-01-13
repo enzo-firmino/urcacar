@@ -56,6 +56,28 @@ class Trajet
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
      */
+=======
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="Adr_idAd", type="integer", nullable=false)
+     */
+    private $adrIdad;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="idRec", type="integer", nullable=true)
+     */
+    private $idrec;
+
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
+     */
+>>>>>>> 07c8c7b116aea7d67bd84fca794150efebc11715
     private $prix;
 
     /**
@@ -147,6 +169,15 @@ class Trajet
     public function setPrix(?float $prix): self
     {
         $this->prix = $prix;
+=======
+    {
+        return $this->idrec;
+    }
+
+    public function setIdrec(?int $idrec): self
+    {
+        $this->idrec = $idrec;
+>>>>>>> 07c8c7b116aea7d67bd84fca794150efebc11715
 
         return $this;
     }
@@ -159,6 +190,16 @@ class Trajet
     public function setNbplace(?int $nbplace): self
     {
         $this->nbplace = $nbplace;
+=======
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): self
+    {
+        $this->prix = $prix;
+>>>>>>> 07c8c7b116aea7d67bd84fca794150efebc11715
 
         return $this;
     }
@@ -171,6 +212,16 @@ class Trajet
     public function setDatedeb(?\DateTimeInterface $datedeb): self
     {
         $this->datedeb = $datedeb;
+=======
+    public function getNbplace(): ?int
+    {
+        return $this->nbplace;
+    }
+
+    public function setNbplace(?int $nbplace): self
+    {
+        $this->nbplace = $nbplace;
+>>>>>>> 07c8c7b116aea7d67bd84fca794150efebc11715
 
         return $this;
     }
@@ -183,6 +234,16 @@ class Trajet
     public function setHeurearriver(?\DateTimeInterface $heurearriver): self
     {
         $this->heurearriver = $heurearriver;
+=======
+    public function getDatedeb(): ?\DateTimeInterface
+    {
+        return $this->datedeb;
+    }
+
+    public function setDatedeb(?\DateTimeInterface $datedeb): self
+    {
+        $this->datedeb = $datedeb;
+>>>>>>> 07c8c7b116aea7d67bd84fca794150efebc11715
 
         return $this;
     }
@@ -195,9 +256,33 @@ class Trajet
     public function setHeuredepart(?\DateTimeInterface $heuredepart): self
     {
         $this->heuredepart = $heuredepart;
+=======
+    public function getHeurearriver(): ?\DateTimeInterface
+    {
+        return $this->heurearriver;
+    }
+
+    public function setHeurearriver(?\DateTimeInterface $heurearriver): self
+    {
+        $this->heurearriver = $heurearriver;
+>>>>>>> 07c8c7b116aea7d67bd84fca794150efebc11715
 
         return $this;
     }
 
+=======
+    public function getHeuredepart(): ?\DateTimeInterface
+    {
+        return $this->heuredepart;
+    }
+
+    public function setHeuredepart(?\DateTimeInterface $heuredepart): self
+    {
+        $this->heuredepart = $heuredepart;
+
+        return $this;
+    }
+
+>>>>>>> 07c8c7b116aea7d67bd84fca794150efebc11715
 
 }
