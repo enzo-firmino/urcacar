@@ -2,43 +2,51 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ReserverRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * Reserver
+ *
+ * @ORM\Table(name="reserver", indexes={@ORM\Index(name="FK_Reserver2", columns={"idUser"})})
+ * @ORM\Entity
  * @ApiResource()
- * @ORM\Entity(repositoryClass=ReserverRepository::class)
  */
 class Reserver
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="idTrajet", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    private $idtrajet;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @var int
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $iduser;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="valider", type="boolean", nullable=true)
      */
     private $valider;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Utilisateur::class, inversedBy="reservers")
-     */
-    private $idUser;
-
-    public function __construct()
+    public function getIdtrajet(): ?int
     {
-        $this->idUser = new ArrayCollection();
+        return $this->idtrajet;
     }
 
-    public function getId(): ?int
+    public function getIduser(): ?int
     {
-        return $this->id;
+        return $this->iduser;
     }
 
     public function getValider(): ?bool
@@ -46,34 +54,12 @@ class Reserver
         return $this->valider;
     }
 
-    public function setValider(bool $valider): self
+    public function setValider(?bool $valider): self
     {
         $this->valider = $valider;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getIdUser(): Collection
-    {
-        return $this->idUser;
-    }
 
-    public function addIdUser(Utilisateur $idUser): self
-    {
-        if (!$this->idUser->contains($idUser)) {
-            $this->idUser[] = $idUser;
-        }
-
-        return $this;
-    }
-
-    public function removeIdUser(Utilisateur $idUser): self
-    {
-        $this->idUser->removeElement($idUser);
-
-        return $this;
-    }
 }

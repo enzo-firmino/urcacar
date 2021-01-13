@@ -2,56 +2,141 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\TrajetRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * Trajet
+ *
+ * @ORM\Table(name="trajet", indexes={@ORM\Index(name="FK_Pouvoir", columns={"idRec"}), @ORM\Index(name="FK_Terminer", columns={"Adr_idAd"}), @ORM\Index(name="FK_Commencer", columns={"idAd"}), @ORM\Index(name="FK_Proposer", columns={"idUser"})})
+ * @ORM\Entity
  * @ApiResource()
- * @ORM\Entity(repositoryClass=TrajetRepository::class)
  */
 class Trajet
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="idTrajet", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idtrajet;
 
     /**
-     * @ORM\Column(type="float")
+     * @var int
+     *
+     * @ORM\Column(name="idAd", type="integer", nullable=false)
+     */
+    private $idad;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
+     */
+    private $iduser;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="Adr_idAd", type="integer", nullable=false)
+     */
+    private $adrIdad;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="idRec", type="integer", nullable=true)
+     */
+    private $idrec;
+
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
      */
     private $prix;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int|null
+     *
+     * @ORM\Column(name="nbPlace", type="integer", nullable=true)
      */
-    private $nbPlace;
+    private $nbplace;
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="dateDeb", type="date", nullable=true)
      */
-    private $dateDeb;
+    private $datedeb;
 
     /**
-     * @ORM\Column(type="time")
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="heureArriver", type="time", nullable=true)
      */
-    private $heureArriver;
+    private $heurearriver;
 
     /**
-     * @ORM\Column(type="time")
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="heureDepart", type="time", nullable=true)
      */
-    private $heureDepart;
+    private $heuredepart;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Recurrence::class, mappedBy="idTrajet", cascade={"persist", "remove"})
-     */
-    private $recurrence;
-
-    public function getId(): ?int
+    public function getIdtrajet(): ?int
     {
-        return $this->id;
+        return $this->idtrajet;
+    }
+
+    public function getIdad(): ?int
+    {
+        return $this->idad;
+    }
+
+    public function setIdad(int $idad): self
+    {
+        $this->idad = $idad;
+
+        return $this;
+    }
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
+
+        return $this;
+    }
+
+    public function getAdrIdad(): ?int
+    {
+        return $this->adrIdad;
+    }
+
+    public function setAdrIdad(int $adrIdad): self
+    {
+        $this->adrIdad = $adrIdad;
+
+        return $this;
+    }
+
+    public function getIdrec(): ?int
+    {
+        return $this->idrec;
+    }
+
+    public function setIdrec(?int $idrec): self
+    {
+        $this->idrec = $idrec;
+
+        return $this;
     }
 
     public function getPrix(): ?float
@@ -59,76 +144,60 @@ class Trajet
         return $this->prix;
     }
 
-    public function setPrix(float $prix): self
+    public function setPrix(?float $prix): self
     {
         $this->prix = $prix;
 
         return $this;
     }
 
-    public function getNbPlace(): ?int
+    public function getNbplace(): ?int
     {
-        return $this->nbPlace;
+        return $this->nbplace;
     }
 
-    public function setNbPlace(int $nbPlace): self
+    public function setNbplace(?int $nbplace): self
     {
-        $this->nbPlace = $nbPlace;
+        $this->nbplace = $nbplace;
 
         return $this;
     }
 
-    public function getDateDeb(): ?\DateTimeInterface
+    public function getDatedeb(): ?\DateTimeInterface
     {
-        return $this->dateDeb;
+        return $this->datedeb;
     }
 
-    public function setDateDeb(\DateTimeInterface $dateDeb): self
+    public function setDatedeb(?\DateTimeInterface $datedeb): self
     {
-        $this->dateDeb = $dateDeb;
+        $this->datedeb = $datedeb;
 
         return $this;
     }
 
-    public function getHeureArriver(): ?\DateTimeInterface
+    public function getHeurearriver(): ?\DateTimeInterface
     {
-        return $this->heureArriver;
+        return $this->heurearriver;
     }
 
-    public function setHeureArriver(\DateTimeInterface $heureArriver): self
+    public function setHeurearriver(?\DateTimeInterface $heurearriver): self
     {
-        $this->heureArriver = $heureArriver;
+        $this->heurearriver = $heurearriver;
 
         return $this;
     }
 
-    public function getHeureDepart(): ?\DateTimeInterface
+    public function getHeuredepart(): ?\DateTimeInterface
     {
-        return $this->heureDepart;
+        return $this->heuredepart;
     }
 
-    public function setHeureDepart(\DateTimeInterface $heureDepart): self
+    public function setHeuredepart(?\DateTimeInterface $heuredepart): self
     {
-        $this->heureDepart = $heureDepart;
+        $this->heuredepart = $heuredepart;
 
         return $this;
     }
 
-    public function getRecurrence(): ?Recurrence
-    {
-        return $this->recurrence;
-    }
 
-    public function setRecurrence(?Recurrence $recurrence): self
-    {
-        $this->recurrence = $recurrence;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newIdTrajet = null === $recurrence ? null : $this;
-        if ($recurrence->getIdTrajet() !== $newIdTrajet) {
-            $recurrence->setIdTrajet($newIdTrajet);
-        }
-
-        return $this;
-    }
 }

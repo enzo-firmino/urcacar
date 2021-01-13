@@ -1,14 +1,12 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  03/12/2020 14:32:52                      */
+/* Date de création :  04/12/2020 13:49:42                      */
 /*==============================================================*/
 
 
 drop table if exists Adresse;
 
 drop table if exists Avis;
-
-drop table if exists Consulter;
 
 drop table if exists Etapes;
 
@@ -47,20 +45,11 @@ create table Avis
 (
    idAvis               int not null auto_increment,
    idUser               int not null,
+   Uti_idUser           int not null,
    conduite             int,
    ponctualite          int,
    comportement         int,
    primary key (idAvis)
-);
-
-/*==============================================================*/
-/* Table : Consulter                                            */
-/*==============================================================*/
-create table Consulter
-(
-   idAvis               int not null,
-   idUser               int not null,
-   primary key (idAvis, idUser)
 );
 
 /*==============================================================*/
@@ -200,13 +189,10 @@ create table Voiture
    primary key (idCar)
 );
 
-alter table Avis add constraint FK_donner foreign key (idUser)
+alter table Avis add constraint FK_Avoir foreign key (Uti_idUser)
       references Utilisateur (idUser) on delete restrict on update restrict;
 
-alter table Consulter add constraint FK_Consulter foreign key (idAvis)
-      references Avis (idAvis) on delete restrict on update restrict;
-
-alter table Consulter add constraint FK_Consulter2 foreign key (idUser)
+alter table Avis add constraint FK_donner foreign key (idUser)
       references Utilisateur (idUser) on delete restrict on update restrict;
 
 alter table Etapes add constraint FK_Contenir foreign key (idTrajet)
