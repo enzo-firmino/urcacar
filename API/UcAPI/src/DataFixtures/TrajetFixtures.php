@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
 use App\Entity\Trajet;
 use Doctrine\Persistence\ObjectManager;
@@ -18,11 +19,12 @@ class TrajetFixtures extends Fixture implements DependentFixtureInterface
 
         for($nbTrajet = 1; $nbTrajet <= 10; $nbTrajet++){
             $trajet = new Trajet();
-            $trajet->setIdad($this->getReference(AdresseFixtures::ADDRESS));
+            $trajet->setAdresseArrivee($this->getReference(AdresseFixtures::ADDRESS));
+            $trajet->setAdresseDepart($this->getReference(AdresseFixtures::ADDRESS));
             $trajet->setPrix(rand(0,10));
             $trajet->setNbplace(rand(1,4));
-            $trajet->setDatedeb($faker->dateTime($max = 'now', $timezone = null));
-            $trajet->setHeurearriver($faker->dateTime($max = 'now', $timezone = null));
+            $trajet->setDateDepart($faker->dateTime($max = 'now', $timezone = null));
+            $trajet->setHeureArrivee($faker->dateTime($max = 'now', $timezone = null));
             $trajet->setHeuredepart($faker->dateTime($max = 'now', $timezone = null));
             $manager->persist($trajet);
             array_push($tab,$trajet);

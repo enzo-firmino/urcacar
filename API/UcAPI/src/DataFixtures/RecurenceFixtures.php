@@ -2,8 +2,9 @@
 
 namespace App\DataFixtures;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
-use App\Entity\Recurence;
+use App\Entity\Recurrence;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -15,8 +16,8 @@ class RecurenceFixtures extends Fixture implements DependentFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
 
         for($nbUsers = 1; $nbUsers <= 10; $nbUsers++){
-            $rec = new Recurence();
-            $rec->setIdtrajet($this->getReference(TrajetFixtures::TRAJETS));
+            $rec = new Recurrence();
+            $rec->setTrajet($this->getReference(TrajetFixtures::TRAJETS));
             $rec->setDatefin($faker->dateTime($max = 'now', $timezone = null));
             $rec->setLundi($faker->boolean);
             $rec->setMardi($faker->boolean);
