@@ -15,17 +15,17 @@ class RecurenceFixtures extends Fixture implements DependentFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
 
         for($nbUsers = 1; $nbUsers <= 10; $nbUsers++){
-            $trajet = new Recurence();
-            $trajet->setIdtrajet($this->getReference(TrajetFixtures::TRAJETS));
-            $trajet->setDatefin($faker->dateTime($max = 'now', $timezone = null));
-            $trajet->setLundi($bill[rand(0,1)]);
-            $trajet->setMardi($bill[rand(0,1)]);
-            $trajet->setMercredi($bill[rand(0,1)]);
-            $trajet->setJeudi($bill[rand(0,1)]);
-            $trajet->setVendredi($bill[rand(0,1)]);
-            $trajet->setSamedi($bill[rand(0,1)]);
-            $trajet->setDimanche($bill[rand(0,1)]);
-            $manager->persist($user);
+            $rec = new Recurence();
+            $rec->setIdtrajet($this->getReference(TrajetFixtures::TRAJETS));
+            $rec->setDatefin($faker->dateTime($max = 'now', $timezone = null));
+            $rec->setLundi($faker->boolean);
+            $rec->setMardi($faker->boolean);
+            $rec->setMercredi($faker->boolean);
+            $rec->setJeudi($faker->boolean);
+            $rec->setVendredi($faker->boolean);
+            $rec->setSamedi($faker->boolean);
+            $rec->setDimanche($faker->boolean);
+            $manager->persist($rec);
         }
         
         $manager->flush();
