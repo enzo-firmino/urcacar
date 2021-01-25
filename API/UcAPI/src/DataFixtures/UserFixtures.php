@@ -9,6 +9,7 @@ use Faker;
 
 class UserFixtures extends Fixture
 {
+    public const USER = 'user';
 
     public function load(ObjectManager $manager)
     {
@@ -33,7 +34,7 @@ class UserFixtures extends Fixture
             $user->setFumer($faker->boolean);
             $user->setMusique($faker->boolean);
             $user->setPhotouser($faker->imageUrl($width = 350, $height = 350, 'people'));
-
+            $this->addReference(self::USER, $user);
             $manager->persist($user);
         }
         $manager->flush();

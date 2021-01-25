@@ -52,18 +52,6 @@ class Trajet
     private $idrec;
 
     /**
-     * @var float|null
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
-     */
-
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
-     */
-
-    /**
      * @var int|null
      *
      * @ORM\Column(name="nbPlace", type="integer", nullable=true)
