@@ -2,31 +2,28 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\ReserverRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Reserver
- *
- * @ORM\Table(name="reserver", indexes={@ORM\Index(name="FK_Reserver2", columns={"idUser"})})
- * @ORM\Entity
  * @ApiResource()
+ * @ORM\Entity(repositoryClass=ReserverRepository::class)
  */
 class Reserver
 {
-
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="valider", type="boolean", nullable=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $valider;
+    private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservations")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $utilisateur;
+    private $passager;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="reservations")
@@ -34,27 +31,24 @@ class Reserver
      */
     private $trajet;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $acceptee;
 
-    public function getValider(): ?bool
+    public function getId(): ?int
     {
-        return $this->valider;
+        return $this->id;
     }
 
-    public function setValider(?bool $valider): self
+    public function getPassager(): ?Utilisateur
     {
-        $this->valider = $valider;
-
-        return $this;
+        return $this->passager;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    public function setPassager(?Utilisateur $passager): self
     {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
+        $this->passager = $passager;
 
         return $this;
     }
@@ -71,5 +65,15 @@ class Reserver
         return $this;
     }
 
+    public function getAcceptee(): ?bool
+    {
+        return $this->acceptee;
+    }
 
+    public function setAcceptee(bool $acceptee): self
+    {
+        $this->acceptee = $acceptee;
+
+        return $this;
+    }
 }

@@ -2,109 +2,99 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\AdresseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * Adresse
- *
- * @ORM\Table(name="adresse")
- * @ORM\Entity
  * @ApiResource()
+ * @ORM\Entity(repositoryClass=AdresseRepository::class)
  */
 class Adresse
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idAd", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idad;
+    private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="villeAd", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $villead;
+    private $ville;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="cpAd", type="decimal", precision=5, scale=0, nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $cpad;
+    private $cp;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="adAd", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $adad;
+    private $adresse;
 
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="adresseDepart")
      */
-    private $trajetsDepart;
+    private $departTrajets;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="adresseArrivée")
+     * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="adresseArrivee")
      */
-    private $trajetsArrivee;
+    private $arriveeTrajet;
 
     /**
-     * @ORM\OneToMany(targetEntity=Etapes::class, mappedBy="adresse")
+     * @ORM\OneToMany(targetEntity=Etape::class, mappedBy="adresse")
      */
     private $etapes;
 
     public function __construct()
     {
-        $this->trajetsDepart = new ArrayCollection();
-        $this->trajetsArrivee = new ArrayCollection();
+        $this->departTrajets = new ArrayCollection();
+        $this->arriveeTrajet = new ArrayCollection();
         $this->etapes = new ArrayCollection();
     }
 
-    public function getIdad(): ?int
+    public function getId(): ?int
     {
-        return $this->idad;
+        return $this->id;
     }
 
-    public function getVillead(): ?string
+    public function getVille(): ?string
     {
-        return $this->villead;
+        return $this->ville;
     }
 
-    public function setVillead(?string $villead): self
+    public function setVille(string $ville): self
     {
-        $this->villead = $villead;
+        $this->ville = $ville;
 
         return $this;
     }
 
-    public function getCpad(): ?string
+    public function getCp(): ?int
     {
-        return $this->cpad;
+        return $this->cp;
     }
 
-    public function setCpad(?string $cpad): self
+    public function setCp(int $cp): self
     {
-        $this->cpad = $cpad;
+        $this->cp = $cp;
 
         return $this;
     }
 
-    public function getAdad(): ?string
+    public function getAdresse(): ?string
     {
-        return $this->adad;
+        return $this->adresse;
     }
 
-    public function setAdad(?string $adad): self
+    public function setAdresse(string $adresse): self
     {
-        $this->adad = $adad;
+        $this->adresse = $adresse;
 
         return $this;
     }
@@ -112,27 +102,27 @@ class Adresse
     /**
      * @return Collection|Trajet[]
      */
-    public function getTrajetsDepart(): Collection
+    public function getDepartTrajets(): Collection
     {
-        return $this->trajetsDepart;
+        return $this->departTrajets;
     }
 
-    public function addTrajetsDepart(Trajet $trajetsDepart): self
+    public function addDepartTrajet(Trajet $departTrajet): self
     {
-        if (!$this->trajetsDepart->contains($trajetsDepart)) {
-            $this->trajetsDepart[] = $trajetsDepart;
-            $trajetsDepart->setAdresseDepart($this);
+        if (!$this->departTrajets->contains($departTrajet)) {
+            $this->departTrajets[] = $departTrajet;
+            $departTrajet->setAdresseDepart($this);
         }
 
         return $this;
     }
 
-    public function removeTrajetsDepart(Trajet $trajetsDepart): self
+    public function removeDepartTrajet(Trajet $departTrajet): self
     {
-        if ($this->trajetsDepart->removeElement($trajetsDepart)) {
+        if ($this->departTrajets->removeElement($departTrajet)) {
             // set the owning side to null (unless already changed)
-            if ($trajetsDepart->getAdresseDepart() === $this) {
-                $trajetsDepart->setAdresseDepart(null);
+            if ($departTrajet->getAdresseDepart() === $this) {
+                $departTrajet->setAdresseDepart(null);
             }
         }
 
@@ -142,27 +132,27 @@ class Adresse
     /**
      * @return Collection|Trajet[]
      */
-    public function getTrajetsArrivee(): Collection
+    public function getArriveeTrajet(): Collection
     {
-        return $this->trajetsArrivee;
+        return $this->arriveeTrajet;
     }
 
-    public function addTrajetsArrivE(Trajet $trajetsArrivE): self
+    public function addArriveeTrajet(Trajet $arriveeTrajet): self
     {
-        if (!$this->trajetsArrivee->contains($trajetsArrivE)) {
-            $this->trajetsArrivee[] = $trajetsArrivE;
-            $trajetsArrivE->setAdresseArrivee($this);
+        if (!$this->arriveeTrajet->contains($arriveeTrajet)) {
+            $this->arriveeTrajet[] = $arriveeTrajet;
+            $arriveeTrajet->setAdresseArrivee($this);
         }
 
         return $this;
     }
 
-    public function removeTrajetsArrivE(Trajet $trajetsArrivE): self
+    public function removeArriveeTrajet(Trajet $arriveeTrajet): self
     {
-        if ($this->trajetsArrivee->removeElement($trajetsArrivE)) {
+        if ($this->arriveeTrajet->removeElement($arriveeTrajet)) {
             // set the owning side to null (unless already changed)
-            if ($trajetsArrivE->getAdresseArrivee() === $this) {
-                $trajetsArrivE->setAdresseArrivee(null);
+            if ($arriveeTrajet->getAdresseArrivee() === $this) {
+                $arriveeTrajet->setAdresseArrivee(null);
             }
         }
 
@@ -170,14 +160,14 @@ class Adresse
     }
 
     /**
-     * @return Collection|Etapes[]
+     * @return Collection|Etape[]
      */
     public function getEtapes(): Collection
     {
         return $this->etapes;
     }
 
-    public function addEtape(Etapes $etape): self
+    public function addEtape(Etape $etape): self
     {
         if (!$this->etapes->contains($etape)) {
             $this->etapes[] = $etape;
@@ -187,7 +177,7 @@ class Adresse
         return $this;
     }
 
-    public function removeEtape(Etapes $etape): self
+    public function removeEtape(Etape $etape): self
     {
         if ($this->etapes->removeElement($etape)) {
             // set the owning side to null (unless already changed)
@@ -198,6 +188,4 @@ class Adresse
 
         return $this;
     }
-
-
 }

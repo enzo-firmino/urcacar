@@ -2,63 +2,53 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\AvisRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Avis
- *
- * @ORM\Table(name="avis", indexes={@ORM\Index(name="FK_donner", columns={"idUser"}), @ORM\Index(name="FK_Avoir", columns={"Uti_idUser"})})
- * @ORM\Entity
  * @ApiResource()
+ * @ORM\Entity(repositoryClass=AvisRepository::class)
  */
 class Avis
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idAvis", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idavis;
+    private $id;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="conduite", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $conduite;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="ponctualite", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $ponctualite;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="comportement", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $comportement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisDonnés")
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisEmis")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $utilisateurDonne;
+    private $emetteur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisRecu")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $utilisateurRecu;
+    private $destinataire;
 
-    public function getIdavis(): ?int
+    public function getId(): ?int
     {
-        return $this->idavis;
+        return $this->id;
     }
 
     public function getConduite(): ?int
@@ -97,29 +87,27 @@ class Avis
         return $this;
     }
 
-    public function getUtilisateurDonne(): ?Utilisateur
+    public function getEmetteur(): ?Utilisateur
     {
-        return $this->utilisateurDonne;
+        return $this->emetteur;
     }
 
-    public function setUtilisateurDonne(?Utilisateur $utilisateurDonne): self
+    public function setEmetteur(?Utilisateur $emetteur): self
     {
-        $this->utilisateurDonne = $utilisateurDonne;
+        $this->emetteur = $emetteur;
 
         return $this;
     }
 
-    public function getUtilisateurRecu(): ?Utilisateur
+    public function getDestinataire(): ?Utilisateur
     {
-        return $this->utilisateurRecu;
+        return $this->destinataire;
     }
 
-    public function setUtilisateurRecu(?Utilisateur $utilisateurRecu): self
+    public function setDestinataire(?Utilisateur $destinataire): self
     {
-        $this->utilisateurRecu = $utilisateurRecu;
+        $this->destinataire = $destinataire;
 
         return $this;
     }
-
-
 }

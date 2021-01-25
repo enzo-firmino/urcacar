@@ -2,124 +2,112 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\MessageRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Message
- *
- * @ORM\Table(name="message", indexes={@ORM\Index(name="FK_Recevoir", columns={"idUser"}), @ORM\Index(name="FK_Envoyer", columns={"Uti_idUser"})})
- * @ORM\Entity
  * @ApiResource()
+ * @ORM\Entity(repositoryClass=MessageRepository::class)
  */
 class Message
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idMsg", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idmsg;
+    private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="texteMsg", type="string", length=1024, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $textemsg;
+    private $texte;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="dateMsg", type="date", nullable=true)
+     * @ORM\Column(type="date")
      */
-    private $datemsg;
+    private $date;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="vuMsg", type="date", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $vumsg;
+    private $vu;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messagesEnvoyés")
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messagesEnvoyes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $utilisateurEnvoi;
+    private $envoyeur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messagesRecus")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $utilisateurRecu;
+    private $destinataire;
 
-    public function getIdmsg(): ?int
+    public function getId(): ?int
     {
-        return $this->idmsg;
+        return $this->id;
     }
 
-    public function getTextemsg(): ?string
+    public function getTexte(): ?string
     {
-        return $this->textemsg;
+        return $this->texte;
     }
 
-    public function setTextemsg(?string $textemsg): self
+    public function setTexte(string $texte): self
     {
-        $this->textemsg = $textemsg;
+        $this->texte = $texte;
 
         return $this;
     }
 
-    public function getDatemsg(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->datemsg;
+        return $this->date;
     }
 
-    public function setDatemsg(?\DateTimeInterface $datemsg): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->datemsg = $datemsg;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function getVumsg(): ?\DateTimeInterface
+    public function getVu(): ?bool
     {
-        return $this->vumsg;
+        return $this->vu;
     }
 
-    public function setVumsg(?\DateTimeInterface $vumsg): self
+    public function setVu(?bool $vu): self
     {
-        $this->vumsg = $vumsg;
+        $this->vu = $vu;
 
         return $this;
     }
 
-    public function getUtilisateurEnvoi(): ?Utilisateur
+    public function getEnvoyeur(): ?Utilisateur
     {
-        return $this->utilisateurEnvoi;
+        return $this->envoyeur;
     }
 
-    public function setUtilisateurEnvoi(?Utilisateur $utilisateurEnvoi): self
+    public function setEnvoyeur(?Utilisateur $envoyeur): self
     {
-        $this->utilisateurEnvoi = $utilisateurEnvoi;
+        $this->envoyeur = $envoyeur;
 
         return $this;
     }
 
-    public function getUtilisateurRecu(): ?Utilisateur
+    public function getDestinataire(): ?Utilisateur
     {
-        return $this->utilisateurRecu;
+        return $this->destinataire;
     }
 
-    public function setUtilisateurRecu(?Utilisateur $utilisateurRecu): self
+    public function setDestinataire(?Utilisateur $destinataire): self
     {
-        $this->utilisateurRecu = $utilisateurRecu;
+        $this->destinataire = $destinataire;
 
         return $this;
     }
-
-
 }

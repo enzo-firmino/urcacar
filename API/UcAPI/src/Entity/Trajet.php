@@ -2,173 +2,150 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\TrajetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * Trajet
- *
- * @ORM\Table(name="trajet", indexes={@ORM\Index(name="FK_Pouvoir", columns={"idRec"}), @ORM\Index(name="FK_Terminer", columns={"Adr_idAd"}), @ORM\Index(name="FK_Commencer", columns={"idAd"}), @ORM\Index(name="FK_Proposer", columns={"idUser"})})
- * @ORM\Entity
  * @ApiResource()
+ * @ORM\Entity(repositoryClass=TrajetRepository::class)
  */
 class Trajet
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idTrajet", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idtrajet;
+    private $id;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="nbPlace", type="integer", nullable=true)
+     * @ORM\Column(type="float")
      */
-    private $nbplace;
+    private $prix;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="dateDeb", type="date", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $datedeb;
+    private $nbPlace;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="heureArriver", type="time", nullable=true)
+     * @ORM\Column(type="date")
      */
-    private $heurearriver;
+    private $dateDepart;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="heureDepart", type="time", nullable=true)
+     * @ORM\Column(type="time")
      */
-    private $heuredepart;
+    private $heureArrivee;
 
     /**
-     * @ORM\OneToOne(targetEntity=Recurence::class, mappedBy="trajet", cascade={"persist", "remove"})
+     * @ORM\Column(type="time")
      */
-    private $recurence;
+    private $heureDepart;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="trajetsProposés")
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="trajetsProposes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $conducteur;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="trajetsDepart")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $adresseDepart;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="trajetsArrivée")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $adresseArrivee;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Etapes::class, mappedBy="trajet")
-     */
-    private $etapes;
 
     /**
      * @ORM\OneToMany(targetEntity=Reserver::class, mappedBy="trajet")
      */
     private $reservations;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Recurrence::class, mappedBy="trajet", cascade={"persist", "remove"})
+     */
+    private $recurrence;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="departTrajets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adresseDepart;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="arriveeTrajet")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adresseArrivee;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Etape::class, mappedBy="trajet")
+     */
+    private $etapes;
+
     public function __construct()
     {
-        $this->passagers = new ArrayCollection();
-        $this->etapes = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->etapes = new ArrayCollection();
     }
 
-    public function getIdtrajet(): ?int
+    public function getId(): ?int
     {
-        return $this->idtrajet;
+        return $this->id;
     }
-
-
 
     public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(?float $prix): self
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
+
         return $this;
     }
 
-    public function getNbplace(): ?int
+    public function getNbPlace(): ?int
     {
-        return $this->nbplace;
+        return $this->nbPlace;
     }
 
-    public function setNbplace(?int $nbplace): self
+    public function setNbPlace(int $nbPlace): self
     {
-        $this->nbplace = $nbplace;
+        $this->nbPlace = $nbPlace;
+
         return $this;
     }
 
-    public function getDatedeb(): ?\DateTimeInterface
+    public function getDateDepart(): ?\DateTimeInterface
     {
-        return $this->datedeb;
+        return $this->dateDepart;
     }
 
-    public function setDatedeb(?\DateTimeInterface $datedeb): self
+    public function setDateDepart(\DateTimeInterface $dateDepart): self
     {
-        $this->datedeb = $datedeb;
+        $this->dateDepart = $dateDepart;
+
         return $this;
     }
 
-    public function getHeurearriver(): ?\DateTimeInterface
+    public function getHeureArrivee(): ?\DateTimeInterface
     {
-        return $this->heurearriver;
+        return $this->heureArrivee;
     }
 
-    public function setHeurearriver(?\DateTimeInterface $heurearriver): self
+    public function setHeureArrivee(\DateTimeInterface $heureArrivee): self
     {
-        $this->heurearriver = $heurearriver;
+        $this->heureArrivee = $heureArrivee;
+
         return $this;
     }
 
-    public function getHeuredepart(): ?\DateTimeInterface
+    public function getHeureDepart(): ?\DateTimeInterface
     {
-        return $this->heuredepart;
+        return $this->heureDepart;
     }
 
-    public function setHeuredepart(?\DateTimeInterface $heuredepart): self
+    public function setHeureDepart(\DateTimeInterface $heureDepart): self
     {
-        $this->heuredepart = $heuredepart;
-        return $this;
-    }
-
-    public function getRecurence(): ?Recurence
-    {
-        return $this->recurence;
-    }
-
-    public function setRecurence(?Recurence $recurence): self
-    {
-        $this->recurence = $recurence;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newTrajet = null === $recurence ? null : $this;
-        if ($recurence->getTrajet() !== $newTrajet) {
-            $recurence->setTrajet($newTrajet);
-        }
+        $this->heureDepart = $heureDepart;
 
         return $this;
     }
@@ -186,25 +163,48 @@ class Trajet
     }
 
     /**
-     * @return Collection|Utilisateur[]
+     * @return Collection|Reserver[]
      */
-    public function getPassagers(): Collection
+    public function getReservations(): Collection
     {
-        return $this->passagers;
+        return $this->reservations;
     }
 
-    public function addPassager(Utilisateur $passager): self
+    public function addReservation(Reserver $reservation): self
     {
-        if (!$this->passagers->contains($passager)) {
-            $this->passagers[] = $passager;
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setTrajet($this);
         }
 
         return $this;
     }
 
-    public function removePassager(Utilisateur $passager): self
+    public function removeReservation(Reserver $reservation): self
     {
-        $this->passagers->removeElement($passager);
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getTrajet() === $this) {
+                $reservation->setTrajet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRecurrence(): ?Recurrence
+    {
+        return $this->recurrence;
+    }
+
+    public function setRecurrence(Recurrence $recurrence): self
+    {
+        $this->recurrence = $recurrence;
+
+        // set the owning side of the relation if necessary
+        if ($recurrence->getTrajet() !== $this) {
+            $recurrence->setTrajet($this);
+        }
 
         return $this;
     }
@@ -234,14 +234,14 @@ class Trajet
     }
 
     /**
-     * @return Collection|Etapes[]
+     * @return Collection|Etape[]
      */
     public function getEtapes(): Collection
     {
         return $this->etapes;
     }
 
-    public function addEtape(Etapes $etape): self
+    public function addEtape(Etape $etape): self
     {
         if (!$this->etapes->contains($etape)) {
             $this->etapes[] = $etape;
@@ -251,42 +251,12 @@ class Trajet
         return $this;
     }
 
-    public function removeEtape(Etapes $etape): self
+    public function removeEtape(Etape $etape): self
     {
         if ($this->etapes->removeElement($etape)) {
             // set the owning side to null (unless already changed)
             if ($etape->getTrajet() === $this) {
                 $etape->setTrajet(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Reserver[]
-     */
-    public function getReservations(): Collection
-    {
-        return $this->reservations;
-    }
-
-    public function addReservation(Reserver $reservation): self
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations[] = $reservation;
-            $reservation->setTrajet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReservation(Reserver $reservation): self
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getTrajet() === $this) {
-                $reservation->setTrajet(null);
             }
         }
 

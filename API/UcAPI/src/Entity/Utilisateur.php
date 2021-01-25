@@ -2,185 +2,151 @@
 
 namespace App\Entity;
 
+use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Utilisateur
- *
- * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="FK_Posseder2", columns={"idCar"})})
- * @ORM\Entity
- * @ApiResource()
+ * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $iduser;
+    private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="pnomUser", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $pnomuser;
+    private $email;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="emailUser", type="string", length=255, nullable=true)
+     * @ORM\Column(type="json")
      */
-    private $emailuser;
+    private $roles = [];
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="telUser", type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $teluser;
+    private $prenom;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="statutUser", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $statutuser;
+    private $telephone;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="rang", type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $rang;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="photoUser", type="blob", length=0, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $photouser;
+    private $photo;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="fiabilite", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $fiabilite;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="resAccepter", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $resaccepter;
+    private $resAcceptee;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="resEnvoyer", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $resenvoyer;
+    private $resEnvoyee;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="demandeRes", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $demanderes;
+    private $demandeRes;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="trajetImi", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $trajetimi;
+    private $trajetImminent;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="trajetAnnuler", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $trajetannuler;
+    private $trajetAnnule;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="demandeNota", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $demandenota;
+    private $demandeNotation;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="nouvelleAvis", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $nouvelleavis;
+    private $nouvelAvis;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="dialogue", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $dialogue;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="fumer", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $fumer;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="musique", type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $musique;
 
     /**
-     * @ORM\OneToOne(targetEntity=Voiture::class, mappedBy="utilisateur", cascade={"persist", "remove"})
-     */
-    private $voiture;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="utilisateurEnvoi")
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="envoyeur")
      */
     private $messagesEnvoyes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="utilisateurRecu")
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="destinataire")
      */
     private $messagesRecus;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="conducteur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="utilisateur")
      */
-    private $trajetsProposes;
+    private $notifications;
 
     /**
-     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="utilisateurDonne")
+     * @ORM\OneToOne(targetEntity=Voiture::class, mappedBy="proprietaire", cascade={"persist", "remove"})
      */
-    private $avisDonnes;
+    private $voiture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="utilisateurRecu")
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="emetteur")
+     */
+    private $avisEmis;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="destinataire")
      */
     private $avisRecu;
 
     /**
-     * @ORM\OneToMany(targetEntity=Notifs::class, mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="conducteur")
      */
-    private $notifs;
+    private $trajetsProposes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reserver::class, mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity=Reserver::class, mappedBy="passager")
      */
     private $reservations;
 
@@ -188,63 +154,116 @@ class Utilisateur
     {
         $this->messagesEnvoyes = new ArrayCollection();
         $this->messagesRecus = new ArrayCollection();
-        $this->trajetsProposes = new ArrayCollection();
-        $this->trajetsRéservés = new ArrayCollection();
-        $this->avisDonnes = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
+        $this->avisEmis = new ArrayCollection();
         $this->avisRecu = new ArrayCollection();
-        $this->notifs = new ArrayCollection();
+        $this->trajetsProposes = new ArrayCollection();
         $this->reservations = new ArrayCollection();
     }
 
-    public function getIduser(): ?int
+    public function getId(): ?int
     {
-        return $this->iduser;
+        return $this->id;
     }
 
-    public function getPnomuser(): ?string
+    public function getEmail(): ?string
     {
-        return $this->pnomuser;
+        return $this->email;
     }
 
-    public function setPnomuser(?string $pnomuser): self
+    public function setEmail(string $email): self
     {
-        $this->pnomuser = $pnomuser;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getEmailuser(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->emailuser;
+        return (string) $this->email;
     }
 
-    public function setEmailuser(?string $emailuser): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->emailuser = $emailuser;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getTeluser(): ?int
+    /**
+     * @see UserInterface
+     */
+    public function getPassword()
     {
-        return $this->teluser;
+        // not needed for apps that do not check user passwords
     }
 
-    public function setTeluser(?int $teluser): self
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
     {
-        $this->teluser = $teluser;
+        // not needed for apps that do not check user passwords
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getStatutuser(): ?int
+    public function getTelephone(): ?int
     {
-        return $this->statutuser;
+        return $this->telephone;
     }
 
-    public function setStatutuser(?int $statutuser): self
+    public function setTelephone(?int $telephone): self
     {
-        $this->statutuser = $statutuser;
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
@@ -261,14 +280,14 @@ class Utilisateur
         return $this;
     }
 
-    public function getPhotouser()
+    public function getPhoto(): ?string
     {
-        return $this->photouser;
+        return $this->photo;
     }
 
-    public function setPhotouser($photouser): self
+    public function setPhoto(?string $photo): self
     {
-        $this->photouser = $photouser;
+        $this->photo = $photo;
 
         return $this;
     }
@@ -285,86 +304,86 @@ class Utilisateur
         return $this;
     }
 
-    public function getResaccepter(): ?bool
+    public function getResAcceptee(): ?bool
     {
-        return $this->resaccepter;
+        return $this->resAcceptee;
     }
 
-    public function setResaccepter(?bool $resaccepter): self
+    public function setResAcceptee(?bool $resAcceptee): self
     {
-        $this->resaccepter = $resaccepter;
+        $this->resAcceptee = $resAcceptee;
 
         return $this;
     }
 
-    public function getResenvoyer(): ?bool
+    public function getResEnvoyee(): ?bool
     {
-        return $this->resenvoyer;
+        return $this->resEnvoyee;
     }
 
-    public function setResenvoyer(?bool $resenvoyer): self
+    public function setResEnvoyee(?bool $resEnvoyee): self
     {
-        $this->resenvoyer = $resenvoyer;
+        $this->resEnvoyee = $resEnvoyee;
 
         return $this;
     }
 
-    public function getDemanderes(): ?bool
+    public function getDemandeRes(): ?bool
     {
-        return $this->demanderes;
+        return $this->demandeRes;
     }
 
-    public function setDemanderes(?bool $demanderes): self
+    public function setDemandeRes(?bool $demandeRes): self
     {
-        $this->demanderes = $demanderes;
+        $this->demandeRes = $demandeRes;
 
         return $this;
     }
 
-    public function getTrajetimi(): ?bool
+    public function getTrajetImminent(): ?bool
     {
-        return $this->trajetimi;
+        return $this->trajetImminent;
     }
 
-    public function setTrajetimi(?bool $trajetimi): self
+    public function setTrajetImminent(?bool $trajetImminent): self
     {
-        $this->trajetimi = $trajetimi;
+        $this->trajetImminent = $trajetImminent;
 
         return $this;
     }
 
-    public function getTrajetannuler(): ?bool
+    public function getTrajetAnnule(): ?bool
     {
-        return $this->trajetannuler;
+        return $this->trajetAnnule;
     }
 
-    public function setTrajetannuler(?bool $trajetannuler): self
+    public function setTrajetAnnule(?bool $trajetAnnule): self
     {
-        $this->trajetannuler = $trajetannuler;
+        $this->trajetAnnule = $trajetAnnule;
 
         return $this;
     }
 
-    public function getDemandenota(): ?bool
+    public function getDemandeNotation(): ?bool
     {
-        return $this->demandenota;
+        return $this->demandeNotation;
     }
 
-    public function setDemandenota(?bool $demandenota): self
+    public function setDemandeNotation(?bool $demandeNotation): self
     {
-        $this->demandenota = $demandenota;
+        $this->demandeNotation = $demandeNotation;
 
         return $this;
     }
 
-    public function getNouvelleavis(): ?bool
+    public function getNouvelAvis(): ?bool
     {
-        return $this->nouvelleavis;
+        return $this->nouvelAvis;
     }
 
-    public function setNouvelleavis(?bool $nouvelleavis): self
+    public function setNouvelAvis(?bool $nouvelAvis): self
     {
-        $this->nouvelleavis = $nouvelleavis;
+        $this->nouvelAvis = $nouvelAvis;
 
         return $this;
     }
@@ -405,23 +424,6 @@ class Utilisateur
         return $this;
     }
 
-    public function getVoiture(): ?Voiture
-    {
-        return $this->voiture;
-    }
-
-    public function setVoiture(Voiture $voiture): self
-    {
-        $this->voiture = $voiture;
-
-        // set the owning side of the relation if necessary
-        if ($voiture->getUtilisateur() !== $this) {
-            $voiture->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Message[]
      */
@@ -430,22 +432,22 @@ class Utilisateur
         return $this->messagesEnvoyes;
     }
 
-    public function addMessagesEnvoy(Message $messagesEnvoy): self
+    public function addMessagesEnvoye(Message $messagesEnvoye): self
     {
-        if (!$this->messagesEnvoyes->contains($messagesEnvoy)) {
-            $this->messagesEnvoyes[] = $messagesEnvoy;
-            $messagesEnvoy->setUtilisateurEnvoi($this);
+        if (!$this->messagesEnvoyes->contains($messagesEnvoye)) {
+            $this->messagesEnvoyes[] = $messagesEnvoye;
+            $messagesEnvoye->setEnvoyeur($this);
         }
 
         return $this;
     }
 
-    public function removeMessagesEnvoy(Message $messagesEnvoy): self
+    public function removeMessagesEnvoye(Message $messagesEnvoye): self
     {
-        if ($this->messagesEnvoyes->removeElement($messagesEnvoy)) {
+        if ($this->messagesEnvoyes->removeElement($messagesEnvoye)) {
             // set the owning side to null (unless already changed)
-            if ($messagesEnvoy->getUtilisateurEnvoi() === $this) {
-                $messagesEnvoy->setUtilisateurEnvoi(null);
+            if ($messagesEnvoye->getEnvoyeur() === $this) {
+                $messagesEnvoye->setEnvoyeur(null);
             }
         }
 
@@ -464,7 +466,7 @@ class Utilisateur
     {
         if (!$this->messagesRecus->contains($messagesRecu)) {
             $this->messagesRecus[] = $messagesRecu;
-            $messagesRecu->setUtilisateurRecu($this);
+            $messagesRecu->setDestinataire($this);
         }
 
         return $this;
@@ -474,8 +476,8 @@ class Utilisateur
     {
         if ($this->messagesRecus->removeElement($messagesRecu)) {
             // set the owning side to null (unless already changed)
-            if ($messagesRecu->getUtilisateurRecu() === $this) {
-                $messagesRecu->setUtilisateurRecu(null);
+            if ($messagesRecu->getDestinataire() === $this) {
+                $messagesRecu->setDestinataire(null);
             }
         }
 
@@ -483,57 +485,47 @@ class Utilisateur
     }
 
     /**
-     * @return Collection|Trajet[]
+     * @return Collection|Notification[]
      */
-    public function getTrajetsProposes(): Collection
+    public function getNotifications(): Collection
     {
-        return $this->trajetsProposes;
+        return $this->notifications;
     }
 
-    public function addTrajetsPropos(Trajet $trajetsPropos): self
+    public function addNotification(Notification $notification): self
     {
-        if (!$this->trajetsProposes->contains($trajetsPropos)) {
-            $this->trajetsProposes[] = $trajetsPropos;
-            $trajetsPropos->setConducteur($this);
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUtilisateur($this);
         }
 
         return $this;
     }
 
-    public function removeTrajetsPropos(Trajet $trajetsPropos): self
+    public function removeNotification(Notification $notification): self
     {
-        if ($this->trajetsProposes->removeElement($trajetsPropos)) {
+        if ($this->notifications->removeElement($notification)) {
             // set the owning side to null (unless already changed)
-            if ($trajetsPropos->getConducteur() === $this) {
-                $trajetsPropos->setConducteur(null);
+            if ($notification->getUtilisateur() === $this) {
+                $notification->setUtilisateur(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection|Trajet[]
-     */
-    public function getTrajetsRéservés(): Collection
+    public function getVoiture(): ?Voiture
     {
-        return $this->trajetsRéservés;
+        return $this->voiture;
     }
 
-    public function addTrajetsRServ(Trajet $trajetsRServ): self
+    public function setVoiture(Voiture $voiture): self
     {
-        if (!$this->trajetsRéservés->contains($trajetsRServ)) {
-            $this->trajetsRéservés[] = $trajetsRServ;
-            $trajetsRServ->addPassager($this);
-        }
+        $this->voiture = $voiture;
 
-        return $this;
-    }
-
-    public function removeTrajetsRServ(Trajet $trajetsRServ): self
-    {
-        if ($this->trajetsRéservés->removeElement($trajetsRServ)) {
-            $trajetsRServ->removePassager($this);
+        // set the owning side of the relation if necessary
+        if ($voiture->getProprietaire() !== $this) {
+            $voiture->setProprietaire($this);
         }
 
         return $this;
@@ -542,27 +534,27 @@ class Utilisateur
     /**
      * @return Collection|Avis[]
      */
-    public function getAvisDonnes(): Collection
+    public function getAvisEmis(): Collection
     {
-        return $this->avisDonnes;
+        return $this->avisEmis;
     }
 
-    public function addAvisDonn(Avis $avisDonn): self
+    public function addAvisEmi(Avis $avisEmi): self
     {
-        if (!$this->avisDonnes->contains($avisDonn)) {
-            $this->avisDonnes[] = $avisDonn;
-            $avisDonn->setUtilisateurDonne($this);
+        if (!$this->avisEmis->contains($avisEmi)) {
+            $this->avisEmis[] = $avisEmi;
+            $avisEmi->setEmetteur($this);
         }
 
         return $this;
     }
 
-    public function removeAvisDonn(Avis $avisDonn): self
+    public function removeAvisEmi(Avis $avisEmi): self
     {
-        if ($this->avisDonnes->removeElement($avisDonn)) {
+        if ($this->avisEmis->removeElement($avisEmi)) {
             // set the owning side to null (unless already changed)
-            if ($avisDonn->getUtilisateurDonne() === $this) {
-                $avisDonn->setUtilisateurDonne(null);
+            if ($avisEmi->getEmetteur() === $this) {
+                $avisEmi->setEmetteur(null);
             }
         }
 
@@ -581,7 +573,7 @@ class Utilisateur
     {
         if (!$this->avisRecu->contains($avisRecu)) {
             $this->avisRecu[] = $avisRecu;
-            $avisRecu->setUtilisateurRecu($this);
+            $avisRecu->setDestinataire($this);
         }
 
         return $this;
@@ -591,8 +583,8 @@ class Utilisateur
     {
         if ($this->avisRecu->removeElement($avisRecu)) {
             // set the owning side to null (unless already changed)
-            if ($avisRecu->getUtilisateurRecu() === $this) {
-                $avisRecu->setUtilisateurRecu(null);
+            if ($avisRecu->getDestinataire() === $this) {
+                $avisRecu->setDestinataire(null);
             }
         }
 
@@ -600,29 +592,29 @@ class Utilisateur
     }
 
     /**
-     * @return Collection|Notifs[]
+     * @return Collection|Trajet[]
      */
-    public function getNotifs(): Collection
+    public function getTrajetsProposes(): Collection
     {
-        return $this->notifs;
+        return $this->trajetsProposes;
     }
 
-    public function addNotif(Notifs $notif): self
+    public function addTrajetsPropose(Trajet $trajetsPropose): self
     {
-        if (!$this->notifs->contains($notif)) {
-            $this->notifs[] = $notif;
-            $notif->setUtilisateur($this);
+        if (!$this->trajetsProposes->contains($trajetsPropose)) {
+            $this->trajetsProposes[] = $trajetsPropose;
+            $trajetsPropose->setConducteur($this);
         }
 
         return $this;
     }
 
-    public function removeNotif(Notifs $notif): self
+    public function removeTrajetsPropose(Trajet $trajetsPropose): self
     {
-        if ($this->notifs->removeElement($notif)) {
+        if ($this->trajetsProposes->removeElement($trajetsPropose)) {
             // set the owning side to null (unless already changed)
-            if ($notif->getUtilisateur() === $this) {
-                $notif->setUtilisateur(null);
+            if ($trajetsPropose->getConducteur() === $this) {
+                $trajetsPropose->setConducteur(null);
             }
         }
 
@@ -641,7 +633,7 @@ class Utilisateur
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations[] = $reservation;
-            $reservation->setUtilisateur($this);
+            $reservation->setPassager($this);
         }
 
         return $this;
@@ -651,13 +643,11 @@ class Utilisateur
     {
         if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)
-            if ($reservation->getUtilisateur() === $this) {
-                $reservation->setUtilisateur(null);
+            if ($reservation->getPassager() === $this) {
+                $reservation->setPassager(null);
             }
         }
 
         return $this;
     }
-
-
 }

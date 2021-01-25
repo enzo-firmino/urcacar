@@ -2,163 +2,143 @@
 
 namespace App\Entity;
 
+use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * Voiture
- *
- * @ORM\Table(name="voiture", indexes={@ORM\Index(name="FK_Posseder", columns={"idUser"})})
- * @ORM\Entity
- * @ApiResource()
+ * @ORM\Entity(repositoryClass=VoitureRepository::class)
  */
 class Voiture
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idCar", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idcar;
+    private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="modeleCar", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $modelecar;
+    private $modele;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="anneeCar", type="date", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
-    private $anneecar;
+    private $annee;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="couleurCar", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $couleurcar;
+    private $couleur;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="marqueCar", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $marquecar;
+    private $marque;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="plaqueCar", type="string", length=7, nullable=true, options={"fixed"=true})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $plaquecar;
+    private $immatriculation;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="photoCar", type="blob", length=0, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $photocar;
+    private $photo;
 
     /**
      * @ORM\OneToOne(targetEntity=Utilisateur::class, inversedBy="voiture", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $utilisateur;
+    private $proprietaire;
 
-    public function getIdcar(): ?int
+    public function getId(): ?int
     {
-        return $this->idcar;
+        return $this->id;
     }
 
-    public function getModelecar(): ?string
+    public function getModele(): ?string
     {
-        return $this->modelecar;
+        return $this->modele;
     }
 
-    public function setModelecar(?string $modelecar): self
+    public function setModele(?string $modele): self
     {
-        $this->modelecar = $modelecar;
+        $this->modele = $modele;
 
         return $this;
     }
 
-    public function getAnneecar(): ?\DateTimeInterface
+    public function getAnnee(): ?\DateTimeInterface
     {
-        return $this->anneecar;
+        return $this->annee;
     }
 
-    public function setAnneecar(?\DateTimeInterface $anneecar): self
+    public function setAnnee(?\DateTimeInterface $annee): self
     {
-        $this->anneecar = $anneecar;
+        $this->annee = $annee;
 
         return $this;
     }
 
-    public function getCouleurcar(): ?string
+    public function getCouleur(): ?string
     {
-        return $this->couleurcar;
+        return $this->couleur;
     }
 
-    public function setCouleurcar(?string $couleurcar): self
+    public function setCouleur(?string $couleur): self
     {
-        $this->couleurcar = $couleurcar;
+        $this->couleur = $couleur;
 
         return $this;
     }
 
-    public function getMarquecar(): ?string
+    public function getMarque(): ?string
     {
-        return $this->marquecar;
+        return $this->marque;
     }
 
-    public function setMarquecar(?string $marquecar): self
+    public function setMarque(?string $marque): self
     {
-        $this->marquecar = $marquecar;
+        $this->marque = $marque;
 
         return $this;
     }
 
-    public function getPlaquecar(): ?string
+    public function getImmatriculation(): ?string
     {
-        return $this->plaquecar;
+        return $this->immatriculation;
     }
 
-    public function setPlaquecar(?string $plaquecar): self
+    public function setImmatriculation(?string $immatriculation): self
     {
-        $this->plaquecar = $plaquecar;
+        $this->immatriculation = $immatriculation;
 
         return $this;
     }
 
-    public function getPhotocar()
+    public function getPhoto(): ?string
     {
-        return $this->photocar;
+        return $this->photo;
     }
 
-    public function setPhotocar($photocar): self
+    public function setPhoto(?string $photo): self
     {
-        $this->photocar = $photocar;
+        $this->photo = $photo;
 
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    public function getProprietaire(): ?Utilisateur
     {
-        return $this->utilisateur;
+        return $this->proprietaire;
     }
 
-    public function setUtilisateur(Utilisateur $utilisateur): self
+    public function setProprietaire(Utilisateur $proprietaire): self
     {
-        $this->utilisateur = $utilisateur;
+        $this->proprietaire = $proprietaire;
 
         return $this;
     }
-
-
 }
