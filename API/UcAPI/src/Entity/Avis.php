@@ -24,20 +24,6 @@ class Avis
     private $idavis;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
-     */
-    private $iduser;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Uti_idUser", type="integer", nullable=false)
-     */
-    private $utiIduser;
-
-    /**
      * @var int|null
      *
      * @ORM\Column(name="conduite", type="integer", nullable=true)
@@ -58,33 +44,21 @@ class Avis
      */
     private $comportement;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisDonnés")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurDonne;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisRecu")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurRecu;
+
     public function getIdavis(): ?int
     {
         return $this->idavis;
-    }
-
-    public function getIduser(): ?int
-    {
-        return $this->iduser;
-    }
-
-    public function setIduser(int $iduser): self
-    {
-        $this->iduser = $iduser;
-
-        return $this;
-    }
-
-    public function getUtiIduser(): ?int
-    {
-        return $this->utiIduser;
-    }
-
-    public function setUtiIduser(int $utiIduser): self
-    {
-        $this->utiIduser = $utiIduser;
-
-        return $this;
     }
 
     public function getConduite(): ?int
@@ -119,6 +93,30 @@ class Avis
     public function setComportement(?int $comportement): self
     {
         $this->comportement = $comportement;
+
+        return $this;
+    }
+
+    public function getUtilisateurDonne(): ?Utilisateur
+    {
+        return $this->utilisateurDonne;
+    }
+
+    public function setUtilisateurDonne(?Utilisateur $utilisateurDonne): self
+    {
+        $this->utilisateurDonne = $utilisateurDonne;
+
+        return $this;
+    }
+
+    public function getUtilisateurRecu(): ?Utilisateur
+    {
+        return $this->utilisateurRecu;
+    }
+
+    public function setUtilisateurRecu(?Utilisateur $utilisateurRecu): self
+    {
+        $this->utilisateurRecu = $utilisateurRecu;
 
         return $this;
     }

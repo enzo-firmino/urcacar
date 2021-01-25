@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 
@@ -22,34 +24,6 @@ class Trajet
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idtrajet;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idAd", type="integer", nullable=false)
-     */
-    private $idad;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
-     */
-    private $iduser;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Adr_idAd", type="integer", nullable=false)
-     */
-    private $adrIdad;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idRec", type="integer", nullable=true)
-     */
-    private $idrec;
 
     /**
      * @var int|null
@@ -79,58 +53,52 @@ class Trajet
      */
     private $heuredepart;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Recurence::class, mappedBy="trajet", cascade={"persist", "remove"})
+     */
+    private $recurence;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="trajetsProposés")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $conducteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="trajetsDepart")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adresseDepart;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="trajetsArrivée")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adresseArrivee;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Etapes::class, mappedBy="trajet")
+     */
+    private $etapes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reserver::class, mappedBy="trajet")
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->passagers = new ArrayCollection();
+        $this->etapes = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+    }
+
     public function getIdtrajet(): ?int
     {
         return $this->idtrajet;
     }
 
-    public function getIdad(): ?int
-    {
-        return $this->idad;
-    }
 
-    public function setIdad(int $idad): self
-    {
-        $this->idad = $idad;
-
-        return $this;
-    }
-
-    public function getIduser(): ?int
-    {
-        return $this->iduser;
-    }
-
-    public function setIduser(int $iduser): self
-    {
-        $this->iduser = $iduser;
-
-        return $this;
-    }
-
-    public function getAdrIdad(): ?int
-    {
-        return $this->adrIdad;
-    }
-
-    public function setAdrIdad(int $adrIdad): self
-    {
-        $this->adrIdad = $adrIdad;
-
-        return $this;
-    }
-
-    public function getIdrec(): ?int
-    {
-        return $this->idrec;
-    }
-
-    public function setIdrec(?int $idrec): self
-    {
-        $this->idrec = $idrec;
-
-        return $this;
-    }
 
     public function getPrix(): ?float
     {
@@ -184,6 +152,144 @@ class Trajet
     public function setHeuredepart(?\DateTimeInterface $heuredepart): self
     {
         $this->heuredepart = $heuredepart;
+        return $this;
+    }
+
+    public function getRecurence(): ?Recurence
+    {
+        return $this->recurence;
+    }
+
+    public function setRecurence(?Recurence $recurence): self
+    {
+        $this->recurence = $recurence;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newTrajet = null === $recurence ? null : $this;
+        if ($recurence->getTrajet() !== $newTrajet) {
+            $recurence->setTrajet($newTrajet);
+        }
+
+        return $this;
+    }
+
+    public function getConducteur(): ?Utilisateur
+    {
+        return $this->conducteur;
+    }
+
+    public function setConducteur(?Utilisateur $conducteur): self
+    {
+        $this->conducteur = $conducteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getPassagers(): Collection
+    {
+        return $this->passagers;
+    }
+
+    public function addPassager(Utilisateur $passager): self
+    {
+        if (!$this->passagers->contains($passager)) {
+            $this->passagers[] = $passager;
+        }
+
+        return $this;
+    }
+
+    public function removePassager(Utilisateur $passager): self
+    {
+        $this->passagers->removeElement($passager);
+
+        return $this;
+    }
+
+    public function getAdresseDepart(): ?Adresse
+    {
+        return $this->adresseDepart;
+    }
+
+    public function setAdresseDepart(?Adresse $adresseDepart): self
+    {
+        $this->adresseDepart = $adresseDepart;
+
+        return $this;
+    }
+
+    public function getAdresseArrivee(): ?Adresse
+    {
+        return $this->adresseArrivee;
+    }
+
+    public function setAdresseArrivee(?Adresse $adresseArrivee): self
+    {
+        $this->adresseArrivee = $adresseArrivee;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Etapes[]
+     */
+    public function getEtapes(): Collection
+    {
+        return $this->etapes;
+    }
+
+    public function addEtape(Etapes $etape): self
+    {
+        if (!$this->etapes->contains($etape)) {
+            $this->etapes[] = $etape;
+            $etape->setTrajet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtape(Etapes $etape): self
+    {
+        if ($this->etapes->removeElement($etape)) {
+            // set the owning side to null (unless already changed)
+            if ($etape->getTrajet() === $this) {
+                $etape->setTrajet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reserver[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reserver $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setTrajet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reserver $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getTrajet() === $this) {
+                $reservation->setTrajet(null);
+            }
+        }
+
         return $this;
     }
 }

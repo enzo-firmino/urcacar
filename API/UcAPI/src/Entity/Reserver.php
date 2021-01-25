@@ -14,23 +14,6 @@ use ApiPlatform\Core\Annotation\ApiResource;
  */
 class Reserver
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idTrajet", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $idtrajet;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $iduser;
 
     /**
      * @var bool|null
@@ -39,15 +22,18 @@ class Reserver
      */
     private $valider;
 
-    public function getIdtrajet(): ?int
-    {
-        return $this->idtrajet;
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateur;
 
-    public function getIduser(): ?int
-    {
-        return $this->iduser;
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $trajet;
+
 
     public function getValider(): ?bool
     {
@@ -57,6 +43,30 @@ class Reserver
     public function setValider(?bool $valider): self
     {
         $this->valider = $valider;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getTrajet(): ?Trajet
+    {
+        return $this->trajet;
+    }
+
+    public function setTrajet(?Trajet $trajet): self
+    {
+        $this->trajet = $trajet;
 
         return $this;
     }

@@ -24,13 +24,6 @@ class Recurence
     private $idrec;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idTrajet", type="integer", nullable=false)
-     */
-    private $idtrajet;
-
-    /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="dateFin", type="date", nullable=true)
@@ -85,6 +78,11 @@ class Recurence
      * @ORM\Column(name="Dimanche", type="boolean", nullable=true)
      */
     private $dimanche;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Trajet::class, inversedBy="recurence", cascade={"persist", "remove"})
+     */
+    private $trajet;
 
     public function getIdrec(): ?int
     {
@@ -195,6 +193,18 @@ class Recurence
     public function setDimanche(?bool $dimanche): self
     {
         $this->dimanche = $dimanche;
+
+        return $this;
+    }
+
+    public function getTrajet(): ?Trajet
+    {
+        return $this->trajet;
+    }
+
+    public function setTrajet(?Trajet $trajet): self
+    {
+        $this->trajet = $trajet;
 
         return $this;
     }

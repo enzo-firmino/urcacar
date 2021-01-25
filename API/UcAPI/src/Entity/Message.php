@@ -24,20 +24,6 @@ class Message
     private $idmsg;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
-     */
-    private $iduser;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Uti_idUser", type="integer", nullable=false)
-     */
-    private $utiIduser;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="texteMsg", type="string", length=1024, nullable=true)
@@ -58,33 +44,21 @@ class Message
      */
     private $vumsg;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messagesEnvoyés")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurEnvoi;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="messagesRecus")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateurRecu;
+
     public function getIdmsg(): ?int
     {
         return $this->idmsg;
-    }
-
-    public function getIduser(): ?int
-    {
-        return $this->iduser;
-    }
-
-    public function setIduser(int $iduser): self
-    {
-        $this->iduser = $iduser;
-
-        return $this;
-    }
-
-    public function getUtiIduser(): ?int
-    {
-        return $this->utiIduser;
-    }
-
-    public function setUtiIduser(int $utiIduser): self
-    {
-        $this->utiIduser = $utiIduser;
-
-        return $this;
     }
 
     public function getTextemsg(): ?string
@@ -119,6 +93,30 @@ class Message
     public function setVumsg(?\DateTimeInterface $vumsg): self
     {
         $this->vumsg = $vumsg;
+
+        return $this;
+    }
+
+    public function getUtilisateurEnvoi(): ?Utilisateur
+    {
+        return $this->utilisateurEnvoi;
+    }
+
+    public function setUtilisateurEnvoi(?Utilisateur $utilisateurEnvoi): self
+    {
+        $this->utilisateurEnvoi = $utilisateurEnvoi;
+
+        return $this;
+    }
+
+    public function getUtilisateurRecu(): ?Utilisateur
+    {
+        return $this->utilisateurRecu;
+    }
+
+    public function setUtilisateurRecu(?Utilisateur $utilisateurRecu): self
+    {
+        $this->utilisateurRecu = $utilisateurRecu;
 
         return $this;
     }

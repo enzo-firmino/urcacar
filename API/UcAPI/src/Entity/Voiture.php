@@ -24,13 +24,6 @@ class Voiture
     private $idcar;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
-     */
-    private $iduser;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="modeleCar", type="string", length=255, nullable=true)
@@ -72,21 +65,15 @@ class Voiture
      */
     private $photocar;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Utilisateur::class, inversedBy="voiture", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateur;
+
     public function getIdcar(): ?int
     {
         return $this->idcar;
-    }
-
-    public function getIduser(): ?int
-    {
-        return $this->iduser;
-    }
-
-    public function setIduser(int $iduser): self
-    {
-        $this->iduser = $iduser;
-
-        return $this;
     }
 
     public function getModelecar(): ?string
@@ -157,6 +144,18 @@ class Voiture
     public function setPhotocar($photocar): self
     {
         $this->photocar = $photocar;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

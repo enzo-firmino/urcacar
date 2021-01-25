@@ -24,13 +24,6 @@ class Notifs
     private $idnotif;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
-     */
-    private $iduser;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="titreNotif", type="string", length=255, nullable=true)
@@ -44,21 +37,15 @@ class Notifs
      */
     private $textenotif;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="notifs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateur;
+
     public function getIdnotif(): ?int
     {
         return $this->idnotif;
-    }
-
-    public function getIduser(): ?int
-    {
-        return $this->iduser;
-    }
-
-    public function setIduser(int $iduser): self
-    {
-        $this->iduser = $iduser;
-
-        return $this;
     }
 
     public function getTitrenotif(): ?string
@@ -81,6 +68,18 @@ class Notifs
     public function setTextenotif(?string $textenotif): self
     {
         $this->textenotif = $textenotif;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

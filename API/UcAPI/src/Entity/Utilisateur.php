@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 
@@ -22,13 +24,6 @@ class Utilisateur
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $iduser;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idCar", type="integer", nullable=true)
-     */
-    private $idcar;
 
     /**
      * @var string|null
@@ -149,21 +144,61 @@ class Utilisateur
      */
     private $musique;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Voiture::class, mappedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $voiture;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="utilisateurEnvoi")
+     */
+    private $messagesEnvoyes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="utilisateurRecu")
+     */
+    private $messagesRecus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="conducteur", orphanRemoval=true)
+     */
+    private $trajetsProposes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="utilisateurDonne")
+     */
+    private $avisDonnes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="utilisateurRecu")
+     */
+    private $avisRecu;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Notifs::class, mappedBy="utilisateur")
+     */
+    private $notifs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reserver::class, mappedBy="utilisateur")
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->messagesEnvoyes = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
+        $this->trajetsProposes = new ArrayCollection();
+        $this->trajetsRéservés = new ArrayCollection();
+        $this->avisDonnes = new ArrayCollection();
+        $this->avisRecu = new ArrayCollection();
+        $this->notifs = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+    }
+
     public function getIduser(): ?int
     {
         return $this->iduser;
-    }
-
-    public function getIdcar(): ?int
-    {
-        return $this->idcar;
-    }
-
-    public function setIdcar(?int $idcar): self
-    {
-        $this->idcar = $idcar;
-
-        return $this;
     }
 
     public function getPnomuser(): ?string
@@ -366,6 +401,260 @@ class Utilisateur
     public function setMusique(?bool $musique): self
     {
         $this->musique = $musique;
+
+        return $this;
+    }
+
+    public function getVoiture(): ?Voiture
+    {
+        return $this->voiture;
+    }
+
+    public function setVoiture(Voiture $voiture): self
+    {
+        $this->voiture = $voiture;
+
+        // set the owning side of the relation if necessary
+        if ($voiture->getUtilisateur() !== $this) {
+            $voiture->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesEnvoyes(): Collection
+    {
+        return $this->messagesEnvoyes;
+    }
+
+    public function addMessagesEnvoy(Message $messagesEnvoy): self
+    {
+        if (!$this->messagesEnvoyes->contains($messagesEnvoy)) {
+            $this->messagesEnvoyes[] = $messagesEnvoy;
+            $messagesEnvoy->setUtilisateurEnvoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEnvoy(Message $messagesEnvoy): self
+    {
+        if ($this->messagesEnvoyes->removeElement($messagesEnvoy)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesEnvoy->getUtilisateurEnvoi() === $this) {
+                $messagesEnvoy->setUtilisateurEnvoi(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecu(Message $messagesRecu): self
+    {
+        if (!$this->messagesRecus->contains($messagesRecu)) {
+            $this->messagesRecus[] = $messagesRecu;
+            $messagesRecu->setUtilisateurRecu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecu(Message $messagesRecu): self
+    {
+        if ($this->messagesRecus->removeElement($messagesRecu)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesRecu->getUtilisateurRecu() === $this) {
+                $messagesRecu->setUtilisateurRecu(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getTrajetsProposes(): Collection
+    {
+        return $this->trajetsProposes;
+    }
+
+    public function addTrajetsPropos(Trajet $trajetsPropos): self
+    {
+        if (!$this->trajetsProposes->contains($trajetsPropos)) {
+            $this->trajetsProposes[] = $trajetsPropos;
+            $trajetsPropos->setConducteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrajetsPropos(Trajet $trajetsPropos): self
+    {
+        if ($this->trajetsProposes->removeElement($trajetsPropos)) {
+            // set the owning side to null (unless already changed)
+            if ($trajetsPropos->getConducteur() === $this) {
+                $trajetsPropos->setConducteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getTrajetsRéservés(): Collection
+    {
+        return $this->trajetsRéservés;
+    }
+
+    public function addTrajetsRServ(Trajet $trajetsRServ): self
+    {
+        if (!$this->trajetsRéservés->contains($trajetsRServ)) {
+            $this->trajetsRéservés[] = $trajetsRServ;
+            $trajetsRServ->addPassager($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrajetsRServ(Trajet $trajetsRServ): self
+    {
+        if ($this->trajetsRéservés->removeElement($trajetsRServ)) {
+            $trajetsRServ->removePassager($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvisDonnes(): Collection
+    {
+        return $this->avisDonnes;
+    }
+
+    public function addAvisDonn(Avis $avisDonn): self
+    {
+        if (!$this->avisDonnes->contains($avisDonn)) {
+            $this->avisDonnes[] = $avisDonn;
+            $avisDonn->setUtilisateurDonne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvisDonn(Avis $avisDonn): self
+    {
+        if ($this->avisDonnes->removeElement($avisDonn)) {
+            // set the owning side to null (unless already changed)
+            if ($avisDonn->getUtilisateurDonne() === $this) {
+                $avisDonn->setUtilisateurDonne(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvisRecu(): Collection
+    {
+        return $this->avisRecu;
+    }
+
+    public function addAvisRecu(Avis $avisRecu): self
+    {
+        if (!$this->avisRecu->contains($avisRecu)) {
+            $this->avisRecu[] = $avisRecu;
+            $avisRecu->setUtilisateurRecu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvisRecu(Avis $avisRecu): self
+    {
+        if ($this->avisRecu->removeElement($avisRecu)) {
+            // set the owning side to null (unless already changed)
+            if ($avisRecu->getUtilisateurRecu() === $this) {
+                $avisRecu->setUtilisateurRecu(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notifs[]
+     */
+    public function getNotifs(): Collection
+    {
+        return $this->notifs;
+    }
+
+    public function addNotif(Notifs $notif): self
+    {
+        if (!$this->notifs->contains($notif)) {
+            $this->notifs[] = $notif;
+            $notif->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotif(Notifs $notif): self
+    {
+        if ($this->notifs->removeElement($notif)) {
+            // set the owning side to null (unless already changed)
+            if ($notif->getUtilisateur() === $this) {
+                $notif->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reserver[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reserver $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reserver $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getUtilisateur() === $this) {
+                $reservation->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

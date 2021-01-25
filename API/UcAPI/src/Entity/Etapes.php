@@ -24,35 +24,28 @@ class Etapes
     private $idetape;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="idTrajet", type="integer", nullable=true)
-     */
-    private $idtrajet;
-
-    /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="heure", type="time", nullable=true)
      */
     private $heure;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="etapes")
+     */
+    private $trajet;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="etapes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adresse;
+
     public function getIdetape(): ?int
     {
         return $this->idetape;
     }
 
-    public function getIdtrajet(): ?int
-    {
-        return $this->idtrajet;
-    }
-
-    public function setIdtrajet(?int $idtrajet): self
-    {
-        $this->idtrajet = $idtrajet;
-
-        return $this;
-    }
 
     public function getHeure(): ?\DateTimeInterface
     {
@@ -62,6 +55,30 @@ class Etapes
     public function setHeure(?\DateTimeInterface $heure): self
     {
         $this->heure = $heure;
+
+        return $this;
+    }
+
+    public function getTrajet(): ?Trajet
+    {
+        return $this->trajet;
+    }
+
+    public function setTrajet(?Trajet $trajet): self
+    {
+        $this->trajet = $trajet;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?Adresse
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?Adresse $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }
