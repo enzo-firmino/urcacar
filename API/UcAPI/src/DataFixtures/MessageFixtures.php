@@ -21,7 +21,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             $message->setTexte($faker->sentence($nbWords = 6, $variableNbWords = true));
             $message->setDate($faker->dateTime($max = 'now', $timezone = null));
             $message->setDestinataire($this->getReference(UserFixtures::USER));
-            $message->setDestinataire($this->getReference(UserFixtures::USER));
+            $message->setEnvoyeur($this->getReference(UserFixtures::USER));
             $manager->persist($message);
         }
         $manager->flush();

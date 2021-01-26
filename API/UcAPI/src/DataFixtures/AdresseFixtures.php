@@ -9,7 +9,7 @@ use App\Entity\Etape;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class AdresseFixtures extends Fixture implements DependentFixtureInterface
+class AdresseFixtures extends Fixture
 {
 
     public function load(ObjectManager $manager)
@@ -26,10 +26,4 @@ class AdresseFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
-    {
-        return [
-            TrajetFixtures::class,
-        ];
-    }
 }
