@@ -3,14 +3,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Adresse;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
-use App\Entity\Etape;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class AdresseFixtures extends Fixture implements DependentFixtureInterface
+class AdresseFixtures extends Fixture 
 {
+    public const AD = "ad";
+    public const RAD = "rad";
 
     public function load(ObjectManager $manager)
     {
@@ -19,17 +19,24 @@ class AdresseFixtures extends Fixture implements DependentFixtureInterface
         for($nbAdresse = 1; $nbAdresse <= 4; $nbAdresse++){
             $adresse = new Adresse();
             $adresse->setAdresse($faker->streetAddress);
-            $adresse->setCp($faker->postcode);
+            $adresse->setCp((int)$faker->postcode);
             $adresse->setVille($faker->city);
             $manager->persist($adresse);
         }
-        $manager->flush();
-    }
 
-    public function getDependencies()
-    {
-        return [
-            TrajetFixtures::class,
-        ];
+        $adresse = new Adresse();
+        $adresse->setAdresse("2 rue du petit poids");
+        $adresse->setCp(51100);
+        $adresse->setVille("Reims");
+        $manager->persist($adresse);
+        $this->addReference(self::AD, $adresse);
+
+        $adresse = new Adresse();
+        $adresse->setAdresse("5 rue de la gare");
+        $adresse->setCp(51100);
+        $adresse->setVille("Reims");
+        $manager->persist($adresse);
+        $this->addReference(self::RAD, $adresse);
+        $manager->flush();
     }
 }

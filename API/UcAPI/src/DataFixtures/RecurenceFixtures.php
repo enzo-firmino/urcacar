@@ -15,9 +15,13 @@ class RecurenceFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for($nbUsers = 1; $nbUsers <= 10; $nbUsers++){
+        for($nbUsers = 1; $nbUsers <= 2; $nbUsers++){
             $rec = new Recurrence();
-            $rec->setTrajet($this->getReference(TrajetFixtures::TRAJETS));
+            if($nbUsers%2){
+                $rec->setTrajet($this->getReference(TrajetFixtures::TF));
+            }else{
+                $rec->setTrajet($this->getReference(TrajetFixtures::RTF));
+            }
             $rec->setDatefin($faker->dateTime($max = 'now', $timezone = null));
             $rec->setLundi($faker->boolean);
             $rec->setMardi($faker->boolean);

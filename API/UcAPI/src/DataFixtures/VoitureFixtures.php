@@ -2,11 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Adresse;
 use App\Entity\Voiture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
-use App\Entity\Etape;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\User\User;
@@ -32,14 +30,18 @@ class VoitureFixtures extends Fixture implements DependentFixtureInterface
                 $modele = '3008';
             }
         }
-        for ($nbVoiture = 1; $nbVoiture <= 4; $nbVoiture++) {
+        for ($nbVoiture = 1; $nbVoiture <= 2; $nbVoiture++) {
             $voiture = new Voiture();
             $voiture->setAnnee($faker->dateTime($max = 'now', $timezone = null));
             $voiture->setCouleur($faker->colorName);
             $voiture->setImmatriculation($faker->randomNumber($nbDigits = 6, $strict = false));
             $voiture->setMarque($marque);
             $voiture->setModele($modele);
-            $voiture->setProprietaire($this->getReference(UserFixtures::USER));
+            if($nbVoiture%2){
+                $voiture->setProprietaire($this->getReference(UserFixtures::ROMAIN));
+            }else{
+                $voiture->setProprietaire($this->getReference(UserFixtures::JEAN));
+            }
             $voiture->setPhoto($faker->imageUrl($width = 350, $height = 350, 'transport'));
             $manager->persist($voiture);
         }

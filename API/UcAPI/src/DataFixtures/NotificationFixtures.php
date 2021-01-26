@@ -3,7 +3,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Message;
 use App\Entity\Notification;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
@@ -21,7 +20,11 @@ class NotificationFixtures extends Fixture implements DependentFixtureInterface
             $notification = new Notification();
             $notification->setTexte($faker->sentence($nbWords = 6, $variableNbWords = true));
             $notification->setTitre($faker->words($nb = 3, $asText = true));
-            $notification->setUtilisateur($this->getReference(UserFixtures::USER));
+            if($nbNotifs%2){
+                $notification->setUtilisateur($this->getReference(UserFixtures::JEAN));
+            }else{
+                $notification->setUtilisateur($this->getReference(UserFixtures::ROMAIN));
+            }
             $manager->persist($notification);
         }
         $manager->flush();

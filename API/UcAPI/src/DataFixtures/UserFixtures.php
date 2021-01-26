@@ -9,7 +9,8 @@ use Faker;
 
 class UserFixtures extends Fixture
 {
-    public const USER = 'user';
+    public const ROMAIN = 'romain';
+    public const JEAN = 'jean';
 
     public function load(ObjectManager $manager)
     {
@@ -19,7 +20,7 @@ class UserFixtures extends Fixture
             $user = new Utilisateur();
             $user->setPrenom($faker->firstName);
             $user->setEmail($faker->email);
-            $user->setTelephone($faker->phoneNumber);
+            $user->setTelephone((int)$faker->phoneNumber);
             $user->setStatus($faker->numberBetween(0, 1));
             $user->setRang($faker->numberBetween(0, 2));
             $user->setFiabilite($faker->numberBetween(0, 5));
@@ -34,9 +35,50 @@ class UserFixtures extends Fixture
             $user->setFumer($faker->boolean);
             $user->setMusique($faker->boolean);
             $user->setPhoto($faker->imageUrl($width = 350, $height = 350, 'people'));
-            $this->addReference(self::USER, $user);
             $manager->persist($user);
         }
+        $user = new Utilisateur();
+        $user->setPrenom($faker->firstName);
+        $user->setEmail($faker->email);
+        $user->setTelephone((int)$faker->phoneNumber);
+        $user->setStatus($faker->numberBetween(0, 1));
+        $user->setRang($faker->numberBetween(0, 2));
+        $user->setFiabilite($faker->numberBetween(0, 5));
+        $user->setDemanderes($faker->boolean);
+        $user->setResAcceptee($faker->boolean);
+        $user->setResEnvoyee($faker->boolean);
+        $user->setDemandeNotation($faker->boolean);
+        $user->setTrajetAnnule($faker->boolean);
+        $user->setTrajetImminent($faker->boolean);
+        $user->setNouvelAvis($faker->boolean);
+        $user->setDialogue($faker->boolean);
+        $user->setFumer($faker->boolean);
+        $user->setMusique($faker->boolean);
+        $user->setPhoto($faker->imageUrl($width = 350, $height = 350, 'people'));
+        $manager->persist($user);
+        $this->addReference(self::JEAN, $user);
+    
+        $user = new Utilisateur();
+        $user->setPrenom($faker->firstName);
+        $user->setEmail($faker->email);
+        $user->setTelephone((int)$faker->phoneNumber);
+        $user->setStatus($faker->numberBetween(0, 1));
+        $user->setRang($faker->numberBetween(0, 2));
+        $user->setFiabilite($faker->numberBetween(0, 5));
+        $user->setDemanderes($faker->boolean);
+        $user->setResAcceptee($faker->boolean);
+        $user->setResEnvoyee($faker->boolean);
+        $user->setDemandeNotation($faker->boolean);
+        $user->setTrajetAnnule($faker->boolean);
+        $user->setTrajetImminent($faker->boolean);
+        $user->setNouvelAvis($faker->boolean);
+        $user->setDialogue($faker->boolean);
+        $user->setFumer($faker->boolean);
+        $user->setMusique($faker->boolean);
+        $user->setPhoto($faker->imageUrl($width = 350, $height = 350, 'people'));
+        $manager->persist($user);
+        $this->addReference(self::ROMAIN, $user);
+
         $manager->flush();
     }
 }

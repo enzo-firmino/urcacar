@@ -2,7 +2,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Avis;
-use App\Entity\Utilisateur;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
 use Doctrine\Persistence\ObjectManager;
@@ -20,19 +19,8 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             $avis->setConduite(rand(0,5));
             $avis->setPonctualite(rand(0,5));
             $avis->setComportement(rand(0,5));
-
-            $emetteur = $this->getReference(UserFixtures::USER);
-            $destinataire = $this->getReference(UserFixtures::USER);
-
-            if($emetteur != $destinataire){
-            $avis->setEmetteur($this->getReference(UserFixtures::USER));
-            $avis->setDestinataire($this->getReference(UserFixtures::USER));
-            }
-            else{
-              $destinataire = $this->getReference(UserFixtures::USER);
-              $emetteur = $this->getReference(UserFixtures::USER);
-
-            }
+            $avis->setEmetteur($this->getReference(UserFixtures::ROMAIN));
+            $avis->setDestinataire($this->getReference(UserFixtures::JEAN));
             $manager->persist($avis);
         }
 

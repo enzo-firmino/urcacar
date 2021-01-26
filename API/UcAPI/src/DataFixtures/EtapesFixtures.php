@@ -17,7 +17,11 @@ class EtapesFixtures extends Fixture implements DependentFixtureInterface
 
         for($nbEtape = 1; $nbEtape <= 4; $nbEtape++){
             $etape = new Etape();
-            $etape->setTrajet($this->getReference(TrajetFixtures::TRAJETS));
+            if($nbEtape%2){
+                $etape->setTrajet($this->getReference(TrajetFixtures::RTF));
+            }else{
+                $etape->setTrajet($this->getReference(TrajetFixtures::TF));
+            }
             $etape->setHeure($faker->dateTime($max = 'now', $timezone = null));
             $manager->persist($etape);
         }
