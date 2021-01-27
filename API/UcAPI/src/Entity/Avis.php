@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=AvisRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"avis:read"}},
  *      itemOperations={
  *          "get"
  *      },

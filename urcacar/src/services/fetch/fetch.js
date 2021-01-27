@@ -8,7 +8,7 @@ export function getAllAd(){
     return fetch(url + "/adresses").then(response => response.json())
 }
 
-export function getAllAvis(id){
+export function getAvis(id){
     return fetch(url + "/avis/" + id).then(response => response.json())
 }
 

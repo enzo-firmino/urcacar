@@ -7,8 +7,6 @@ const StarRating = () => {
 
     for(let i = 0; i<5; i++){
         stars.push(<StarFill className="flex-fill avis" size = "24 "color="green"/>);
-
-
     }
 
     return (
@@ -23,7 +21,6 @@ const StarRating = () => {
                         </p>
                         <div>
                             {stars.map((star, i )=> {
-
                                 return star;
                             })}
                         </div>
