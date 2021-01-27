@@ -8,7 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ReserverRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups": {"res:read"}},
+ *      itemOperations={
+ *          "get"
+ *      },
+ *      collectionOperations={
+ *           "get"
+ *      },
+ * )
  */
 class Reserver
 {

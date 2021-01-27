@@ -8,7 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups": {"msg:read"}},
+ *      itemOperations={
+ *          "get"
+ *      },
+ *      collectionOperations={
+ *           "get"
+ *      },
+ * )
  */
 class Message
 {

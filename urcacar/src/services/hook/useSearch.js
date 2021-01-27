@@ -3,11 +3,11 @@ import { getAllTrajet } from '../fetch/fetch';
 
 function useSearch(recherche){
 
-    const [trajets, setTrajets] = useState();
+    const [trajets, setTrajets] = useState([]);
 
     useEffect(() => {
         getAllTrajet().then(trajets => {
-            console.log(trajets);
+            setTrajets(trajets["hydra:member"]);
         });
     }, [])
 

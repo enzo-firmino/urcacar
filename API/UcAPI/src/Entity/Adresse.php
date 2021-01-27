@@ -2,15 +2,24 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\AdresseRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AdresseRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups": {"ad:read"}, {"trajets:read"}},
+ *      itemOperations={
+ *          "get"
+ *      },
+ *      collectionOperations={
+ *           "get"
+ *      },
+ * )
  */
 class Adresse
 {
@@ -23,31 +32,37 @@ class Adresse
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"ad:read","trajets:read"})
      */
     private $ville;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"ad:read","trajets:read"})
      */
     private $cp;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"ad:read","trajets:read"})
      */
     private $adresse;
 
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="adresseDepart")
+     * @Groups({"trajets:read"})
      */
     private $departTrajets;
 
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="adresseArrivee")
+     * @Groups({"trajets:read"})
      */
     private $arriveeTrajet;
 
     /**
      * @ORM\OneToMany(targetEntity=Etape::class, mappedBy="adresse")
+     * @Groups({"trajets:read"})
      */
     private $etapes;
 

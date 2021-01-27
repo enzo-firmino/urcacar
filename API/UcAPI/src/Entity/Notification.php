@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\NotificationRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=NotificationRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups": {"notif:read"}},
+ *      itemOperations={
+ *          "get"
+ *      },
+ *      collectionOperations={
+ *           "get"
+ *      },
+ * )
  */
 class Notification
 {
@@ -21,11 +30,13 @@ class Notification
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"notif:read"})
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"notif:read"})
      */
     private $texte;
 

@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\EtapeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EtapeRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EtapeRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups": {"etape:read"}},
+ *      itemOperations={
+ *          "get"
+ *      },
+ *      collectionOperations={
+ *           "get"
+ *      },
+ * )
  */
 class Etape
 {
@@ -21,12 +30,14 @@ class Etape
 
     /**
      * @ORM\Column(type="time")
+     * @Groups({"etape:read"})
      */
     private $heure;
 
     /**
      * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="etapes")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"etape:read"})
      */
     private $adresse;
 

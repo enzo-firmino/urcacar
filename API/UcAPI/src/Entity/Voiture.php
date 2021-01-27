@@ -2,12 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VoitureRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VoitureRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups": {"car:read"}},
+ *      itemOperations={
+ *          "get"
+ *      },
+ *      collectionOperations={
+ *           "get"
+ *      },
+ * )
  */
 class Voiture
 {
@@ -20,31 +30,37 @@ class Voiture
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"car:read"})
      */
     private $modele;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"car:read"})
      */
     private $annee;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"car:read"})
      */
     private $couleur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"car:read"})
      */
     private $marque;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"car:read"})
      */
     private $immatriculation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"car:read"})
      */
     private $photo;
 

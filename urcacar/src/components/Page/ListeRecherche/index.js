@@ -14,108 +14,25 @@ import useSearch from "../../../services/hook/useSearch";
 
 export function ListeRecherche(props) {
     const history = useHistory();
-    console.log(history.location.state);
 
     const recherche = {
         depart: history.location.state.depart,
-        date: history.location.state.date,
+        date: history.location.state.date.split('-')[2]+"/"+history.location.state.date.split('-')[1],
         arrive: history.location.state.arrive,
         heureDepart: history.location.state.heureDepart,
         heureArrive: history.location.state.heureArrive,
         nbPassager: history.location.state.nbPassager
     }
 
-    const trajetS = useSearch(recherche);
-
-    const trajets = [
-        {
-            idTrajet: 1,
-            conducteur: 'Romane',
-            notation: 'neutre',
-            depart: 'Reims',
-            arrive: 'Paris',
-            date: '12/05',
-            heureDepart: '12h10',
-            heureArrive: '12h50',
-            prix: 125,
-            recurrence: {
-                lun: true,
-                mar: true,
-                mer: false,
-                jeu: true,
-                ven: true,
-                sam: false,
-                dim: false,
-            }
-        },
-        {
-            idTrajet: 2,
-            conducteur: 'Romane',
-            notation: 'neutre',
-            depart: 'Reims',
-            arrive: 'Paris',
-            date: '12/05',
-            heureDepart: '12h10',
-            heureArrive: '12h50',
-            prix: 125,
-            recurrence: null
-        },
-        {
-            idTrajet: 3,
-            conducteur: 'Romane',
-            notation: 'neutre',
-            depart: 'Reims',
-            arrive: 'Paris',
-            date: '12/05',
-            heureDepart: '12h10',
-            heureArrive: '12h50',
-            prix: 125,
-            recurrence: null
-        },
-        {
-            idTrajet: 4,
-            conducteur: 'Romane',
-            notation: 'neutre',
-            depart: 'Reims',
-            arrive: 'Paris',
-            date: '12/05',
-            heureDepart: '12h10',
-            heureArrive: '12h50',
-            prix: 125,
-            recurrence: null
-        },
-        {
-            idTrajet: 5,
-            conducteur: 'Romane',
-            notation: 'neutre',
-            depart: 'Reims',
-            arrive: 'Paris',
-            date: '12/05',
-            heureDepart: '12h10',
-            heureArrive: '12h50',
-            prix: 125,
-            recurrence: {
-                lun: true,
-                mar: true,
-                mer: false,
-                jeu: true,
-                ven: true,
-                sam: false,
-                dim: false,
-            }
-        },
-    ];
-    
-    const listeTrajets = trajets.map((trajet, index) => {
-            return <Trajet key={index} trajet={trajet}/>;
-        }
-    );
+    const trajets = useSearch(recherche);
 
     return (
         <div className='listeRecherche'>
             <RecapRecherche recherche={recherche}/>
             <ListGroup>
-                {listeTrajets}
+                {trajets.map(todo => (
+                    <Trajet key={todo.id} trajet={todo}/>
+                ))}
             </ListGroup>
         </div>
 
@@ -166,6 +83,10 @@ function Trajet({trajet}) {
         }
     }
 
+    const date = new Date(trajet.dateDepart);
+    const heureDepart = new Date(trajet.heureDepart);
+    const heureArrivee = new Date(trajet.heureArrivee);
+
     return (
         <a href="/trajet" className='box'>
             <div className='leftBox'>
@@ -174,20 +95,20 @@ function Trajet({trajet}) {
                 borderBottom: "1px solid #58B94B",
                 fontWeight: 'bold'
             }}> {trajet.conducteur}</span>
-                <span style={{fontSize:'20px'}}>{trajet.date}</span>
+                <span style={{fontSize:'20px'}}>{date.getDate()}/{date.getMonth() + 1}</span>
                 <table>
                         <tbody>
                         <tr>
-                            <td>{trajet.heureDepart}</td>
-                            <td>{trajet.depart}</td>
+                            <td>{heureDepart.getHours()}:{heureDepart.getMinutes()}</td>
+                            <td>{trajet.adresseDepart}</td>
                         </tr>
                         <tr>
                             <td><ArrowDown/></td>
                             <td><ArrowDown/></td>
                         </tr>
                         <tr>
-                            <td>{trajet.heureArrive}</td>
-                            <td>{trajet.arrive}</td>
+                            <td>{heureArrivee.getHours()}:{heureArrivee.getMinutes()}</td>
+                            <td>{trajet.adresseArrivee}</td>
                         </tr>
                         </tbody>
                     </table>

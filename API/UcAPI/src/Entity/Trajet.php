@@ -2,15 +2,20 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\TrajetRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TrajetRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TrajetRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={
+ *          "get"
+ *      },
+ * )
  */
 class Trajet
 {
@@ -23,6 +28,7 @@ class Trajet
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"trajet:read"})
      */
     private $prix;
 
