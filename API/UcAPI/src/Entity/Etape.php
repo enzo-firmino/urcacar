@@ -7,8 +7,8 @@ use App\Repository\EtapeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=EtapeRepository::class)
+ * @ApiResource()
  */
 class Etape
 {

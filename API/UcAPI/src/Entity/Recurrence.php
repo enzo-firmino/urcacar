@@ -7,8 +7,8 @@ use App\Repository\RecurrenceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=RecurrenceRepository::class)
+ * @ApiResource()
  */
 class Recurrence
 {

@@ -7,8 +7,8 @@ use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=AvisRepository::class)
+ * @ApiResource()
  */
 class Avis
 {

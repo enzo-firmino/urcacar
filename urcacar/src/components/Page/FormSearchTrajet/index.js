@@ -4,25 +4,38 @@ import Col from "react-bootstrap/Col";
 import { ArrowDownUp } from 'react-bootstrap-icons';
 import '../../../styles/form.css';
 import { Redirect } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 export function FormSearchTrajet(props) {
 
+    const history = useHistory();
+
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        setRedirect('/recherche');
+        history.push({
+            pathname: '/recherche',
+            state:
+            {
+                depart: depart, 
+                arrive: arrive, 
+                date: date, 
+                heureDepart: heureDepart, 
+                heureArrive: heureArrive, 
+                nbPassager: nbPassager
+            }
+        })
     }
 
     const [depart, setDepart] = useState('');
     const [arrive, setArrive] = useState('');
-    const [date, setDate] = useState();
-    const [heureDepart, setHeureDepart] = useState();
-    const [heureArrive, setHeureArrive] = useState();
+    const [date, setDate] = useState('');
+    const [heureDepart, setHeureDepart] = useState('');
+    const [heureArrive, setHeureArrive] = useState('');
     const [nbPassager, setNbPassager] = useState(1);
     const [redirect, setRedirect] = useState(null);
 
-
     if (redirect) {
-        return <Redirect to={redirect} />
+        return <Redirect to={{ pathname: '/recherche', state: { date: {depart: depart, arrive: arrive, date: date, heureDepart: heureDepart, heureArrive: heureArrive, nbPassager: nbPassager} } }} />
     }
     return (
 

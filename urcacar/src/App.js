@@ -17,6 +17,7 @@ import Message from './components/Page/Message';
 import {DetailTrajet} from "./components/Page/DetailTrajet";
 import AddTrajet from './components/Page/AddTrajet'
 import {MesTrajets, MesTrajetsReservations} from "./components/Page/MesTrajets";
+import MapView from "./components/Map/index";
 
 
 function App() {
@@ -55,7 +56,9 @@ function App() {
                     <Route path="/trajet">
                         <DetailTrajet/>
                     </Route>
-
+                    <Route path="/map">
+                        <MapView/>
+                    </Route>
                 </Switch>
             <Footer/>
         </Router>

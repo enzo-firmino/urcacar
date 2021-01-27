@@ -7,8 +7,8 @@ use App\Repository\ReserverRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=ReserverRepository::class)
+ * @ApiResource()
  */
 class Reserver
 {

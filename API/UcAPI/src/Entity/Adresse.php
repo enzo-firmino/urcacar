@@ -9,8 +9,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
+ * @ApiResource()
  */
 class Adresse
 {

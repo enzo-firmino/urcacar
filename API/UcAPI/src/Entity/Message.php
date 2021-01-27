@@ -7,8 +7,8 @@ use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=MessageRepository::class)
+ * @ApiResource()
  */
 class Message
 {

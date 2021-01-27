@@ -9,17 +9,23 @@ import '../../../styles/listeRecherche.css';
 import Badge from "react-bootstrap/Badge";
 import retour from '../../../assets/Retour.png';
 import Col from "react-bootstrap/Col";
+import { useHistory } from "react-router-dom";
+import useSearch from "../../../services/hook/useSearch";
 
 export function ListeRecherche(props) {
+    const history = useHistory();
+    console.log(history.location.state);
 
     const recherche = {
-        depart: 'Reims',
-        date: '12/05',
-        arrive: 'Paris',
-        heureDepart: '12h10',
-        heureArrive: '12h50',
-        nbPassager: 2
+        depart: history.location.state.depart,
+        date: history.location.state.date,
+        arrive: history.location.state.arrive,
+        heureDepart: history.location.state.heureDepart,
+        heureArrive: history.location.state.heureArrive,
+        nbPassager: history.location.state.nbPassager
     }
+
+    const trajetS = useSearch(recherche);
 
     const trajets = [
         {
@@ -99,6 +105,7 @@ export function ListeRecherche(props) {
             }
         },
     ];
+    
     const listeTrajets = trajets.map((trajet, index) => {
             return <Trajet key={index} trajet={trajet}/>;
         }
