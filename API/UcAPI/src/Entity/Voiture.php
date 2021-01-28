@@ -10,7 +10,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=VoitureRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"car:read"}},
  *      itemOperations={
  *          "get"
  *      },

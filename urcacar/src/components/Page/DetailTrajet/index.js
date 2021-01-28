@@ -1,19 +1,21 @@
 import Container from "react-bootstrap/Container";
-import React, {useRef, useState} from "react";
-import profilePicture from '../../../assets/profilepicture.jpg';
-import voiture from '../../../assets/c4.png';
+import React, {useEffect, useState} from "react";
 import Image from "react-bootstrap/Image";
 import '../../../styles/detailTrajet.css';
 
-import {ArrowDown, GeoAlt, GeoFill, Map, Signpost} from "react-bootstrap-icons";
+import {GeoAlt, Map} from "react-bootstrap-icons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Avis from "../../Reusable/Avis";
+<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
 import useDetailTrajet from "../../../services/hook/useDetailTrajet";
+=======
+import {getUser} from "../../../services/fetch/fetch";
+>>>>>>> a35c0213639327e1fa658d038f0b68cfaccb3854
 
-export function DetailTrajet(props) {
+export function DetailTrajet() {
 
     const history = useHistory();
     console.log("Detail :",history.location.state)
@@ -41,43 +43,51 @@ export function DetailTrajet(props) {
         }
     }
 
-    let conducteur = {
-        prenom: 'Romane',
-        photo: profilePicture,
-        notation: 'neutre',
-        preferences: {
-            discussion: true,
-            fumer: false,
-            musique: true,
-        },
-        vehicle: {
-            marque: 'Citroen',
-            modele: 'C4',
-            annee: '2020',
-            couleur: 'Bleu',
-            immatriculation: 'AB-544-LK',
-            photo: voiture
-        },
-        avis: [
-            {
-                utilisateur: 'Pierre',
-                photo: profilePicture,
-                conduite: 4,
-                ponctuation: 4,
-                comportement: 4,
-            },
-            {
-                utilisateur: 'Marie',
-                photo: profilePicture,
-                conduite: 3,
-                ponctuation: 2,
-                comportement: 4,
-            }
-        ]
-    }
+    // let conducteur = {
+    //     prenom: 'Romane',
+    //     photo: profilePicture,
+    //     rang: 1,
+    //     status: 1,
+    //     dialogue: true,
+    //     fumer: false,
+    //     musique: true,
+    //     vehicle: {
+    //         marque: 'Citroen',
+    //         modele: 'C4',
+    //         annee: '2020',
+    //         couleur: 'Bleu',
+    //         immatriculation: 'AB-544-LK',
+    //         photo: voiture
+    //     },
+    //     avis: [
+    //         {
+    //             utilisateur: 'Pierre',
+    //             photo: profilePicture,
+    //             conduite: 4,
+    //             ponctuation: 4,
+    //             comportement: 4,
+    //         },
+    //         {
+    //             utilisateur: 'Marie',
+    //             photo: profilePicture,
+    //             conduite: 3,
+    //             ponctuation: 2,
+    //             comportement: 4,
+    //         }
+    //     ]
+    // }
 
-    const [show, setShow] = useState(false);
-    const target = useRef(null);
+
+    const [conducteur, setConducteur] = useState(null);
+
+    useEffect(() => {
+        getUser('11').then((response) =>  {
+            console.log('conducteur', response);
+            setConducteur(response);
+        });
+    }, []);
+
+
 
     return (
         <Container className='detailTrajet container bg-light'>
@@ -85,7 +95,7 @@ export function DetailTrajet(props) {
                 <h2>{trajet.date}</h2>
             </Row>
             <Row className='row-padding'>
-                <Profil conducteur={conducteur}/>
+                { conducteur !== null && <Profil conducteur={conducteur}/>}
                 <Col className='border-left'>
                     <RecapTrajet trajet={trajet}/>
                     <Row>
@@ -107,9 +117,9 @@ export function DetailTrajet(props) {
                 </Col>
             </Row>
             <Row className='row-padding'>
-                <Col>
-                    <Vehicule voiture={conducteur.vehicle}/>
-                </Col>
+                {/*<Col>{ conducteur.voiture !== null &&*/}
+                {/*    <Vehicule voiture={conducteur.vehicle}/> }*/}
+                {/*</Col>*/}
                 <Col className='border-left'>
                     <Avis/>
                 </Col>
@@ -119,30 +129,36 @@ export function DetailTrajet(props) {
 }
 
 function Profil({conducteur}) {
-    return (<Col className='profil'>
+    return (
+        <Col className='profil'>
         <Row>
+            <a href="/profil">
             <Image src={conducteur.photo} roundedCircle/>
+            </a>
         </Row>
         <Row>
+            <a href="/profil">
             <h3>{conducteur.prenom}</h3>
+            </a>
         </Row>
         <Row>
-            <span>{conducteur.notation}</span>
+            <span>{conducteur.rang}</span>
         </Row>
         <Row>
             <div className='preferences'>
-                <Image className={conducteur.preferences.discussion.toString()}
+                <Image className={conducteur.dialogue.toString()}
                        style={{height: 50, width: 50, margin: 10}}
                        src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>
-                <Image className={conducteur.preferences.fumer.toString()}
+                <Image className={conducteur.fumer.toString()}
                        style={{height: 50, width: 50, margin: 10}}
                        src="https://webstockreview.net/images/cigar-clipart-vector-14.png"/>
-                <Image className={conducteur.preferences.musique.toString()}
+                <Image className={conducteur.musique.toString()}
                        style={{height: 50, width: 50, margin: 10}}
                        src="https://img.icons8.com/metro/452/music.png"/>
             </div>
         </Row>
-    </Col>);
+    </Col>
+    );
 }
 
 function RecapTrajet({trajet}) {
