@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=VoitureRepository::class)
  * @ApiResource(
+ *      normalizationContext={"groups": {"infoCar"}},
  *      itemOperations={
  *          "get"
  *      },
@@ -29,37 +30,37 @@ class Voiture
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"car:read"})
+     * @Groups({"infoCar"})
      */
     private $modele;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"car:read"})
+     * @Groups({"infoCar"})
      */
     private $annee;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"car:read"})
+     * @Groups({"infoCar"})
      */
     private $couleur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"car:read"})
+     * @Groups({"infoCar"})
      */
     private $marque;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"car:read"})
+     * @Groups({"infoCar"})
      */
     private $immatriculation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"car:read"})
+     * @Groups({"infoCar"})
      */
     private $photo;
 

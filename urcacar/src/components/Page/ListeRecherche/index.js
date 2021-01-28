@@ -75,7 +75,7 @@ function Trajet({trajet}) {
 
     const history = useHistory();
 
-    console.log(trajet.conducteur["@id"],trajet["@id"])
+    console.log(trajet.conducteur,trajet["@id"])
 
     const Click = (evt) => {
         evt.preventDefault();
@@ -83,7 +83,7 @@ function Trajet({trajet}) {
             pathname: '/trajet',
             state:
             {
-                conducteur: trajet.conducteur["@id"],
+                conducteur: trajet.conducteur,
                 trajet: trajet["@id"]
             }
         })

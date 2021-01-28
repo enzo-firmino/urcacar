@@ -3,15 +3,15 @@ import { getInfo } from '../fetch/fetch';
 
 function useDetailTrajet(info){
 
-    const [trajet, setTrajet] = useState({});
-    const [conducteur, setConducteur] = useState({});
+    const [trajet, setTrajet] = useState(null);
+    const [conducteur, setConducteur] = useState(null);
 
     useEffect(() => {
-        getInfo(info.conducteur).then(conducteur => {
-            setConducteur(conducteur);
+        getInfo(info.conducteur).then(response => {
+            setConducteur(response);
         });
-        getInfo(info.trajet).then(trajet => {
-            setTrajet(trajet);
+        getInfo(info.trajet).then(response => {
+            setTrajet(response);
         });
     }, []);
 

@@ -10,69 +10,16 @@ import Button from "react-bootstrap/Button";
 import Avis from "../../Reusable/Avis";
 import { useHistory } from "react-router-dom";
 import useDetailTrajet from "../../../services/hook/useDetailTrajet";
+import { getInfo } from "../../../services/fetch/fetch";
 
 export function DetailTrajet() {
-
     const history = useHistory();
-    console.log("Detail :",history.location.state)
+    const {trajet,conducteur} = useDetailTrajet(history.location.state);
 
-    const {trajetS,conducteurS} = useDetailTrajet(history.location.state);
-
-    console.log("Detail :",trajetS,conducteurS)
-
-    let trajet = {
-        depart: 'Reims, 15 Rue de la marne',
-        arrive: 'Paris, 85 Avenue Pierre',
-        date: 'Mardi 15 avril',
-        heureDepart: '12h10',
-        heureArrive: '12h50',
-        nbPlaceDispo: 4,
-        prix: 12,
-        recurrence: {
-            lundi: true,
-            mardi: true,
-            mercredi: false,
-            jeudi: true,
-            vendredi: true,
-            samedi: false,
-            dimanche: false,
-        }
+    if(trajet === null || conducteur === null){
+        return <div/>;
     }
-
-    let conducteur = {
-        prenom: 'Romane',
-        photo: "blabla",
-        rang: 1,
-        status: 1,
-        dialogue: true,
-        fumer: false,
-        musique: true,
-        vehicle: {
-            marque: 'Citroen',
-            modele: 'C4',
-            annee: '2020',
-            couleur: 'Bleu',
-            immatriculation: 'AB-544-LK',
-            photo: "cc"
-        },
-        avis: [
-            {
-                utilisateur: 'Pierre',
-                photo: "cc",
-                conduite: 4,
-                ponctuation: 4,
-                comportement: 4,
-            },
-            {
-                utilisateur: 'Marie',
-                photo: "profilePi",
-                conduite: 3,
-                ponctuation: 2,
-                comportement: 4,
-            }
-        ]
-    }
-
+    console.log("Résultat :",trajet, conducteur.voiture)
     return (
         <Container className='detailTrajet container bg-light'>
             <Row className='row-padding'>
@@ -102,7 +49,7 @@ export function DetailTrajet() {
             </Row>
             <Row className='row-padding'>
                 <Col>
-                    <Vehicule voiture={conducteur.vehicle}/>
+                    <Vehicule v={conducteur.voiture}/>
                 </Col>
                 <Col className='border-left'>
                     {/*<Avis/>*/}
@@ -113,6 +60,20 @@ export function DetailTrajet() {
 }
 
 function Profil({conducteur}) {
+    let rang;
+    switch(conducteur.rang){
+        case 1:
+            rang = "NUL"
+            break;
+        case 2:
+            rang = "Neutre"
+            break;
+        case 3:
+            rang = "Recommander"
+            break;
+        default:
+            rang = "Inconnu"
+    }
     return (
         <Col className='profil'>
         <Row>
@@ -126,7 +87,7 @@ function Profil({conducteur}) {
             </a>
         </Row>
         <Row>
-            <span>{conducteur.rang}</span>
+            <span>{rang}</span>
         </Row>
         <Row>
             <div className='preferences'>
@@ -171,7 +132,16 @@ function RecapTrajet({trajet}) {
     );
 }
 
-function Vehicule({voiture}) {
+function Vehicule({v}) {
+
+    const [voiture, setVoiture] = useState({});
+
+    useEffect(() => {
+        getInfo(v).then(response => {
+            setVoiture(response);
+        });
+    }, []);
+
     return (
         <Col>
             <Row>
