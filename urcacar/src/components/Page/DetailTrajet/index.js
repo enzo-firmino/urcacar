@@ -8,12 +8,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Avis from "../../Reusable/Avis";
-<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
 import useDetailTrajet from "../../../services/hook/useDetailTrajet";
-=======
-import {getUser} from "../../../services/fetch/fetch";
->>>>>>> a35c0213639327e1fa658d038f0b68cfaccb3854
 
 export function DetailTrajet() {
 
@@ -43,51 +39,39 @@ export function DetailTrajet() {
         }
     }
 
-    // let conducteur = {
-    //     prenom: 'Romane',
-    //     photo: profilePicture,
-    //     rang: 1,
-    //     status: 1,
-    //     dialogue: true,
-    //     fumer: false,
-    //     musique: true,
-    //     vehicle: {
-    //         marque: 'Citroen',
-    //         modele: 'C4',
-    //         annee: '2020',
-    //         couleur: 'Bleu',
-    //         immatriculation: 'AB-544-LK',
-    //         photo: voiture
-    //     },
-    //     avis: [
-    //         {
-    //             utilisateur: 'Pierre',
-    //             photo: profilePicture,
-    //             conduite: 4,
-    //             ponctuation: 4,
-    //             comportement: 4,
-    //         },
-    //         {
-    //             utilisateur: 'Marie',
-    //             photo: profilePicture,
-    //             conduite: 3,
-    //             ponctuation: 2,
-    //             comportement: 4,
-    //         }
-    //     ]
-    // }
-
-
-    const [conducteur, setConducteur] = useState(null);
-
-    useEffect(() => {
-        getUser('11').then((response) =>  {
-            console.log('conducteur', response);
-            setConducteur(response);
-        });
-    }, []);
-
-
+    let conducteur = {
+        prenom: 'Romane',
+        photo: "blabla",
+        rang: 1,
+        status: 1,
+        dialogue: true,
+        fumer: false,
+        musique: true,
+        vehicle: {
+            marque: 'Citroen',
+            modele: 'C4',
+            annee: '2020',
+            couleur: 'Bleu',
+            immatriculation: 'AB-544-LK',
+            photo: "cc"
+        },
+        avis: [
+            {
+                utilisateur: 'Pierre',
+                photo: "cc",
+                conduite: 4,
+                ponctuation: 4,
+                comportement: 4,
+            },
+            {
+                utilisateur: 'Marie',
+                photo: "profilePi",
+                conduite: 3,
+                ponctuation: 2,
+                comportement: 4,
+            }
+        ]
+    }
 
     return (
         <Container className='detailTrajet container bg-light'>
@@ -95,7 +79,7 @@ export function DetailTrajet() {
                 <h2>{trajet.date}</h2>
             </Row>
             <Row className='row-padding'>
-                { conducteur !== null && <Profil conducteur={conducteur}/>}
+                <Profil conducteur={conducteur}/>
                 <Col className='border-left'>
                     <RecapTrajet trajet={trajet}/>
                     <Row>
@@ -117,11 +101,11 @@ export function DetailTrajet() {
                 </Col>
             </Row>
             <Row className='row-padding'>
-                {/*<Col>{ conducteur.voiture !== null &&*/}
-                {/*    <Vehicule voiture={conducteur.vehicle}/> }*/}
-                {/*</Col>*/}
+                <Col>
+                    <Vehicule voiture={conducteur.vehicle}/>
+                </Col>
                 <Col className='border-left'>
-                    <Avis/>
+                    {/*<Avis/>*/}
                 </Col>
             </Row>
         </Container>

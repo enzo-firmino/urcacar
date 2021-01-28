@@ -36,7 +36,7 @@ export function Profil(props) {
             <Voiture/>
             <Preferences/>
             {/*<Notification/>*/}
-            <Avis listeAvis={[avis]}/>
+            {/*<Avis listeAvis={[avis]}/>*/}
         </div>
     )
 

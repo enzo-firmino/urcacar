@@ -6,13 +6,9 @@ const StarRating = () => {
     var stars = [];
 
     for(let i = 0; i<5; i++){
-<<<<<<< HEAD
         stars.push(<StarFill key={i} className="flex-fill avis" size = "24 "color="green"/>);
 
 
-=======
-        stars.push(<StarFill className="flex-fill avis" size = "24 "color="green"/>);
->>>>>>> a35c0213639327e1fa658d038f0b68cfaccb3854
     }
 
     return (

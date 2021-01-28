@@ -32,16 +32,16 @@ export function getAllMessages(id){
     return fetch(url + "/messages/" + id).then(response => response.json())
 }
 
-<<<<<<< HEAD
 /********************************************************************************************************************************
 *********************************************************GLOBAL*****************************************************************
 ********************************************************************************************************************************/
+
+export function getUser(id){
+    return fetch(url + "/utilisateurs/" + id).then(response => response.json())
+}
 
 export function getInfo(fin){
     return fetch(url + fin).then(response => response.json())
 }
 
 export default getAll;
-=======
-export default getAll;
->>>>>>> a35c0213639327e1fa658d038f0b68cfaccb3854
