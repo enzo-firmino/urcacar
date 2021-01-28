@@ -10,8 +10,17 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Avis from "../../Reusable/Avis";
+import { useHistory } from "react-router-dom";
+import useDetailTrajet from "../../../services/hook/useDetailTrajet";
 
 export function DetailTrajet(props) {
+
+    const history = useHistory();
+    console.log("Detail :",history.location.state)
+
+    const {trajetS,conducteurS} = useDetailTrajet(history.location.state);
+
+    console.log("Detail :",trajetS,conducteurS)
 
     let trajet = {
         depart: 'Reims, 15 Rue de la marne',

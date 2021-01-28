@@ -33,10 +33,6 @@ export function FormSearchTrajet(props) {
     const [heureArrive, setHeureArrive] = useState('');
     const [nbPassager, setNbPassager] = useState(1);
     const [redirect, setRedirect] = useState(null);
-
-    if (redirect) {
-        return <Redirect to={{ pathname: '/recherche', state: { date: {depart: depart, arrive: arrive, date: date, heureDepart: heureDepart, heureArrive: heureArrive, nbPassager: nbPassager} } }} />
-    }
     return (
 
         <div className="formSearchTrajet">

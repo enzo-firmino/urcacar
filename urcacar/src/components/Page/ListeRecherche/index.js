@@ -73,6 +73,22 @@ function RecapRecherche(props) {
 
 function Trajet({trajet}) {
 
+    const history = useHistory();
+
+    console.log(trajet.conducteur["@id"],trajet["@id"])
+
+    const Click = (evt) => {
+        evt.preventDefault();
+        history.push({
+            pathname: '/trajet',
+            state:
+            {
+                conducteur: trajet.conducteur["@id"],
+                trajet: trajet["@id"]
+            }
+        })
+    }
+
     let recurrenceText = '';
 
     if (trajet.recurrence != null) {
@@ -87,20 +103,36 @@ function Trajet({trajet}) {
     const heureDepart = new Date(trajet.heureDepart);
     const heureArrivee = new Date(trajet.heureArrivee);
 
+    let rang;
+
+    switch(trajet.conducteur.rang){
+        case 1:
+            rang = "NUL"
+            break;
+        case 2:
+            rang = "Neutre"
+            break;
+        case 3:
+            rang = "Recommander"
+            break;
+        default:
+            rang = "Inconnu"
+    }
+
     return (
-        <a href="/trajet" className='box'>
+        <a onClick={Click} className='box'>
             <div className='leftBox'>
-                <Image className="pp" src={profilePicture} roundedCircle/>
+                <Image className="pp" src={trajet.conducteur.photo} roundedCircle/>
             <span style={{
                 borderBottom: "1px solid #58B94B",
                 fontWeight: 'bold'
-            }}> {trajet.conducteur}</span>
+            }}> {trajet.conducteur.prenom}</span>
                 <span style={{fontSize:'20px'}}>{date.getDate()}/{date.getMonth() + 1}</span>
                 <table>
                         <tbody>
                         <tr>
                             <td>{heureDepart.getHours()}:{heureDepart.getMinutes()}</td>
-                            <td>{trajet.adresseDepart}</td>
+                            <td>{trajet.adresseDepart.ville}</td>
                         </tr>
                         <tr>
                             <td><ArrowDown/></td>
@@ -108,13 +140,13 @@ function Trajet({trajet}) {
                         </tr>
                         <tr>
                             <td>{heureArrivee.getHours()}:{heureArrivee.getMinutes()}</td>
-                            <td>{trajet.adresseArrivee}</td>
+                            <td>{trajet.adresseArrivee.ville}</td>
                         </tr>
                         </tbody>
                     </table>
             </div>
             <div className='rightBox'>
-                Neutre
+                {rang}
                 <span>{recurrenceText}</span>
                 <div className='badgeRight'>
                     <Badge variant="success">{trajet.prix}€</Badge>

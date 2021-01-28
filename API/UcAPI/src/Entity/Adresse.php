@@ -32,7 +32,7 @@ class Adresse
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"ad:read","trajets:read"})
+     * @Groups({"infoTrajet"})
      */
     private $ville;
 

@@ -12,8 +12,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=TrajetRepository::class)
  * @ApiResource(
+ *      normalizationContext={"groups"={"infoTrajet"}},
  *      itemOperations={
- *          "get"
+ *          "get",
+ *      },
+ *      collectionOperations={
+ *          "get",
  *      },
  * )
  */
@@ -28,33 +32,38 @@ class Trajet
 
     /**
      * @ORM\Column(type="float")
-     * @Groups({"trajet:read"})
+     * @Groups({"infoTrajet"})
      */
     private $prix;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"infoTrajet"})
      */
     private $nbPlace;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"infoTrajet"})
      */
     private $dateDepart;
 
     /**
      * @ORM\Column(type="time")
+     * @Groups({"infoTrajet"})
      */
     private $heureArrivee;
 
     /**
      * @ORM\Column(type="time")
+     * @Groups({"infoTrajet"})
      */
     private $heureDepart;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="trajetsProposes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"infoTrajet"})
      */
     private $conducteur;
 
@@ -71,12 +80,14 @@ class Trajet
     /**
      * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="departTrajets")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"infoTrajet"})
      */
     private $adresseDepart;
 
     /**
      * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="arriveeTrajet")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"infoTrajet"})
      */
     private $adresseArrivee;
 

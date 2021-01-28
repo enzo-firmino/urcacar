@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"user:read"}},
+ *      normalizationContext={"groups": {"infoUser", "infoTrajet"}},
  *      itemOperations={
  *          "get"
  *      },
@@ -33,7 +33,6 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user:read"})
      */
     private $email;
 
@@ -44,7 +43,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read"})
+     * @Groups({"infoTrajet", "infoUser"})
      */
     private $prenom;
 
@@ -55,19 +54,18 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user:read"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"user:read"})
+     * @Groups({"infoTrajet", "infoUser"})
      */
     private $rang;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user:read"})
+     * @Groups({"infoTrajet"})
      */
     private $photo;
 
@@ -113,16 +111,19 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $dialogue;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $fumer;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $musique;
 
@@ -143,7 +144,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity=Voiture::class, mappedBy="proprietaire", cascade={"persist", "remove"})
-     * @Groups({"user:read"})
+     * @Groups({"infoUser"})
      */
     private $voiture;
 
@@ -154,12 +155,13 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="destinataire")
+     * @Groups({"infoUser"})
      */
     private $avisRecu;
 
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="conducteur")
-     * @Groups({"user:read"})
+     * @Groups({"infoUser"})
      */
     private $trajetsProposes;
 
