@@ -35,7 +35,7 @@ export function DetailTrajet() {
                     </Row>
                     <Row>
                         <span style={{color: 'rgba(0, 0, 0, 0.6)', paddingRight: '15px'}}> Places disponibles</span>
-                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.nbPlaceDispo}</span>
+                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.nbPlace}</span>
                     </Row>
                 </Col>
             </Row>
@@ -107,13 +107,16 @@ function Profil({conducteur}) {
 }
 
 function RecapTrajet({trajet}) {
+
+    const hD = new Date(trajet.heureDepart);
+    const hA = new Date(trajet.heureArrivee);
+
     return (
         <div>
-
                 <div className="d-flex flex-fill">
-                    <p style={{fontSize: 15, width:"50%"}}>Place de la Gare,<br/> 51100 Reims</p>
+                    <p style={{fontSize: 15, width:"50%"}}>{trajet.adresseDepart.adresse}<br/>{trajet.adresseDepart.cp}</p>
                     <p/>
-                    <p style={{fontSize: 15, width:"50%"}}>Chemin des Rouliers,<br/> 51100 Reims</p>
+                    <p style={{fontSize: 15, width:"50%"}}>{trajet.adresseArrivee.adresse}<br/>{trajet.adresseArrivee.cp}</p>
                 </div>
                 <div className="d-flex flex-fill border-bottom border-dark">
 
@@ -121,8 +124,8 @@ function RecapTrajet({trajet}) {
                     <GeoAlt className="justify-content-center" width="50%" height="35"/>
                 </div>
                 <div className="d-flex flex-fill">
-                    <p style={{fontSize: 15, width:"50%"}}>12h00</p>
-                    <p style={{fontSize: 15, width:"50%"}}>12h15</p>
+                    <p style={{fontSize: 15, width:"50%"}}>{(hD.getHours()<10?'0':'') + hD.getHours()}:{(hD.getMinutes()<10?'0':'') + hD.getMinutes()}</p>
+                    <p style={{fontSize: 15, width:"50%"}}>{(hA.getHours()<10?'0':'') + hA.getHours()}:{(hA.getMinutes()<10?'0':'') + hA.getMinutes()}</p>
                 </div>
             <a className='a-bg-green' style={{marginTop: '20px'}} href='/map'>
                 <Map className='align-middle' />
@@ -141,6 +144,7 @@ function Vehicule({v}) {
             setVoiture(response);
         });
     }, []);
+    let annee = new Date(voiture.annee)
 
     return (
         <Col>
@@ -150,7 +154,7 @@ function Vehicule({v}) {
                     src="https://www.flaticon.com/svg/static/icons/svg/846/846338.svg"/>
             </Row>
             <Row>
-                <span>{voiture.marque} {voiture.modele} {voiture.annee} </span>
+                <span>{voiture.marque} {voiture.modele} {annee.getFullYear()} </span>
             </Row>
             <Row>
                 <span>{voiture.couleur}</span>

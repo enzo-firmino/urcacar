@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"ad:read"}, {"trajets:read"}},
+ *      normalizationContext={"groups": {"infoAdresse"}, {"infoTrajet"}},
  *      itemOperations={
  *          "get"
  *      },
@@ -38,25 +38,23 @@ class Adresse
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"ad:read","trajets:read"})
+     * @Groups({"infoTrajet"})
      */
     private $cp;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"ad:read","trajets:read"})
+     * @Groups({"infoTrajet"})
      */
     private $adresse;
 
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="adresseDepart")
-     * @Groups({"trajets:read"})
      */
     private $departTrajets;
 
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="adresseArrivee")
-     * @Groups({"trajets:read"})
      */
     private $arriveeTrajet;
 
