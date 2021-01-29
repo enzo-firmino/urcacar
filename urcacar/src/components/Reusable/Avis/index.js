@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Image } from "react-bootstrap";
+import {Navbar, Nav, Image, ListGroup} from "react-bootstrap";
 import StarRating from '../Rating'
 import Table from "react-bootstrap/Table";
 
@@ -8,7 +8,11 @@ export default function Avis({listeAvis}) {
     return (
         <div style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
             <h1 className="text-left text-success">Avis</h1>
-            {listeAvis !== undefined ? <AvisComponent avis={listeAvis[0]}/>:<p>Aucun avis n'a encore été posté pour cette utilisateurs.</p>}
+            {listeAvis !== undefined ? <ListGroup>
+                {listeAvis.map(avis => (
+                    <AvisComponent key={avis['@id']} avis={avis}/>
+                ))}
+            </ListGroup>:<p>Aucun avis n'a encore été posté pour cette utilisateurs.</p>}
         </div>
     );
 }

@@ -7,26 +7,33 @@ import {GeoAlt, Map} from "react-bootstrap-icons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Avis from "../../Reusable/Avis";
 import { useHistory } from "react-router-dom";
-import useDetailTrajet from "../../../services/hook/useDetailTrajet";
 import { getInfo } from "../../../services/fetch/fetch";
 import { Spinner } from "react-bootstrap";
 
 export function DetailTrajet() {
+
     const history = useHistory();
-    const {trajet,conducteur} = useDetailTrajet(history.location.state);
+    const {trajet,conducteur} = history.location.state;
 
     if(trajet === null || conducteur === null){
         return <Spinner animation="grow" variant="success" />;
     }
+
+    function onClickProfile() {
+        history.push({
+            pathname: '/profil',
+            state: {conducteur}
+        })
+    }
+
     return (
         <Container className='detailTrajet container bg-light'>
             <Row className='row-padding'>
                 <h2>{trajet.date}</h2>
             </Row>
             <Row className='row-padding'>
-                <Profil conducteur={conducteur}/>
+                <Profil conducteur={conducteur} onClickProfile={onClickProfile}/>
                 <Col className='border-left'>
                     <RecapTrajet trajet={trajet}/>
                     <Row>
@@ -52,14 +59,15 @@ export function DetailTrajet() {
                     <Vehicule v={conducteur.voiture}/>
                 </Col>
                 <Col className='border-left'>
-                    <Avis listeAvis={trajet.avisRecu}/>
+                    {/*<Avis/>*/}
                 </Col>
             </Row>
         </Container>
     );
 }
 
-function Profil({conducteur}) {
+function Profil({conducteur, onClickProfile}) {
+
     let rang;
     switch(conducteur.rang){
         case 1:
@@ -74,15 +82,16 @@ function Profil({conducteur}) {
         default:
             rang = "Inconnu"
     }
+
     return (
         <Col className='profil'>
         <Row>
-            <a href="/profil">
+            <a onClick={onClickProfile}>
             <Image src={conducteur.photo} roundedCircle/>
             </a>
         </Row>
         <Row>
-            <a href="/profil">
+            <a onClick={onClickProfile}>
             <h3>{conducteur.prenom}</h3>
             </a>
         </Row>
@@ -173,4 +182,3 @@ function Vehicule({v}) {
 
     );
 }
-

@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AvisRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AvisRepository::class)
  * @ApiResource(
+ *      normalizationContext={"groups": {"infoAvis"}},
  *      itemOperations={
  *          "get"
  *      },
@@ -28,22 +30,26 @@ class Avis
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"infoAvis"})
      */
     private $conduite;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"infoAvis"})
      */
     private $ponctualite;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"infoAvis"})
      */
     private $comportement;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="avisEmis")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"infoAvis"})
      */
     private $emetteur;
 

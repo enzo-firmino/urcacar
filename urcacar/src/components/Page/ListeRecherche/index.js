@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import {Button, ListGroup} from "react-bootstrap";
 import {ArrowDown} from 'react-bootstrap-icons';
@@ -8,6 +8,9 @@ import Badge from "react-bootstrap/Badge";
 import retour from '../../../assets/Retour.png';
 import { useHistory } from "react-router-dom";
 import useSearch from "../../../services/hook/useSearch";
+import { Spinner } from "react-bootstrap";
+import { getInfo } from "../../../services/fetch/fetch";
+import { useState } from "react";
 
 export function ListeRecherche(props) {
     const history = useHistory();
@@ -23,12 +26,17 @@ export function ListeRecherche(props) {
 
     const trajets = useSearch(recherche);
 
+    if(trajets.length === 0){
+        return <Spinner animation="grow" variant="success" />;
+    }
+    console.log(trajets)
+
     return (
         <div className='listeRecherche'>
             <RecapRecherche recherche={recherche}/>
             <ListGroup>
                 {trajets.map(trajet => (
-                    <Trajet key={trajet.id} trajet={trajet}/>
+                    <Trajet key={trajet.conducteur+trajet["@id"]} trajet={trajet}/>
                 ))}
             </ListGroup>
         </div>
@@ -69,9 +77,19 @@ function RecapRecherche(props) {
 }
 
 function Trajet({trajet}) {
-    console.log(trajet)
-
     const history = useHistory();
+
+    const [conducteur, setConducteur] = useState([]);
+
+    useEffect(() => {
+        getInfo(trajet.conducteur).then(response => {
+            setConducteur(response);
+        });
+    }, [])
+
+    if(conducteur.length === 0){
+        return <Spinner animation="grow" variant="success" />;
+    }
 
     const Click = (evt) => {
         evt.preventDefault();
@@ -79,8 +97,8 @@ function Trajet({trajet}) {
             pathname: '/trajet',
             state:
             {
-                conducteur: trajet.conducteur["@id"],
-                trajet: trajet["@id"]
+                conducteur: conducteur,
+                trajet: trajet
             }
         })
     }
@@ -101,7 +119,7 @@ function Trajet({trajet}) {
 
     let rang;
 
-    switch(trajet.conducteur.rang){
+    switch(conducteur.rang){
         case 1:
             rang = "NUL"
             break;
@@ -118,11 +136,11 @@ function Trajet({trajet}) {
     return (
         <a onClick={Click} className='box'>
             <div className='leftBox'>
-                <Image className="pp" src={trajet.conducteur.photo} roundedCircle/>
+                <Image className="pp" src={conducteur.photo} roundedCircle/>
             <span style={{
                 borderBottom: "1px solid #58B94B",
                 fontWeight: 'bold'
-            }}> {trajet.conducteur.prenom}</span>
+            }}> {conducteur.prenom}</span>
                 <span style={{fontSize:'20px'}}>{date.getDate()}/{date.getMonth() + 1}</span>
                 <table>
                         <tbody>

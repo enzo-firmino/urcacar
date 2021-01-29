@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"infoUser", "infoTrajet"}},
+ *      normalizationContext={"groups": {"infoUser"}},
  *      itemOperations={
  *          "get"
  *      },
@@ -43,7 +43,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoUser","infoTrajet"})
+     * @Groups({"infoUser"})
      */
     private $prenom;
 
@@ -59,13 +59,13 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"infoUser","infoTrajet"})
+     * @Groups({"infoUser"})
      */
     private $rang;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoUser", "infoTrajet"})
+     * @Groups({"infoUser"})
      */
     private $photo;
 
@@ -161,6 +161,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="conducteur")
+     * @Groups({"infoUser"})
      */
     private $trajetsProposes;
 
