@@ -4,8 +4,13 @@ import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import L from 'leaflet';
 import useMap from "../../services/hook/Map"
 import iconGreen from '../../assets/GreenMarker.png';
+import { useHistory } from 'react-router-dom';
 
 export default function MapView(props){
+
+    const history = useHistory();
+    const {aD,aA} = props;
+
     const dataPoints = [
         [ 49.467134581917357,4.546518086577947],
         [ 49.295014379864874,4.898610599532319],
@@ -19,36 +24,31 @@ export default function MapView(props){
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
-    const[refMap, wayPoints, saveMap, setWaypoint] = useMap();
+    const[refMap, wayPoints, saveMap] = useMap(aD,aA);
+    console.log("Waypoints: ",wayPoints[0])
+
+    if(wayPoints[0] === null){
+        return <div/>
+    }
 
     return(
-        <div className="mapHolder" style={{height:"100%"}}>
+        <div className="mapHolder" style={{height:"100px"}}>
 
-            <input id="rue1" placeholder="Adresse1"type = "text"/>
-            <input id="rue2" placeholder="Adresse2"type = "text"/>
 
-            <button onClick ={()=>{
-                setWaypoint(document.getElementById("rue1").value, document.getElementById("rue2").value)
-            }}>
-                Change
-            </button>
-
-            <Map center={[49.24167849096564, 4.061995752829034]} zoom={11} ref={saveMap}>
+            <Map ref={saveMap}>
                 <TileLayer
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
-                { dataPoints.map((data , index)=>{
+                { wayPoints.map((data , index)=>{
                     return(
                         <Marker icon={greenIcon} key={index} position={data}>
                             <Popup>
-                                Sample Popup
+                                {aD.split("+")[0]}
                             </Popup>
                         </Marker>
                     )
                 })}
-
-                {console.log(wayPoints)}
 
                 <Routing
                     map={refMap}

@@ -10,6 +10,9 @@ import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { getInfo } from "../../../services/fetch/fetch";
 import { Spinner } from "react-bootstrap";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import MapView from "../../Map";
 
 export function DetailTrajet() {
 
@@ -119,6 +122,17 @@ function RecapTrajet({trajet}) {
 
     const hD = new Date(trajet.heureDepart);
     const hA = new Date(trajet.heureArrivee);
+    const history = useHistory();
+
+    function CheckMap(){
+        history.push({
+            pathname: '/map',
+            state: {
+                aD:trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.cp,
+                aA:trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.cp
+            }
+        })
+    }
 
     return (
         <div>
@@ -136,10 +150,12 @@ function RecapTrajet({trajet}) {
                     <p style={{fontSize: 15, width:"50%"}}>{(hD.getHours()<10?'0':'') + hD.getHours()}:{(hD.getMinutes()<10?'0':'') + hD.getMinutes()}</p>
                     <p style={{fontSize: 15, width:"50%"}}>{(hA.getHours()<10?'0':'') + hA.getHours()}:{(hA.getMinutes()<10?'0':'') + hA.getMinutes()}</p>
                 </div>
-            <a className='a-bg-green' style={{marginTop: '20px'}} href='/map'>
-                <Map className='align-middle' />
-                <span className='align-middle' >  Voir le trajet sur la carte </span>
-            </a>
+                <div className="VoirTrajet">
+                    <Map className='align-middle' />
+                    <Popup trigger={<span className='align-middle' >  Voir le trajet sur la carte </span>} modal closeOnDocumentClick>
+                        <MapView aD={trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.cp} aA={trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.cp}/>
+                    </Popup>
+                </div>
             </div>
     );
 }

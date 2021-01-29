@@ -25,7 +25,7 @@ class AdresseFixtures extends Fixture
         }
 
         $adresse = new Adresse();
-        $adresse->setAdresse("2 rue du petit poids");
+        $adresse->setAdresse("2 rue Goiot");
         $adresse->setCp(51100);
         $adresse->setVille("Reims");
         $manager->persist($adresse);

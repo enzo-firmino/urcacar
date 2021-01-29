@@ -1,7 +1,8 @@
 const url = "http://localhost:8000";
 
 export function getAll(recherche){
-    return fetch("https://nominatim.openstreetmap.org/search/"+recherche+"?format=json").then(response => response.json())
+    console.log("https://nominatim.openstreetmap.org/search?q="+recherche+"&format=json")
+    return fetch("https://nominatim.openstreetmap.org/search?q="+recherche+"&format=json").then(response => response.json())
 }
 
 export function getAllAd(){
@@ -10,10 +11,6 @@ export function getAllAd(){
 
 export function getAvis(id){
     return fetch(url + "/avis/" + id).then(response => response.json())
-}
-
-export function getInfoCar(id){
-    return fetch(url + "/voitures/" + id).then(response => response.json())
 }
 
 /********************************************************************************************************************************
