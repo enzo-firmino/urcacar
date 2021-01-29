@@ -36,7 +36,7 @@
     font-weight: bold;
 }
 
-.detailTrajet .preferences .false {
+.preferences .false {
     background: linear-gradient(to left top, transparent 45%, red, red, transparent 55%);
 }
 

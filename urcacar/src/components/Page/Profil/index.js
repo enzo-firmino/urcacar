@@ -1,7 +1,7 @@
 import React from "react";
 import profilePicture from '../../../assets/profilepicture.jpg';
 import Image from "react-bootstrap/Image";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import {Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import Avis from "../../Reusable/Avis"
 import Table from "react-bootstrap/Table";
 import {useHistory} from "react-router-dom";
@@ -10,13 +10,9 @@ import useProfil from "../../../services/hook/useProfil";
 export function Profil(props) {
 
     const history = useHistory();
-    const {conducteur} = history.location.state;
-    const {voiture, avisRecus} = useProfil(conducteur);
+    const {conducteur, voiture, avisRecus} = history.location.state;
 
-    console.log(conducteur);
-    if(voiture === null){
-        return <div/>;
-    }
+    console.log(avisRecus);
 
     return (
         <div className="container bg-light">
@@ -24,7 +20,7 @@ export function Profil(props) {
             <Voiture voiture={voiture}/>
             <Preferences conducteur={conducteur}/>
             {/*<Notification/>*/}
-            {avisRecus.length > 0 && <Avis listeAvis={[avisRecus]}/>}
+            <Avis listeAvis={avisRecus}/>
         </div>
     )
 }
@@ -136,6 +132,10 @@ function VoitureForm(){
 }
 
 function Voiture({voiture}){
+
+    if(voiture === null){
+        return <Spinner animation="grow" variant="success" />;
+    }
     return(
         <div>
             <Title titre="Véhicule"/>
@@ -175,7 +175,7 @@ function Preferences({conducteur}){
     return (
         <>
             <Title titre="Préférences"/>
-            <div>
+            <div className='preferences'>
                 <Image className={conducteur.dialogue.toString()}
                        style={{height: 50, width: 50, margin: 10}}
                        src="https://cdn.onlinewebfonts.com/svg/img_216930.png"/>

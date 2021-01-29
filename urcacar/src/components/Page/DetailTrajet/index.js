@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Image from "react-bootstrap/Image";
 import '../../../styles/detailTrajet.css';
 
@@ -8,23 +8,26 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
-import { getInfo } from "../../../services/fetch/fetch";
 import { Spinner } from "react-bootstrap";
+import useProfil from "../../../services/hook/useProfil";
+import Avis from "../../Reusable/Avis";
 
 export function DetailTrajet() {
 
     const history = useHistory();
     const {trajet,conducteur} = history.location.state;
 
-    if(trajet === null || conducteur === null){
-        return <Spinner animation="grow" variant="success" />;
-    }
+    const {voiture, avisRecus} = useProfil(conducteur);
 
     function onClickProfile() {
         history.push({
             pathname: '/profil',
-            state: {conducteur}
+            state: {conducteur, voiture, avisRecus}
         })
+    }
+
+    if(trajet === null || conducteur === null){
+        return <Spinner animation="grow" variant="success" />;
     }
 
     return (
@@ -56,10 +59,10 @@ export function DetailTrajet() {
             </Row>
             <Row className='row-padding'>
                 <Col>
-                    <Vehicule v={conducteur.voiture}/>
+                    <Vehicule voiture={voiture}/>
                 </Col>
                 <Col className='border-left'>
-                    {/*<Avis/>*/}
+                    <Avis listeAvis={avisRecus}/>
                 </Col>
             </Row>
         </Container>
@@ -144,15 +147,7 @@ function RecapTrajet({trajet}) {
     );
 }
 
-function Vehicule({v}) {
-
-    const [voiture, setVoiture] = useState(null);
-
-    useEffect(() => {
-        getInfo(v).then(response => {
-            setVoiture(response);
-        });
-    }, []);
+function Vehicule({voiture}) {
 
     if(voiture === null){
         return <Spinner animation="grow" variant="success" />;
