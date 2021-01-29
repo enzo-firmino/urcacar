@@ -53,7 +53,8 @@ class Utilisateur implements UserInterface
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $status;
 
