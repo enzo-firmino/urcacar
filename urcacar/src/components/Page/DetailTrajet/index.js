@@ -146,13 +146,18 @@ function RecapTrajet({trajet}) {
 
 function Vehicule({v}) {
 
-    const [voiture, setVoiture] = useState({});
+    const [voiture, setVoiture] = useState(null);
 
     useEffect(() => {
         getInfo(v).then(response => {
             setVoiture(response);
         });
     }, []);
+
+    if(voiture === null){
+        return <Spinner animation="grow" variant="success" />;
+    }
+
     let annee = new Date(voiture.annee)
 
     return (
