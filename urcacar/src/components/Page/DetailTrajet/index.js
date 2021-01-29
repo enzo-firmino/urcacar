@@ -11,15 +11,15 @@ import Avis from "../../Reusable/Avis";
 import { useHistory } from "react-router-dom";
 import useDetailTrajet from "../../../services/hook/useDetailTrajet";
 import { getInfo } from "../../../services/fetch/fetch";
+import { Spinner } from "react-bootstrap";
 
 export function DetailTrajet() {
     const history = useHistory();
     const {trajet,conducteur} = useDetailTrajet(history.location.state);
 
     if(trajet === null || conducteur === null){
-        return <div/>;
+        return <Spinner animation="grow" variant="success" />;
     }
-    console.log("Résultat :",trajet, conducteur.voiture)
     return (
         <Container className='detailTrajet container bg-light'>
             <Row className='row-padding'>
@@ -52,7 +52,7 @@ export function DetailTrajet() {
                     <Vehicule v={conducteur.voiture}/>
                 </Col>
                 <Col className='border-left'>
-                    {/*<Avis/>*/}
+                    <Avis listeAvis={trajet.avisRecu}/>
                 </Col>
             </Row>
         </Container>

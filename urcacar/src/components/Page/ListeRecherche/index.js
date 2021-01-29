@@ -1,14 +1,11 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
-import profilePicture from '../../../assets/profilepicture.jpg';
 import {Button, ListGroup} from "react-bootstrap";
 import {ArrowDown} from 'react-bootstrap-icons';
 import {ArrowRight} from 'react-bootstrap-icons';
-import {Search} from 'react-bootstrap-icons';
 import '../../../styles/listeRecherche.css';
 import Badge from "react-bootstrap/Badge";
 import retour from '../../../assets/Retour.png';
-import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
 import useSearch from "../../../services/hook/useSearch";
 
@@ -30,8 +27,8 @@ export function ListeRecherche(props) {
         <div className='listeRecherche'>
             <RecapRecherche recherche={recherche}/>
             <ListGroup>
-                {trajets.map(todo => (
-                    <Trajet key={todo.id} trajet={todo}/>
+                {trajets.map(trajet => (
+                    <Trajet key={trajet.id} trajet={trajet}/>
                 ))}
             </ListGroup>
         </div>
@@ -72,10 +69,9 @@ function RecapRecherche(props) {
 }
 
 function Trajet({trajet}) {
+    console.log(trajet)
 
     const history = useHistory();
-
-    console.log(trajet.conducteur,trajet["@id"])
 
     const Click = (evt) => {
         evt.preventDefault();
@@ -83,7 +79,7 @@ function Trajet({trajet}) {
             pathname: '/trajet',
             state:
             {
-                conducteur: trajet.conducteur,
+                conducteur: trajet.conducteur["@id"],
                 trajet: trajet["@id"]
             }
         })

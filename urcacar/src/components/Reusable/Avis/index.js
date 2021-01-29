@@ -8,7 +8,7 @@ export default function Avis({listeAvis}) {
     return (
         <div style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
             <h1 className="text-left text-success">Avis</h1>
-            <AvisComponent avis={listeAvis[0]}/>
+            {listeAvis !== undefined ? <AvisComponent avis={listeAvis[0]}/>:<p>Aucun avis n'a encore été posté pour cette utilisateurs.</p>}
         </div>
     );
 }
