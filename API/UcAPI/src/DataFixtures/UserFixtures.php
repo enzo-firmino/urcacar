@@ -2,13 +2,22 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Utilisateur;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Faker;
+use App\Entity\Utilisateur;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public const ROMAIN = 'romain';
     public const JEAN = 'jean';
 
@@ -20,6 +29,8 @@ class UserFixtures extends Fixture
             $user = new Utilisateur();
             $user->setPrenom($faker->firstName);
             $user->setEmail($faker->email);
+            $password = $this->encoder->encodePassword($user, 'password');
+            $user->setPassword($password);
             $user->setTelephone((int)$faker->phoneNumber);
             $user->setStatus($faker->numberBetween(0, 1));
             $user->setRang($faker->numberBetween(0, 2));
@@ -40,6 +51,8 @@ class UserFixtures extends Fixture
         $user = new Utilisateur();
         $user->setPrenom($faker->firstName);
         $user->setEmail($faker->email);
+        $password = $this->encoder->encodePassword($user, 'jean');
+        $user->setPassword($password);
         $user->setTelephone((int)$faker->phoneNumber);
         $user->setStatus($faker->numberBetween(0, 1));
         $user->setRang($faker->numberBetween(0, 2));
@@ -61,6 +74,8 @@ class UserFixtures extends Fixture
         $user = new Utilisateur();
         $user->setPrenom($faker->firstName);
         $user->setEmail($faker->email);
+        $password = $this->encoder->encodePassword($user, 'romain');
+        $user->setPassword($password);
         $user->setTelephone((int)$faker->phoneNumber);
         $user->setStatus($faker->numberBetween(0, 1));
         $user->setRang($faker->numberBetween(0, 2));
