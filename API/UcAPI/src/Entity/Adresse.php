@@ -14,10 +14,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *      normalizationContext={"groups": {"infoAdresse"}, {"infoTrajet"}},
  *      itemOperations={
- *          "get"
+ *          "get",
+ *          "delete"={"security"="is_granted('ROLE_USER')"}
  *      },
  *      collectionOperations={
- *           "get"
+ *           "get",
+ *           "post"={"security"="is_granted('ROLE_USER')"}
  *      },
  * )
  */
@@ -60,7 +62,7 @@ class Adresse
 
     /**
      * @ORM\OneToMany(targetEntity=Etape::class, mappedBy="adresse")
-     * @Groups({"trajets:read"})
+     * @Groups({"infoTrajet"})
      */
     private $etapes;
 

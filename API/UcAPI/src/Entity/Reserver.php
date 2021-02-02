@@ -11,10 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource(
  *      normalizationContext={"groups": {"res:read"}},
  *      itemOperations={
- *          "get"
+ *          "get",
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *      },
  *      collectionOperations={
- *           "get"
+ *           "get",
+ *           "post"={"security"="is_granted('ROLE_USER')"}
  *      },
  * )
  */

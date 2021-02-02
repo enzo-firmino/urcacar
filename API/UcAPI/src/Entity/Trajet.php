@@ -15,9 +15,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      normalizationContext={"groups"={"infoTrajet"}},
  *      itemOperations={
  *          "get",
+ *          "delete"={"security"="is_granted('ROLE_USER')"},
+ *          "put"={
+ *              "path"="/trajets/{id}.{_format}",
+ *              "security"="is_granted('ROLE_USER')"
+ *          },
  *      },
  *      collectionOperations={
  *          "get",
+ *          "post"={"security"="is_granted('ROLE_USER')"}
  *      },
  * )
  */

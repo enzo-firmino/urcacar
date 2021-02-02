@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ApiResource(
  *      normalizationContext={"groups": {"infoUser"}},
  *      itemOperations={
- *          "get"
+ *          "get",
  *      },
  *      collectionOperations={
  *           "get"

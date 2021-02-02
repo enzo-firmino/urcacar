@@ -12,10 +12,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *      normalizationContext={"groups": {"infoAvis"}},
  *      itemOperations={
- *          "get"
+ *          "get",
  *      },
  *      collectionOperations={
- *           "get"
+ *           "get",
+ *           "post"={"security"="is_granted('ROLE_USER')"}
  *      },
  * )
  */
