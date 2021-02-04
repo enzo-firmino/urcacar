@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Navbar, Nav, Image } from "react-bootstrap";
 import profilePicture from '../../../assets/profilepicture.jpg';
+import context from '../../../services/store/store';
 
 
 export default function ListeMessage(props) {
-
+    const {jwt} = useContext(context)
+    console.log('jwt :', jwt);
     return (
         <div className="container" style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
             <Message name="Emmanuel" trajet="Reims -> Paris"/>

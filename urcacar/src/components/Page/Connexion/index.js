@@ -1,10 +1,11 @@
-import React, {useState} from "react";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {ArrowDownUp, StarFill} from "react-bootstrap-icons";
+import React, {useState, useContext} from "react";
+import {Button, Col, Form} from "react-bootstrap";
 import '../../../styles/form.css';
 import '../../../styles/connexion.css';
-import background from "../../../assets/route.jpg";
-import urca from "../../../assets/logo univ reims.png";
+import context from '../../../services/store/store';
+import {connexion} from '../../../action/action';
+import { useHistory } from "react-router-dom";
+
 export function Connexion(props) {
     return (
         <div className="container bg-light">
@@ -14,6 +15,36 @@ export function Connexion(props) {
 }
 
 function Login() {
+    const {dispatch} = useContext(context)
+    const history = useHistory();
+
+    function loginButton(){
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({"username":login,"password":password});
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        return fetch("http://localhost:8000/api/login_check", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            dispatch(connexion(data.token));
+            history.push({
+                pathname: '/messagerie',
+            })
+        })
+        .catch(error => console.log('error', error));
+        
+    }
+    const[login, setLogin] = useState('');
+    const[password, setPassword] = useState('');
+
     return (
         <div className="formConnexion">
             <div style={{backgroundImage: 'url({background})' }}>
@@ -24,6 +55,7 @@ function Login() {
 
                 <Form.Group as={Col} controlId="">
                     <Form.Control
+                        onChange={(event)=> setLogin(event.target.value)}
                         placeholder="Identifiant"
                     />
                 </Form.Group>
@@ -31,11 +63,12 @@ function Login() {
 
 
                 <Form.Group as={Col} controlId="">
-                    <Form.Control placeholder="Mot de passe"
-                        />
+                    <Form.Control placeholder="Mot de passe" type="password"
+                        onChange={(event)=> setPassword(event.target.value)}
+                        />                                                      
                 </Form.Group>
 
-                <input type ="submit" value="Connexion"/>
+                <Button onClick={()=> loginButton()}>Connexion</Button>
                     
                 
 

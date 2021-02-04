@@ -1,6 +1,6 @@
 import './App.css';
 import 'leaflet/dist/leaflet.css'
-import React from "react";
+import React, { useReducer } from "react";
 import Header from "./components/Reusable/Header";
 import Footer from "./components/Reusable/Footer";
 import {Accueil} from "./components/Page/Accueil";
@@ -19,54 +19,61 @@ import AddTrajet from './components/Page/AddTrajet'
 import {MesTrajets, MesTrajetsReservations} from "./components/Page/MesTrajets";
 import MapView from "./components/Map/index";
 import {Connexion} from './components/Page/Connexion';
+import context from './services/store/store';
+import reducer from './services/reducer/reducer';
+import useConnexion from './services/hook/useConnexion';
 
 function App() {
+    const data = useConnexion();
+    
   return (
-    <div className="App">
-        <Router>
-            <Header/>
-                <Switch>
-                    <Route exact path="/">
-                        <Accueil/>
-                    </Route>
-                    <Route path="/recherche">
-                        <ListeRecherche/>
-                    </Route>
-                    <Route path="/profil">
-                        <Profil/>
-                    </Route>
-                    <Route path="/notifications">
-                        <Dashboard/>
-                    </Route>
-                    <Route path="/mesTrajets">
-                        <MesTrajetsReservations/>
-                    </Route>
-                    <Route path="/addTrajet">
-                        <AddTrajet/>
-                    </Route>
-                    <Route exact path="/messagerie">
-                        <ListeMessage/>
-                    </Route>
-                    <Route  path="/messagerie/id">
-                        <Message/>
-                    </Route>
-                    <Route path="/notation">
-                        <Notation/>
-                    </Route>
-                    <Route path="/login">
-                        <Connexion/>
-                    </Route>
-                    <Route path="/trajet">
-                        <DetailTrajet/>
-                    </Route>
-                    <Route path="/map">
-                        <MapView/>
-                    </Route>
-                </Switch>
-            <Footer/>
-        </Router>
+    <context.Provider value= {data}>
+        <div className="App">
+            <Router>
+                <Header/>
+                    <Switch>
+                        <Route exact path="/">
+                            <Accueil/>
+                        </Route>
+                        <Route path="/recherche">
+                            <ListeRecherche/>
+                        </Route>
+                        <Route path="/profil">
+                            <Profil/>
+                        </Route>
+                        <Route path="/notifications">
+                            <Dashboard/>
+                        </Route>
+                        <Route path="/mesTrajets">
+                            <MesTrajetsReservations/>
+                        </Route>
+                        <Route path="/addTrajet">
+                            <AddTrajet/>
+                        </Route>
+                        <Route exact path="/messagerie">
+                            <ListeMessage/>
+                        </Route>
+                        <Route  path="/messagerie/id">
+                            <Message/>
+                        </Route>
+                        <Route path="/notation">
+                            <Notation/>
+                        </Route>
+                        <Route path="/login">
+                            <Connexion/>
+                        </Route>
+                        <Route path="/trajet">
+                            <DetailTrajet/>
+                        </Route>
+                        <Route path="/map">
+                            <MapView/>
+                        </Route>
+                    </Switch>
+                <Footer/>
+            </Router>
 
-    </div>
+        </div>
+    </context.Provider>
   );
 }
 
