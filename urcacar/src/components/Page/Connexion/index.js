@@ -18,11 +18,11 @@ function Login() {
         <div className="formConnexion">
             <div style={{backgroundImage: 'url({background})' }}>
 
-            <h1> UrcaCar</h1>
+            <h1>UrcaCar</h1>
 
             <Form className="container">
 
-                <Form.Group as={Col} controlId="formGridDepart">
+                <Form.Group as={Col} controlId="">
                     <Form.Control
                         placeholder="Identifiant"
                     />
@@ -30,14 +30,14 @@ function Login() {
 
 
 
-                <Form.Group as={Col} controlId="formGridArrive">
+                <Form.Group as={Col} controlId="">
                     <Form.Control placeholder="Mot de passe"
                         />
                 </Form.Group>
 
-                <Button>
-                    Connexion
-                </Button>
+                <input type ="submit" value="Connexion"/>
+                    
+                
 
 
 
