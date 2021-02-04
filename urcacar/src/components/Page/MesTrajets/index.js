@@ -4,8 +4,6 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    useParams,
     useRouteMatch, NavLink
 } from "react-router-dom";
 import Image from "react-bootstrap/Image";
@@ -14,11 +12,11 @@ import {ArrowDown} from "react-bootstrap-icons";
 import Badge from "react-bootstrap/Badge";
 import {ListGroup} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+import { cancelTrajet } from "../../../services/fetch/fetch";
 
 export function MesTrajetsReservations(props) {
-        let { path, url } = useRouteMatch();
+    let { path, url } = useRouteMatch();
 
     const mesReservations = [
         {idTrajet: 1, conducteur: 'Romane',date:'12/05', depart: 'Reims', arrive: 'Paris',
@@ -38,7 +36,6 @@ export function MesTrajetsReservations(props) {
 
     const [mesReservationsCurrentLink, setMesReservationsCurrentLink] = useState(true);
     const [mesTrajetsCurrentLink, setMesTrajetsCurrentLink] = useState(false);
-
 
     return (
         <div className='mesTrajets'>
@@ -129,6 +126,10 @@ function MesReservations({reservations}) {
 }
 
 function MonTrajet({trajet}) {
+    function cancel(){
+        cancelTrajet(trajet.id)
+    }
+
     return (
         <a href="/trajet" className='box' >
             <span style={{fontSize:'20px'}}>{trajet.date}</span>
@@ -151,7 +152,7 @@ function MonTrajet({trajet}) {
             <div className='rightBox'>
                 <span>{trajet.nbPassagers} / {trajet.nbPlaces} Passagers</span>
                 <div className='badgeRight'>
-                    <Button variant="danger" className='btn-badge'>Annuler</Button>
+                    <Button onClick={() => cancel()} variant="danger" className='btn-badge'>Annuler</Button>
                     <Badge variant="success">{trajet.prix}€</Badge>
                 </div>
             </div>
@@ -199,6 +200,13 @@ function MaReservation({trajet}) {
 }
 
 function MaDemandeReservation({demande}) {
+    function accept(){
+        console.log("Accepter");
+    }
+
+    function refuse(){
+        console.log("Refuser");
+    }
     return (
         <div className='box' >
             <Image className="pp" src={profilePicture} roundedCircle/>
@@ -228,8 +236,8 @@ function MaDemandeReservation({demande}) {
             <div className='rightBox'>
                 Neutre
                 <div className='badgeRight'>
-                    <Button variant="danger" className='btn-badge'>Refuser</Button>
-                    <Button variant="success" className='btn-badge'>Accepter</Button>
+                    <Button onClick={() => refuse()} variant="danger" className='btn-badge'>Refuser</Button>
+                    <Button onClick={() => accept()} variant="success" className='btn-badge'>Accepter</Button>
                 </div>
             </div>
         </div>

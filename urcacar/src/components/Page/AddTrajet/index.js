@@ -1,19 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Dropdown, Row } from "react-bootstrap";
 import { ArrowDownUp, PlusCircle, TrashFill } from "react-bootstrap-icons";
 import Col from "react-bootstrap/Col";
 import MapView from '../../Map';
 import '../../../styles/form.css';
+import { appendTrajet } from '../../../services/fetch/fetch';
 
 export default function AddTrajet(props) {
 
     const [depart, setDepart] = useState('');
     const [arrive, setArrive] = useState('');
     const [date, setDate] = useState();
+    const [nbPassager, setNbPassager] = useState(1);
     const [heureDepart, setHeureDepart] = useState();
     const [heureArrive, setHeureArrive] = useState();
-    const [nbPassager, setNbPassager] = useState(1);
     const [prix, setPrix] = useState(0);
+    const [etapes, setEtapes] = useState([]);
+
+    useEffect(() =>  {
+        setEtapes(etape => [...etape,"24 rue du coin/15h"]);
+        setEtapes(etape => [...etape,"28 rue du milieu/13h30"]);
+    },[])
+
+    console.log(etapes);
+
+    function publish(){
+        const trajet = {
+            prix: prix,
+            nbPlace: nbPassager,
+            dateDepart: date,
+            heureArrivee: heureArrive,
+            heureDepart: heureDepart,
+            conducteur: "moi",
+            adresseDepart: depart,
+            adresseArrivee: arrive,
+        }
+        appendTrajet(trajet);
+    }
 
     return (
         <div className='addTrajet'>
@@ -140,24 +163,22 @@ export default function AddTrajet(props) {
                     </Button>
                 </Row>
                 <div>
-                <Row style={{borderBottom: "1px solid black", marginRight: 10, marginLeft:10}}>
-                        <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Etapes</p>
-                        <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">24 rue du coin</p>
-                        <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">15h</p>
-                        <Button className="transparent"><TrashFill color="black"/></Button>
-                    </Row>
-                    <Row style={{marginRight: 10, marginLeft:10}}>
-                        <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Etapes</p>
-                        <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">24 rue du coin</p>
-                        <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">15h</p>
-                        <Button className="transparent"><TrashFill color="black"/></Button>
-                    </Row>
+                    {etapes.map(values => {
+                        let value = values.split('/');
+                        return (
+                            <Row key={value[0]} style={{borderBottom: "1px solid black", marginRight: 10, marginLeft:10}}>
+                                <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Etapes</p>
+                                <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">{value[0]}</p>
+                                <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">{value[1]}</p>
+                                <Button className="transparent"><TrashFill color="black"/></Button>
+                            </Row>
+                        )
+                    })}
                 </div>
 
 
-                <MapView size={250} />
 
-                <Button
+                <Button onClick={() => publish()}
                     className='fullBgField rechercheButton'
                     variant="primary"
                     type="submit">
