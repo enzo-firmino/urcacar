@@ -18,7 +18,7 @@ import {DetailTrajet} from "./components/Page/DetailTrajet";
 import AddTrajet from './components/Page/AddTrajet'
 import {MesTrajets, MesTrajetsReservations} from "./components/Page/MesTrajets";
 import MapView from "./components/Map/index";
-
+import {Connexion} from './components/Page/Connexion';
 
 function App() {
   return (
@@ -52,6 +52,9 @@ function App() {
                     </Route>
                     <Route path="/notation">
                         <Notation/>
+                    </Route>
+                    <Route path="/login">
+                        <Connexion/>
                     </Route>
                     <Route path="/trajet">
                         <DetailTrajet/>
