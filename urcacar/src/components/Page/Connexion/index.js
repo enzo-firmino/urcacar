@@ -38,6 +38,7 @@ function Login() {
             history.push({
                 pathname: '/messagerie',
             })
+            localStorage.setItem("jwt",data.token)
         })
         .catch(error => console.log('error', error));
         
