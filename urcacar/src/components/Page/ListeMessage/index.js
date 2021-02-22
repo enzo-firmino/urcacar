@@ -21,8 +21,7 @@ function Message(props){
         <a className='box' href="/messagerie/id">
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <p className="pTitre text-success">{props.name} - {props.trajet}</p>
-                <p>Bonjour, est-il possible de partir 15 minutes 
-avant ? </p>
+                <p>Bonjour, est-il possible de partir 15 minutes avant ? </p>
             </div>
             <Image className="pp" src={profilePicture} roundedCircle/>
         </a>

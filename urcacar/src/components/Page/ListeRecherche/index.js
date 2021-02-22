@@ -78,6 +78,7 @@ function RecapRecherche(props) {
 
 function Trajet({trajet}) {
     const history = useHistory();
+    console.log(trajet)
 
     const [conducteur, setConducteur] = useState([]);
 
@@ -86,6 +87,7 @@ function Trajet({trajet}) {
             setConducteur(response);
         });
     }, [])
+    console.log(conducteur)
 
     if(conducteur.length === 0){
         return <Spinner animation="grow" variant="success" />;
@@ -118,15 +120,15 @@ function Trajet({trajet}) {
     const heureArrivee = new Date(trajet.heureArrivee);
 
     let rang;
-
+    console.log(conducteur.rang)
     switch(conducteur.rang){
-        case 1:
+        case 0:
             rang = "NUL"
             break;
-        case 2:
+        case 1:
             rang = "Neutre"
             break;
-        case 3:
+        case 2:
             rang = "Recommander"
             break;
         default:

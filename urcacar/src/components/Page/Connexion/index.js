@@ -4,47 +4,28 @@ import '../../../styles/form.css';
 import '../../../styles/connexion.css';
 import context from '../../../services/store/store';
 import {connexion} from '../../../action/action';
+import { loginFetch } from '../../../services/fetch/fetch';
 import { useHistory } from "react-router-dom";
 
 export function Connexion(props) {
     return (
         <div className="container bg-light">
-            <Login/>
+            <LoginComponent/>
         </div>
     )
 }
 
-function Login() {
+function LoginComponent() {
     const {dispatch} = useContext(context)
     const history = useHistory();
 
-    function loginButton(){
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({"username":login,"password":password});
-
-        var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-        };
-
-        return fetch("http://localhost:8000/api/login_check", requestOptions)
-        .then(response => response.json())
-        .then(data => {
-            dispatch(connexion(data.token));
-            history.push({
-                pathname: '/messagerie',
-            })
-            localStorage.setItem("jwt",data.token)
-        })
-        .catch(error => console.log('error', error));
-        
-    }
     const[login, setLogin] = useState('');
     const[password, setPassword] = useState('');
+
+    function loginButton(){
+        var body = {"username":login,"password":password};
+        loginFetch(body, dispatch).catch(error => console.log('error', error));
+    }
 
     return (
         <div className="formConnexion">
@@ -70,12 +51,6 @@ function Login() {
                 </Form.Group>
 
                 <Button onClick={()=> loginButton()}>Connexion</Button>
-                    
-                
-
-
-
-
             </Form>
             </div>
 

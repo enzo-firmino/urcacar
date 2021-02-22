@@ -35,7 +35,7 @@ export default function AddTrajet(props) {
             adresseDepart: depart,
             adresseArrivee: arrive,
         }
-        appendTrajet(trajet);
+        appendTrajet(trajet, localStorage.getItem("jwt"));
     }
 
     return (
@@ -175,8 +175,6 @@ export default function AddTrajet(props) {
                         )
                     })}
                 </div>
-
-
 
                 <Button onClick={() => publish()}
                     className='fullBgField rechercheButton'

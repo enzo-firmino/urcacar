@@ -29,14 +29,15 @@ export function Profil(props) {
 function Top({conducteur}){
 
     let rang;
+    
     switch(conducteur.rang){
-        case 1:
+        case 0:
             rang = "NUL"
             break;
-        case 2:
+        case 1:
             rang = "Neutre"
             break;
-        case 3:
+        case 2:
             rang = "Recommander"
             break;
         default:

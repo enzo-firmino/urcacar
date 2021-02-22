@@ -1,3 +1,5 @@
+import { connexion } from "../../action/action";
+
 const url = "http://localhost:8000";
 
 export function getAll(recherche){
@@ -25,12 +27,44 @@ export function getUser(id){
 *********************************************************TRAJETS*****************************************************************
 ********************************************************************************************************************************/
 
-export function getAllTrajet(){
-    return fetch(url + "/api/trajets").then(response => response.json())
+export function loginFetch(body, dispatch){
+    var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+    if (body.username !== undefined) {
+        var raw = JSON.stringify({"username":body.username,"password":body.password});
+    } else {
+        var raw = JSON.stringify({"refreshToken":localStorage.getItem("refreshToken")});
+    }
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+    return fetch("http://localhost:8000/api/login_check", requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        dispatch(connexion(data.token));
+        localStorage.setItem("jwt",data.token)
+    })
 }
 
-export function appendTrajet(trajet) {
-    const options = method('POST', body(trajet, mimeType('application/json')));
+function Options(jwt) {
+    return {
+        method: 'GET',
+        headers: new Headers({
+            Authorization: 'Bearer ' + jwt,
+        }),
+    };
+}
+
+export function getAllTrajet(){
+    return fetch(url + "/api/trajets", Options(localStorage.getItem("jwt"))).then(response => response.json())
+}
+
+export function appendTrajet(trajet, jwt) {
+    const options = method('POST', body(trajet, jwt, mimeType('application/json')));
     return fetch(url + "/api/trajets/", options).then((response) => response.json());
 }
 
@@ -56,7 +90,7 @@ export function getAllMessages(id){
 ********************************************************************************************************************************/
 
 export function getInfo(fin){
-    return fetch(url + fin).then(response => response.json())
+    return fetch(url + fin, Options(localStorage.getItem("jwt"))).then(response => response.json())
 }
 
 /********************************************************************************************************************************
@@ -84,9 +118,10 @@ function body(data, options = {}) {
     };
 }
 
-function mimeType(mimeType, options = {}) {
+function mimeType(mimeType, jwt, options = {}) {
     const headers = options.headers ?? new Headers();
     headers.append('Content-Type', mimeType);
+    headers.append("Authorization: 'Bearer '"+ jwt)
     return {
         ...options,
         headers,
