@@ -25,7 +25,7 @@ export function DetailTrajet() {
     function onClickProfile() {
         history.push({
             pathname: '/profil',
-            state: {conducteur, voiture, avisRecus}
+            state: {conducteur: trajet.conducteur}
         })
     }
 
@@ -139,27 +139,27 @@ function RecapTrajet({trajet}) {
 
     return (
         <div>
-                <div className="d-flex flex-fill">
-                    <p style={{fontSize: 15, width:"50%"}}>{trajet.adresseDepart.adresse}<br/>{trajet.adresseDepart.cp}</p>
-                    <p/>
-                    <p style={{fontSize: 15, width:"50%"}}>{trajet.adresseArrivee.adresse}<br/>{trajet.adresseArrivee.cp}</p>
-                </div>
-                <div className="d-flex flex-fill border-bottom border-dark">
-
-                    <GeoAlt className="justify-content-center" width="50%" height="35"/>
-                    <GeoAlt className="justify-content-center" width="50%" height="35"/>
-                </div>
-                <div className="d-flex flex-fill">
-                    <p style={{fontSize: 15, width:"50%"}}>{(hD.getHours()<10?'0':'') + hD.getHours()}:{(hD.getMinutes()<10?'0':'') + hD.getMinutes()}</p>
-                    <p style={{fontSize: 15, width:"50%"}}>{(hA.getHours()<10?'0':'') + hA.getHours()}:{(hA.getMinutes()<10?'0':'') + hA.getMinutes()}</p>
-                </div>
-                <div className="VoirTrajet">
-                    <Map className='align-middle' />
-                    <Popup trigger={<span className='align-middle' >  Voir le trajet sur la carte </span>} modal closeOnDocumentClick>
-                        <MapView aD={trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.cp} aA={trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.cp}/>
-                    </Popup>
-                </div>
+            <div className="d-flex flex-fill">
+                <p style={{fontSize: 15, width:"50%"}}>{trajet.adresseDepart.adresse}<br/>{trajet.adresseDepart.cp}</p>
+                <p/>
+                <p style={{fontSize: 15, width:"50%"}}>{trajet.adresseArrivee.adresse}<br/>{trajet.adresseArrivee.cp}</p>
             </div>
+            <div className="d-flex flex-fill border-bottom border-dark">
+
+                <GeoAlt className="justify-content-center" width="50%" height="35"/>
+                <GeoAlt className="justify-content-center" width="50%" height="35"/>
+            </div>
+            <div className="d-flex flex-fill">
+                <p style={{fontSize: 15, width:"50%"}}>{(hD.getHours()<10?'0':'') + hD.getHours()}:{(hD.getMinutes()<10?'0':'') + hD.getMinutes()}</p>
+                <p style={{fontSize: 15, width:"50%"}}>{(hA.getHours()<10?'0':'') + hA.getHours()}:{(hA.getMinutes()<10?'0':'') + hA.getMinutes()}</p>
+            </div>
+            <div className="VoirTrajet">
+                <Map className='align-middle' />
+                <Popup trigger={<span className='align-middle' >  Voir le trajet sur la carte </span>} modal closeOnDocumentClick>
+                    <MapView aD={trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.cp} aA={trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.cp}/>
+                </Popup>
+            </div>
+        </div>
     );
 }
 

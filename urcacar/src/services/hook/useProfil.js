@@ -5,6 +5,7 @@ function useDetailTrajet(conducteur){
 
     const [voiture, setVoiture] = useState(null);
     const [avisRecus, setAvisRecus] = useState([]);
+    console.log("Conducteur: ",conducteur)
 
     useEffect(() => {
         for (const avisRecu of conducteur.avisRecu) {

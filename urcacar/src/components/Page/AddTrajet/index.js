@@ -35,7 +35,7 @@ export default function AddTrajet(props) {
             adresseDepart: depart,
             adresseArrivee: arrive,
         }
-        appendTrajet(trajet, localStorage.getItem("jwt"));
+        appendTrajet(trajet);
     }
 
     return (

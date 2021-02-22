@@ -3,6 +3,7 @@ import {Image, ListGroup} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 export default function Avis({listeAvis}) {
+    console.log(listeAvis)
 
     return (
         <div style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>

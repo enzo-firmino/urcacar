@@ -63,8 +63,8 @@ export function getAllTrajet(){
     return fetch(url + "/api/trajets", Options(localStorage.getItem("jwt"))).then(response => response.json())
 }
 
-export function appendTrajet(trajet, jwt) {
-    const options = method('POST', body(trajet, jwt, mimeType('application/json')));
+export function appendTrajet(trajet) {
+    const options = method('POST', body(trajet, localStorage.getItem("jwt"), mimeType('application/json')));
     return fetch(url + "/api/trajets/", options).then((response) => response.json());
 }
 
@@ -90,7 +90,8 @@ export function getAllMessages(id){
 ********************************************************************************************************************************/
 
 export function getInfo(fin){
-    return fetch(url + fin, Options(localStorage.getItem("jwt"))).then(response => response.json())
+    return fetch(url + fin, Options(localStorage.getItem("jwt")))
+    .then(response => response.json())
 }
 
 /********************************************************************************************************************************

@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import profilePicture from '../../../assets/profilepicture.jpg';
 import Image from "react-bootstrap/Image";
 import {Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import Avis from "../../Reusable/Avis"
 import Table from "react-bootstrap/Table";
 import {useHistory} from "react-router-dom";
-import useProfil from "../../../services/hook/useProfil";
+import { getInfo } from "../../../services/fetch/fetch";
 
 export function Profil(props) {
 
     const history = useHistory();
-    const {conducteur, voiture, avisRecus} = history.location.state;
+    const {conducteur} = history.location.state;
+    const [personne, setPersonne] = useState('');
+    console.log("Conducteur :",conducteur)
 
-    console.log(avisRecus);
+    useEffect(() => {
+        getInfo(conducteur).then(response => {
+            setPersonne(response);
+            
+        });
+    }, [])
+
+    if(personne.length === 0){
+        return <Spinner animation="grow" variant="success" />;
+    }
+    console.log("Profil: ",personne)
 
     return (
         <div className="container bg-light">
-            <Top conducteur={conducteur}/>
-            <Voiture voiture={voiture}/>
-            <Preferences conducteur={conducteur}/>
+            <Top conducteur={personne}/>
+            <Voiture voitureApi={personne.voiture}/>
+            <Preferences conducteur={personne}/>
             {/*<Notification/>*/}
-            <Avis listeAvis={avisRecus}/>
+            <Avis listeAvis={personne.avisRecu}/>
         </div>
     )
 }
@@ -58,6 +70,9 @@ function Top({conducteur}){
 }
 
 function VoitureForm(){
+    const [voiture, setVoiture] = useState('');
+    
+
     return(
         <div>
             <Title titre="Véhicule"/>
@@ -132,9 +147,16 @@ function VoitureForm(){
     )
 }
 
-function Voiture({voiture}){
+function Voiture({voitureApi}){
+    const [voiture, setVoiture] = useState('');
 
-    if(voiture === null){
+    useEffect(() => {
+        getInfo(voitureApi).then(response => {
+            setVoiture(response);
+        });
+    }, [])
+
+    if(voiture.length === 0){
         return <Spinner animation="grow" variant="success" />;
     }
     return(
