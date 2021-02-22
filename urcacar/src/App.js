@@ -22,6 +22,7 @@ import {Connexion} from './components/Page/Connexion';
 import context from './services/store/store';
 import reducer from './services/reducer/reducer';
 import useConnexion from './services/hook/useConnexion';
+import { Deconnexion } from './components/Page/Deconnexion';
 
 function App() {
     const data = useConnexion();
@@ -67,6 +68,9 @@ function App() {
                         </Route>
                         <Route path="/map">
                             <MapView/>
+                        </Route>
+                        <Route path="/deconnexion">
+                            <Deconnexion/>
                         </Route>
                     </Switch>
                 <Footer/>

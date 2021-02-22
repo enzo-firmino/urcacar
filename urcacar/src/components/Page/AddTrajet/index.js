@@ -4,7 +4,7 @@ import { ArrowDownUp, PlusCircle, TrashFill } from "react-bootstrap-icons";
 import Col from "react-bootstrap/Col";
 import MapView from '../../Map';
 import '../../../styles/form.css';
-import { appendTrajet } from '../../../services/fetch/fetch';
+import { appendTrajet, getInfo } from '../../../services/fetch/fetch';
 
 export default function AddTrajet(props) {
 
@@ -16,10 +16,14 @@ export default function AddTrajet(props) {
     const [heureArrive, setHeureArrive] = useState();
     const [prix, setPrix] = useState(0);
     const [etapes, setEtapes] = useState([]);
+    const [adresses, setAdresses] = useState([]);
 
     useEffect(() =>  {
         setEtapes(etape => [...etape,"24 rue du coin/15h"]);
         setEtapes(etape => [...etape,"28 rue du milieu/13h30"]);
+        getInfo("/api/adresses").then(response => {
+            setAdresses(response);
+        })
     },[])
 
     console.log(etapes);
@@ -45,7 +49,7 @@ export default function AddTrajet(props) {
 
                 <Form.Group as={Col} controlId="formGridDepart">
                     <Form.Control
-                        className='fullBgField'
+                        className='fullBgField dropdown-content'
                         type="text"
                         placeholder="Départ"
                         value={depart}
@@ -170,7 +174,7 @@ export default function AddTrajet(props) {
                                 <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Etapes</p>
                                 <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">{value[0]}</p>
                                 <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">{value[1]}</p>
-                                <Button className="transparent"><TrashFill color="black"/></Button>
+                                <Button className="transparent" onClick={ () => {}}><TrashFill color="black"/></Button>
                             </Row>
                         )
                     })}

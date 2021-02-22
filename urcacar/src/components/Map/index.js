@@ -6,6 +6,8 @@ import useMap from "../../services/hook/Map"
 import iconGreen from '../../assets/GreenMarker.png';
 import { useHistory } from 'react-router-dom';
 
+
+//Pas terminé
 export default function MapView(props){
 
     const history = useHistory();
