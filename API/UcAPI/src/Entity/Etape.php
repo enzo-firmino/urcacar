@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=EtapeRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"etape:read"}},
+ *      normalizationContext={"groups": {"etapeInfo"}},
  *      itemOperations={
  *          "get",
  *          "delete"={"security"="is_granted('ROLE_USER')"}
@@ -32,14 +32,14 @@ class Etape
 
     /**
      * @ORM\Column(type="time")
-     * @Groups({"etape:read"})
+     * @Groups({"etapeInfo"})
      */
     private $heure;
 
     /**
      * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="etapes")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"etape:read"})
+     * @Groups({"etapeInfo"})
      */
     private $adresse;
 

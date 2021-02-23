@@ -15,11 +15,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      normalizationContext={"groups": {"infoAdresse"}, {"infoTrajet"}},
  *      itemOperations={
  *          "get",
+ *          "put"={"security"="is_granted('ROLE_USER')"},
  *          "delete"={"security"="is_granted('ROLE_USER')"}
  *      },
  *      collectionOperations={
  *           "get",
- *           "post"={"security"="is_granted('ROLE_USER')"}
+ *           "post"={
+ *              "controller"=App\Controller\Api\AdresseCreateController::class
+ *           }
  *      },
  * )
  */
@@ -34,19 +37,13 @@ class Adresse
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoAdresse", "infoTrajet"})
+     * @Groups({"infoAdresse", "infoTrajet", "etapeInfo"})
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Groups({"infoAdresse", "infoTrajet"})
-     */
-    private $cp;
-
-    /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoAdresse", "infoTrajet"})
+     * @Groups({"infoAdresse", "infoTrajet", "etapeInfo"})
      */
     private $adresse;
 
@@ -62,7 +59,7 @@ class Adresse
 
     /**
      * @ORM\OneToMany(targetEntity=Etape::class, mappedBy="adresse")
-     * @Groups({"infoAdresse"})
+     * @Groups({"infoTrajet"})
      */
     private $etapes;
 
@@ -86,18 +83,6 @@ class Adresse
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getCp(): ?int
-    {
-        return $this->cp;
-    }
-
-    public function setCp(int $cp): self
-    {
-        $this->cp = $cp;
 
         return $this;
     }

@@ -65,10 +65,19 @@
     opacity: 1 !important;
 }
 
- .emptyBgField {
+.emptyBgField {
     border-radius: 25px !important ;
     position: relative !important;
     border: solid 3px rgba(88,185,75,1) !important;
+    background-color: white !important;
+    box-shadow: 2px 2px 5px #292929 !important;
+    text-align: center !important;
+    color: black !important;
+}
+.emptyBgFieldNotValid {
+    border-radius: 25px !important ;
+    position: relative !important;
+    border: solid 3px red !important;
     background-color: white !important;
     box-shadow: 2px 2px 5px #292929 !important;
     text-align: center !important;

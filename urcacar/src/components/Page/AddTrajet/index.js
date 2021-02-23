@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Dropdown, Row } from "react-bootstrap";
-import { ArrowDownUp, PlusCircle, TrashFill } from "react-bootstrap-icons";
+import { ArrowDownUp, Check, PlusCircle, TrashFill } from "react-bootstrap-icons";
 import Col from "react-bootstrap/Col";
 import MapView from '../../Map';
 import '../../../styles/form.css';
-import { appendTrajet, getInfo } from '../../../services/fetch/fetch';
+import { appendTrajet, appendAdresse, getInfo } from '../../../services/fetch/fetch';
+import { Popup } from 'leaflet';
 
 export default function AddTrajet(props) {
 
     const [depart, setDepart] = useState('');
     const [arrive, setArrive] = useState('');
-    const [date, setDate] = useState();
+    const [departVille, setDepartVille] = useState('');
+    const [arriveVille, setArriveVille] = useState('');
+    const [date, setDate] = useState('');
     const [nbPassager, setNbPassager] = useState(1);
-    const [heureDepart, setHeureDepart] = useState();
-    const [heureArrive, setHeureArrive] = useState();
+    const [heureDepart, setHeureDepart] = useState('');
+    const [heureArrive, setHeureArrive] = useState('');
     const [prix, setPrix] = useState(0);
     const [etapes, setEtapes] = useState([]);
     const [adresses, setAdresses] = useState([]);
@@ -22,13 +25,23 @@ export default function AddTrajet(props) {
         setEtapes(etape => [...etape,"24 rue du coin/15h"]);
         setEtapes(etape => [...etape,"28 rue du milieu/13h30"]);
         getInfo("/api/adresses").then(response => {
-            setAdresses(response);
+            setAdresses(response["hydra:member"]);
         })
     },[])
+    console.log(adresses)
 
-    console.log(etapes);
+    function publish(e){
+        e.preventDefault();
 
-    function publish(){
+        adresses.map(adresse => {
+            if(adresse.adresse === depart && adresse.ville === departVille){
+                var m = {ville:depart,adresse:departVille};
+                appendAdresse(m)
+            }
+            if(adresse.adresse === arrive && adresse.ville === arriveVille){
+                appendAdresse(arrive)
+            }
+        })
         const trajet = {
             prix: prix,
             nbPlace: nbPassager,
@@ -42,18 +55,30 @@ export default function AddTrajet(props) {
         appendTrajet(trajet);
     }
 
+    const [active, setActive] = useState(true);
+
     return (
         <div className='addTrajet'>
             <h1>Ajouter un trajet</h1>
-            <Form className="container bg-light">
+            <Form className="container bg-light" onSubmit={(e) => publish(e)}>
 
-                <Form.Group as={Col} controlId="formGridDepart">
-                    <Form.Control
-                        className='fullBgField dropdown-content'
-                        type="text"
-                        placeholder="Départ"
-                        value={depart}
-                        onChange={e => setDepart(e.target.value)}/>
+                <Form.Group as={Row} controlId="formGridDepart">
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Départ"
+                            value={depart.toUpperCase()}
+                            onChange={e => setDepart(e.target.value.toUpperCase())}/>
+                    </Col>
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Ville de départ"
+                            value={departVille.toUpperCase()}
+                            onChange={e => setDepartVille(e.target.value.toUpperCase())}/>
+                    </Col>
                 </Form.Group>
 
                 <Button
@@ -67,25 +92,34 @@ export default function AddTrajet(props) {
                     <ArrowDownUp/>
                 </Button>
 
-                <Form.Group as={Col} controlId="formGridArrive">
-                    <Form.Control
-                        className="fullBgField"
-                        type="text"
-                        placeholder="Arrivée"
-
-                        value={arrive}
-                        onChange={e => setArrive(e.target.value)}/>
+                <Form.Group as={Row} controlId="formGridArrive">
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Arrivée"
+                            value={arrive.toUpperCase()}
+                            onChange={e => setArrive(e.target.value.toUpperCase())}/>
+                    </Col>
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Ville d'arrivée"
+                            value={arriveVille.toUpperCase()}
+                            onChange={e => setArriveVille(e.target.value.toUpperCase())}/>
+                    </Col>
                 </Form.Group>
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridDate">
                         <Form.Label>Date départ</Form.Label>
                         <Form.Control
-                            className="emptyBgField"
+                            className= {new Date(date) > new Date() ? "emptyBgField" : "emptyBgFieldNotValid"}
                             type="date"
                             placeholder="Date"
                             value={date}
-                            onChange={e => setDate(e.target.value)}/>
+                            onChange={e => {setDate(e.target.value); setActive(new Date(e.target.value) > new Date())}}/>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridNbPassagers">
                         <Form.Label>Nombre de passagers</Form.Label>
@@ -93,7 +127,7 @@ export default function AddTrajet(props) {
                             className="emptyBgField"
                             type="number"
                             min="1"
-                            max="5"
+                            max="4"
                             placeholder="Nombre passagers"
                             value={nbPassager}
                             onChange={e => setNbPassager(parseInt(e.target.value))}/>
@@ -180,10 +214,11 @@ export default function AddTrajet(props) {
                     })}
                 </div>
 
-                <Button onClick={() => publish()}
-                    className='fullBgField rechercheButton'
+                <Button onClick={(e) => publish(e)}
+                    className="fullBgField rechercheButton"
                     variant="primary"
-                    type="submit">
+                    type="submit"
+                    disabled={!active}>
                     Publier
                 </Button>
             </Form>

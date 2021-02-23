@@ -26,14 +26,12 @@ class AdresseFixtures extends Fixture
 
         $adresse = new Adresse();
         $adresse->setAdresse("2 rue Goiot");
-        $adresse->setCp(51100);
         $adresse->setVille("Reims");
         $manager->persist($adresse);
         $this->addReference(self::AD, $adresse);
 
         $adresse = new Adresse();
         $adresse->setAdresse("5 rue de la gare");
-        $adresse->setCp(51100);
         $adresse->setVille("Reims");
         $manager->persist($adresse);
         $this->addReference(self::RAD, $adresse);

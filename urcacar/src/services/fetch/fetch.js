@@ -40,7 +40,7 @@ export function loginFetch(body, dispatch){
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
-        };
+    };
 
     return fetch("http://localhost:8000/api/login_check", requestOptions)
     .then(response => response.json())
@@ -64,8 +64,27 @@ export function getAllTrajet(){
 }
 
 export function appendTrajet(trajet) {
-    const options = method('POST', body(trajet, localStorage.getItem("jwt"), mimeType('application/json')));
-    return fetch(url + "/api/trajets/", options).then((response) => response.json());
+    return fetch(url + "/api/trajets/", getOptions(trajet)).then((response) => response.json());
+}
+
+export function appendAdresse(ad) {
+    //const options = method('POST', body(trajet, localStorage.getItem("jwt"), mimeType('application/json')));
+
+    return fetch(url + "/api/trajets/", getOptions(ad)).then((response) => response.json());
+}
+
+function getOptions(b) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: b,
+        redirect: 'follow'
+    };
+    return requestOptions;
 }
 
 export function updateTrajet(trajet) {
