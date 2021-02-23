@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get",
  *          "delete"={"security"="is_granted('ROLE_USER')"},
  *          "put"={
+ *              "path"="/voitures/{id}.{_format}",
  *              "security"="is_granted('ROLE_USER')"
  *          },
  *      },

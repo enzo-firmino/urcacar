@@ -12,8 +12,8 @@ import { Spinner } from "react-bootstrap";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import MapView from "../../Map";
-import useProfil from "../../../services/hook/useProfil";
 import Avis from "../../Reusable/Avis";
+import useDetailsProfil from "../../../services/hook/useDetailsProfil";
 
 export function DetailTrajet() {
 
