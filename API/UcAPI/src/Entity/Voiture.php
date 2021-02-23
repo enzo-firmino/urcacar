@@ -36,37 +36,37 @@ class Voiture
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar"})
+     * @Groups({"infoCar", "infoUser", "infoTrajet"})
      */
     private $modele;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"infoCar"})
+     * @Groups({"infoCar", "infoUser", "infoTrajet"})
      */
     private $annee;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar"})
+     * @Groups({"infoCar", "infoUser", "infoTrajet"})
      */
     private $couleur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar"})
+     * @Groups({"infoCar", "infoUser", "infoTrajet"})
      */
     private $marque;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar"})
+     * @Groups({"infoCar", "infoUser", "infoTrajet"})
      */
     private $immatriculation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar"})
+     * @Groups({"infoCar", "infoUser", "infoTrajet"})
      */
     private $photo;
 

@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ApiResource(
  *      normalizationContext={"groups": {"infoUser"}},
  *      itemOperations={
- *          "get",
+ *          "get"
  *      },
  *      collectionOperations={
  *           "get"
@@ -43,7 +43,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet", "infoAvis"})
      */
     private $prenom;
 
@@ -60,71 +60,79 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet"})
      */
     private $rang;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet", "infoAvis"})
      */
     private $photo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $fiabilite;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $resAcceptee;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $resEnvoyee;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $demandeRes;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $trajetImminent;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $trajetAnnule;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $demandeNotation;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"infoUser"})
      */
     private $nouvelAvis;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet"})
      */
     private $dialogue;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet"})
      */
     private $fumer;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet"})
      */
     private $musique;
 
@@ -145,7 +153,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity=Voiture::class, mappedBy="proprietaire", cascade={"persist", "remove"})
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet"})
      */
     private $voiture;
 

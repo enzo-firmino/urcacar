@@ -34,19 +34,19 @@ class Adresse
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoTrajet"})
+     * @Groups({"infoAdresse", "infoTrajet"})
      */
     private $ville;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"infoTrajet"})
+     * @Groups({"infoAdresse", "infoTrajet"})
      */
     private $cp;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoTrajet"})
+     * @Groups({"infoAdresse", "infoTrajet"})
      */
     private $adresse;
 
@@ -62,7 +62,7 @@ class Adresse
 
     /**
      * @ORM\OneToMany(targetEntity=Etape::class, mappedBy="adresse")
-     * @Groups({"infoTrajet"})
+     * @Groups({"infoAdresse"})
      */
     private $etapes;
 
