@@ -1,15 +1,27 @@
-import React from "react";
-import {Image, ListGroup} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import {Image, ListGroup, Spinner} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import { getInfo } from "../../../services/fetch/fetch";
 
-export default function Avis({listeAvis}) {
-    console.log(listeAvis)
+export default function Avis({source}) {
+    
+    const [avis, setAvis] = useState(null);
+    useEffect(() => {
+        getInfo(source).then(response => {
+            setAvis(response.avisRecu);
+            
+        });
+    }, [])
+
+    if(avis === null){
+        return <Spinner animation="grow" variant="success" />;
+    }
 
     return (
         <div style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
             <h1 className="text-left text-success">Avis</h1>
-            {listeAvis.length > 0 ? <ListGroup>
-                {listeAvis.map(avis => (
+            {avis.length > 0 ? <ListGroup>
+                {avis.map(avis => (
                     <AvisComponent key={avis['@id']} avis={avis}/>
                 ))}
             </ListGroup>:<p>Aucun avis n'a encore été posté pour cet utilisateur.</p>}

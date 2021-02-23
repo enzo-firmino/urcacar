@@ -80,13 +80,7 @@ function Trajet({trajet}) {
     const history = useHistory();
     console.log(trajet)
 
-    const [conducteur, setConducteur] = useState([]);
-
-    useEffect(() => {
-        getInfo(trajet.conducteur).then(response => {
-            setConducteur(response);
-        });
-    }, [])
+    const conducteur = trajet.conducteur;
     console.log(conducteur)
 
     if(conducteur.length === 0){

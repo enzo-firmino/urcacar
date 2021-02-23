@@ -8,11 +8,11 @@ function useDetailTrajet(conducteur){
     console.log("Conducteur: ",conducteur)
 
     useEffect(() => {
-        for (const avisRecu of conducteur.avisRecu) {
-            getInfo(avisRecu).then((response) => {
-                setAvisRecus([...avisRecus, response]);
-            });
-        }
+        // for (const avisRecu of conducteur.avisRecu) {
+        //     getInfo(avisRecu).then((response) => {
+        //         setAvisRecus([...avisRecus, response]);
+        //     });
+        // }
         getInfo(conducteur.voiture).then((response) => {
             setVoiture(response);
         });

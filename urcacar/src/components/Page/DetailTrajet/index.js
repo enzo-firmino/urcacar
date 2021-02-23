@@ -20,8 +20,6 @@ export function DetailTrajet() {
     const history = useHistory();
     const {trajet,conducteur} = history.location.state;
 
-    const {voiture, avisRecus} = useProfil(conducteur);
-
     function onClickProfile() {
         history.push({
             pathname: '/profil',
@@ -62,10 +60,10 @@ export function DetailTrajet() {
             </Row>
             <Row className='row-padding'>
                 <Col>
-                    <Vehicule voiture={voiture}/>
+                    <Vehicule voiture={conducteur.voiture}/>
                 </Col>
                 <Col className='border-left'>
-                    <Avis listeAvis={avisRecus}/>
+                    <Avis source={conducteur["@id"]}/>
                 </Col>
             </Row>
         </Container>
@@ -166,7 +164,12 @@ function RecapTrajet({trajet}) {
 function Vehicule({voiture}) {
 
     if(voiture === null){
-        return <Spinner animation="grow" variant="success" />;
+        return <div>
+            <Image
+                    style={{height: 50, width: 50, margin: 10}}
+                    src="https://www.flaticon.com/svg/static/icons/svg/846/846338.svg"/>
+            <span> Aucune information </span>
+        </div>;
     }
 
     let annee = new Date(voiture.annee)
