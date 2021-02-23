@@ -19,7 +19,6 @@ class AdresseFixtures extends Fixture
         for($nbAdresse = 1; $nbAdresse <= 4; $nbAdresse++){
             $adresse = new Adresse();
             $adresse->setAdresse($faker->streetAddress);
-            $adresse->setCp((int)$faker->postcode);
             $adresse->setVille($faker->city);
             $manager->persist($adresse);
         }

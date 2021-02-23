@@ -8,11 +8,11 @@ export function getAll(recherche){
 }
 
 export function getAllAd(){
-    return fetch(url + "/adresses").then(response => response.json())
+    return fetch(url + "/api/adresses").then(response => response.json())
 }
 
 export function getAvis(id){
-    return fetch(url + "/avis/" + id).then(response => response.json())
+    return fetch(url + "/api/avis/" + id).then(response => response.json())
 }
 
 /********************************************************************************************************************************
@@ -20,7 +20,38 @@ export function getAvis(id){
  ********************************************************************************************************************************/
 
 export function getUser(id){
-    return fetch(url + "/utilisateurs/" + id).then(response => response.json())
+    return fetch(url + id, Options(localStorage.getItem("jwt"))).then(response => {
+        return response.json()
+    })
+        .catch((err) => console.error(err));
+}
+
+export function updateUser(id, updates) {
+    return fetch(url + id, {
+        method: 'PUT',
+        body: JSON.stringify(updates),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: 'Bearer ' + localStorage.getItem("jwt"),
+        }
+    }).then(response => response.json())
+}
+
+
+/********************************************************************************************************************************
+ *********************************************************VOITURE*****************************************************************
+ ********************************************************************************************************************************/
+
+export function updateVoiture(id, voiture){
+    console.log(voiture);
+    return fetch(url + id, {
+        method: 'PUT',
+        body: JSON.stringify(voiture),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: 'Bearer ' + localStorage.getItem("jwt"),
+        }
+    }).then(response => response.json())
 }
 
 /********************************************************************************************************************************
@@ -43,8 +74,11 @@ export function loginFetch(body, dispatch){
     };
 
     return fetch("http://localhost:8000/api/login_check", requestOptions)
-    .then(response => response.json())
+    .then(response => {
+        return response.json();
+    })
     .then(data => {
+        console.log(data);
         dispatch(connexion(data.token));
         localStorage.setItem("jwt",data.token)
     })
@@ -101,7 +135,7 @@ export function cancelTrajet(trajetID) {
 ********************************************************************************************************************************/
 
 export function getAllMessages(id){
-    return fetch(url + "/messages/" + id).then(response => response.json())
+    return fetch(url + "/api/messages/" + id).then(response => response.json())
 }
 
 /********************************************************************************************************************************

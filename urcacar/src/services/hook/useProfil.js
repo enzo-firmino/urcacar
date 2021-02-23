@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
-import { getInfo } from '../fetch/fetch';
+import {getUser} from '../fetch/fetch';
 
-function useDetailTrajet(conducteur){
+function useProfil(history){
 
-    const [voiture, setVoiture] = useState(null);
+    const [utilisateur, setUtilisateur] = useState(null);
     const [avisRecus, setAvisRecus] = useState([]);
-    console.log("Conducteur: ",conducteur)
+    const [isItMyProfil, setIsItMyProfil] = useState(false);
 
     useEffect(() => {
-        // for (const avisRecu of conducteur.avisRecu) {
-        //     getInfo(avisRecu).then((response) => {
-        //         setAvisRecus([...avisRecus, response]);
-        //     });
-        // }
-        getInfo(conducteur.voiture).then((response) => {
-            setVoiture(response);
-        });
+        if (history.location.state === undefined) {
+            getUser('/api/utilisateurs/11').then((user) => {
+                console.log('user', user);
+                setUtilisateur(user);
+
+            }).catch((err) => console.error(err));
+            setIsItMyProfil(true);
+
+        } else {
+            getUser(history.location.state.conducteur['@id']).then((user) => {
+                console.log('user', user);
+                setUtilisateur(user);
+            }).catch((err) => console.error(err));
+            setIsItMyProfil(false);
+        }
     }, []);
 
-    return {voiture, avisRecus};
+    return {utilisateur, avisRecus, isItMyProfil};
 }
-export default useDetailTrajet;
-
+export default useProfil;

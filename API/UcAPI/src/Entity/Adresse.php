@@ -21,6 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      collectionOperations={
  *           "get",
  *           "post"={
+ *              "security"="is_granted('ROLE_ADMIN')",
  *              "controller"=App\Controller\Api\AdresseCreateController::class
  *           }
  *      },

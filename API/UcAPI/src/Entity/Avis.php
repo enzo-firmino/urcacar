@@ -13,6 +13,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      normalizationContext={"groups": {"infoAvis"}},
  *      itemOperations={
  *          "get",
+ *          "put"={"security"="is_granted('ROLE_USER')"},
+ *          "delete"={"security"="is_granted('ROLE_USER')"}
  *      },
  *      collectionOperations={
  *           "get",

@@ -16,10 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      itemOperations={
  *          "get",
  *          "delete"={"security"="is_granted('ROLE_USER')"},
- *          "put"={
- *              "path"="/trajets/{id}.{_format}",
- *              "security"="is_granted('ROLE_USER')"
- *          },
+ *          "put"={"security"="is_granted('ROLE_USER')"},
  *      },
  *      collectionOperations={
  *          "get",
