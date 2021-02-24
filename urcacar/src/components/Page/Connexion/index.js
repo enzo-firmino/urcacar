@@ -5,7 +5,7 @@ import '../../../styles/connexion.css';
 import context from '../../../services/store/store';
 import {connexion} from '../../../action/action';
 import { loginFetch } from '../../../services/fetch/fetch';
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 export function Connexion(props) {
     return (
@@ -21,18 +21,18 @@ function LoginComponent() {
 
     const[login, setLogin] = useState('');
     const[password, setPassword] = useState('');
+    const[isLogin, setIsLogin] = useState(false);
 
     function loginButton(){
         var body = {"username":login,"password":password};
         loginFetch(body, dispatch).catch(error => console.log('error', error));
+        setIsLogin(true);
     }
 
-    return (
+    return !isLogin ? (
         <div className="formConnexion">
             <div style={{backgroundImage: 'url({background})' }}>
-
             <h1>UrcaCar</h1>
-
             <Form className="container">
 
                 <Form.Group as={Col} controlId="">
@@ -41,8 +41,6 @@ function LoginComponent() {
                         placeholder="Identifiant"
                     />
                 </Form.Group>
-
-
 
                 <Form.Group as={Col} controlId="">
                     <Form.Control placeholder="Mot de passe" type="password"
@@ -53,9 +51,9 @@ function LoginComponent() {
                 <Button onClick={()=> loginButton()}>Connexion</Button>
             </Form>
             </div>
-
         </div>
-
+    ) : (
+        <Redirect to="/" />
     )
 }
 

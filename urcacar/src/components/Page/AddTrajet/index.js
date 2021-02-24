@@ -4,7 +4,7 @@ import { ArrowDownUp, Check, PlusCircle, TrashFill } from "react-bootstrap-icons
 import Col from "react-bootstrap/Col";
 import MapView from '../../Map';
 import '../../../styles/form.css';
-import { appendTrajet, appendAdresse, getInfo } from '../../../services/fetch/fetch';
+import { appendTrajet, getInfo } from '../../../services/fetch/fetch';
 import { Popup } from 'leaflet';
 
 export default function AddTrajet(props) {
@@ -37,11 +37,11 @@ export default function AddTrajet(props) {
             dateDepart: date,
             heureArrivee: heureArrive,
             heureDepart: heureDepart,
-            conducteur: null,
-            adresseDepart: "cc",
-            adresseArrivee: "cc",
+            conducteur: "api/utilisateurs/1",
+            adresseDepart: {adresse:depart, ville: departVille},
+            adresseArrivee: {adresse:arrive, ville: arriveVille},
         }
-        appendTrajet(trajet);
+        appendTrajet(trajet).then(r => console.log(r));
     }
 
     const [active, setActive] = useState(true);

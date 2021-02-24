@@ -4,17 +4,23 @@ namespace App\Controller\Api;
 
 use App\Entity\Trajet;
 use App\Entity\Adresse;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TrajetCreateController extends AbstractController
 {
     private $repository;
+    private $security;
+
+    public function __construct(Security $security){
+        $this->security = $security;
+    }
 
     public function __invoke(Trajet $data)
     {
         $this->repository = $this->getDoctrine()
             ->getRepository(Adresse::class);
-        $data->setConducteur($this->getUser());
+        $data->setConducteur($this->security->getUser());
 
         $depart = $this->CheckDepart($data);
         if($depart != null){

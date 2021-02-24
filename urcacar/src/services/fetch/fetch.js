@@ -96,7 +96,7 @@ export function getAllTrajet(){
 }
 
 export function appendTrajet(trajet) {
-    return fetch(url + "/api/trajets/", getOptions(trajet)).then((response) => response.json());
+    return fetch(url + "/api/trajets", getOptions(trajet)).then((response) => response.json());
 }
 
 export function appendAdresse(ad) {
@@ -115,6 +115,7 @@ function getOptions(b) {
         body: JSON.stringify(b),
         redirect: 'follow'
     };
+    console.log(b)
     return requestOptions;
 }
 

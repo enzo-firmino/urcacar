@@ -69,7 +69,7 @@ class Trajet
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="trajetsProposes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(onDelete="CASCADE",nullable=false)
      * @Groups({"infoTrajet"})
      */
     private $conducteur;
