@@ -50,8 +50,8 @@ class UserFixtures extends Fixture
         }
         $user = new Utilisateur();
         $user->setPrenom($faker->firstName);
-        $user->setEmail($faker->email);
-        $password = $this->encoder->encodePassword($user, 'jean');
+        $user->setEmail("admin@admin.fr");
+        $password = $this->encoder->encodePassword($user, 'admin');
         $user->setPassword($password);
         $user->setTelephone((int)$faker->phoneNumber);
         $user->setStatus($faker->numberBetween(0, 1));
@@ -68,13 +68,14 @@ class UserFixtures extends Fixture
         $user->setFumer($faker->boolean);
         $user->setMusique($faker->boolean);
         $user->setPhoto($faker->imageUrl($width = 350, $height = 350, 'people'));
+        $user->setRoles(["ROLE_ADMIN"]);
         $manager->persist($user);
         $this->addReference(self::JEAN, $user);
     
         $user = new Utilisateur();
         $user->setPrenom($faker->firstName);
-        $user->setEmail($faker->email);
-        $password = $this->encoder->encodePassword($user, 'romain');
+        $user->setEmail("user@user.fr");
+        $password = $this->encoder->encodePassword($user, 'user');
         $user->setPassword($password);
         $user->setTelephone((int)$faker->phoneNumber);
         $user->setStatus($faker->numberBetween(0, 1));

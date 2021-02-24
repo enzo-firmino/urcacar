@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      collectionOperations={
  *           "get",
  *           "post"={
- *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security"="is_granted('ROLE_USER')",
  *              "controller"=App\Controller\Api\AdresseCreateController::class
  *           }
  *      },
@@ -38,13 +38,13 @@ class Adresse
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoAdresse", "infoTrajet", "etapeInfo"})
+     * @Groups({"infoAdresse", "infoTrajet", "etapeInfo", "postTrajet"})
      */
     private $ville;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"infoAdresse", "infoTrajet", "etapeInfo"})
+     * @Groups({"infoAdresse", "infoTrajet", "etapeInfo", "postTrajet"})
      */
     private $adresse;
 

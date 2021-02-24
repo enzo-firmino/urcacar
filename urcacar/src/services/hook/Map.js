@@ -32,9 +32,6 @@ function useMap(rue1, rue2) {
     //     });
     // }
 
-    
-    console.log("test :", wayPoints)
-
     return [refMap, wayPoints, saveMap]
 }
 

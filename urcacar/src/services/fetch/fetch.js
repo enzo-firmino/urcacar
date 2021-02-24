@@ -3,7 +3,6 @@ import { connexion } from "../../action/action";
 const url = "http://localhost:8000";
 
 export function getAll(recherche){
-    console.log("https://nominatim.openstreetmap.org/search?q="+recherche+"&format=json")
     return fetch("https://nominatim.openstreetmap.org/search?q="+recherche+"&format=json").then(response => response.json())
 }
 
@@ -78,7 +77,6 @@ export function loginFetch(body, dispatch){
         return response.json();
     })
     .then(data => {
-        console.log(data);
         dispatch(connexion(data.token));
         localStorage.setItem("jwt",data.token)
     })
@@ -103,8 +101,7 @@ export function appendTrajet(trajet) {
 
 export function appendAdresse(ad) {
     //const options = method('POST', body(trajet, localStorage.getItem("jwt"), mimeType('application/json')));
-
-    return fetch(url + "/api/trajets/", getOptions(ad)).then((response) => response.json());
+    return fetch(url + "/api/adresses", getOptions(ad)).then((response) => response.json());
 }
 
 function getOptions(b) {
@@ -115,7 +112,7 @@ function getOptions(b) {
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: b,
+        body: JSON.stringify(b),
         redirect: 'follow'
     };
     return requestOptions;

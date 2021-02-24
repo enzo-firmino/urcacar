@@ -7,7 +7,6 @@ import context from '../../../services/store/store';
 export default function ListeMessage(props) {
     const {jwt} = useContext(context)
 
-    console.log('jwt :', localStorage.getItem("jwt"));
     return (
         <div className="container" style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
             <Message name="Emmanuel" trajet="Reims -> Paris"/>

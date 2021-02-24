@@ -28,29 +28,18 @@ export default function AddTrajet(props) {
             setAdresses(response["hydra:member"]);
         })
     },[])
-    console.log(adresses)
 
     function publish(e){
         e.preventDefault();
-
-        adresses.map(adresse => {
-            if(adresse.adresse === depart && adresse.ville === departVille){
-                var m = {ville:depart,adresse:departVille};
-                appendAdresse(m)
-            }
-            if(adresse.adresse === arrive && adresse.ville === arriveVille){
-                appendAdresse(arrive)
-            }
-        })
         const trajet = {
             prix: prix,
             nbPlace: nbPassager,
             dateDepart: date,
             heureArrivee: heureArrive,
             heureDepart: heureDepart,
-            conducteur: "moi",
-            adresseDepart: depart,
-            adresseArrivee: arrive,
+            conducteur: null,
+            adresseDepart: "cc",
+            adresseArrivee: "cc",
         }
         appendTrajet(trajet);
     }

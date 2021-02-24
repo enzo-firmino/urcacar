@@ -20,7 +20,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      },
  *      collectionOperations={
  *          "get",
- *          "post"={"security"="is_granted('ROLE_USER')"}
+ *          "post"={
+ *              "security"="is_granted('ROLE_USER')",
+ *              "denormalization_context"={"groups"={"infoTrajet"}},
+ *              "controller"=App\Controller\Api\TrajetCreateController::class
+ *          }
  *      },
  * )
  */
@@ -81,16 +85,16 @@ class Trajet
     private $recurrence;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="departTrajets")
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"infoTrajet"})
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="departTrajets", cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="CASCADE",nullable=false)
+     * @Groups({"infoTrajet", "postTrajet"})
      */
     private $adresseDepart;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="arriveeTrajet")
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"infoTrajet"})
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="arriveeTrajet", cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="CASCADE",nullable=false)
+     * @Groups({"infoTrajet", "postTrajet"})
      */
     private $adresseArrivee;
 

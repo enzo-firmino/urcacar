@@ -29,7 +29,6 @@ export function ListeRecherche(props) {
     if(trajets.length === 0){
         return <Spinner animation="grow" variant="success" />;
     }
-    console.log(trajets)
 
     return (
         <div className='listeRecherche'>
@@ -78,10 +77,8 @@ function RecapRecherche(props) {
 
 function Trajet({trajet}) {
     const history = useHistory();
-    console.log(trajet)
 
     const conducteur = trajet.conducteur;
-    console.log(conducteur)
 
     if(conducteur.length === 0){
         return <Spinner animation="grow" variant="success" />;
@@ -114,7 +111,6 @@ function Trajet({trajet}) {
     const heureArrivee = new Date(trajet.heureArrivee);
 
     let rang;
-    console.log(conducteur.rang)
     switch(conducteur.rang){
         case 0:
             rang = "NUL"
