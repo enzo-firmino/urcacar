@@ -132,8 +132,16 @@ export function cancelTrajet(trajetID) {
 *********************************************************MESSAGE*****************************************************************
 ********************************************************************************************************************************/
 
+export function getConversations(id){
+    return fetch(url + "/api/utilisateurs/" + id + "/conversations", Options(localStorage.getItem("jwt"))).then(response => response.json())
+}
+
 export function getAllMessages(id){
-    return fetch(url + "/api/messages/" + id).then(response => response.json())
+    return fetch(url + "/api/messages/" + id, Options(localStorage.getItem("jwt"))).then(response => response.json())
+}
+
+export function appendMessage(message) {
+    return fetch(url + "/api/messages", getOptions(message)).then((response) => response.json());
 }
 
 /********************************************************************************************************************************

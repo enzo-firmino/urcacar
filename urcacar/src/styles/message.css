@@ -1,0 +1,37 @@
+.message {
+    display: flex;
+    flex-direction: column;
+}
+
+.message .bubble-container {
+    font-size: 14px;
+    display: flex;
+}
+
+.message.mine .bubble-container {
+    justify-content: flex-end;
+}
+
+.message .bubble-container .bubble {
+    margin: 1px 0px;
+    background: #C4C4C4;
+    padding: 10px 15px;
+    max-width: 75%;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.message.mine .bubble-container .bubble {
+    background: #007aff;
+    color: white;
+}
+
+.container-conversation {
+    width: 50%;
+    margin: auto;
+    padding: 50px;
+    background-color: #f4f4f8;
+}
+
+.sendingBar {
+    justify-content: end;
+}

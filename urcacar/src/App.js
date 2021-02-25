@@ -26,7 +26,7 @@ import { Deconnexion } from './components/Page/Deconnexion';
 
 function App() {
     const data = useConnexion();
-    
+
   return (
     <context.Provider value= {data}>
         <div className="App">
@@ -54,7 +54,7 @@ function App() {
                         <Route exact path="/messagerie">
                             <ListeMessage/>
                         </Route>
-                        <Route  path="/messagerie/id">
+                        <Route  path="/messages">
                             <Message/>
                         </Route>
                         <Route path="/notation">
