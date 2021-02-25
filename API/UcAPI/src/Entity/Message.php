@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          "get"
  *      },
  *      collectionOperations={
- *           "get"
+ *           "get",
  *      },
  * )
  */
@@ -33,7 +33,7 @@ class Message
     private $texte;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 

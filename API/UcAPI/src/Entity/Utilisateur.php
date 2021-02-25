@@ -22,12 +22,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *              "path"="/utilisateurs/{id}.{_format}",
  *              "security"="is_granted('ROLE_USER')"
  *          },
- *          "conversations"={
- *              "path"="/api/utilisateurs/{id}/conversations",
- *          }
  *      },
  *      collectionOperations={
- *           "get"
+ *           "get",
  *      },
  * )
  */

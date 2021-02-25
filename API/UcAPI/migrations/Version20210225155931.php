@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210225104211 extends AbstractMigration
+final class Version20210225155931 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,7 +23,7 @@ final class Version20210225104211 extends AbstractMigration
         $this->addSql('CREATE TABLE adresse (id INT AUTO_INCREMENT NOT NULL, ville VARCHAR(255) NOT NULL, adresse VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE avis (id INT AUTO_INCREMENT NOT NULL, emetteur_id INT NOT NULL, destinataire_id INT NOT NULL, conduite INT DEFAULT NULL, ponctualite INT DEFAULT NULL, comportement INT DEFAULT NULL, INDEX IDX_8F91ABF079E92E8C (emetteur_id), INDEX IDX_8F91ABF0A4F84F6E (destinataire_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE etape (id INT AUTO_INCREMENT NOT NULL, adresse_id INT DEFAULT NULL, trajet_id INT NOT NULL, heure TIME NOT NULL, INDEX IDX_285F75DD4DE7DC5C (adresse_id), INDEX IDX_285F75DDD12A823 (trajet_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE message (id INT AUTO_INCREMENT NOT NULL, envoyeur_id INT NOT NULL, destinataire_id INT NOT NULL, trajet_id INT NOT NULL, texte VARCHAR(255) NOT NULL, date DATE NOT NULL, vu TINYINT(1) DEFAULT NULL, INDEX IDX_B6BD307F4795A786 (envoyeur_id), INDEX IDX_B6BD307FA4F84F6E (destinataire_id), INDEX IDX_B6BD307FD12A823 (trajet_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE message (id INT AUTO_INCREMENT NOT NULL, envoyeur_id INT NOT NULL, destinataire_id INT NOT NULL, trajet_id INT NOT NULL, texte VARCHAR(255) NOT NULL, date DATETIME NOT NULL, vu TINYINT(1) DEFAULT NULL, INDEX IDX_B6BD307F4795A786 (envoyeur_id), INDEX IDX_B6BD307FA4F84F6E (destinataire_id), INDEX IDX_B6BD307FD12A823 (trajet_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE notification (id INT AUTO_INCREMENT NOT NULL, utilisateur_id INT NOT NULL, titre VARCHAR(255) NOT NULL, texte VARCHAR(255) DEFAULT NULL, INDEX IDX_BF5476CAFB88E14F (utilisateur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recurrence (id INT AUTO_INCREMENT NOT NULL, trajet_id INT NOT NULL, date_fin DATE NOT NULL, lundi TINYINT(1) NOT NULL, mardi TINYINT(1) NOT NULL, mercredi TINYINT(1) NOT NULL, jeudi TINYINT(1) NOT NULL, vendredi TINYINT(1) NOT NULL, samedi TINYINT(1) NOT NULL, dimanche TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_1FB7F221D12A823 (trajet_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE reserver (id INT AUTO_INCREMENT NOT NULL, passager_id INT NOT NULL, trajet_id INT NOT NULL, acceptee TINYINT(1) NOT NULL, INDEX IDX_B9765E9371A51189 (passager_id), INDEX IDX_B9765E93D12A823 (trajet_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
