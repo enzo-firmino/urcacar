@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Search } from "react-bootstrap-icons";
-import { getAllTrajet } from '../fetch/fetch';
+import { getInfo } from '../fetch/fetch';
 
 function useSearch(recherche){
 
     const [trajets, setTrajets] = useState([]);
 
     useEffect(() => {
-        getAllTrajet().then(trajets => {
+        getInfo("/api/trajets").then(trajets => {
             const t = [];
+            console.log(trajets)
+            
             trajets["hydra:member"].map(trajet => {
                 if(recherche.depart.includes(trajet.adresseDepart.adresse)){
                     t.push(trajet);

@@ -91,7 +91,7 @@ function Options(jwt) {
     };
 }
 
-export function getAllTrajet(){
+export function getTrajets(){
     return fetch(url + "/api/trajets", Options(localStorage.getItem("jwt"))).then(response => response.json())
 }
 

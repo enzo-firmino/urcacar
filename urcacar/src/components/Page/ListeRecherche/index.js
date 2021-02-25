@@ -17,8 +17,8 @@ export function ListeRecherche(props) {
 
     const recherche = {
         depart: history.location.state.depart,
-        date: history.location.state.date.split('-')[2]+"/"+history.location.state.date.split('-')[1],
         arrive: history.location.state.arrive,
+        date: history.location.state.date.split('-')[2]+"/"+history.location.state.date.split('-')[1],
         heureDepart: history.location.state.heureDepart,
         heureArrive: history.location.state.heureArrive,
         nbPassager: history.location.state.nbPassager

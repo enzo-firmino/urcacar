@@ -19,32 +19,25 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
-    // /**
-    //  * @return Message[] Returns an array of Message objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByUser(int $user)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $em = $this->getEntityManager();
 
-    /*
-    public function findOneBySomeField($value): ?Message
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $statement = $em->getConnection()->prepare("
+            SELECT * 
+            FROM message
+            WHERE date IN 
+            (SELECT MAX(date) AS maxdate
+            FROM message
+            WHERE
+            envoyeur_id = '11'
+                OR destinataire_id = '11'
+            GROUP BY IF( envoyeur_id = '11', destinataire_id, envoyeur_id )
+            )"
+        );
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        return $result;
     }
-    */
 }

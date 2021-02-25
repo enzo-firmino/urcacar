@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Form, Button} from 'react-bootstrap';
+import {Form, Button, Row} from 'react-bootstrap';
 import Col from "react-bootstrap/Col";
 import { ArrowDownUp } from 'react-bootstrap-icons';
 import '../../../styles/form.css';
@@ -16,8 +16,8 @@ export function FormSearchTrajet(props) {
             pathname: '/recherche',
             state:
             {
-                depart: depart, 
-                arrive: arrive, 
+                depart: {adresse:depart, ville: departVille}, 
+                arrive: {adresse:arrive, ville: arriveVille}, 
                 date: date, 
                 heureDepart: heureDepart, 
                 heureArrive: heureArrive, 
@@ -28,6 +28,8 @@ export function FormSearchTrajet(props) {
 
     const [depart, setDepart] = useState('');
     const [arrive, setArrive] = useState('');
+    const [departVille, setDepartVille] = useState('');
+    const [arriveVille, setArriveVille] = useState('');
     const [date, setDate] = useState('');
     const [heureDepart, setHeureDepart] = useState('');
     const [heureArrive, setHeureArrive] = useState('');
@@ -40,13 +42,23 @@ export function FormSearchTrajet(props) {
 
             <Form className="container" onSubmit={handleSubmit}>
 
-                <Form.Group as={Col} controlId="formGridDepart">
-                    <Form.Control
-                        className='fullBgField'
-                        type="text"
-                        placeholder="Départ"
-                        value={depart}
-                        onChange={e => setDepart(e.target.value)}/>
+            <Form.Group as={Row} controlId="formGridDepart">
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Départ"
+                            value={depart.toUpperCase()}
+                            onChange={e => setDepart(e.target.value.toUpperCase())}/>
+                    </Col>
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Ville de départ"
+                            value={departVille.toUpperCase()}
+                            onChange={e => setDepartVille(e.target.value.toUpperCase())}/>
+                    </Col>
                 </Form.Group>
 
                 <Button
@@ -60,14 +72,23 @@ export function FormSearchTrajet(props) {
                     <ArrowDownUp/>
                 </Button>
 
-                <Form.Group as={Col} controlId="formGridArrive">
-                    <Form.Control
-                        className="fullBgField"
-                        type="text"
-                        placeholder="Arrivée"
-
-                        value={arrive}
-                        onChange={e => setArrive(e.target.value)}/>
+                <Form.Group as={Row} controlId="formGridArrive">
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Arrivée"
+                            value={arrive.toUpperCase()}
+                            onChange={e => setArrive(e.target.value.toUpperCase())}/>
+                    </Col>
+                    <Col>
+                        <Form.Control
+                            className='fullBgField'
+                            type="text"
+                            placeholder="Ville d'arrivée"
+                            value={arriveVille.toUpperCase()}
+                            onChange={e => setArriveVille(e.target.value.toUpperCase())}/>
+                    </Col>
                 </Form.Group>
 
                 <Form.Row>

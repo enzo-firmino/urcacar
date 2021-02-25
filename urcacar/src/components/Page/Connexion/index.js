@@ -25,8 +25,7 @@ function LoginComponent() {
 
     function loginButton(){
         var body = {"username":login,"password":password};
-        loginFetch(body, dispatch).catch(error => console.log('error', error));
-        setIsLogin(true);
+        loginFetch(body, dispatch).then(setIsLogin(true)).catch(error => console.log('error', error));
     }
 
     return !isLogin ? (

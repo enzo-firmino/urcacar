@@ -15,11 +15,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ApiResource(
  *      normalizationContext={"groups": {"infoUser"}},
  *      itemOperations={
- *          "get",
+ *          "get"={
+ *              "path"="/utilisateurs/{id}"
+ *          },
  *          "put"={
  *              "path"="/utilisateurs/{id}.{_format}",
  *              "security"="is_granted('ROLE_USER')"
  *          },
+ *          "conversations"={
+ *              "path"="/api/utilisateurs/{id}/conversations",
+ *          }
  *      },
  *      collectionOperations={
  *           "get"
@@ -142,11 +147,13 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="envoyeur")
+     * Groups({"infoMessage"})
      */
     private $messagesEnvoyes;
 
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="destinataire")
+     * Groups({"infoMessage"})
      */
     private $messagesRecus;
 
