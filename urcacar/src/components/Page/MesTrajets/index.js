@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import '../../../styles/mesTrajets.css';
 import {
     BrowserRouter as Router,
@@ -10,10 +10,10 @@ import Image from "react-bootstrap/Image";
 import profilePicture from "../../../assets/profilepicture.jpg";
 import {ArrowDown} from "react-bootstrap-icons";
 import Badge from "react-bootstrap/Badge";
-import {ListGroup} from "react-bootstrap";
+import {ListGroup, Spinner} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import { cancelTrajet } from "../../../services/fetch/fetch";
+import { cancelTrajet, getMesTrajets } from "../../../services/fetch/fetch";
 
 export function MesTrajetsReservations(props) {
     let { path, url } = useRouteMatch();
@@ -71,8 +71,18 @@ export function MesTrajetsReservations(props) {
     );
 }
 
-function MesTrajets({trajets, demandesReservations}) {
-    const mesTrajets = trajets.map((trajet, index) =>
+function MesTrajets({demandesReservations}) {
+
+    const [mesTrajets,setMesTrajets] = useState([]);
+    useEffect(() => {
+        getMesTrajets().then(response => setMesTrajets(response["hydra:member"]));
+    }, [])
+    
+    if(mesTrajets.length === 0){
+        return <Spinner animation="grow" variant="success" />
+    }
+
+    const trajets = mesTrajets.map((trajet, index) =>
         <MonTrajet key={index} trajet={trajet} />
     );
     const mesDemandesReservation = demandesReservations.map((demande, index) =>
@@ -83,7 +93,7 @@ function MesTrajets({trajets, demandesReservations}) {
             <div className='div-padding-top-bottom'>
                 <span className='span-title'>Mes trajets</span>
                 <ListGroup>
-                    {mesTrajets}
+                    {trajets}
                 </ListGroup>
             </div>
             <div>
@@ -126,37 +136,43 @@ function MesReservations({reservations}) {
 }
 
 function MonTrajet({trajet}) {
+    console.log(trajet)
     function cancel(){
-        cancelTrajet(trajet.id)
+        cancelTrajet(trajet["@id"]);
     }
+    const date = new Date(trajet.dateDepart);
+    const heureDepart = new Date(trajet.heureDepart);
+    const heureArrivee = new Date(trajet.heureArrivee);
 
     return (
-        <a href="/trajet" className='box' >
-            <span style={{fontSize:'20px'}}>{trajet.date}</span>
+        <div className='box' >
+            <a>
+                <span style={{fontSize:'20px'}}>{date.getDate()}/{date.getMonth() + 1}</span>
                 <table>
                     <tbody>
                     <tr>
-                        <td>{trajet.heureDepart}</td>
-                        <td>{trajet.depart}</td>
+                        <td>{heureDepart.getHours()}:{heureDepart.getMinutes()}</td>
+                        <td>{trajet.adresseDepart.adresse}</td>
                     </tr>
                     <tr>
                         <td><ArrowDown/></td>
                         <td><ArrowDown/></td>
                     </tr>
                     <tr>
-                        <td>{trajet.heureArrive}</td>
-                        <td>{trajet.arrive}</td>
+                        <td>{heureArrivee.getHours()}:{heureArrivee.getMinutes()}</td>
+                        <td>{trajet.adresseArrivee.adresse}</td>
                     </tr>
                     </tbody>
                 </table>
+            </a>
             <div className='rightBox'>
-                <span>{trajet.nbPassagers} / {trajet.nbPlaces} Passagers</span>
+                <span>{trajet.nbPlace} / {trajet.nbPlace} Passagers</span>
                 <div className='badgeRight'>
                     <Button onClick={() => cancel()} variant="danger" className='btn-badge'>Annuler</Button>
                     <Badge variant="success">{trajet.prix}€</Badge>
                 </div>
             </div>
-        </a>
+        </div>
     );
 }
 

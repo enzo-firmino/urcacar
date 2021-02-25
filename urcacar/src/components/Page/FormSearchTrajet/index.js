@@ -34,7 +34,23 @@ export function FormSearchTrajet(props) {
     const [heureDepart, setHeureDepart] = useState('');
     const [heureArrive, setHeureArrive] = useState('');
     const [nbPassager, setNbPassager] = useState(1);
-    const [redirect, setRedirect] = useState(null);
+
+    const [active, setActive] = useState(true);
+
+    function Check(){
+        if (depart === "" || arrive === "" || departVille === "" || arriveVille === ""){
+            console.log("adresse")
+            setActive(false);
+            return null;
+        }
+        if(date === "" || heureDepart === "" || heureArrive === ""){
+            console.log("autre")
+            setActive(false);
+            return null;
+        }
+        setActive(true);
+    }
+
     return (
 
         <div className="formSearchTrajet">
@@ -49,7 +65,7 @@ export function FormSearchTrajet(props) {
                             type="text"
                             placeholder="Départ"
                             value={depart.toUpperCase()}
-                            onChange={e => setDepart(e.target.value.toUpperCase())}/>
+                            onChange={e => {setDepart(e.target.value.toUpperCase()); Check()}}/>
                     </Col>
                     <Col>
                         <Form.Control
@@ -57,7 +73,7 @@ export function FormSearchTrajet(props) {
                             type="text"
                             placeholder="Ville de départ"
                             value={departVille.toUpperCase()}
-                            onChange={e => setDepartVille(e.target.value.toUpperCase())}/>
+                            onChange={e => {setDepartVille(e.target.value.toUpperCase()); Check()}}/>
                     </Col>
                 </Form.Group>
 
@@ -79,7 +95,7 @@ export function FormSearchTrajet(props) {
                             type="text"
                             placeholder="Arrivée"
                             value={arrive.toUpperCase()}
-                            onChange={e => setArrive(e.target.value.toUpperCase())}/>
+                            onChange={e => {setArrive(e.target.value.toUpperCase()); Check()}}/>
                     </Col>
                     <Col>
                         <Form.Control
@@ -87,7 +103,7 @@ export function FormSearchTrajet(props) {
                             type="text"
                             placeholder="Ville d'arrivée"
                             value={arriveVille.toUpperCase()}
-                            onChange={e => setArriveVille(e.target.value.toUpperCase())}/>
+                            onChange={e => {setArriveVille(e.target.value.toUpperCase()); Check()}}/>
                     </Col>
                 </Form.Group>
 
@@ -99,7 +115,7 @@ export function FormSearchTrajet(props) {
                             type="date"
                             placeholder="Date"
                             value={date}
-                            onChange={e => setDate(e.target.value)}/>
+                            onChange={e => {setDate(e.target.value); Check()}}/>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridNbPassagers">
                         <Form.Label>Nombre de passagers</Form.Label>
@@ -124,7 +140,7 @@ export function FormSearchTrajet(props) {
                             type="time"
                             placeholder="Heure départ"
                             value={heureDepart}
-                            onChange={e => setHeureDepart(e.target.value)}/>
+                            onChange={e => {setHeureDepart(e.target.value); Check()}}/>
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridHeureArrive">
@@ -134,7 +150,7 @@ export function FormSearchTrajet(props) {
                             type="time"
                             placeholder="Heure arrivée"
                             value={heureArrive}
-                            onChange={e => setHeureArrive(e.target.value)}/>
+                            onChange={e => {setHeureArrive(e.target.value); Check()}}/>
                     </Form.Group>
 
 
@@ -143,7 +159,8 @@ export function FormSearchTrajet(props) {
                 <Button
                     className='fullBgField rechercheButton'
                     variant="primary"
-                    type="submit">
+                    type="submit"
+                    disabled={!active}>
                     Rechercher
                 </Button>
             </Form>

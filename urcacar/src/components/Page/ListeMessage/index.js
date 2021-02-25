@@ -3,7 +3,6 @@ import {Image, Spinner} from "react-bootstrap";
 import profilePicture from '../../../assets/profilepicture.jpg';
 import {getConversations, getInfo, getTrajets, getUser} from "../../../services/fetch/fetch";
 import {useHistory} from "react-router-dom";
-import {getIn} from "formik";
 
 
 export default function ListeMessage(props) {

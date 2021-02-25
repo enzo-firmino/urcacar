@@ -5,21 +5,25 @@ import { getInfo } from '../fetch/fetch';
 function useSearch(recherche){
 
     const [trajets, setTrajets] = useState([]);
+    const [finish, setFinish] = useState(false);
 
     useEffect(() => {
         getInfo("/api/trajets").then(trajets => {
             const t = [];
-            console.log(trajets)
-            
             trajets["hydra:member"].map(trajet => {
-                if(recherche.depart.includes(trajet.adresseDepart.adresse)){
+                if(recherche.depart.adresse.includes(trajet.adresseDepart.adresse.toUpperCase())){
+                    t.push(trajet);
+                }
+                if(recherche.arrive.adresse.includes(trajet.adresseArrivee.adresse.toUpperCase())){
                     t.push(trajet);
                 }
             })
-            setTrajets(trajets["hydra:member"]);
+            console.log(t)
+            setFinish(true);
+            setTrajets(t);
         });
     }, [])
 
-    return trajets;
+    return {trajets,finish};
 }
 export default useSearch;

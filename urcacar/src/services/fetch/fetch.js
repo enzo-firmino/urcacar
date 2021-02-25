@@ -82,29 +82,16 @@ export function loginFetch(body, dispatch){
     })
 }
 
-function Options(jwt) {
+function Options() {
     return {
         method: 'GET',
         headers: new Headers({
-            Authorization: 'Bearer ' + jwt,
+            Authorization: 'Bearer ' + localStorage.getItem("jwt"),
         }),
     };
 }
 
-export function getTrajets(){
-    return fetch(url + "/api/trajets", Options(localStorage.getItem("jwt"))).then(response => response.json())
-}
-
-export function appendTrajet(trajet) {
-    return fetch(url + "/api/trajets", getOptions(trajet)).then((response) => response.json());
-}
-
-export function appendAdresse(ad) {
-    //const options = method('POST', body(trajet, localStorage.getItem("jwt"), mimeType('application/json')));
-    return fetch(url + "/api/adresses", getOptions(ad)).then((response) => response.json());
-}
-
-function getOptions(b) {
+function getPostOptions(b) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
@@ -115,7 +102,16 @@ function getOptions(b) {
         body: JSON.stringify(b),
         redirect: 'follow'
     };
-    console.log(b)
+    return requestOptions;
+}
+function getDelOptions() {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
+
+    var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders
+    };
     return requestOptions;
 }
 
@@ -124,8 +120,20 @@ export function updateTrajet(trajet) {
     return fetch(url + '/api/trajets/' + trajet.id, options).then((response) => response.json());
 }
 
+export function getMesTrajets() {
+    return fetch(url + "/api/trajets", Options()).then((response) => response.json());
+}
+
+export function appendTrajet(trajet) {
+    return fetch(url + "/api/trajets", getPostOptions(trajet)).then((response) => response.json());
+}
+
 export function cancelTrajet(trajetID) {
-    return fetch(url + '/api/trajets/' + trajetID, method('DELETE'));
+    return fetch(url + trajetID, getDelOptions()).then(response => {
+        if(response.ok){
+            window.location.reload(false);
+        }
+    });
 }
 
 /********************************************************************************************************************************
@@ -133,15 +141,15 @@ export function cancelTrajet(trajetID) {
 ********************************************************************************************************************************/
 
 export function getConversations(id){
-    return fetch(url + "/api/utilisateurs/" + id + "/conversations", Options(localStorage.getItem("jwt"))).then(response => response.json())
+    return fetch(url + "/api/utilisateurs/" + id + "/conversations", Options()).then(response => response.json())
 }
 
 export function getAllMessages(id){
-    return fetch(url + "/api/messages/" + id, Options(localStorage.getItem("jwt"))).then(response => response.json())
+    return fetch(url + "/api/messages/" + id, Options()).then(response => response.json())
 }
 
 export function appendMessage(message) {
-    return fetch(url + "/api/messages", getOptions(message)).then((response) => response.json());
+    return fetch(url + "/api/messages", getPostOptions(message)).then((response) => response.json());
 }
 
 /********************************************************************************************************************************
@@ -149,7 +157,7 @@ export function appendMessage(message) {
 ********************************************************************************************************************************/
 
 export function getInfo(fin){
-    return fetch(url + fin, Options(localStorage.getItem("jwt")))
+    return fetch(url + fin, Options())
     .then(response => response.json())
 }
 

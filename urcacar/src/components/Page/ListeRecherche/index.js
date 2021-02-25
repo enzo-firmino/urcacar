@@ -24,12 +24,22 @@ export function ListeRecherche(props) {
         nbPassager: history.location.state.nbPassager
     }
 
-    const trajets = useSearch(recherche);
+    const {trajets,finish} = useSearch(recherche);
+    console.log(finish)
 
-    if(trajets.length === 0){
-        return <Spinner animation="grow" variant="success" />;
+    if(!finish && trajets.length === 0){
+        return <div className='listeRecherche'>
+                    <RecapRecherche recherche={recherche}/>
+                    <Spinner animation="grow" variant="success" />
+                </div>;
     }
-
+    if(finish && trajets.length === 0){
+        return <div className='listeRecherche'>
+                    <RecapRecherche recherche={recherche}/>
+                    <p>Aucun résultat trouver</p>
+                </div>;
+    }
+    
     return (
         <div className='listeRecherche'>
             <RecapRecherche recherche={recherche}/>
@@ -43,32 +53,32 @@ export function ListeRecherche(props) {
     );
 }
 
-function RecapRecherche(props) {
+function RecapRecherche({recherche,...props}) {
     return (
         <div className='recapRecherche'>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <Button style={{backgroundColor: "transparent", borderColor: "transparent"}} href="/">
                     <Image style={{height: 25, width: 25, marginTop: "auto", marginBottom: "auto"}} src={retour}/>
                 </Button>
-                <span style={{fontSize: '20px'}}>{props.recherche.date}</span>
+                <span style={{fontSize: '20px'}}>{recherche.date}</span>
                 <table>
                     <tbody>
                     <tr>
-                        <td>{props.recherche.depart}</td>
+                        <td>{recherche.depart.adresse}</td>
                         <td><ArrowRight/></td>
-                        <td>{props.recherche.arrive}</td>
+                        <td>{recherche.arrive.adresse}</td>
                     </tr>
                     <tr>
-                        <td>{props.recherche.heureDepart}</td>
+                        <td>{recherche.heureDepart}</td>
                         <td><ArrowRight/></td>
-                        <td>{props.recherche.heureArrive}</td>
+                        <td>{recherche.heureArrive}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
             <div>
-                <span>{props.recherche.nbPassager} passagers</span>
+                <span>{recherche.nbPassager} passagers</span>
 
             </div>
         </div>
