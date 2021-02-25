@@ -2,33 +2,360 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9e24407-6637-458e-b350-25d0cfd50609" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/urcacar/src/components/Page/AddTrajet/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/urcacar/src/components/Page/MesTrajets/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/urcacar/src/components/Reusable/Rating/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/urcacar/src/styles/mesTrajets.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Map/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Map/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Page/DetailTrajet/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Page/DetailTrajet/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Page/FormSearchTrajet/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Page/FormSearchTrajet/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Page/ListeMessage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Page/ListeMessage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Page/ListeRecherche/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Page/ListeRecherche/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Page/Message/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Page/Message/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Page/Notation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Page/Notation/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Page/Profil/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Page/Profil/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Reusable/Footer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Reusable/Footer/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/components/Reusable/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/components/Reusable/Header/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/styles/detailTrajet.css" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/styles/detailTrajet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/styles/formSearchTrajet.css" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/styles/formSearchTrajet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/styles/listeRecherche.css" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/styles/listeRecherche.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urcacar/src/styles/recherchesRecentes.css" beforeDir="false" afterPath="$PROJECT_DIR$/urcacar/src/styles/recherchesRecentes.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/UcAPI/config/packages/mailer.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/UcAPI/src/Controller/MailerController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/UcAPI/templates/mail/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/doctrine/lexer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/doctrine/lexer/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/doctrine/lexer/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/EmailLexer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/EmailParser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/EmailValidator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/AtextAfterCFWS.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/CRLFAtTheEnd.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/CRLFX2.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/CRNoLF.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/CharNotAllowed.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/CommaInDomain.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ConsecutiveAt.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ConsecutiveDot.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/DomainAcceptsNoMail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/DomainHyphened.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/DotAtEnd.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/DotAtStart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ExpectingAT.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ExpectingATEXT.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ExpectingCTEXT.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ExpectingDTEXT.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ExpectingDomainLiteralClose.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/ExpectingQPair.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/InvalidEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/LocalOrReservedDomain.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/NoDNSRecord.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/NoDomainPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/NoLocalPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/UnclosedComment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/UnclosedQuotedString.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Exception/UnopenedComment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Parser/DomainPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Parser/LocalPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Parser/Parser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/DNSCheckValidation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/EmailValidation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/Error/RFCWarnings.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/Error/SpoofEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/Exception/EmptyValidationList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/MultipleErrors.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/MultipleValidationWithAnd.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/NoRFCWarningsValidation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/RFCValidation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Validation/SpoofCheckValidation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/AddressLiteral.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/CFWSNearAt.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/CFWSWithFWS.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/Comment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/DeprecatedComment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/DomainLiteral.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/DomainTooLong.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/EmailTooLong.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/IPV6BadChar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/IPV6ColonEnd.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/IPV6ColonStart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/IPV6Deprecated.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/IPV6DoubleColon.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/IPV6GroupCount.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/IPV6MaxGroups.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/LabelTooLong.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/LocalTooLong.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/NoDNSMXRecord.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/ObsoleteDTEXT.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/QuotedPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/QuotedString.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/TLD.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/src/Warning/Warning.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/container/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/container/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/container/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/container/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/container/src/ContainerExceptionInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/container/src/ContainerInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/container/src/NotFoundExceptionInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/src/EventDispatcherInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/src/ListenerProviderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/event-dispatcher/src/StoppableEventInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/AbstractLogger.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/InvalidArgumentException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/LogLevel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/LoggerAwareInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/LoggerAwareTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/LoggerInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/LoggerTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/NullLogger.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/Test/DummyTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/Test/LoggerInterfaceTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/Test/TestLogger.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/psr/log/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/deprecation-contracts/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/deprecation-contracts/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/deprecation-contracts/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/deprecation-contracts/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/deprecation-contracts/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/deprecation-contracts/function.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts/Event.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts/EventDispatcherInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Debug/WrappedListener.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/EventDispatcher.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/EventDispatcherInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/EventSubscriberInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/GenericEvent.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/ImmutableEventDispatcher.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/LegacyEventDispatcherProxy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/DataCollector/MessageDataCollector.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/DelayedEnvelope.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Envelope.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Event/MessageEvent.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Event/MessageEvents.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/EventListener/EnvelopeListener.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/EventListener/MessageListener.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/EventListener/MessageLoggerListener.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/ExceptionInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/HttpTransportException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/IncompleteDsnException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/InvalidArgumentException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/LogicException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/RuntimeException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/TransportException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/TransportExceptionInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Exception/UnsupportedSchemeException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Header/MetadataHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Header/TagHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Mailer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/MailerInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Messenger/MessageHandler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Messenger/SendEmailMessage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/SentMessage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Test/Constraint/EmailCount.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Test/Constraint/EmailIsQueued.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Test/TransportFactoryTestCase.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/AbstractApiTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/AbstractHttpTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/AbstractTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/AbstractTransportFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Dsn.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/FailoverTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/NativeTransportFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/NullTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/NullTransportFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/RoundRobinTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/SendmailTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/SendmailTransportFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Auth/AuthenticatorInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Auth/CramMd5Authenticator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Auth/LoginAuthenticator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Auth/PlainAuthenticator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Auth/XOAuth2Authenticator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/EsmtpTransportFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Stream/AbstractStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Stream/ProcessStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/TransportFactoryInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/TransportInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/Transport/Transports.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mailer/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Address.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/BodyRendererInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/CharacterStream.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Crypto/DkimOptions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Crypto/DkimSigner.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Crypto/SMime.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Crypto/SMimeEncrypter.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Crypto/SMimeSigner.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/DependencyInjection/AddMimeTypeGuesserPass.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Email.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/AddressEncoderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/Base64ContentEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/Base64Encoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/Base64MimeHeaderEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/ContentEncoderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/EightBitContentEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/EncoderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/IdnAddressEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/MimeHeaderEncoderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/QpContentEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/QpEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/QpMimeHeaderEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Encoder/Rfc2231Encoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Exception/AddressEncoderException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Exception/ExceptionInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Exception/InvalidArgumentException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Exception/LogicException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Exception/RfcComplianceException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Exception/RuntimeException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/FileBinaryMimeTypeGuesser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/FileinfoMimeTypeGuesser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/AbstractHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/DateHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/HeaderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/Headers.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/IdentificationHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/MailboxHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/MailboxListHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/ParameterizedHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/PathHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Header/UnstructuredHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Message.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/MessageConverter.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/MimeTypeGuesserInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/MimeTypes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/MimeTypesInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/AbstractMultipartPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/AbstractPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/DataPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/MessagePart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/Multipart/AlternativePart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/Multipart/DigestPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/Multipart/FormDataPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/Multipart/MixedPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/Multipart/RelatedPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/SMimePart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Part/TextPart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/RawMessage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Resources/bin/update_mime_types.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Test/Constraint/EmailAddressContains.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Test/Constraint/EmailAttachmentCount.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Test/Constraint/EmailHasHeader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Test/Constraint/EmailHeaderSame.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Test/Constraint/EmailHtmlBodyContains.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/Test/Constraint/EmailTextBodyContains.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/mime/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Idn.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Info.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/DisallowedRanges.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/Regex.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/deviation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/disallowed.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/disallowed_STD3_mapped.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/disallowed_STD3_valid.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/ignored.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/mapped.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/Resources/unidata/virama.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/bootstrap80.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/Normalizer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/canonicalComposition.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/canonicalDecomposition.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/combiningClass.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/Resources/unidata/compatibilityDecomposition.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/bootstrap80.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/Mbstring.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/Resources/unidata/lowerCase.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/Resources/unidata/titleCaseRegexp.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/Resources/unidata/upperCase.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/bootstrap80.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php72/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php72/Php72.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php72/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php72/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php72/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/Php80.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php80/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/Attribute/Required.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/ResetInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/ServiceLocatorTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/ServiceProviderInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/ServiceSubscriberInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/ServiceSubscriberTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/Test/ServiceLocatorTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendor/symfony/service-contracts/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/projet-wimsi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet-wimsi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/UcAPI/.env" beforeDir="false" afterPath="$PROJECT_DIR$/API/UcAPI/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/UcAPI/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/API/UcAPI/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/UcAPI/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/API/UcAPI/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/UcAPI/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/API/UcAPI/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="composer.json" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,6 +366,27 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+    </include_path>
+  </component>
   <component name="ProjectId" id="1kmiq4hKGo1sm6mmPVtR1UttHHP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -46,6 +394,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -78,6 +428,7 @@
       <workItem from="1606840862965" duration="1082000" />
       <workItem from="1606902989163" duration="5276000" />
       <workItem from="1606996616163" duration="10572000" />
+      <workItem from="1614271855275" duration="1754000" />
     </task>
     <servers />
   </component>
