@@ -22,10 +22,10 @@ export function Profil() {
 
     return (
         <div className="container bg-light">
-            <Top conducteur={utilisateur}/>
+            <Top conducteur={utilisateur} isItMyProfile={isItMyProfil}/>
             { isItMyProfil && <VoitureForm voiture={utilisateur.voiture}/>}
             { !isItMyProfil && <Voiture voiture={utilisateur.voiture}/>}
-            <Preferences conducteur={utilisateur}/>
+            <Preferences conducteur={utilisateur} isItMyProfile={isItMyProfil}/>
             { isItMyProfil && <Notification utilisateur={utilisateur} notifs={
                 {
                     resAcceptee: utilisateur.resAcceptee,

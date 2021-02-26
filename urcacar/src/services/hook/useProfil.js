@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {getUser} from '../fetch/fetch';
+import {getInfo, getUser} from '../fetch/fetch';
 
 function useProfil(history){
 
@@ -9,7 +9,7 @@ function useProfil(history){
 
     useEffect(() => {
         if (history.location.state === undefined) {
-            getUser('/api/utilisateurs/11').then((user) => {
+            getInfo("/api/utilisateurs").then((user) => {
                 console.log('user', user);
                 setUtilisateur(user);
 

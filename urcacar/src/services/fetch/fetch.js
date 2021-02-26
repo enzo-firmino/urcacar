@@ -104,12 +104,14 @@ export function cancelTrajet(trajetID) {
 *********************************************************MESSAGE*****************************************************************
 ********************************************************************************************************************************/
 
-export function getConversations(id){
-    return fetch(url + "/api/utilisateurs/" + id + "/conversations", Options()).then(response => response.json())
-}
-
-export function getAllMessages(id){
-    return fetch(url + "/api/messages/" + id, Options()).then(response => response.json())
+export function getAllMessages(utilisateur1, utilisateur2) {
+    return fetch(url + "/api/conversation", getPostOptions({
+        utilisateur1,
+        utilisateur2
+    })).then(response => {
+        console.log('response', response);
+        return response.json();
+    })
 }
 
 export function appendMessage(message) {

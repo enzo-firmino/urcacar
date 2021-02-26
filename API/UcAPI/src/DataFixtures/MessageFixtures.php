@@ -28,7 +28,6 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
                 $message->setDestinataire($this->getReference(UserFixtures::JEAN));
                 $message->setEnvoyeur($this->getReference(UserFixtures::ROMAIN));
             }
-            $message->setTrajet($this->getReference(TrajetFixtures::RTF));
             $manager->persist($message);
         }
         $manager->flush();

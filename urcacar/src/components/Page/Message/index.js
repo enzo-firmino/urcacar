@@ -1,52 +1,47 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Image, Form, Button, Row, Col } from "react-bootstrap";
 import retour from '../../../assets/Retour.png';
-import {appendMessage} from "../../../services/fetch/fetch";
+import {appendMessage, getAllMessages, getInfo} from "../../../services/fetch/fetch";
 import '../../../styles/message.css';
 import {useHistory} from "react-router-dom";
 
-export default function Message(props) {
+export default function Message() {
 
 
     const history = useHistory();
 
-     let otherUtilisateur = history.location.state.utilisateur;
-     let trajet = history.location.state.trajet;
+     let otherUtilisateur = history.location.state.otherUtilisateur;
+     let utilisateurConnecte = history.location.state.utilisateurConnecte;
 
-    const listMessage = [
-        {
-            text: 'ouioui',
-            id: '11',
-        },
-        {
-            text: 'ertert',
-            id: '11',
-        },
-        {
-            text: 'fsqfe',
-            id: '12',
-        },
-        {
-            text: 'vfereza',
-            id: '11',
-        },
-        {
-            text: 'aezze',
-            id: '12',
-        },
-        {
-            text: 'grtue',
-            id: '12',
-        },
-    ];
+    const [messages, setMessages] = useState([]);
 
-    const listMessagesItem = listMessage.map((message) =>
-        <MessageItem key={message.text} message={message}/>
-    );
 
-    const [message, setMessage] = useState('');
+    useEffect(() => {
+        getAllMessages(otherUtilisateur['@id'], '13').then((messages) => {
+            console.log('messages', messages);
+            setMessages(messages);
+        });
+    }, []);
+
+
+
+    const listMessagesItem = messages.map((message) => {
+        let isMine = message.envoyeur_id === utilisateurConnecte['@id'] ? message.destinataire_id : message.envoyeur_id;
+        return <MessageItem key={message.text} message={message} isMine={isMine}/>
+    });
+
+    const [messageTexte, setMessage] = useState('');
+
 
     function sendMessage() {
+
+        let message = {
+            texte: messageTexte,
+            envoyeur_id: utilisateurConnecte['@id'],
+            destinataire_id: otherUtilisateur['@id'],
+            date: Date.now(),
+        }
+
         appendMessage(message);
     }
 
@@ -56,7 +51,7 @@ export default function Message(props) {
                 <div className="container">
                     <div className="row p-2">
                         <Image className="pp" src={otherUtilisateur.photo} roundedCircle/>
-                        <h1>{otherUtilisateur.prenom}   |   {trajet.adresseDepart.ville} - {trajet.adresseArrivee.ville}</h1>
+                        <h1>{otherUtilisateur.prenom}</h1>
                     </div>
                 </div>
             </div>
@@ -76,12 +71,7 @@ export default function Message(props) {
 }
 
 
-export function MessageItem({message}) {
-
-    let currentUser = '11';
-
-    let isMine = message.id === currentUser;
-
+export function MessageItem({message, isMine}) {
 
     return (
         <div className={[
@@ -94,9 +84,6 @@ export function MessageItem({message}) {
                 </div>
             </div>
         </div>
-
     )
-
-
 }
 
