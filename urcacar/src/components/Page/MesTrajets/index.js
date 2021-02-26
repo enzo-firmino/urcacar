@@ -13,10 +13,18 @@ import Badge from "react-bootstrap/Badge";
 import {ListGroup, Spinner} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import { cancelTrajet, getMesTrajets } from "../../../services/fetch/fetch";
+import { cancelTrajet, getInfo, getMesTrajets } from "../../../services/fetch/fetch";
 
 export function MesTrajetsReservations(props) {
     let { path, url } = useRouteMatch();
+
+    const [utilisateur, setUtilisateur] = useState({});
+
+    useEffect(() => {
+        getInfo("/api/utilisateurs").then((response) => {
+            setUtilisateur(response);
+        });
+    }, []);
 
     const mesReservations = [
         {idTrajet: 1, conducteur: 'Romane',date:'12/05', depart: 'Reims', arrive: 'Paris',

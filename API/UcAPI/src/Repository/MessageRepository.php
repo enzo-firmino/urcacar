@@ -41,7 +41,7 @@ class MessageRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function findConversation(int $trajet, int $p, int $d)
+    public function findConversation(int $p, int $d)
     {
         // $this->createQueryBuilder('a')
         //     ->andWhere('a.trajet = :trajet')

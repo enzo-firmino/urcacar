@@ -185,6 +185,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Reserver::class, mappedBy="passager")
+     * @Groups({"infoUser"})
      */
     private $reservations;
 

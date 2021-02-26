@@ -29,15 +29,9 @@ export function DetailTrajet() {
     }
     console.log(trajet)
 
-    useEffect(() => {
-        
-    }, []);
-
     if(trajet === null || conducteur === null){
         return <Spinner animation="grow" variant="success" />;
     }
-
-    let place = trajet.nbPlace - res;
 
     return (
         <Container className='detailTrajet container bg-light'>
@@ -54,7 +48,7 @@ export function DetailTrajet() {
                     </Row>
                     <Row>
                         <span style={{color: 'rgba(0, 0, 0, 0.6)', paddingRight: '15px'}}> Places disponibles</span>
-                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{place}</span>
+                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.nbPlace - trajet.reservations.length}</span>
                     </Row>
                 </Col>
             </Row>
