@@ -30,6 +30,18 @@ class UtilisateurController extends AbstractController
     }
 
     /**
+     * @Route("/api/utilisateurs/{id}", name="utilisateurs")
+     */
+    public function test(int $id,SerializerInterface $serializer): Response
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository(Utilisateur::class);
+        $response = $repository->findby(['id' => $id]);
+        $entityAsArray = $serializer->normalize($response, null);
+        return new JsonResponse($entityAsArray[0]);
+    }
+
+    /**
      * @Route("/api/utilisateur/{id}/avis", name="AvisUtilisateur")
      */
     public function getAvis(int $id,SerializerInterface $serializer): Response

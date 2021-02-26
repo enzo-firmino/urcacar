@@ -6,8 +6,6 @@ import '../../../styles/message.css';
 import {useHistory} from "react-router-dom";
 
 export default function Message() {
-
-
     const history = useHistory();
 
      let otherUtilisateur = history.location.state.otherUtilisateur;
@@ -17,7 +15,7 @@ export default function Message() {
 
 
     useEffect(() => {
-        getAllMessages(otherUtilisateur['@id'], '13').then((messages) => {
+        getAllMessages(otherUtilisateur.id, utilisateurConnecte.id).then((messages) => {
             console.log('messages', messages);
             setMessages(messages);
         });
@@ -26,7 +24,7 @@ export default function Message() {
 
 
     const listMessagesItem = messages.map((message) => {
-        let isMine = message.envoyeur_id === utilisateurConnecte['@id'] ? message.destinataire_id : message.envoyeur_id;
+        let isMine = message.envoyeur_id === utilisateurConnecte.id ? message.destinataire_id : message.envoyeur_id;
         return <MessageItem key={message.text} message={message} isMine={isMine}/>
     });
 
@@ -37,8 +35,8 @@ export default function Message() {
 
         let message = {
             texte: messageTexte,
-            envoyeur_id: utilisateurConnecte['@id'],
-            destinataire_id: otherUtilisateur['@id'],
+            envoyeur_id: utilisateurConnecte.id,
+            destinataire_id: otherUtilisateur.id,
             date: Date.now(),
         }
 

@@ -171,7 +171,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="destinataire")
-     * @Groups({"infoUser", "infoTrajet"})
+     * @Groups({"infoTrajet"})
      */
     private $avisRecu;
 

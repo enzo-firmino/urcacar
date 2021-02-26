@@ -9,9 +9,9 @@ export default function ListeMessage(props) {
 
     const [conversations, setConversations] = useState([]);
 
+    //OK
     useEffect(() => {
         getInfo('/api/conversations').then(r => {
-            console.log('conversations', r);
             setConversations(r)
         });
     }, []);
@@ -36,11 +36,11 @@ function Conversation({conversation}) {
     const [otherUtilisateur, setOtherUtilisateur] = useState(null);
     const [utilisateurConnecte, setUtilisateurConnecte] = useState(null);
 
-
+    //INUTILE
     useEffect(() => {
-        getInfo("/api/utilisateur").then((response) => {
+        getInfo("/api/utilisateur/").then((response) => {
             setUtilisateurConnecte(response);
-            console.log(utilisateurConnecte);
+            console.log("Utilisateur co:",response);
             let otherUtilisateurId = conversation.envoyeur_id === response.id ? conversation.destinataire_id : conversation.envoyeur_id;
             getInfo('/api/utilisateurs/' + otherUtilisateurId).then((utilisateur) => {
                 setOtherUtilisateur(utilisateur);
@@ -55,8 +55,8 @@ function Conversation({conversation}) {
         history.push({
             pathname: '/messages',
             state: {
-                    otherUtilisateur,
                     utilisateurConnecte,
+                    otherUtilisateur
                 }
         });
     }

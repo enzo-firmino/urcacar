@@ -114,8 +114,8 @@ export function reserverTrajet(reservation) {
 
 export function getAllMessages(utilisateur1, utilisateur2) {
     return fetch(url + "/api/conversation", getPostOptions({
-        utilisateur1,
-        utilisateur2
+        envoyeur_id: utilisateur1,
+        destinataire_id: utilisateur2
     })).then(response => {
         console.log('response', response);
         return response.json();
@@ -155,6 +155,20 @@ function getPostOptions(b) {
 
     var requestOptions = {
         method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(b),
+        redirect: 'follow'
+    };
+    return requestOptions;
+}
+
+function getGetOptions(b) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
+
+    var requestOptions = {
+        method: 'GET',
         headers: myHeaders,
         body: JSON.stringify(b),
         redirect: 'follow'
