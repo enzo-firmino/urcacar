@@ -3,7 +3,6 @@
 namespace App\Controller\Api;
 
 use App\Entity\Message;
-use App\Entity\Utilisateur;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,7 +29,7 @@ class ConversationController extends AbstractController
     }
 
     /**
-     * @Route("/api/conversation", name="conversations")
+     * @Route("/api/conversation", name="conversation")
      */
     public function getConversation(Request $request)
     {

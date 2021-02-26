@@ -19,32 +19,32 @@ class TrajetRepository extends ServiceEntityRepository
         parent::__construct($registry, Trajet::class);
     }
 
-    // /**
-    //  * @return Trajet[] Returns an array of Trajet objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findTrajetsByUser(int $user)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+        // $em = $this->getEntityManager();
+
+        // $statement = $em->getConnection()->prepare("
+
+        //     SELECT a.prix,a.nb_place,a.date_depart,a.heure_arrivee,a.heure_depart
+        //     FROM trajet a INNER JOIN adresse as ad INNER JOIN adresse as aa
+        //     WHERE a.conducteur_id = :user
+
+        //     SELECT a.prix,a.nbPlace,a.dateDepart,a.heureArrivee,a.heureDepart,ad,aa
+        //     FROM trajet a INNER JOIN a.adresseDepart as ad INNER JOIN a.adresseArrivee as aa
+        //     WHERE a.conducteur = :user"
+        // );
+        // $statement->bindValue('user', $user);
+        // $statement->execute();
+        // $result = $statement->fetchAll();
+
+        // return $result;
+
+        return $this->createQueryBuilder('a')
+            ->where('a.conducteur = :user')
+            ->setParameter('user', $user)
+            ->orderBy('a.dateDepart', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Trajet
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

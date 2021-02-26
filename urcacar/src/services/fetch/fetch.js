@@ -36,27 +36,6 @@ export function updateUser(id, updates) {
     }).then(response => response.json())
 }
 
-
-/********************************************************************************************************************************
- *********************************************************VOITURE*****************************************************************
- ********************************************************************************************************************************/
-
-export function updateVoiture(id, voiture){
-    console.log(voiture);
-    return fetch(url + id, {
-        method: 'PUT',
-        body: JSON.stringify(voiture),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: 'Bearer ' + localStorage.getItem("jwt"),
-        }
-    }).then(response => response.json())
-}
-
-/********************************************************************************************************************************
-*********************************************************TRAJETS*****************************************************************
-********************************************************************************************************************************/
-
 export function loginFetch(body, dispatch){
     var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -82,41 +61,30 @@ export function loginFetch(body, dispatch){
     })
 }
 
-function Options() {
-    return {
-        method: 'GET',
-        headers: new Headers({
+/********************************************************************************************************************************
+ *********************************************************VOITURE*****************************************************************
+ ********************************************************************************************************************************/
+
+export function updateVoiture(id, voiture){
+    console.log(voiture);
+    return fetch(url + id, {
+        method: 'PUT',
+        body: JSON.stringify(voiture),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
             Authorization: 'Bearer ' + localStorage.getItem("jwt"),
-        }),
-    };
+        }
+    }).then(response => response.json())
 }
 
-function getPostOptions(b) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
+/********************************************************************************************************************************
+*********************************************************TRAJETS*****************************************************************
+********************************************************************************************************************************/
 
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: JSON.stringify(b),
-        redirect: 'follow'
-    };
-    return requestOptions;
-}
-function getDelOptions() {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
 
-    var requestOptions = {
-        method: 'DELETE',
-        headers: myHeaders
-    };
-    return requestOptions;
-}
 
 export function updateTrajet(trajet) {
-    const options = method('PATCH', body(trajet, mimeType('application/json')));
+    const options = method('PUT', body(trajet, mimeType('application/json')));
     return fetch(url + '/api/trajets/' + trajet.id, options).then((response) => response.json());
 }
 
@@ -164,6 +132,40 @@ export function getInfo(fin){
 /********************************************************************************************************************************
 *********************************************************AUTRE*******************************************************************
 ********************************************************************************************************************************/
+
+function Options() {
+    return {
+        method: 'GET',
+        headers: new Headers({
+            Authorization: 'Bearer ' + localStorage.getItem("jwt"),
+        }),
+    };
+}
+
+function getPostOptions(b) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(b),
+        redirect: 'follow'
+    };
+    return requestOptions;
+}
+
+function getDelOptions() {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
+
+    var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders
+    };
+    return requestOptions;
+}
 
 function credential(options = {}) {
     return {

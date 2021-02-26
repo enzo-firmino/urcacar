@@ -14,16 +14,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *      normalizationContext={"groups": {"infoAdresse"}, {"infoTrajet"}},
  *      itemOperations={
- *          "get",
- *          "put"={"security"="is_granted('ROLE_USER')"},
- *          "delete"={"security"="is_granted('ROLE_USER')"}
+ *          "get"
  *      },
  *      collectionOperations={
- *           "get",
- *           "post"={
- *              "security"="is_granted('ROLE_USER')",
- *              "controller"=App\Controller\Api\AdresseCreateController::class
- *           }
+ *           "get"
  *      },
  * )
  */

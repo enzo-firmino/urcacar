@@ -5,6 +5,9 @@ namespace App\Controller\Api;
 use App\Entity\Trajet;
 use App\Entity\Adresse;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TrajetCreateController extends AbstractController
@@ -51,5 +54,19 @@ class TrajetCreateController extends AbstractController
         }else{
             return $depart[0];
         }
+    }
+
+    /**
+     * @Route("/api/mesTrajets", name="mesTrajets")
+     */
+    public function getMesTrajets(SerializerInterface $serializer){
+        $repository = $this->getDoctrine()
+            ->getRepository(Trajet::class);
+        $response = $repository->findTrajetsByUser($this->security->getUser()->getId());
+        $entityAsArray = $serializer->normalize($response, null);
+        foreach($entityAsArray as $key => $value){
+            unset($entityAsArray[$key]["conducteur"]);
+        }
+        return new JsonResponse($entityAsArray);
     }
 }

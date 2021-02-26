@@ -30,11 +30,12 @@ class MessageRepository extends ServiceEntityRepository
             (SELECT MAX(date) AS maxdate
             FROM message
             WHERE
-            envoyeur_id = '11'
-                OR destinataire_id = '11'
-            GROUP BY IF( envoyeur_id = '11', destinataire_id, envoyeur_id )
+            envoyeur_id = :user
+                OR destinataire_id = :user
+            GROUP BY IF( envoyeur_id = :user, destinataire_id, envoyeur_id )
             )"
         );
+        $statement->bindValue('user', $user);
         $statement->execute();
         $result = $statement->fetchAll();
 
@@ -58,16 +59,18 @@ class MessageRepository extends ServiceEntityRepository
         $statement = $em->getConnection()->prepare("
             SELECT * 
             FROM `message` 
-            WHERE trajet_id = '7'
-            AND (destinataire_id = '3'
-                OR envoyeur_id = '3')
-            AND (destinataire_id = '12'
-                OR envoyeur_id = '12')
+            WHERE trajet_id = :trajet
+            AND (destinataire_id = :p
+                OR envoyeur_id = :p)
+            AND (destinataire_id = :d
+                OR envoyeur_id = :d)
             ORDER BY date ASC"
         );
+        $statement->bindValue('trajet', $trajet);
+        $statement->bindValue('p', $p);
+        $statement->bindValue('d', $d);
         $statement->execute();
         $result = $statement->fetchAll();
-
         return $result;
     }
 }
