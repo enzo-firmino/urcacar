@@ -8,8 +8,7 @@ export default function Avis({source}) {
     const [avis, setAvis] = useState(null);
     useEffect(() => {
         getInfo(source).then(response => {
-            setAvis(response.avisRecu);
-            
+            setAvis(response);
         });
     }, [])
 

@@ -2,6 +2,8 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Avis;
+use App\Entity\Utilisateur;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,5 +27,16 @@ class UtilisateurController extends AbstractController
         $user = $serializer->normalize($this->security->getUser(), null);
         
         return new JsonResponse($user);
+    }
+
+    /**
+     * @Route("/api/utilisateur/{id}/avis", name="AvisUtilisateur")
+     */
+    public function getAvis(int $id,SerializerInterface $serializer): Response
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository(Avis::class);
+        $response = $repository->findAvisById($id);
+        return new JsonResponse($response);
     }
 }

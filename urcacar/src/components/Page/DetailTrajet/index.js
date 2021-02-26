@@ -14,12 +14,22 @@ import 'reactjs-popup/dist/index.css';
 import MapView from "../../Map";
 import Avis from "../../Reusable/Avis";
 import useDetailsProfil from "../../../services/hook/useDetailsProfil";
+import { getInfo, reserverTrajet } from "../../../services/fetch/fetch";
 
 export function DetailTrajet() {
 
     const history = useHistory();
-    const {trajet,conducteur} = history.location.state;
+    const {trajet} = history.location.state;
     const [res, setRes] = useState("");
+    console.log(trajet);
+
+    const [utilisateur, setUtilisateur] = useState({});
+
+    useEffect(() => {
+        getInfo("/api/utilisateur").then((response) => {
+            setUtilisateur(response);
+        });
+    }, []);
 
     function onClickProfile() {
         history.push({
@@ -27,11 +37,26 @@ export function DetailTrajet() {
             state: {conducteur: trajet.conducteur}
         })
     }
-    console.log(trajet)
 
-    if(trajet === null || conducteur === null){
+    if(trajet === null || Object.keys(utilisateur).length === 0){
         return <Spinner animation="grow" variant="success" />;
     }
+
+    function reserver(IDutilisateur, IDtrajet){
+        const reservation = {
+            acceptee: false,
+            passager: "/api/utilisateurs/" + IDutilisateur,
+            trajet: "/api/trajets/" + IDtrajet
+        }
+        reserverTrajet(reservation).then(response => {
+            if(response.ok){
+                history.push({
+                    pathname: '/mesTrajets'
+                })
+            }
+        });
+    }
+    console.log("Condition :",utilisateur,trajet["@id"],utilisateur.reservations.filter(reservation => reservation.trajet === trajet["@id"]).length !== 0)
 
     return (
         <Container className='detailTrajet container bg-light'>
@@ -39,7 +64,7 @@ export function DetailTrajet() {
                 <h2>{trajet.date}</h2>
             </Row>
             <Row className='row-padding'>
-                <Profil conducteur={conducteur} onClickProfile={onClickProfile}/>
+                <Profil conducteur={trajet.conducteur} onClickProfile={onClickProfile}/>
                 <Col className='border-left'>
                     <RecapTrajet trajet={trajet}/>
                     <Row>
@@ -57,15 +82,15 @@ export function DetailTrajet() {
                     <a href='/messagerie/id'>Contacter</a>
                 </Col>
                 <Col className='btn-bg-green'>
-                    <Button>Réserver</Button>
+                    <Button disabled={utilisateur.reservations.filter(reservation => reservation.trajet === trajet["@id"]).length !== 0} onClick={() => reserver(utilisateur.id, trajet.id)}>Réserver</Button>
                 </Col>
             </Row>
             <Row className='row-padding'>
                 <Col>
-                    <Vehicule voiture={conducteur.voiture}/>
+                    <Vehicule voiture={trajet.conducteur.voiture}/>
                 </Col>
                 <Col className='border-left'>
-                    <Avis source={conducteur["@id"]}/>
+                    <Avis source={'/api/utilisateur/'+trajet.conducteur["@id"].split('/')[3]+'/avis'}/>
                 </Col>
             </Row>
         </Container>

@@ -23,7 +23,6 @@ class ReserverRepository extends ServiceEntityRepository
     public function findReservationById(int $trajet)
     {
         return $this->createQueryBuilder('a')
-            ->select('a.acceptee')
             ->where('a.trajet = :id')
             ->setParameter('id', $trajet)
             ->orderBy('a.id', 'ASC')

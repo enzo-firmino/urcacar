@@ -13,7 +13,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      normalizationContext={"groups": {"infoReservation"}},
  *      itemOperations={
  *          "get",
- *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
+ *          "delete"={"security"="is_granted('ROLE_USER')"},
+ *          "put"={"security"="is_granted('ROLE_USER')"}
  *      },
  *      collectionOperations={
  *           "get",
@@ -27,24 +28,27 @@ class Reserver
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"infoReservation", "infoUser"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservations")
      * @ORM\JoinColumn(onDelete="CASCADE",nullable=false)
+     * @Groups({"infoReservation", "infoUser"})
      */
     private $passager;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="reservations")
      * @ORM\JoinColumn(onDelete="CASCADE",nullable=false)
+     * @Groups({"infoReservation", "infoUser"})
      */
     private $trajet;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"infoReservation", "infoTrajet"})
+     * @Groups({"infoReservation", "infoTrajet", "infoUser"})
      */
     private $acceptee;
 

@@ -15,9 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ApiResource(
  *      normalizationContext={"groups": {"infoUser"}},
  *      itemOperations={
- *          "get"={
- *              "path"="/utilisateurs/{id}"
- *          },
+ *          "get",
  *          "put"={
  *              "path"="/utilisateurs/{id}.{_format}",
  *              "security"="is_granted('ROLE_USER')"
@@ -173,7 +171,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="destinataire")
-     * @Groups({"infoUser"})
+     * @Groups({"infoUser", "infoTrajet"})
      */
     private $avisRecu;
 

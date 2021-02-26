@@ -7,13 +7,14 @@ import {
     useRouteMatch, NavLink
 } from "react-router-dom";
 import Image from "react-bootstrap/Image";
+import { useHistory } from "react-router-dom";
 import profilePicture from "../../../assets/profilepicture.jpg";
 import {ArrowDown} from "react-bootstrap-icons";
 import Badge from "react-bootstrap/Badge";
 import {ListGroup, Spinner} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import { cancelTrajet, getInfo, getMesTrajets } from "../../../services/fetch/fetch";
+import { cancelTrajet, getInfo, getMesTrajets, acceptReservation, refuseReservation } from "../../../services/fetch/fetch";
 
 export function MesTrajetsReservations(props) {
     let { path, url } = useRouteMatch();
@@ -21,29 +22,15 @@ export function MesTrajetsReservations(props) {
     const [utilisateur, setUtilisateur] = useState({});
 
     useEffect(() => {
-        getInfo("/api/utilisateurs").then((response) => {
+        getInfo("/api/utilisateur").then((response) => {
             setUtilisateur(response);
         });
     }, []);
 
-    const mesReservations = [
-        {idTrajet: 1, conducteur: 'Romane',date:'12/05', depart: 'Reims', arrive: 'Paris',
-            heureDepart: '12h10', heureArrive: '12h50', prix: 125},
-
-        {idTrajet: 2, conducteur: 'Romane',date:'16/05', depart: 'Reims', arrive: 'Paris',
-            heureDepart: '12h10', heureArrive: '12h50', prix: 125},
-    ];
-
-    const mesTrajets = [
-        {idTrajet: 1,date:'12/05', depart: 'Reims', arrive: 'Paris',
-            heureDepart: '12h10', heureArrive: '12h50', prix: 125, nbPlaces: 4, nbPassagers: 3},
-
-        {idTrajet: 2,date:'16/05', depart: 'Reims', arrive: 'Paris',
-            heureDepart: '12h10', heureArrive: '12h50', prix: 125, nbPlaces: 4, nbPassagers: 3},
-    ];
-
-    const [mesReservationsCurrentLink, setMesReservationsCurrentLink] = useState(true);
-    const [mesTrajetsCurrentLink, setMesTrajetsCurrentLink] = useState(false);
+    if(Object.keys(utilisateur).length === 0){
+        return <Spinner animation="grow" variant="success" />
+    }
+    console.log("Utilisateur",utilisateur)
 
     return (
         <div className='mesTrajets'>
@@ -53,11 +40,9 @@ export function MesTrajetsReservations(props) {
                           activeStyle={{
                               borderBottom: "solid 2px black",
                           }}
-                          className={mesReservationsCurrentLink}
                     >Mes Réservations</NavLink>
                     <div className='separateur'/>
                     <NavLink
-                          className={mesReservationsCurrentLink}
                           to={`${url}/mesTrajets`}
                           activeStyle={{
                               borderBottom: "solid 2px black",
@@ -66,13 +51,13 @@ export function MesTrajetsReservations(props) {
 
             <Switch>
                 <Route exact path={path}>
-                    <MesReservations reservations={mesReservations}/>
+                    <MesReservations reservations={utilisateur.reservations}/>
                 </Route>
                 <Route path={`${path}/mesTrajets`}>
-                    <MesTrajets trajets={mesTrajets} demandesReservations={mesReservations}/>
+                    <MesTrajets demandesReservations={utilisateur.trajetsProposes}/>
                 </Route>
                 <Route path={`${path}/mesReservations`}>
-                    <MesReservations reservations={mesReservations}/>
+                    <MesReservations reservations={utilisateur.reservations}/>
                 </Route>
             </Switch>
         </div>
@@ -82,20 +67,31 @@ export function MesTrajetsReservations(props) {
 function MesTrajets({demandesReservations}) {
 
     const [mesTrajets,setMesTrajets] = useState([]);
+    const [finish,setFinish] = useState(false);
     useEffect(() => {
-        getMesTrajets().then(response => setMesTrajets(response));
+        getMesTrajets().then(response => {setMesTrajets(response); setFinish(true)});
     }, [])
     
-    if(mesTrajets.length === 0){
+    if(mesTrajets.length === 0 && !finish){
         return <Spinner animation="grow" variant="success" />
+    }
+    if(mesTrajets.length === 0 && finish){
+        return <p>Vous n'avez encore proposer aucun trajet.</p>
     }
 
     const trajets = mesTrajets.map((trajet, index) =>
         <MonTrajet key={index} trajet={trajet} />
     );
-    const mesDemandesReservation = demandesReservations.map((demande, index) =>
-        <MaDemandeReservation key={index} demande={demande} />
+
+    const mesDemandesReservation = demandesReservations.map((demande, index) => {
+            return demande.reservations.map((demande, index) => {
+                if(!demande.acceptee){
+                    return <MaDemandeReservation key={index} demande={demande} />
+                }
+            })
+        }
     );
+
     return (
         <div className='mesTrajets'>
             <div className='div-padding-top-bottom'>
@@ -107,7 +103,7 @@ function MesTrajets({demandesReservations}) {
             <div>
                 <span className='span-title'>Mes demandes de réservations</span>
                 <ListGroup>
-                    {mesDemandesReservation}
+                    {mesDemandesReservation.filter(demande => demande.length > 0 && demande[0] !== undefined).length === 0 ? <p>Aucune demande de reservation pour le moment</p> : mesDemandesReservation}
                 </ListGroup>
             </div>
 
@@ -117,24 +113,28 @@ function MesTrajets({demandesReservations}) {
 }
 
 function MesReservations({reservations}) {
-    const reservationAttente = reservations.map((trajet, index) =>
-          <MaReservation key={index} trajet={trajet} />
+
+    const reservationAttenteList = reservations.filter((reservation) => !reservation.acceptee);
+    const reservationAccepteeList = reservations.filter((reservation) => reservation.acceptee);
+
+    const reservationAttente = reservationAttenteList.map((reservation, index) =>
+          <MaReservation key={index} reservation={reservation} />
     );
-    const reservationAcceptee = reservations.map((trajet, index) =>
-        <MaReservation key={index} trajet={trajet} />
+    const reservationAcceptee = reservationAccepteeList.map((reservation, index) =>
+        <MaReservation key={index} reservation={reservation} />
     );
     return (
         <div className='mesReservations'>
             <div className='div-padding-top-bottom'>
                 <span className='span-title'>Réservation acceptée</span>
                 <ListGroup>
-                    {reservationAcceptee}
+                    {reservationAcceptee.length === 0 ? <p>Aucune réservation acceptée.</p>:reservationAcceptee}
                 </ListGroup>
             </div>
             <div>
                 <span className='span-title'>Réservation en attente</span>
                 <ListGroup>
-                    {reservationAttente}
+                    {reservationAttente.length === 0 ? <p>Aucune réservation en attente.</p>:reservationAttente}
                 </ListGroup>
             </div>
 
@@ -144,7 +144,6 @@ function MesReservations({reservations}) {
 }
 
 function MonTrajet({trajet}) {
-    console.log(trajet)
     const [monTrajet, setMonTrajet] = useState(trajet);
     function cancel(){
         cancelTrajet(trajet["id"]).then(response => {if(response.ok) setMonTrajet(null)});
@@ -188,84 +187,163 @@ function MonTrajet({trajet}) {
     );
 }
 
-function MaReservation({trajet}) {
+function MaReservation({reservation}) {
+    const [trajet, setTrajet] = useState({});
+    const history = useHistory();
+
+    useEffect(() => {
+        getInfo(reservation.trajet).then((response) => {
+            setTrajet(response);
+        });
+    }, []);
+
+    if(Object.keys(trajet).length === 0) return <Spinner animation="grow" variant="success" />
+
+    function cancel(IDreservation){
+        refuseReservation(IDreservation);
+    }
+
+    function toTrajet(){
+        console.log(trajet)
+        history.push({
+            pathname: '/trajet',
+            state: {trajet: trajet}
+        })
+    }
+    const date = new Date(trajet.dateDepart);
+    const heureDepart = new Date(trajet.heureDepart);
+    const heureArrivee = new Date(trajet.heureArrivee);
+
+    let rang;
+    switch(trajet.conducteur.rang){
+        case 1:
+            rang = "NUL"
+            break;
+        case 2:
+            rang = "Neutre"
+            break;
+        case 3:
+            rang = "Recommander"
+            break;
+        default:
+            rang = "Inconnu"
+    }
 
     return (
-        <a href="/trajet" className='box'>
-            <div className='leftBox'>
+        <div className='box'>
+            <a onClick={toTrajet} className='leftBox'>
                 <Image className="pp" src={profilePicture} roundedCircle/>
                 <span style={{
                     borderBottom: "1px solid #58B94B",
                     fontWeight: 'bold'
-                }}> {trajet.conducteur}</span>
-                <span style={{fontSize:'20px'}}>{trajet.date}</span>
+                }}> {trajet.conducteur.prenom}</span>
+                <span style={{fontSize:'20px'}}>{date.getDate()}/{date.getMonth() + 1}</span>
                 <table>
                     <tbody>
                     <tr>
-                        <td>{trajet.heureDepart}</td>
-                        <td>{trajet.depart}</td>
+                        <td>{heureDepart.getHours()}:{heureDepart.getMinutes()}</td>
+                        <td>{trajet.adresseDepart.ville}</td>
                     </tr>
                     <tr>
                         <td><ArrowDown/></td>
                         <td><ArrowDown/></td>
                     </tr>
                     <tr>
-                        <td>{trajet.heureArrive}</td>
-                        <td>{trajet.arrive}</td>
+                        <td>{heureArrivee.getHours()}:{heureArrivee.getMinutes()}</td>
+                        <td>{trajet.adresseArrivee.ville}</td>
                     </tr>
                     </tbody>
                 </table>
-            </div>
+            </a>
             <div className='rightBox'>
-                Neutre
+                {rang}
                 <div className='badgeRight'>
-                    <Button variant="danger" className='btn-badge'>Annuler</Button>
+                    <Button onClick={() => cancel(reservation.id)} variant="danger" className='btn-badge'>Annuler</Button>
                     <Badge variant="success">{trajet.prix}€</Badge>
                 </div>
             </div>
-        </a>
+        </div>
     );
 }
 
 function MaDemandeReservation({demande}) {
-    function accept(){
-        console.log("Accepter");
+    const [mesDemande,setMesDemandes] = useState([]);
+
+    useEffect(() => {
+        getInfo(demande.trajet).then(response => setMesDemandes(response));
+    }, [])
+
+    function accept(demande){
+        const res = {
+            acceptee: true,
+            id: demande.id,
+            passager: demande.passager,
+            trajet: demande.trajet
+        }
+        acceptReservation(res);
+    }
+    const [visible, setVisible] = useState(true);
+
+    function refuse(IDreservation){
+        refuseReservation(IDreservation).then(response => {if(response.ok) setVisible(false)});
+    }
+    if(!visible){
+        return null;
     }
 
-    function refuse(){
-        console.log("Refuser");
+    if(mesDemande.length === 0){
+        return <Spinner animation="grow" variant="success" />
+    }
+
+    const date = new Date(mesDemande.dateDepart);
+    const heureDepart = new Date(mesDemande.heureDepart);
+    const heureArrivee = new Date(mesDemande.heureArrivee);
+
+    let rang;
+    switch(mesDemande.conducteur.rang){
+        case 1:
+            rang = "NUL"
+            break;
+        case 2:
+            rang = "Neutre"
+            break;
+        case 3:
+            rang = "Recommander"
+            break;
+        default:
+            rang = "Inconnu"
     }
     return (
         <div className='box' >
-            <Image className="pp" src={profilePicture} roundedCircle/>
+            <Image className="pp" src={mesDemande.conducteur.photo} roundedCircle/>
             <div style={{display: 'flex', flexDirection: 'column'}}>
-            <span style={{
-                borderBottom: "1px solid #58B94B",
-                fontWeight: 'bold'
-            }}> {demande.conducteur}</span>
-            <span style={{fontSize:'20px'}}>{demande.date}</span>
+                <span style={{
+                    borderBottom: "1px solid #58B94B",
+                    fontWeight: 'bold'
+                }}> {mesDemande.conducteur.prenom}</span>
+                <span style={{fontSize:'20px'}}>{date.getDate()}/{date.getMonth() + 1}</span>
                 <table>
                     <tbody>
                     <tr>
-                        <td>{demande.heureDepart}</td>
-                        <td>{demande.depart}</td>
+                        <td>{heureDepart.getHours()}:{heureDepart.getMinutes()}</td>
+                        <td>{mesDemande.adresseDepart.ville}</td>
                     </tr>
                     <tr>
                         <td><ArrowDown/></td>
                         <td><ArrowDown/></td>
                     </tr>
                     <tr>
-                        <td>{demande.heureArrive}</td>
-                        <td>{demande.arrive}</td>
+                        <td>{heureArrivee.getHours()}:{heureArrivee.getMinutes()}</td>
+                        <td>{mesDemande.adresseArrivee.ville}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div className='rightBox'>
-                Neutre
+                {rang}
                 <div className='badgeRight'>
-                    <Button onClick={() => refuse()} variant="danger" className='btn-badge'>Refuser</Button>
-                    <Button onClick={() => accept()} variant="success" className='btn-badge'>Accepter</Button>
+                    <Button onClick={() => refuse(demande)} variant="danger" className='btn-badge'>Refuser</Button>
+                    <Button onClick={() => accept(demande)} variant="success" className='btn-badge'>Accepter</Button>
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@ class Trajet
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"infoTrajet"})
+     * @Groups({"infoTrajet", "infoUser"})
      */
     private $id;
 

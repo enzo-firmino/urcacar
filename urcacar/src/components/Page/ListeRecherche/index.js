@@ -100,7 +100,6 @@ function Trajet({trajet}) {
             pathname: '/trajet',
             state:
             {
-                conducteur: conducteur,
                 trajet: trajet
             }
         })

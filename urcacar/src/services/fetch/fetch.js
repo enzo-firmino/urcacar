@@ -81,8 +81,6 @@ export function updateVoiture(id, voiture){
 *********************************************************TRAJETS*****************************************************************
 ********************************************************************************************************************************/
 
-
-
 export function updateTrajet(trajet) {
     const options = method('PUT', body(trajet, mimeType('application/json')));
     return fetch(url + '/api/trajets/' + trajet.id, options).then((response) => response.json());
@@ -98,6 +96,16 @@ export function appendTrajet(trajet) {
 
 export function cancelTrajet(trajetID) {
     return fetch(url + "/api/trajets/" + trajetID, getDelOptions());
+}
+
+export function acceptReservation(demande) {
+    return fetch(url + '/api/reservers/' + demande.id, getPutOptions(demande)).then((response) => response.json());
+}
+export function refuseReservation(IDreservation) {
+    return fetch(url + '/api/reservers/' + IDreservation, getDelOptions());
+}
+export function reserverTrajet(reservation) {
+    return fetch(url + '/api/reservers', getPostOptions(reservation)).then(response => response.json());
 }
 
 /********************************************************************************************************************************
@@ -147,6 +155,20 @@ function getPostOptions(b) {
 
     var requestOptions = {
         method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(b),
+        redirect: 'follow'
+    };
+    return requestOptions;
+}
+
+function getPutOptions(b) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
+
+    var requestOptions = {
+        method: 'PUT',
         headers: myHeaders,
         body: JSON.stringify(b),
         redirect: 'follow'
