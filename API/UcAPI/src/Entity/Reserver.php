@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ReserverRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReserverRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReserverRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"res:read"}},
+ *      normalizationContext={"groups": {"infoReservation"}},
  *      itemOperations={
  *          "get",
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
@@ -31,18 +32,19 @@ class Reserver
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(onDelete="CASCADE",nullable=false)
      */
     private $passager;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="reservations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(onDelete="CASCADE",nullable=false)
      */
     private $trajet;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"infoReservation", "infoTrajet"})
      */
     private $acceptee;
 

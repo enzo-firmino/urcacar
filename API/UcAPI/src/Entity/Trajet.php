@@ -34,6 +34,7 @@ class Trajet
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"infoTrajet"})
      */
     private $id;
 
@@ -76,6 +77,7 @@ class Trajet
 
     /**
      * @ORM\OneToMany(targetEntity=Reserver::class, mappedBy="trajet")
+     * @Groups({"infoTrajet"})
      */
     private $reservations;
 

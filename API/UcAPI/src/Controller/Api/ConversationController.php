@@ -36,7 +36,7 @@ class ConversationController extends AbstractController
         $body = json_decode($request->getContent(),true);
         $repository = $this->getDoctrine()
             ->getRepository(Message::class);
-        $response = $repository->findConversation($body["trajet_id"],$body["envoyeur_id"],$body["destinataire_id"]);
+        $response = $repository->findConversation($body["envoyeur_id"],$body["destinataire_id"]);
         return new JsonResponse($response);
     }
 }

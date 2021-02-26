@@ -75,7 +75,7 @@ function MesTrajets({demandesReservations}) {
 
     const [mesTrajets,setMesTrajets] = useState([]);
     useEffect(() => {
-        getMesTrajets().then(response => setMesTrajets(response["hydra:member"]));
+        getMesTrajets().then(response => setMesTrajets(response));
     }, [])
     
     if(mesTrajets.length === 0){
@@ -137,13 +137,17 @@ function MesReservations({reservations}) {
 
 function MonTrajet({trajet}) {
     console.log(trajet)
+    const [monTrajet, setMonTrajet] = useState(trajet);
     function cancel(){
-        cancelTrajet(trajet["@id"]);
+        cancelTrajet(trajet["id"]).then(response => {if(response.ok) setMonTrajet(null)});
     }
-    const date = new Date(trajet.dateDepart);
-    const heureDepart = new Date(trajet.heureDepart);
-    const heureArrivee = new Date(trajet.heureArrivee);
 
+    if(monTrajet === null) return null;
+
+    const date = new Date(monTrajet.dateDepart);
+    const heureDepart = new Date(monTrajet.heureDepart);
+    const heureArrivee = new Date(monTrajet.heureArrivee);
+    
     return (
         <div className='box' >
             <a>
@@ -152,7 +156,7 @@ function MonTrajet({trajet}) {
                     <tbody>
                     <tr>
                         <td>{heureDepart.getHours()}:{heureDepart.getMinutes()}</td>
-                        <td>{trajet.adresseDepart.adresse}</td>
+                        <td>{monTrajet.adresseDepart.adresse}</td>
                     </tr>
                     <tr>
                         <td><ArrowDown/></td>
@@ -160,16 +164,16 @@ function MonTrajet({trajet}) {
                     </tr>
                     <tr>
                         <td>{heureArrivee.getHours()}:{heureArrivee.getMinutes()}</td>
-                        <td>{trajet.adresseArrivee.adresse}</td>
+                        <td>{monTrajet.adresseArrivee.adresse}</td>
                     </tr>
                     </tbody>
                 </table>
             </a>
             <div className='rightBox'>
-                <span>{trajet.nbPlace} / {trajet.nbPlace} Passagers</span>
+                <span>{monTrajet.nbPlace} / {monTrajet.nbPlace} Passagers</span>
                 <div className='badgeRight'>
                     <Button onClick={() => cancel()} variant="danger" className='btn-badge'>Annuler</Button>
-                    <Badge variant="success">{trajet.prix}€</Badge>
+                    <Badge variant="success">{monTrajet.prix}€</Badge>
                 </div>
             </div>
         </div>

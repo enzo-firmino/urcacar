@@ -54,12 +54,6 @@ class Message
      */
     private $destinataire;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Trajet::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $trajet;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -121,18 +115,6 @@ class Message
     public function setDestinataire(?Utilisateur $destinataire): self
     {
         $this->destinataire = $destinataire;
-
-        return $this;
-    }
-
-    public function getTrajet(): ?Trajet
-    {
-        return $this->trajet;
-    }
-
-    public function setTrajet(?Trajet $trajet): self
-    {
-        $this->trajet = $trajet;
 
         return $this;
     }

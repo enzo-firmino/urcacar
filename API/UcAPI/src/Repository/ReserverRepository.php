@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
 use App\Entity\Reserver;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Reserver|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,15 @@ class ReserverRepository extends ServiceEntityRepository
         parent::__construct($registry, Reserver::class);
     }
 
-    // /**
-    //  * @return Reserver[] Returns an array of Reserver objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findReservationById(int $trajet)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('a')
+            ->select('a.acceptee')
+            ->where('a.trajet = :id')
+            ->setParameter('id', $trajet)
+            ->orderBy('a.id', 'ASC')
             ->getQuery()
-            ->getResult()
+            ->getResult(Query::HYDRATE_ARRAY)
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Reserver
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

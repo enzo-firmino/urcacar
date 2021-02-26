@@ -35,7 +35,7 @@ export function FormSearchTrajet(props) {
     const [heureArrive, setHeureArrive] = useState('');
     const [nbPassager, setNbPassager] = useState(1);
 
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(false);
 
     function Check(){
         if (depart === "" || arrive === "" || departVille === "" || arriveVille === ""){

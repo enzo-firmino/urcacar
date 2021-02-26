@@ -21,24 +21,6 @@ class TrajetRepository extends ServiceEntityRepository
 
     public function findTrajetsByUser(int $user)
     {
-        // $em = $this->getEntityManager();
-
-        // $statement = $em->getConnection()->prepare("
-
-        //     SELECT a.prix,a.nb_place,a.date_depart,a.heure_arrivee,a.heure_depart
-        //     FROM trajet a INNER JOIN adresse as ad INNER JOIN adresse as aa
-        //     WHERE a.conducteur_id = :user
-
-        //     SELECT a.prix,a.nbPlace,a.dateDepart,a.heureArrivee,a.heureDepart,ad,aa
-        //     FROM trajet a INNER JOIN a.adresseDepart as ad INNER JOIN a.adresseArrivee as aa
-        //     WHERE a.conducteur = :user"
-        // );
-        // $statement->bindValue('user', $user);
-        // $statement->execute();
-        // $result = $statement->fetchAll();
-
-        // return $result;
-
         return $this->createQueryBuilder('a')
             ->where('a.conducteur = :user')
             ->setParameter('user', $user)

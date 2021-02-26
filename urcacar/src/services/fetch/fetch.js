@@ -89,7 +89,7 @@ export function updateTrajet(trajet) {
 }
 
 export function getMesTrajets() {
-    return fetch(url + "/api/trajets", Options()).then((response) => response.json());
+    return fetch(url + "/api/mesTrajets", Options()).then((response) => response.json());
 }
 
 export function appendTrajet(trajet) {
@@ -97,11 +97,7 @@ export function appendTrajet(trajet) {
 }
 
 export function cancelTrajet(trajetID) {
-    return fetch(url + trajetID, getDelOptions()).then(response => {
-        if(response.ok){
-            window.location.reload(false);
-        }
-    });
+    return fetch(url + "/api/trajets/" + trajetID, getDelOptions());
 }
 
 /********************************************************************************************************************************

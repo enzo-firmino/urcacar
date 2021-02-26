@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "react-bootstrap/Image";
 import '../../../styles/detailTrajet.css';
 
@@ -19,6 +19,7 @@ export function DetailTrajet() {
 
     const history = useHistory();
     const {trajet,conducteur} = history.location.state;
+    const [res, setRes] = useState("");
 
     function onClickProfile() {
         history.push({
@@ -26,10 +27,17 @@ export function DetailTrajet() {
             state: {conducteur: trajet.conducteur}
         })
     }
+    console.log(trajet)
+
+    useEffect(() => {
+        
+    }, []);
 
     if(trajet === null || conducteur === null){
         return <Spinner animation="grow" variant="success" />;
     }
+
+    let place = trajet.nbPlace - res;
 
     return (
         <Container className='detailTrajet container bg-light'>
@@ -46,7 +54,7 @@ export function DetailTrajet() {
                     </Row>
                     <Row>
                         <span style={{color: 'rgba(0, 0, 0, 0.6)', paddingRight: '15px'}}> Places disponibles</span>
-                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{trajet.nbPlace}</span>
+                        <span style={{fontWeight: 'bold', color: 'rgb(5, 71, 82)'}}>{place}</span>
                     </Row>
                 </Col>
             </Row>
