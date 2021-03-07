@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { Image, Form, Button, Row, Col } from "react-bootstrap";
-import retour from '../../../assets/Retour.png';
-import {appendMessage, getAllMessages, getInfo} from "../../../services/fetch/fetch";
+import { Image, Form, Button, Row } from "react-bootstrap";
+import {appendMessage, getAllMessages} from "../../../services/fetch/fetch";
 import '../../../styles/message.css';
 import {useHistory} from "react-router-dom";
 
@@ -14,6 +13,8 @@ export default function Message() {
     const [messages, setMessages] = useState([]);
 
 
+
+
     useEffect(() => {
         getAllMessages(otherUtilisateur.id, utilisateurConnecte.id).then((messages) => {
             console.log('messages', messages);
@@ -24,8 +25,8 @@ export default function Message() {
 
 
     const listMessagesItem = messages.map((message) => {
-        let isMine = message.envoyeur_id === utilisateurConnecte.id ? message.destinataire_id : message.envoyeur_id;
-        return <MessageItem key={message.text} message={message} isMine={isMine}/>
+        let isMine = message.envoyeur_id == utilisateurConnecte.id;
+        return <MessageItem key={message.id} message={message} isMine={isMine}/>
     });
 
     const [messageTexte, setMessage] = useState('');
@@ -78,7 +79,7 @@ export function MessageItem({message, isMine}) {
         ].join(' ')}>
             <div className="bubble-container">
                 <div className="bubble" >
-                    { message.text }
+                    { message.texte }
                 </div>
             </div>
         </div>
