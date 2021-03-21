@@ -9,7 +9,7 @@ function useProfil(history){
 
     useEffect(() => {
         if (history.location.state === undefined) {
-            getInfo("/api/utilisateurs").then((user) => {
+            getInfo("/api/utilisateur").then((user) => {
                 console.log('user', user);
                 setUtilisateur(user);
 

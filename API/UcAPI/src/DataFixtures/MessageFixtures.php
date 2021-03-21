@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 
 use Faker;
 use App\Entity\Message;
-use App\DataFixtures\TrajetFixtures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -36,8 +35,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            UserFixtures::class,
-            TrajetFixtures::class
+            UserFixtures::class
         ];
     }
 }
