@@ -62,7 +62,6 @@ export function DetailTrajet() {
     const onContacter = (evt) => {
         getInfo("/api/utilisateur").then((utilisateurConnecte) => {
             console.log(utilisateurConnecte);
-            evt.preventDefault();
             history.push({
                 pathname: '/messages',
                 state: {
@@ -94,7 +93,7 @@ export function DetailTrajet() {
             </Row>
             <Row className='row-btn'>
                 <Col className='btn-bg-green'>
-                    <a onClick={onContacter} >Contacter</a>
+                    <Button onClick={() => onContacter()} >Contacter</Button>
                 </Col>
                 <Col className='btn-bg-green'>
                     <Button disabled={utilisateur.reservations.filter(reservation => reservation.trajet === trajet["@id"]).length !== 0} onClick={() => reserver(utilisateur.id, trajet.id)}>Réserver</Button>
