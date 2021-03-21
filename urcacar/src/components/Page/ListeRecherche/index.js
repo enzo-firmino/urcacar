@@ -128,7 +128,7 @@ function Trajet({trajet}) {
             rang = "Neutre"
             break;
         case 2:
-            rang = "Recommander"
+            rang = "Recommandé"
             break;
         default:
             rang = "Inconnu"

@@ -13,8 +13,8 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import MapView from "../../Map";
 import Avis from "../../Reusable/Avis";
-import useDetailsProfil from "../../../services/hook/useDetailsProfil";
-import { getInfo, reserverTrajet } from "../../../services/fetch/fetch";
+import { Nav } from "react-bootstrap";
+import {getInfo, getUser, reserverTrajet} from "../../../services/fetch/fetch";
 
 export function DetailTrajet() {
 
@@ -58,6 +58,21 @@ export function DetailTrajet() {
     }
     console.log("Condition :",utilisateur,trajet["@id"],utilisateur.reservations.filter(reservation => reservation.trajet === trajet["@id"]).length !== 0)
 
+
+    const onContacter = (evt) => {
+        getInfo("/api/utilisateur").then((utilisateurConnecte) => {
+            console.log(utilisateurConnecte);
+            evt.preventDefault();
+            history.push({
+                pathname: '/messages',
+                state: {
+                    utilisateurConnecte,
+                    otherUtilisateur: utilisateur,
+                }
+            });
+        })
+    }
+
     return (
         <Container className='detailTrajet container bg-light'>
             <Row className='row-padding'>
@@ -79,7 +94,7 @@ export function DetailTrajet() {
             </Row>
             <Row className='row-btn'>
                 <Col className='btn-bg-green'>
-                    <a href='/messagerie/id'>Contacter</a>
+                    <a onClick={onContacter} >Contacter</a>
                 </Col>
                 <Col className='btn-bg-green'>
                     <Button disabled={utilisateur.reservations.filter(reservation => reservation.trajet === trajet["@id"]).length !== 0} onClick={() => reserver(utilisateur.id, trajet.id)}>Réserver</Button>
@@ -108,7 +123,7 @@ function Profil({conducteur, onClickProfile}) {
             rang = "Neutre"
             break;
         case 3:
-            rang = "Recommander"
+            rang = "Recommandé"
             break;
         default:
             rang = "Inconnu"

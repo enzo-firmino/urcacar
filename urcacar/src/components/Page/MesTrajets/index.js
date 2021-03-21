@@ -71,7 +71,7 @@ function MesTrajets({demandesReservations}) {
     useEffect(() => {
         getMesTrajets().then(response => {setMesTrajets(response); setFinish(true)});
     }, [])
-    
+
     if(mesTrajets.length === 0 && !finish){
         return <Spinner animation="grow" variant="success" />
     }
@@ -154,7 +154,7 @@ function MonTrajet({trajet}) {
     const date = new Date(monTrajet.dateDepart);
     const heureDepart = new Date(monTrajet.heureDepart);
     const heureArrivee = new Date(monTrajet.heureArrivee);
-    
+
     return (
         <div className='box' >
             <a>
@@ -223,7 +223,7 @@ function MaReservation({reservation}) {
             rang = "Neutre"
             break;
         case 3:
-            rang = "Recommander"
+            rang = "Recommandé"
             break;
         default:
             rang = "Inconnu"
@@ -308,7 +308,7 @@ function MaDemandeReservation({demande}) {
             rang = "Neutre"
             break;
         case 3:
-            rang = "Recommander"
+            rang = "Recommandé"
             break;
         default:
             rang = "Inconnu"

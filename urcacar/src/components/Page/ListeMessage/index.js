@@ -22,9 +22,11 @@ export default function ListeMessage(props) {
 
     return (
         <div className="container" style={{borderTop: "1px solid #58B94B", fontWeight: 'bold'}}>
+            {conversations.length === 0 ? <p> Pas de conversations </p> :
             <ul>
                 {listConversationsItem}
             </ul>
+            }
         </div>
     );
 }

@@ -10,6 +10,7 @@ export default function Message() {
      let otherUtilisateur = history.location.state.otherUtilisateur;
      let utilisateurConnecte = history.location.state.utilisateurConnecte;
 
+
     const [messages, setMessages] = useState([]);
 
 
@@ -18,9 +19,12 @@ export default function Message() {
     useEffect(() => {
         getAllMessages(otherUtilisateur.id, utilisateurConnecte.id).then((messages) => {
             console.log('messages', messages);
+            messages.sort(function(a,b){
+                return new Date(b.date) - new Date(a.date);
+            });
             setMessages(messages);
         });
-    }, []);
+    }, [messages]);
 
 
 
