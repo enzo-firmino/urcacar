@@ -25,7 +25,6 @@ export function ListeRecherche(props) {
     }
 
     const {trajets,finish} = useSearch(recherche);
-    console.log(finish)
 
     if(!finish && trajets.length === 0){
         return <div className='listeRecherche'>

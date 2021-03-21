@@ -42,11 +42,9 @@ function Conversation({conversation}) {
     useEffect(() => {
         getInfo("/api/utilisateur/").then((response) => {
             setUtilisateurConnecte(response);
-            console.log("Utilisateur co:",response);
             let otherUtilisateurId = conversation.envoyeur_id !== response.id ? conversation.destinataire_id : conversation.envoyeur_id;
             getInfo('/api/utilisateurs/' + otherUtilisateurId).then((utilisateur) => {
                 setOtherUtilisateur(utilisateur);
-                console.log('utilisateur', utilisateur);
             });
         });
 

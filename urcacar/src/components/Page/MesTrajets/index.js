@@ -30,7 +30,6 @@ export function MesTrajetsReservations(props) {
     if(Object.keys(utilisateur).length === 0){
         return <Spinner animation="grow" variant="success" />
     }
-    console.log("Utilisateur",utilisateur)
 
     return (
         <div className='mesTrajets'>
@@ -204,7 +203,6 @@ function MaReservation({reservation}) {
     }
 
     function toTrajet(){
-        console.log(trajet)
         history.push({
             pathname: '/trajet',
             state: {trajet: trajet}

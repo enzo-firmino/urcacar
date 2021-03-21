@@ -22,16 +22,25 @@ function LoginComponent() {
     const[login, setLogin] = useState('');
     const[password, setPassword] = useState('');
     const[isLogin, setIsLogin] = useState(false);
+    const[Fail, setFail] = useState(false);
 
     function loginButton(){
         var body = {"username":login,"password":password};
-        loginFetch(body, dispatch).then(setIsLogin(true)).catch(error => console.log('error', error));
+        loginFetch(body, dispatch).then(response => {
+            if(response){
+                setIsLogin(response);
+            }else{
+                setFail(true);
+            }
+            
+        }).catch(error => console.log('error', error));
     }
 
     return !isLogin ? (
         <div className="formConnexion">
             <div style={{backgroundImage: 'url({background})' }}>
             <h1>UrcaCar</h1>
+            <p>{Fail ? "Entrez un mot de passe ou adresse mail correcte !" : null}</p>
             <Form className="container">
 
                 <Form.Group as={Col} controlId="">

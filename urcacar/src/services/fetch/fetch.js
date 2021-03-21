@@ -56,8 +56,12 @@ export function loginFetch(body, dispatch){
         return response.json();
     })
     .then(data => {
-        dispatch(connexion(data.token));
-        localStorage.setItem("jwt",data.token)
+        if(data.code === undefined){
+            dispatch(connexion(data.token));
+            localStorage.setItem("jwt",data.token);
+            return true;
+        }
+        return false;
     })
 }
 
@@ -66,7 +70,6 @@ export function loginFetch(body, dispatch){
  ********************************************************************************************************************************/
 
 export function updateVoiture(id, voiture){
-    console.log(voiture);
     return fetch(url + id, {
         method: 'PUT',
         body: JSON.stringify(voiture),
@@ -117,7 +120,6 @@ export function getAllMessages(utilisateur1, utilisateur2) {
         envoyeur_id: utilisateur1,
         destinataire_id: utilisateur2
     })).then(response => {
-        console.log('response', response);
         return response.json();
     })
 }

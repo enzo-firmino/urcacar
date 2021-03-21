@@ -21,7 +21,6 @@ export function DetailTrajet() {
     const history = useHistory();
     const {trajet} = history.location.state;
     const [res, setRes] = useState("");
-    console.log(trajet);
 
     const [utilisateur, setUtilisateur] = useState({});
 
@@ -61,7 +60,6 @@ export function DetailTrajet() {
 
     const onContacter = (evt) => {
         getInfo("/api/utilisateur").then((utilisateurConnecte) => {
-            console.log(utilisateurConnecte);
             history.push({
                 pathname: '/messages',
                 state: {

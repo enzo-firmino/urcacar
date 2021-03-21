@@ -39,12 +39,10 @@ export function FormSearchTrajet(props) {
 
     function Check(){
         if (depart === "" || arrive === "" || departVille === "" || arriveVille === ""){
-            console.log("adresse")
             setActive(false);
             return null;
         }
         if(date === "" || heureDepart === "" || heureArrive === ""){
-            console.log("autre")
             setActive(false);
             return null;
         }
