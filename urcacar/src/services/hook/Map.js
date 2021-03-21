@@ -14,9 +14,11 @@ function useMap(rue1, rue2) {
 
     useEffect(() => {
         getAll(rue2.split(' ').join('+')).then(function (data) {
+            console.log(data)
             setCoor2([parseFloat(data[0].lat), parseFloat(data[0].lon)])
         });
         getAll(rue1.split(' ').join('+')).then(function (data) {
+            console.log(data)
             setCoor1([parseFloat(data[0].lat), parseFloat(data[0].lon)])
         });
     }, [])

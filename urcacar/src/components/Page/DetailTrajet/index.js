@@ -152,15 +152,15 @@ function RecapTrajet({trajet}) {
     const hA = new Date(trajet.heureArrivee);
     const history = useHistory();
 
-    function CheckMap(){
-        history.push({
-            pathname: '/map',
-            state: {
-                aD:trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.cp,
-                aA:trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.cp
-            }
-        })
-    }
+    // function CheckMap(){
+    //     history.push({
+    //         pathname: '/map',
+    //         state: {
+    //             aD:trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.ville,
+    //             aA:trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.ville
+    //         }
+    //     })
+    // }
 
     return (
         <div>
@@ -181,7 +181,7 @@ function RecapTrajet({trajet}) {
             <div className="VoirTrajet">
                 <Map className='align-middle' />
                 <Popup trigger={<span className='align-middle' >  Voir le trajet sur la carte </span>} modal closeOnDocumentClick>
-                    <MapView aD={trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.cp} aA={trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.cp}/>
+                    <MapView aD={trajet.adresseDepart.adresse+"+"+trajet.adresseDepart.ville} aA={trajet.adresseArrivee.adresse+"+"+trajet.adresseArrivee.ville}/>
                 </Popup>
             </div>
         </div>

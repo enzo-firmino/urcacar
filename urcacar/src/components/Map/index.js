@@ -12,11 +12,11 @@ export default function MapView(props){
 
     const history = useHistory();
     const {aD,aA} = props;
+    console.log("test ",props)
 
     const dataPoints = [
         [ 49.467134581917357,4.546518086577947],
-        [ 49.295014379864874,4.898610599532319],
-
+        [ 49.295014379864874,4.898610599532319]
     ]
 
     var greenIcon = L.icon({
@@ -43,13 +43,23 @@ export default function MapView(props){
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
                 { wayPoints.map((data , index)=>{
-                    return(
-                        <Marker icon={greenIcon} key={index} position={data}>
-                            <Popup>
-                                {aD.split("+")[0]}
-                            </Popup>
-                        </Marker>
-                    )
+                    if(index%2 == 0){
+                        return(
+                            <Marker icon={greenIcon} key={index} position={data}>
+                                <Popup>
+                                    {aD.split("+")[0]}
+                                </Popup>
+                            </Marker>
+                        )
+                    }else{
+                        return(
+                            <Marker icon={greenIcon} key={index} position={data}>
+                                <Popup>
+                                    {aA.split("+")[0]}
+                                </Popup>
+                            </Marker>
+                        )
+                    }
                 })}
 
                 <Routing
