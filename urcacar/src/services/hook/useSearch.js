@@ -9,15 +9,18 @@ function useSearch(recherche){
 
     useEffect(() => {
         getInfo("/api/trajets").then(trajets => {
+            console.log('trajets', trajets);
             const t = [];
-            trajets["hydra:member"].map(trajet => {
-                if(recherche.depart.adresse.includes(trajet.adresseDepart.adresse.toUpperCase())){
-                    t.push(trajet);
-                }
-                if(recherche.arrive.adresse.includes(trajet.adresseArrivee.adresse.toUpperCase())){
-                    t.push(trajet);
-                }
-            })
+            if (trajets["hydra:member"] !== undefined) {
+                trajets["hydra:member"].map(trajet => {
+                    if (recherche.depart.adresse.includes(trajet.adresseDepart.adresse.toUpperCase())) {
+                        t.push(trajet);
+                    }
+                    if (recherche.arrive.adresse.includes(trajet.adresseArrivee.adresse.toUpperCase())) {
+                        t.push(trajet);
+                    }
+                })
+            }
             console.log(t)
             setFinish(true);
             setTrajets(t);

@@ -36,10 +36,10 @@ export function ListeRecherche(props) {
     if(finish && trajets.length === 0){
         return <div className='listeRecherche'>
                     <RecapRecherche recherche={recherche}/>
-                    <p>Aucun résultat trouver</p>
+                    <p>Aucun résultat trouvé</p>
                 </div>;
     }
-    
+
     return (
         <div className='listeRecherche'>
             <RecapRecherche recherche={recherche}/>
