@@ -10,7 +10,6 @@ function useProfil(history){
     useEffect(() => {
         if (history.location.state === undefined) {
             getInfo("/api/utilisateur").then((user) => {
-                console.log('user', user);
                 setUtilisateur(user);
 
             }).catch((err) => console.error(err));
@@ -18,7 +17,6 @@ function useProfil(history){
 
         } else {
             getUser(history.location.state.conducteur['@id']).then((user) => {
-                console.log('user', user);
                 setUtilisateur(user);
             }).catch((err) => console.error(err));
             setIsItMyProfil(false);

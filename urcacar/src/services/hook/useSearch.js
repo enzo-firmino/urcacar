@@ -9,7 +9,6 @@ function useSearch(recherche){
 
     useEffect(() => {
         getInfo("/api/trajets").then(trajets => {
-            console.log('trajets', trajets);
             const t = [];
             if (trajets["hydra:member"] !== undefined) {
                 trajets["hydra:member"].map(trajet => {
@@ -21,7 +20,6 @@ function useSearch(recherche){
                     }
                 })
             }
-            console.log(t)
             setFinish(true);
             setTrajets(t);
         });

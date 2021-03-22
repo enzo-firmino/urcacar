@@ -4,7 +4,7 @@ import '../../../styles/connexion.css';
 import { Redirect } from "react-router-dom";
 
 export function Deconnexion(props) {
-    localStorage.setItem("jwt",null)
+    localStorage.clear()
     return (
         <Redirect to="/" />
     )

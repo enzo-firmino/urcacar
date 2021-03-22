@@ -12,7 +12,6 @@ export default function MapView(props){
 
     const history = useHistory();
     const {aD,aA} = props;
-    console.log("test ",props)
 
     const dataPoints = [
         [ 49.467134581917357,4.546518086577947],
@@ -27,7 +26,6 @@ export default function MapView(props){
     });
 
     const[refMap, wayPoints, saveMap] = useMap(aD,aA);
-    console.log("Waypoints: ",wayPoints[0])
 
     if(wayPoints[0] === null){
         return <div/>

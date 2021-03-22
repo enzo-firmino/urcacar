@@ -65,10 +65,10 @@ function Top({conducteur, isItMyProfile}){
 
     const [prenom, setPrenom] = useState(conducteur.prenom);
     const [show, setShow] = useState(false);
-
+    console.log(conducteur)
     const onSubmit = (event) => {
         event.preventDefault();
-        updateUser(conducteur['@id'], {prenom}).then(() => setShow(true));
+        updateUser("/api/utilisateurs/"+conducteur.id, {prenom}).then(() => setShow(true));
     };
 
     return (

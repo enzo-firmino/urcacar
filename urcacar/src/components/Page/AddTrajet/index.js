@@ -6,6 +6,7 @@ import MapView from '../../Map';
 import '../../../styles/form.css';
 import { appendTrajet, getInfo } from '../../../services/fetch/fetch';
 import { Popup } from 'leaflet';
+import { Redirect } from 'react-router';
 
 export default function AddTrajet(props) {
 
@@ -20,7 +21,8 @@ export default function AddTrajet(props) {
     const [prix, setPrix] = useState(0);
     const [etapes, setEtapes] = useState([]);
     const [adresses, setAdresses] = useState([]);
-
+    console.log(localStorage.getItem("jwt"))
+    
     useEffect(() =>  {
         setEtapes(etape => [...etape,"24 rue du coin/15h"]);
         setEtapes(etape => [...etape,"28 rue du milieu/13h30"]);
@@ -28,6 +30,8 @@ export default function AddTrajet(props) {
             setAdresses(response["hydra:member"]);
         })
     },[])
+
+    
 
     function publish(e){
         e.preventDefault();
@@ -45,6 +49,11 @@ export default function AddTrajet(props) {
     }
 
     const [active, setActive] = useState(true);
+
+    //Sécurité
+    if(localStorage.getItem("jwt") === null){
+        return <Redirect to="/" />
+    }
 
     return (
         <div className='addTrajet'>

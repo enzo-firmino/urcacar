@@ -5,7 +5,7 @@ export default function Footer(props) {
     return (
         <Navbar className="footer" bg="light">
             <div className="container">
-                {localStorage.getItem("jwt") !== "null" ?
+                {localStorage.getItem("jwt") !== null ?
                 (
                     <Nav className="d-flex flex-fill justify-content-around">
                         <Nav.Link className="text-dark" href="/"><Image style={{height:20}} src="https://i.pinimg.com/originals/cd/ab/85/cdab85a392e92623afa27de32443379f.png"/>Rechercher</Nav.Link>

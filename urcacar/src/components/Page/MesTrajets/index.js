@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useRouteMatch, NavLink
+    useRouteMatch, NavLink, Redirect
 } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import { useHistory } from "react-router-dom";
@@ -26,6 +26,11 @@ export function MesTrajetsReservations(props) {
             setUtilisateur(response);
         });
     }, []);
+
+    //Sécurité
+    if(localStorage.getItem("jwt") === null){
+        return <Redirect to="/" />
+    }
 
     if(Object.keys(utilisateur).length === 0){
         return <Spinner animation="grow" variant="success" />
