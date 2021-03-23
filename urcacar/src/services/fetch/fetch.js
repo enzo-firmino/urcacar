@@ -26,14 +26,7 @@ export function getUser(id){
 }
 
 export function updateUser(id, updates) {
-    return fetch(url + id, {
-        method: 'PUT',
-        body: JSON.stringify(updates),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: 'Bearer ' + localStorage.getItem("jwt"),
-        }
-    }).then(response => response.json())
+    return fetch(url + id, getPutOptions(updates)).then(response => response.json())
 }
 
 export function loginFetch(body, dispatch){

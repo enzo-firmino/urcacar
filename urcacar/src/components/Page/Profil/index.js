@@ -66,10 +66,15 @@ function Top({conducteur, isItMyProfile}){
     const [prenom, setPrenom] = useState(conducteur.prenom);
     const [show, setShow] = useState(false);
     console.log(conducteur)
-    const onSubmit = (event) => {
-        event.preventDefault();
+    // const onSubmit = (event) => {
+    //     event.preventDefault();
+    //     updateUser("/api/utilisateurs/"+conducteur.id, {prenom}).then(() => setShow(true));
+    // };
+
+    function onSubmit(){
+        console.log("/api/utilisateurs/"+conducteur.id, {prenom})
         updateUser("/api/utilisateurs/"+conducteur.id, {prenom}).then(() => setShow(true));
-    };
+    }
 
     return (
         <>
@@ -93,7 +98,7 @@ function Top({conducteur, isItMyProfile}){
                     <p className="text-left" style={{marginBottom:1}}>{conducteur.trajetsProposes.length} trajets proposés</p>
                 </div>
             </div>
-            {isItMyProfile && <Button variant="primary" onClick={onSubmit}>
+            {isItMyProfile && <Button variant="primary" onClick={() => onSubmit()}>
                 Enregistrer
             </Button>}
         </>

@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=VoitureRepository::class)
  * @ApiResource(
- *      normalizationContext={"groups": {"infoCar"}},
+ *      normalizationContext={"groups": {"infoCar","infoUser:put"}},
  *      itemOperations={
  *          "get",
  *          "delete"={"security"="is_granted('ROLE_USER')"},
@@ -36,31 +36,31 @@ class Voiture
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar", "infoUser", "infoTrajet"})
+     * @Groups({"infoCar","infoUser:put", "infoUser", "infoTrajet"})
      */
     private $modele;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"infoCar", "infoUser", "infoTrajet"})
+     * @Groups({"infoCar","infoUser:put", "infoUser", "infoTrajet"})
      */
     private $annee;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar", "infoUser", "infoTrajet"})
+     * @Groups({"infoCar","infoUser:put", "infoUser", "infoTrajet"})
      */
     private $couleur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar", "infoUser", "infoTrajet"})
+     * @Groups({"infoCar","infoUser:put", "infoUser", "infoTrajet"})
      */
     private $marque;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"infoCar", "infoUser", "infoTrajet"})
+     * @Groups({"infoCar","infoUser:put", "infoUser", "infoTrajet"})
      */
     private $immatriculation;
 
