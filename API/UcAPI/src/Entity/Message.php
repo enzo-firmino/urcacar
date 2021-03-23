@@ -12,9 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      normalizationContext={"groups": {"msg:read"}},
  *      itemOperations={
  *          "get",
- * *        "post"={
- *              "security"="is_granted('ROLE_USER')",
- *          }
+ * 
  *      },
  *      collectionOperations={
  *           "get",

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import Image from "react-bootstrap/Image";
 import {Button, Col, Container, Form, Row, Spinner, Toast} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
@@ -127,10 +127,11 @@ function VoitureForm({voiture}){
     const [photo, setPhoto] = useState(v.photo);
     const [show, setShow] = useState(false);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = useCallback((event) => {
         event.preventDefault();
-        updateVoiture(voiture['@id'], {marque, modele, couleur, annee, immat}).then(() => setShow(true));
-    };
+        
+        updateVoiture(voiture.id, {marque, modele, couleur, annee, immat}).then(() => setShow(true));
+    },[voiture]);
 
     return(
         <div>
@@ -269,7 +270,8 @@ function Preferences({conducteur, isItMyProfile}){
     const [show, setShow] = useState(false);
 
     function onSubmit() {
-        updateUser(conducteur["@id"], {
+        console.log(conducteur);
+        updateUser("/api/utilisateurs/"+conducteur.id, {
             musique,
             dialogue,
             fumer,
@@ -308,7 +310,7 @@ function Preferences({conducteur, isItMyProfile}){
 function Notification({notifs, utilisateur}){
 
     function onSubmit() {
-        updateUser(utilisateur["@id"], {
+        updateUser("/api/utilisateurs/"+utilisateur.id, {
             resAcceptee,
             resEnvoyee,
             demandeRes,

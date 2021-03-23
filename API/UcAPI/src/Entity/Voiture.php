@@ -31,6 +31,7 @@ class Voiture
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"infoCar","infoUser:put", "infoUser", "infoTrajet"})
      */
     private $id;
 

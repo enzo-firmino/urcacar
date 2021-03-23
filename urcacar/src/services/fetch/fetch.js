@@ -63,7 +63,7 @@ export function loginFetch(body, dispatch){
  ********************************************************************************************************************************/
 
 export function updateVoiture(id, voiture){
-    return fetch(url + id, {
+    return fetch(url + "/api/voitures/" + id, {
         method: 'PUT',
         body: JSON.stringify(voiture),
         headers: {
