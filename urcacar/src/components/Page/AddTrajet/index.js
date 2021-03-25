@@ -32,12 +32,12 @@ export default function AddTrajet(props) {
         })
     },[])
 
-    
+  
 
     function publish(e){
         e.preventDefault();
         const trajet = {
-            prix: prix,
+            prix: parseFloat(prix),
             nbPlace: nbPassager,
             dateDepart: date,
             heureArrivee: heureArrive,
@@ -55,7 +55,32 @@ export default function AddTrajet(props) {
         });
     }
 
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(false);
+
+
+    function CheckPassager(p){
+        if(p > 4){
+            setNbPassager(4);
+
+        }
+
+        if(p < 1){
+            setNbPassager(1);
+        }
+
+    }
+    function Check(){
+        if (depart === "" || arrive === "" || departVille === "" || arriveVille === ""){
+            setActive(false);
+            return null;
+        }
+    
+        if(date === "" || heureDepart === "" || heureArrive === ""){
+            setActive(false);
+            return null;
+        }
+        setActive(true);
+    }
 
     //Sécurité
     if(localStorage.getItem("jwt") === null){
@@ -70,19 +95,19 @@ export default function AddTrajet(props) {
                 <Form.Group as={Row} controlId="formGridDepart">
                     <Col>
                         <Form.Control
-                            className='fullBgField'
+                            className= {depart != "" ? "emptyBgField" : "emptyBgFieldNotValid"}
                             type="text"
                             placeholder="Départ"
                             value={depart.toUpperCase()}
-                            onChange={e => setDepart(e.target.value.toUpperCase())}/>
+                            onChange={e => {setDepart(e.target.value.toUpperCase()); Check() }}/>
                     </Col>
                     <Col>
                         <Form.Control
-                            className='fullBgField'
+                            className= {departVille != "" ? "emptyBgField" : "emptyBgFieldNotValid"}
                             type="text"
                             placeholder="Ville de départ"
                             value={departVille.toUpperCase()}
-                            onChange={e => setDepartVille(e.target.value.toUpperCase())}/>
+                            onChange={e => {setDepartVille(e.target.value.toUpperCase()); Check() }}/>
                     </Col>
                 </Form.Group>
 
@@ -92,6 +117,9 @@ export default function AddTrajet(props) {
                         let temp = depart;
                         setDepart(arrive);
                         setArrive(temp);
+                        temp = departVille;
+                        setDepartVille(arriveVille);
+                        setArriveVille(temp);
                     }}
                 >
                     <ArrowDownUp/>
@@ -100,19 +128,19 @@ export default function AddTrajet(props) {
                 <Form.Group as={Row} controlId="formGridArrive">
                     <Col>
                         <Form.Control
-                            className='fullBgField'
+                            className= {arrive != "" ? "emptyBgField" : "emptyBgFieldNotValid"}
                             type="text"
                             placeholder="Arrivée"
                             value={arrive.toUpperCase()}
-                            onChange={e => setArrive(e.target.value.toUpperCase())}/>
+                            onChange={e => {setArrive(e.target.value.toUpperCase()); Check() }}/>
                     </Col>
                     <Col>
                         <Form.Control
-                            className='fullBgField'
+                            className= {arriveVille != "" ? "emptyBgField" : "emptyBgFieldNotValid"}
                             type="text"
                             placeholder="Ville d'arrivée"
                             value={arriveVille.toUpperCase()}
-                            onChange={e => setArriveVille(e.target.value.toUpperCase())}/>
+                            onChange={e => {setArriveVille(e.target.value.toUpperCase()); Check() }}/>
                     </Col>
                 </Form.Group>
 
@@ -124,7 +152,7 @@ export default function AddTrajet(props) {
                             type="date"
                             placeholder="Date"
                             value={date}
-                            onChange={e => {setDate(e.target.value); setActive(new Date(e.target.value) > new Date())}}/>
+                            onChange={e => {setDate(e.target.value); Check()}}/>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridNbPassagers">
                         <Form.Label>Nombre de passagers</Form.Label>
@@ -135,7 +163,7 @@ export default function AddTrajet(props) {
                             max="4"
                             placeholder="Nombre passagers"
                             value={nbPassager}
-                            onChange={e => setNbPassager(parseInt(e.target.value))}/>
+                            onChange={e => {CheckPassager(e.target.value); Check();}}/>
                     </Form.Group>
                 </Form.Row>
 
@@ -145,21 +173,21 @@ export default function AddTrajet(props) {
                     <Form.Group as={Col} controlId="formGridHeureDepart">
                         <Form.Label>Heure de départ</Form.Label>
                         <Form.Control
-                            className="emptyBgField"
+                            className= {heureDepart != "" ? "emptyBgField" : "emptyBgFieldNotValid"}
                             type="time"
                             placeholder="Heure départ"
                             value={heureDepart}
-                            onChange={e => setHeureDepart(e.target.value)}/>
+                            onChange={e => {setHeureDepart(e.target.value); Check() }}/>
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridHeureArrive">
                         <Form.Label>Heure d'arrivée</Form.Label>
                         <Form.Control
-                            className="emptyBgField"
+                            className= {heureArrive!= "" ? "emptyBgField" : "emptyBgFieldNotValid"}
                             type="time"
                             placeholder="Heure arrivée"
                             value={heureArrive}
-                            onChange={e => setHeureArrive(e.target.value)}/>
+                            onChange={e => {setHeureArrive(e.target.value); Check() }}/>
                     </Form.Group>
 
 

@@ -81,6 +81,9 @@ export function FormSearchTrajet(props) {
                         let temp = depart;
                         setDepart(arrive);
                         setArrive(temp);
+                        temp = departVille;
+                        setDepartVille(arriveVille);
+                        setArriveVille(temp);
                     }}
                 >
                     <ArrowDownUp/>
