@@ -292,7 +292,12 @@ function MaDemandeReservation({demande}) {
             passager: demande.passager,
             trajet: demande.trajet
         }
-        acceptReservation(res);
+        acceptReservation(res).then(r => {
+            console.log(r)
+            if(r.id !== undefined){
+                setVisible(false)
+            }
+        });
     }
     const [visible, setVisible] = useState(true);
 
