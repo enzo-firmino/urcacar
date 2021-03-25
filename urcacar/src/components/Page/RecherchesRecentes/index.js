@@ -21,7 +21,7 @@ export function RecherchesRecentes(props) {
     return (
         <Card className='recherchesRecentes' text='white'>
             <Card.Header>Recherches récentes</Card.Header>
-            <Card.Subtitle>En cour d'implémentation</Card.Subtitle>
+            <Card.Subtitle>En cours d'implémentation</Card.Subtitle>
             <ListGroup variant="flush">
                 {listRechercheRecente}
             </ListGroup>

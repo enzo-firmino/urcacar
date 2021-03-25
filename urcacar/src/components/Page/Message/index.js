@@ -9,7 +9,6 @@ export default function Message() {
 
      let otherUtilisateur = history.location.state.otherUtilisateur;
      let utilisateurConnecte = history.location.state.utilisateurConnecte;
-     console.log(otherUtilisateur,utilisateurConnecte)
 
     const [messages, setMessages] = useState([]);
 
@@ -39,7 +38,6 @@ export default function Message() {
             date: new Date(),
         }
 
-        console.log('message', message);
 
         appendMessage(message)
         .then(() => {getAllMessages(otherUtilisateur.id, utilisateurConnecte.id).then((messages) => {

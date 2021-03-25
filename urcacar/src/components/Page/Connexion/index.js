@@ -35,14 +35,14 @@ function LoginComponent() {
                 setFail(true);
             }
             
-        }).catch(error => console.log('error', error));
+        }).catch();
     }
 
     return(
         <div className="formConnexion">
             <div style={{backgroundImage: 'url({background})' }}>
             <h1>UrcaCar</h1>
-            <p>{Fail ? "Entrez un mot de passe ou adresse mail correcte !" : null}</p>
+            <p style={{color:'red'}}>{Fail ? "Entrez un mot de passe ou adresse mail correcte !" : null}</p>
             <Form className="container">
 
                 <Form.Group as={Col} controlId="">

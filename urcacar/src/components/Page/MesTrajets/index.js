@@ -80,7 +80,7 @@ function MesTrajets({demandesReservations}) {
         return <Spinner animation="grow" variant="success" />
     }
     if(mesTrajets.length === 0 && finish){
-        return <p>Vous n'avez encore proposer aucun trajet.</p>
+        return <p>Vous n'avez encore proposé aucun trajet.</p>
     }
 
     const trajets = mesTrajets.map((trajet, index) =>
@@ -107,7 +107,7 @@ function MesTrajets({demandesReservations}) {
             <div>
                 <span className='span-title'>Mes demandes de réservations</span>
                 <ListGroup>
-                    {mesDemandesReservation.filter(demande => demande.length > 0 && demande[0] !== undefined).length === 0 ? <p>Aucune demande de reservation pour le moment</p> : mesDemandesReservation}
+                    {mesDemandesReservation.filter(demande => demande.length > 0 && demande[0] !== undefined).length === 0 ? <p>Aucune demande de réservation pour le moment</p> : mesDemandesReservation}
                 </ListGroup>
             </div>
 
@@ -224,13 +224,13 @@ function MaReservation({reservation}) {
 
     let rang;
     switch(trajet.conducteur.rang){
-        case 1:
-            rang = "NUL"
+        case 0:
+            rang = "Déconseillé"
             break;
-        case 2:
+        case 1:
             rang = "Neutre"
             break;
-        case 3:
+        case 2:
             rang = "Recommandé"
             break;
         default:
@@ -238,7 +238,7 @@ function MaReservation({reservation}) {
     }
 
     if(refresh){
-        return <p> Réservation annuler ! </p>
+        return <p> Réservation annulée ! </p>
     }
     return (
         <div className='box'>
@@ -316,13 +316,13 @@ function MaDemandeReservation({demande}) {
 
     let rang;
     switch(mesDemande.conducteur.rang){
-        case 1:
-            rang = "NUL"
+        case 0:
+            rang = "Déconseillé"
             break;
-        case 2:
+        case 1:
             rang = "Neutre"
             break;
-        case 3:
+        case 2:
             rang = "Recommandé"
             break;
         default:

@@ -178,11 +178,11 @@ export default function AddTrajet(props) {
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridHeureArrive">
-                        <Form.Label>Récurrence</Form.Label>
+                        <Form.Label></Form.Label>
 
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Dropdown Button
+                            Récurrence
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Form.Check className="text-left" type="checkbox" label="Lundi" />
@@ -200,7 +200,7 @@ export default function AddTrajet(props) {
                 </Form.Row>
 
                 <Row className="bg-success rounded-pill">
-                    <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Etapes</p>
+                    <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Étapes</p>
                     <Button className="transparent" >
                         <PlusCircle/>
                     </Button>
@@ -210,7 +210,7 @@ export default function AddTrajet(props) {
                         let value = values.split('/');
                         return (
                             <Row key={value[0]} style={{borderBottom: "1px solid black", marginRight: 10, marginLeft:10}}>
-                                <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Etapes</p>
+                                <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">Étapes</p>
                                 <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">{value[0]}</p>
                                 <p style={{marginLeft: 25, marginTop:"auto", marginBottom:"auto"}} className="d-flex flex-fill justify-content-start">{value[1]}</p>
                                 <Button className="transparent" onClick={ () => {}}><TrashFill color="black"/></Button>

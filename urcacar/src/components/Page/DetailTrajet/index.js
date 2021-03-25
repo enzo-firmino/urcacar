@@ -112,13 +112,13 @@ function Profil({conducteur, onClickProfile}) {
 
     let rang;
     switch(conducteur.rang){
-        case 1:
-            rang = "NUL"
+        case 0:
+            rang = "Déconseillé"
             break;
-        case 2:
+        case 1:
             rang = "Neutre"
             break;
-        case 3:
+        case 2:
             rang = "Recommandé"
             break;
         default:

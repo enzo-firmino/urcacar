@@ -121,7 +121,7 @@ function Trajet({trajet}) {
     let rang;
     switch(conducteur.rang){
         case 0:
-            rang = "NUL"
+            rang = "Déconseillé"
             break;
         case 1:
             rang = "Neutre"

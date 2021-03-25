@@ -50,7 +50,7 @@ function Top({conducteur, isItMyProfile}){
 
     switch(conducteur.rang){
         case 0:
-            rang = "NUL"
+            rang = "Déconseillé"
             break;
         case 1:
             rang = "Neutre"
@@ -127,7 +127,7 @@ function VoitureForm({voiture}){
     function handleSubmit(){
         const v = {marque:marque, modele:modele, couleur:couleur, annee:annee, immatriculation:immat};
 
-        updateVoiture(voiture.id, v).then((r) => {console.log(r); setShow(true)});
+        updateVoiture(voiture.id, v).then((r) => {setShow(true)});
     };
 
     return(
