@@ -6,7 +6,7 @@ import MapView from '../../Map';
 import '../../../styles/form.css';
 import { appendTrajet, getInfo } from '../../../services/fetch/fetch';
 import { Popup } from 'leaflet';
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 
 export default function AddTrajet(props) {
 
@@ -21,7 +21,8 @@ export default function AddTrajet(props) {
     const [prix, setPrix] = useState(0);
     const [etapes, setEtapes] = useState([]);
     const [adresses, setAdresses] = useState([]);
-    console.log(localStorage.getItem("jwt"))
+    const history = useHistory();
+
     
     useEffect(() =>  {
         setEtapes(etape => [...etape,"24 rue du coin/15h"]);
@@ -45,7 +46,13 @@ export default function AddTrajet(props) {
             adresseDepart: {adresse:depart, ville: departVille},
             adresseArrivee: {adresse:arrive, ville: arriveVille},
         }
-        appendTrajet(trajet).then(r => console.log(r));
+        appendTrajet(trajet).then(r => {
+            if(r.id !== undefined) {
+                history.push({
+                    pathname: '/'
+                })
+            }
+        });
     }
 
     const [active, setActive] = useState(true);

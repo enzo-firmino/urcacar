@@ -21,14 +21,16 @@ function LoginComponent() {
 
     const[login, setLogin] = useState('');
     const[password, setPassword] = useState('');
-    const[isLogin, setIsLogin] = useState(false);
     const[Fail, setFail] = useState(false);
 
     function loginButton(){
         var body = {"username":login,"password":password};
         loginFetch(body, dispatch).then(response => {
             if(response){
-                setIsLogin(response);
+                history.push({
+                    pathname: '/'
+                })
+                window.location.reload();
             }else{
                 setFail(true);
             }
@@ -36,7 +38,7 @@ function LoginComponent() {
         }).catch(error => console.log('error', error));
     }
 
-    return !isLogin ? (
+    return(
         <div className="formConnexion">
             <div style={{backgroundImage: 'url({background})' }}>
             <h1>UrcaCar</h1>
@@ -60,8 +62,6 @@ function LoginComponent() {
             </Form>
             </div>
         </div>
-    ) : (
-        <Redirect to="/" />
     )
 }
 

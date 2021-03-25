@@ -206,7 +206,6 @@ function MaReservation({reservation}) {
 
     function cancel(IDreservation){
         refuseReservation(IDreservation).then(r => {
-            console.log(r)
             if(r.ok){
                 setRefresh(r.ok);
             }
@@ -293,7 +292,6 @@ function MaDemandeReservation({demande}) {
             trajet: demande.trajet
         }
         acceptReservation(res).then(r => {
-            console.log(r)
             if(r.id !== undefined){
                 setVisible(false)
             }

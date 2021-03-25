@@ -65,14 +65,12 @@ function Top({conducteur, isItMyProfile}){
 
     const [prenom, setPrenom] = useState(conducteur.prenom);
     const [show, setShow] = useState(false);
-    console.log(conducteur)
     // const onSubmit = (event) => {
     //     event.preventDefault();
     //     updateUser("/api/utilisateurs/"+conducteur.id, {prenom}).then(() => setShow(true));
     // };
 
     function onSubmit(){
-        console.log("/api/utilisateurs/"+conducteur.id, {prenom})
         updateUser("/api/utilisateurs/"+conducteur.id, {prenom}).then(() => setShow(true));
     }
 
@@ -270,7 +268,6 @@ function Preferences({conducteur, isItMyProfile}){
     const [show, setShow] = useState(false);
 
     function onSubmit() {
-        console.log(conducteur);
         updateUser("/api/utilisateurs/"+conducteur.id, {
             musique,
             dialogue,

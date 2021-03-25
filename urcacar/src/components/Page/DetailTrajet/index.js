@@ -48,7 +48,6 @@ export function DetailTrajet() {
             trajet: "/api/trajets/" + IDtrajet
         }
         reserverTrajet(reservation).then(response => {
-            console.log(response)
             if(response.id !== undefined){
                 history.push({
                     pathname: '/mesTrajets'
@@ -56,7 +55,6 @@ export function DetailTrajet() {
             }
         });
     }
-    console.log("Condition :",utilisateur,trajet["@id"],utilisateur.reservations.filter(reservation => reservation.trajet === trajet["@id"]).length !== 0)
 
 
     const onContacter = (evt) => {
