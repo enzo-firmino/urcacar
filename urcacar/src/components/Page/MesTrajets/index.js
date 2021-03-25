@@ -354,7 +354,7 @@ function MaDemandeReservation({demande}) {
             <div className='rightBox'>
                 {rang}
                 <div className='badgeRight'>
-                    <Button onClick={() => refuse(demande)} variant="danger" className='btn-badge'>Refuser</Button>
+                    <Button onClick={() => refuse(demande.id)} variant="danger" className='btn-badge'>Refuser</Button>
                     <Button onClick={() => accept(demande)} variant="success" className='btn-badge'>Accepter</Button>
                 </div>
             </div>
