@@ -16,7 +16,7 @@ export default function Message() {
     useEffect(() => {
         getAllMessages(otherUtilisateur.id, utilisateurConnecte.id).then((messages) => {
             messages.sort(function(a,b){
-                return new Date(b.date) - new Date(a.date);
+                return new Date(b.date) + new Date(a.date);
             });
             setMessages(messages);
         });
@@ -41,7 +41,13 @@ export default function Message() {
 
         console.log('message', message);
 
-        appendMessage(message);
+        appendMessage(message)
+        .then(() => {getAllMessages(otherUtilisateur.id, utilisateurConnecte.id).then((messages) => {
+            messages.sort(function(a,b){
+                return new Date(b.date) + new Date(a.date);
+            });
+            setMessages(messages);
+        });})
     }
 
     return (
@@ -56,15 +62,16 @@ export default function Message() {
             </div>
             <div className="container-conversation">
                 <ul className='messageList'>{listMessagesItem}</ul>
-                <div>
-                    <Form>
+                
+            </div>
+            <div style={{maxWidth:'50%', margin:'auto'}}>
+            <Form>
                         <Row className="d-flex flex-fill sendingBar">
-                            <Form.Control style={{marginTop:"auto", marginBottom:"auto", width:"80%"}} className="bg-gris" type="text" placeholder="Message" onChange={(event) => setMessage(event.target.value)}/>
+                            <Form.Control style={{marginTop:"auto", marginBottom:"auto", width:"90%"}} className="bg-gris" type="text" placeholder="Message" onChange={(event) => setMessage(event.target.value)}/>
                             <Button className="transparent" onClick={() => sendMessage()}><Image className="action" src="https://image.winudf.com/v2/image/Y29tLnRyaXNodWx0ZWNoaW5kaWEudGFwMnNlbmRfaWNvbl8xNTM1NDI4MTQxXzAzNg/icon.png?w=170&fakeurl=1"/></Button>
                         </Row>
                     </Form>
-                </div>
-            </div>
+                    </div>
         </>
     );
 }

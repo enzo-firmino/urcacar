@@ -30,6 +30,8 @@
     margin: auto;
     padding: 50px;
     background-color: #f4f4f8;
+    max-height: 800px;
+    overflow: auto;
 }
 
 .sendingBar {
