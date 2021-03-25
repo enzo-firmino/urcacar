@@ -9,12 +9,9 @@ export default function Message() {
 
      let otherUtilisateur = history.location.state.otherUtilisateur;
      let utilisateurConnecte = history.location.state.utilisateurConnecte;
-
+     console.log(otherUtilisateur,utilisateurConnecte)
 
     const [messages, setMessages] = useState([]);
-
-
-
 
     useEffect(() => {
         getAllMessages(otherUtilisateur.id, utilisateurConnecte.id).then((messages) => {
@@ -23,9 +20,7 @@ export default function Message() {
             });
             setMessages(messages);
         });
-    }, [messages]);
-
-
+    }, []);
 
     const listMessagesItem = messages.map((message) => {
         let isMine = message.envoyeur_id == utilisateurConnecte.id;
@@ -39,8 +34,8 @@ export default function Message() {
 
         let message = {
             texte: messageTexte,
-            envoyeur_id: 'api/utilisateurs'+utilisateurConnecte.id,
-            destinataire_id: 'api/utilisateurs'+otherUtilisateur.id,
+            envoyeur: '/api/utilisateurs/'+utilisateurConnecte.id,
+            destinataire: '/api/utilisateurs/'+otherUtilisateur.id,
             date: new Date(),
         }
 
@@ -65,7 +60,7 @@ export default function Message() {
                     <Form>
                         <Row className="d-flex flex-fill sendingBar">
                             <Form.Control style={{marginTop:"auto", marginBottom:"auto", width:"80%"}} className="bg-gris" type="text" placeholder="Message" onChange={(event) => setMessage(event.target.value)}/>
-                            <Button className="transparent" onClick={sendMessage}><Image className="action" src="https://image.winudf.com/v2/image/Y29tLnRyaXNodWx0ZWNoaW5kaWEudGFwMnNlbmRfaWNvbl8xNTM1NDI4MTQxXzAzNg/icon.png?w=170&fakeurl=1"/></Button>
+                            <Button className="transparent" onClick={() => sendMessage()}><Image className="action" src="https://image.winudf.com/v2/image/Y29tLnRyaXNodWx0ZWNoaW5kaWEudGFwMnNlbmRfaWNvbl8xNTM1NDI4MTQxXzAzNg/icon.png?w=170&fakeurl=1"/></Button>
                         </Row>
                     </Form>
                 </div>

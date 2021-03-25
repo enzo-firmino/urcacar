@@ -58,12 +58,12 @@ export function DetailTrajet() {
 
 
     const onContacter = (evt) => {
-        getInfo("/api/utilisateur").then((utilisateurConnecte) => {
+        getInfo(trajet.conducteur["@id"]).then((otherUtilisateur) => {
             history.push({
                 pathname: '/messages',
                 state: {
-                    utilisateurConnecte,
-                    otherUtilisateur: utilisateur,
+                    utilisateurConnecte: utilisateur,
+                    otherUtilisateur: otherUtilisateur,
                 }
             });
         })

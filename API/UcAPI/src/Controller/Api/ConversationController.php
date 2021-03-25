@@ -29,7 +29,7 @@ class ConversationController extends AbstractController
     }
 
     /**
-     * @Route("/api/conversation", name="conversation")
+     * @Route("/api/conversation", methods={"POST"}, name="conversation")
      */
     public function getConversation(Request $request)
     {

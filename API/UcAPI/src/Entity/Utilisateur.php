@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @ApiResource(
+ * attributes={"force_eager"=false},
  *      normalizationContext={"groups": {"infoUser"}},
  *      itemOperations={
  *          "get",

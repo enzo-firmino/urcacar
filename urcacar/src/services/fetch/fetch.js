@@ -63,7 +63,6 @@ export function loginFetch(body, dispatch){
  ********************************************************************************************************************************/
 
 export function updateVoiture(id, voiture){
-    console.log(url + "/api/voitures/" + id, voiture);
     return fetch(url + "/api/voitures/" + id, getPutOptions(voiture)).then(response => response.json())
 }
 
@@ -81,7 +80,6 @@ export function getMesTrajets() {
 }
 
 export function appendTrajet(trajet) {
-    console.log(JSON.stringify(trajet));
     return fetch(url + "/api/trajets", getPostOptions(trajet)).then((response) => response.json());
 }
 
