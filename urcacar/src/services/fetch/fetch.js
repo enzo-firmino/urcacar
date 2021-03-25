@@ -63,14 +63,8 @@ export function loginFetch(body, dispatch){
  ********************************************************************************************************************************/
 
 export function updateVoiture(id, voiture){
-    return fetch(url + "/api/voitures/" + id, {
-        method: 'PUT',
-        body: JSON.stringify(voiture),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: 'Bearer ' + localStorage.getItem("jwt"),
-        }
-    }).then(response => response.json())
+    console.log(url + "/api/voitures/" + id, voiture);
+    return fetch(url + "/api/voitures/" + id, getPutOptions(voiture)).then(response => response.json())
 }
 
 /********************************************************************************************************************************

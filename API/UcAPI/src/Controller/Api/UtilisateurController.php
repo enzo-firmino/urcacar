@@ -20,7 +20,7 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/api/utilisateur", name="utilisateur")
+     * @Route("/api/utilisateur", name="utilisateur", methods={"GET"})
      */
     public function index(SerializerInterface $serializer): Response
     {

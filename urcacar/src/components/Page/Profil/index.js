@@ -19,7 +19,6 @@ export function Profil() {
     if (utilisateur == null) {
         return <Spinner animation="grow" variant="success" />;
     }
-
     return (
         <div className="container bg-light">
             <Top conducteur={utilisateur} isItMyProfile={isItMyProfil}/>
@@ -125,11 +124,11 @@ function VoitureForm({voiture}){
     const [photo, setPhoto] = useState(v.photo);
     const [show, setShow] = useState(false);
 
-    const handleSubmit = useCallback((event) => {
-        event.preventDefault();
-        
-        updateVoiture(voiture.id, {marque, modele, couleur, annee, immat}).then(() => setShow(true));
-    },[voiture]);
+    function handleSubmit(){
+        const v = {marque:marque, modele:modele, couleur:couleur, annee:annee, immatriculation:immat};
+
+        updateVoiture(voiture.id, v).then((r) => {console.log(r); setShow(true)});
+    };
 
     return(
         <div>
@@ -211,7 +210,7 @@ function VoitureForm({voiture}){
                 {/*        </Col>*/}
                 {/*    </Row>*/}
                 {/*</Form.Group>*/}
-                <Button variant="primary" type="submit">
+                <Button variant="primary" onClick={() => handleSubmit()}>
                     Enregistrer
                 </Button>
             </Form>
