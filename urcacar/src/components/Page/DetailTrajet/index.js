@@ -48,7 +48,8 @@ export function DetailTrajet() {
             trajet: "/api/trajets/" + IDtrajet
         }
         reserverTrajet(reservation).then(response => {
-            if(response.ok){
+            console.log(response)
+            if(response.id !== undefined){
                 history.push({
                     pathname: '/mesTrajets'
                 })

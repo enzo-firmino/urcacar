@@ -57,7 +57,7 @@ class TrajetCreateController extends AbstractController
     }
 
     /**
-     * @Route("/api/mesTrajets", name="mesTrajets")
+     * @Route("/api/mesTrajets", methods={"GET"}, name="mesTrajets")
      */
     public function getMesTrajets(SerializerInterface $serializer){
         $repository = $this->getDoctrine()

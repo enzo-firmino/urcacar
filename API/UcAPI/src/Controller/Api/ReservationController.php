@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservationController extends AbstractController
 {
     /**
-     * @Route("/api/reservation/{id}", name="reservation")
+     * @Route("/api/reservation/{id}", methods={"GET"},  name="reservation")
      */
     public function index(int $id, SerializerInterface $serializer): Response
     {

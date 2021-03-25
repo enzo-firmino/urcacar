@@ -193,18 +193,24 @@ function MonTrajet({trajet}) {
 
 function MaReservation({reservation}) {
     const [trajet, setTrajet] = useState({});
+    const [refresh, setRefresh] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
         getInfo(reservation.trajet).then((response) => {
             setTrajet(response);
         });
-    }, []);
+    }, [refresh]);
 
     if(Object.keys(trajet).length === 0) return <Spinner animation="grow" variant="success" />
 
     function cancel(IDreservation){
-        refuseReservation(IDreservation);
+        refuseReservation(IDreservation).then(r => {
+            console.log(r)
+            if(r.ok){
+                setRefresh(r.ok);
+            }
+        });
     }
 
     function toTrajet(){
@@ -232,6 +238,9 @@ function MaReservation({reservation}) {
             rang = "Inconnu"
     }
 
+    if(refresh){
+        return <p> Réservation annuler ! </p>
+    }
     return (
         <div className='box'>
             <a onClick={toTrajet} className='leftBox'>

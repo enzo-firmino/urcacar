@@ -30,7 +30,7 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/api/utilisateurs/{id}", methods={"GET"}, name="utilisateurs")
+     * @Route("/api/utilisateur/{id}", methods={"GET"}, name="utilisateurs")
      */
     public function getUserById(int $id,SerializerInterface $serializer): Response
     {
