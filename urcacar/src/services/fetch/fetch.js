@@ -1,4 +1,4 @@
-import { connexion } from "../../action/action";
+import {connexion} from "../../action/action";
 
 const url = "http://localhost:8000";
 
@@ -81,6 +81,7 @@ export function getMesTrajets() {
 }
 
 export function appendTrajet(trajet) {
+    console.log(JSON.stringify(trajet));
     return fetch(url + "/api/trajets", getPostOptions(trajet)).then((response) => response.json());
 }
 
@@ -91,6 +92,7 @@ export function cancelTrajet(trajetID) {
 export function acceptReservation(demande) {
     return fetch(url + '/api/reservers/' + demande.id, getPutOptions(demande)).then((response) => response.json());
 }
+
 export function refuseReservation(IDreservation) {
     return fetch(url + '/api/reservers/' + IDreservation, getDelOptions());
 }
@@ -112,7 +114,9 @@ export function getAllMessages(utilisateur1, utilisateur2) {
 }
 
 export function appendMessage(message) {
-    return fetch(url + "/api/messages", getPostOptions(message)).then((response) => response.json());
+    return fetch(url + "/api/messages", getPostOptions(message))
+        .then((response) => response.json())
+        .catch((err) => console.log(err));
 }
 
 /********************************************************************************************************************************
@@ -142,13 +146,12 @@ function getPostOptions(b) {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", 'Bearer ' + localStorage.getItem("jwt"));
 
-    var requestOptions = {
+    return {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(b),
         redirect: 'follow'
     };
-    return requestOptions;
 }
 
 function getGetOptions(b) {

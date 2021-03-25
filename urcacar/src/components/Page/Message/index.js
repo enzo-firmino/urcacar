@@ -39,10 +39,12 @@ export default function Message() {
 
         let message = {
             texte: messageTexte,
-            envoyeur_id: utilisateurConnecte.id,
-            destinataire_id: otherUtilisateur.id,
-            date: Date.now(),
+            envoyeur_id: 'api/utilisateurs'+utilisateurConnecte.id,
+            destinataire_id: 'api/utilisateurs'+otherUtilisateur.id,
+            date: new Date(),
         }
+
+        console.log('message', message);
 
         appendMessage(message);
     }
